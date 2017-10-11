@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <titleOpenVMS DMAKE main page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h2 class="text-center">DMAKE</h2>
+    <p>DMAKE is the make tool used in the Openoffice suite. It can however be used without any other part of Openoffice. As such it can be tested and debugged.</p>
+    <p>You are invited to test this part of software and give us any feedback we can use to improve the quality of the software.</p>
+    <p><b><u>Use it at your own risc, because we cannot take responsebility for crashes, dumps or even worse: loosing data.</u></b></p>
+    <p>If you want to help us, you can find a usermanual at this location: <a href="http://tools.openoffice.org/dmake/index.html">http://tools.openoffice.org/dmake/index.html</a></p>
+    <p>Here is a webpage containing <a href="/openoffice/current/dmake_install.html">instructions</a> how to instal and use the dmake module <! , a href="/openoffice/current/dmake_sources.html"dmake sources/A --> and here is the current <a href="/openoffice/current/dmake.exe">dmake alpha-executable (227 KB).</a></p>
+    <p>This executable is made for VMS ALPHA 7.3-1.</p>
+    <br>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

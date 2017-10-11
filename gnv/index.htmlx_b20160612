@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h2>GNV section</h2>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p>
+    <div class="table-responsive">
+      <table class="table">
+       <thead>
+        <tr>
+          <th>Item</th>
+          <th>Description</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+          <td>bash</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/bash/">GNU for VMS bash downloads</a></td>
+        </tr>
+        <tr>
+          <td>
+            <a href="bison/">bison</a>
+          </td>
+          <td>bison v1.3.5 (<!--#flastmod virtual="bison/GNV-AXPVMS-BISON-V0135==1_PCSI.ZIP" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="bzip2/">bzip2</a>
+          </td>
+          <td>bzip2 v1.0.2 (<!--#flastmod virtual="bzip2/GNV-AXPVMS-BZIP2-V0100-2-1_PCSI.ZIP" -->)</td>
+        </tr>
+        <tr>
+          <td>coreutils</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/coreutils/">GNU for VMS coreutils downloads</a></td>
+        </tr>
+        <tr>
+          <td>
+            <a href="cvs/">cvs</a>
+          </td>
+          <td>cvs 1.11.11 (<!--#flastmod virtual="cvs/index.html" -->)</td>
+        </tr>
+        <tr>
+          <td>diffutils</td>
+          <td>GNU diff utilities v2.8.1</td>
+        </tr>
+        <tr>
+          <td>findutils</td>
+          <td>GNU find utilities v4.1</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="flex/">flex</a>
+          </td>
+          <td>flex 2.5.4a (<!--#flastmod virtual="flex/GNV-AXPVMS-FLEX-V0205-4-1_PCSI.ZIP" -->)</td>
+        </tr>
+        <tr>
+          <td>gawk</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/gawk/">GNU for VMS gawk downloads</a></td>
+        </tr>
+        <tr>
+          <td>grep</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/grep/">GNU for VMS grep downloads</a></td>
+        </tr>
+        <tr>
+          <td><!--a href="bzip2/index.html"-->
+          groff <!--/a--></td>
+          <td>groff v1.19</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="gzip/">gzip</a>
+          </td>
+          <td>gzip v1.2.4 (<!--#flastmod virtual="gzip/gzip-1_2_4c.tar-gz" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="java/">java</a>
+          </td>
+          <td>using java under bash (<!--#flastmod virtual="java/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td><!--a href="bzip2/index.html"-->
+          less <!--/a--></td>
+          <td>less v3.8.2</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="m4/">m4</a>
+          </td>
+          <td>GNU m4 1.4 (<!--#flastmod virtual="m4/index.html" -->)</td>
+        </tr>
+        <tr>
+          <td>make</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/make/">GNU for VMS make downloads</a></td>
+        </tr>
+        <tr>
+          <td><!--a href="bzip2/index.html"-->
+          man <!--/a--></td>
+          <td>GNU man v1.5m2</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="patch/">patch</a>
+          </td>
+          <td>GNU patch 2.5.4 (<!--#flastmod virtual="patch/GNV-AXPVMS-PATCH-V0205-4-1_PCSI.ZIP" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="perl/">perl</a>
+          </td>
+          <td>using perl under bash (<!--#flastmod virtual="perl/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="python/">python</a>
+          </td>
+          <td>using python under bash (<!--#flastmod virtual="python/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td>sed</td>
+          <td><a href="https://sourceforge.net/projects/gnv/files/sed/">GNU for VMS sed downloads</a></td>
+        </tr>
+        <tr>
+          <td><!--a href="bzip2/index.html"-->
+          unzip <!--/a--></td>
+          <td>unzip v5.50</td>
+        </tr>
+        <tr>
+          <td><!--a href="bzip2/index.html"-->
+          zip <!--/a--></td>
+          <td>zip v2.3</td>
+        </tr>
+       </tbody>
+      </table>
+    </div>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

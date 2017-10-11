@@ -1,0 +1,886 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+
+<head>
+  <title>
+    porting:        OpenOffice.org for OpenVMS
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="version" content="2.6.2.4.8" />
+  <style type="text/css">
+    /*<![CDATA[*/
+    <!--
+    @import url("/branding/css/tigris.css");
+    @import url("/branding/css/inst.css");
+    -->
+    /*]]>*/
+  </style>
+  <link rel="stylesheet" type="text/css" href="/branding/css/print.css" media="print" />
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico" />
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO" />
+  <meta name="description" content="OpenOffice.org: The Open Office Suite" />
+
+</head>
+
+<body>
+  <p class="nonscreen"><a href="#content">Skip to content</a></p>
+
+
+  <div id="banner">
+    <div>
+      <a href="http://www.openoffice.org">
+      <img src="/branding/images/ooo-logo.png"
+           alt="Openoffice.org" id="ooologo" />
+      </a>
+    </div>
+
+    <div id="login">
+      <form name="bannerloginform" id="bannerloginform" action="http://porting.openoffice.org/servlets/TLogin" method="post">
+        <div>
+          <label for="loginID">User:</label>
+          <input type="text" alt="username" name="loginID" id="loginID" class="inputtext" size="10" maxlength="32" />
+          <label for="password">Password:</label>
+          <input type="password" alt="password" name="password" id="password" class="inputtext" size="10" maxlength="32" />
+          <input type="submit" name="Login" id="Button" class="inputbutton" value="Login" /> 
+          <a href="http://www.openoffice.org/servlets/Join">Register</a>  | 
+          <a href="http://www.openoffice.org/servlets/TLogin">Login help</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toptabs">
+    <ul class="tabs">
+      <li>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </li>
+
+      <li> <a href="http://download.openoffice.org/index.html" title="Get OpenOffice.org or browse for additions">Download</a> </li>
+
+      <li> <a href="http://support.openoffice.org/index.html" title="The place for both free and commercial support on OpenOffice.org">Support</a> </li>
+
+      <li> <a href="http://contributing.openoffice.org/index.html" title="Become part of the largest OpenSource project!">Contributing</a> </li>
+
+      <li class="th">   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </li>
+
+      <li>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </li>
+
+      <li> <a href="http://about.openoffice.org/index.html" title="Background information on OpenOffice.org">About</a> </li>
+
+    </ul>
+  </div>
+
+  <div class="contentpart" id="contextualinformation">
+    <div id="breadcrumbs">
+      <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+      <strong>
+        <a href="http://porting.openoffice.org/">porting</a>
+      </strong>
+    </div>
+  </div>
+
+  <div id="body">
+    <table id="main" summary="body">
+      <tr>
+        <td id="leftcol">
+          <div id="navcolumn">
+            <div id="projecttools" class="toolgroup">
+              <div class="label">
+                <strong>Project tools</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a>
+                </div>  
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+                </div>
+              </div> 
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a>
+                </div>
+              </div>
+            </div>
+            <form action="http://porting.openoffice.org/servlets/Search" method="get">
+              <div id="searchbox" class="toolgroup">
+                <div class="label">
+                  <strong>Search</strong>
+                </div>
+                <div class="body">
+                  <div>
+                    <select name="scope">
+                      <option value="projectAndSubs" selected="selected">This project</option>
+                      <option value="domain" >All projects</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="hidden" name="resultsPerPage" value="40" /> 
+                    <input type="text" name="query" size="10" /> 
+                    <input type="submit" name="Button" value="Go" />
+                  </div>
+                  <div>
+                    <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>
+                  </div>
+                  <div>
+                    <a href="http://support.openoffice.org/search.html">Google search</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="helptext" class="toolgroup">
+              <div class="label">
+                <strong>How do I...</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://www.openoffice.org/sitemap.html" class="helplink">Sitemap</a>
+                </div>
+                <div><a href="http://www.openoffice.org/faq.html" class="helplink">FAQ</a></div>
+                <div>
+                  <a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+                    title="Note: link may open in new window" class="helplink">Get help?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strut">
+            &nbsp;
+          </div>
+        </td>
+
+        <td id="bodytd">
+          <div id="bodycol">
+            <p class="nonscreen"><a name="content">start:</a></p>
+
+            <!--#config timefmt="%Y-%m-%d" --> 
+ 
+	<h1>
+	        Reference section: Installation of OpenVMS 
+	</h1>
+	<p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:ton.vanderzwet@oooovms.dyndns.org">Ton van der Zwet</a></i></p>
+<!-- edit this below -->
+
+  <h2>
+   Description of the installation of Alpha OpenVMS.</h2>
+  <p>
+  </p><hr />
+  <blockquote>
+	First you have to make certain that your Alpha-computer has the latest (supported) firmware loaded.
+<br />
+See <a href="http://www.oooovms.dyndns.org/reference/sw_install/firmware.htmlx">description of a firmware update</a> on an Alpha computer.
+        <br />
+<br />
+<hr />
+<b><i><u>
+Example of an OpenVMS 8.3 installation on an AlphaServer DS10L.
+</u></i></b>
+<pre>
+&gt;&gt;&gt;<b>init</b>
+Initializing...
+*** keyboard not plugged in...
+512 Meg of system memory
+probing hose 0, PCI
+probing PCI-to-ISA bridge, bus 1
+probing PCI-to-PCI bridge, hose 0 bus 2
+bus 0, slot 9 -- ewa -- DE500-BA Network Controller
+bus 0, slot 11 -- ewb -- DE500-BA Network Controller
+bus 0, slot 13 -- dqa -- Acer Labs M1543C IDE
+bus 0, slot 13 -- dqb -- Acer Labs M1543C IDE
+bus 2, slot 0 -- pka -- NCR 53C875
+bus 2, slot 1 -- pkb -- NCR 53C875
+bus 2, slot 2 -- ewc -- DE500-AA Network Controller
+initializing GCT/FRU at 1ff40000
+Testing the System
+Testing the Disks (read only)
+Testing ew* devices.
+System Temperature is 46 degrees C
+
+AlphaServer DS10L 617 MHz Console V7.0-2, Jun 16 2005 15:02:56
+&gt;&gt;&gt;<b>show device d</b>
+dka0.0.0.2000.0            DKA0              COMPAQ BD018122C9  B016
+dka100.1.0.2000.0          DKA100            COMPAQ BD03664553  3B05
+dka200.2.0.2000.0          DKA200                     RZ2ED-LS  0306
+dka300.3.0.2000.0          DKA300            COMPAQ BB00911CA0  3B05
+dka500.5.0.2000.0          DKA500                     RZ1DF-CB  0372
+dka600.6.0.2000.0          DKA600                     RZ1CB-CS  0844
+dkb0.0.0.2001.0            DKB0              COMPAQ BB00911CA0  3B05
+dkb100.1.0.2001.0          DKB100            COMPAQ BD0186349B  3B12
+dkb200.2.0.2001.0          DKB200            COMPAQ BD018122C9  B016
+dkb300.3.0.2001.0          DKB300                     RZ1DB-CA  LYJ0
+dkb400.4.0.2001.0          DKB400            COMPAQ BB00911CA0  3B07
+dkb500.5.0.2001.0          DKB500                     RZ1DF-CB  0372
+dqb0.0.1.13.0              DQB0                        CD-224E  9.5B
+dva0.0.0.0.0               DVA0
+&gt;&gt;&gt;<b>boot dkb100</b>
+(boot dkb100.1.0.2001.0 -flags 0,0)
+block 0 of dkb100.1.0.2001.0 is a valid boot block
+reading 1226 blocks from dkb100.1.0.2001.0
+bootstrap code read in
+base = 200000, image_start = 0, image_bytes = 99400(627712)
+initializing HWRPB at 2000
+initializing page table at 1ff2c000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V8.3
+    © Copyright 1976-2006 Hewlett-Packard Development Company, L.P.
+
+
+%PKB0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.22 ROM V2.0
+%PKB0, SCSI Chip is SYM53C875, Operating mode is SE Ultra SCSI
+
+
+
+    Installing required known files...
+
+    Configuring devices...
+%EWA0, FastFD mode set by console
+%EWB0, FastFD mode set by console
+%PKA0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.22 ROM V2.0
+%PKA0, SCSI Chip is SYM53C875, Operating mode is SE Ultra SCSI
+%EWA0, Link state: UP
+%EWB0, Link state: UP
+%EWC0, FastFD mode set by console
+
+
+    ****************************************************************
+
+    You can install or upgrade the OpenVMS ALPHA operating system
+    or you can install or upgrade layered products that are included
+    on the OpenVMS ALPHA distribution media (CD/DVD).
+
+    You can also execute DCL commands and procedures to perform
+    "standalone" tasks, such as backing up the system disk.
+
+    Please choose one of the following:
+
+        1)  Upgrade, install or reconfigure OpenVMS ALPHA Version V8.3
+        2)  Display layered products that this procedure can install
+        3)  Install or upgrade layered products
+        4)  Show installed products
+        5)  Reconfigure installed products
+        6)  Remove installed products
+        7)  Find, Install or Undo patches; Show or Delete Recovery Data
+        8)  Execute DCL commands and procedures
+        9)  Shut down this system
+
+Enter CHOICE or ? for help: (1/2/3/4/5/6/7/8/9/?) <b>1</b>
+    ***********************************************************
+
+    This procedure will ask a series of questions.
+
+          () - encloses acceptable answers
+          [] - encloses default answers
+
+    Type your response and press the &lt;Return&gt; key.  Type:
+
+          ? - to repeat an explanation
+          ^ - to change prior input (not always possible)
+          Ctrl/Y - to exit the installation procedure
+
+    There are two choices for installation/upgrade:
+
+    Initialize - Removes all software and data files that were
+        previously on the target disk and installs OpenVMS ALPHA.
+
+    Preserve -- Installs or Upgrades OpenVMS ALPHA on the target disk
+        and retains all other contents of the target disk.
+
+   * Note: You cannot use preserve to install OpenVMS ALPHA on a disk on
+        which any other operating system is installed.  This includes
+        implementations of OpenVMS for other architectures.
+
+Do you want to INITIALIZE or to PRESERVE? [PRESERVE] <b>initialize</b>
+
+
+    You must enter the device name for the target disk on which
+    OpenVMS ALPHA will be installed.
+
+Enter device name for target disk: (? for choices) <b>?</b>
+
+Device                  Device           Error    Volume         Free  Trans Mnt
+ Name                   Status           Count     Label        Blocks Count Cnt
+DKB0:                   Online               0
+DKB100:                 Mounted wrtlck       0  ALPHA083      34078870    86   1
+DKB200:                 Online               0
+DKB300:                 Online               0
+DKB400:                 Online               0
+DKB500:                 Online               0
+DVA0:                   Online               0
+DQA0:                   Offline              1
+DQA1:                   Offline              1
+DQB0:                   Online               0
+DQB1:                   Offline              1
+DKA0:                   Online               0
+DKA100:                 Online               0
+DKA200:                 Online               0
+DKA300:                 Online               0
+DKA500:                 Online               0
+DKA600:                 Online               0
+DAD0:                   Online               0
+
+
+Enter device name for target disk: (? for choices) <b>dkb0:</b>
+
+    DKB0: is now labeled ALPHASYS.
+
+Do you want to keep this label? (Yes/No) [Yes]<b><i>&lt;RETURN&gt;</i></b>
+
+    The target system disk can be initialized with On-Disk Structure
+    Level 2 (ODS-2) or Level 5 (ODS-5).  (? for more information)
+
+Do you want to initialize with ODS-2 or ODS-5? (2/5/?) <b>5</b>
+
+    Hard links can be enabled on ODS-5 disks.  (? for more information)
+
+Do you want to enable hard links? (Yes/No/?) <b>yes</b>
+
+
+    You have chosen to install OpenVMS ALPHA on a new disk.
+
+    The target system disk, DKB0:, will be initialized
+    with structure level 5 (ODS-5).
+    Hard links WILL be enabled.
+    The disk will be labeled ALPHASYS.
+    Any data currently on the target system disk will be lost.
+
+Is this OK? (Yes/No) <b>yes</b>
+
+    Initializing and mounting target....
+
+    Creating page and swap files....
+
+
+    You must enter a password for the SYSTEM account.
+
+    The password must be a minimum of 8 characters in length, and
+    may not exceed 31 characters.  It will be checked and verified.
+    The system will not accept passwords that can be guessed easily.
+
+    The password will not be displayed as you enter it.
+
+Password for SYSTEM account: <b><i>password not echoed</i></b>
+
+Re-enter SYSTEM password for verification: <b><i>password not echoed</i></b>
+
+
+Will this system be a member of an OpenVMS Cluster? (Yes/No) <b>yes</b>
+
+    When your new system is first booted you will be required to answer
+    additional questions in order to configure the OpenVMS Cluster correctly.
+
+
+Will this system be an instance in an OpenVMS Galaxy? (Yes/No) <b>no</b>
+
+
+    For your system to operate properly, you must set two parameters:
+    SCSNODE and SCSSYSTEMID.
+
+    SCSNODE can be from 1 to 6 letters or numbers.  It must contain at
+    least one letter.
+
+    If you plan to use DECnet, SCSNODE must be the DECnet Phase IV
+    node name, or the DECnet-Plus (Phase V) node synonym.
+
+    If you have multiple OpenVMS systems, the SCSNODE on each system
+    must be unique.
+
+Enter SCSNODE: <b>star2</b>
+
+    If you plan to use DECnet, SCSSYSTEMID must be set based on the
+    DECnet Phase IV address.
+
+Do you plan to use DECnet? (Yes/No) [Yes] <b>no</b>
+
+    Please choose an SCSSYSTEMID between 1 and 65535.  If you have multiple
+    OpenVMS systems, the SCSSYSTEMID on each system must be unique.
+
+Enter SCSSYSTEMID: [65534] <b>65533</b>
+
+  Configuring the Local Time Zone
+
+
+TIME ZONE SPECIFICATION -- MAIN Time Zone Menu            "*" indicates a menu
+
+  0* GMT
+  1* AFRICA          17) EST             33) IRAN            49) PORTUGAL
+  2* AMERICA         18) EST5EDT         34) ISRAEL          50) PRC
+  3* ANTARCTICA      19* ETC             35) JAMAICA         51) PST8PDT
+  4* ARCTIC          20* EUROPE          36) JAPAN           52) ROC
+  5* ASIA            21) FACTORY         37) KWAJALEIN       53) ROK
+  6* ATLANTIC        22) GB-EIRE         38) LIBYA           54) SINGAPORE
+  7* AUSTRALIA       23) GB              39) MET             55) TURKEY
+  8* BRAZIL          24) GMT-0           40* MEXICO          56) UCT
+  9* CANADA          25) GMT             41* MIDEAST         57) UNIVERSAL
+ 10) CET             26) GMT0            42) MST             58* US
+ 11* CHILE           27) GMTPLUS0        43) MST7MDT         59) UTC
+ 12) CST6CDT         28) GREENWICH       44) NAVAJO          60) W-SU
+ 13) CUBA            29) HONGKONG        45) NZ-CHAT         61) WET
+ 14) EET             30) HST             46) NZ              62) ZULU
+ 15) EGYPT           31) ICELAND         47* PACIFIC
+ 16) EIRE            32* INDIAN          48) POLAND
+
+Press "Return" to redisplay, enter "=" to search or "?" for help, or
+Select the number above that best represents the desired time zone: <b>20</b>
+
+EUROPE Time Zone Menu                                     "*" indicates a menu
+
+  0* RETURN TO MAIN TIME ZONE MENU
+  1) AMSTERDAM       15) HELSINKI        29) NICOSIA         43) STOCKHOLM
+  2) ANDORRA         16) ISTANBUL        30) OSLO            44) TALLINN
+  3) ATHENS          17) KALININGRAD     31) PARIS           45) TIRANE
+  4) BELFAST         18) KIEV            32) POLAND          46) TIRASPOL
+  5) BELGRADE        19) LISBON          33) PORTUGAL        47) UZHGOROD
+  6) BERLIN          20) LJUBLJANA       34) PRAGUE          48) VADUZ
+  7) BRATISLAVA      21) LONDON          35) RIGA            49) VATICAN
+  8) BRUSSELS        22) LUXEMBOURG      36) ROME            50) VIENNA
+  9) BUCHAREST       23) MADRID          37) SAMARA          51) VILNIUS
+ 10) BUDAPEST        24) MALTA           38) SAN_MARINO      52) WARSAW
+ 11) CHISINAU        25) MARIEHAMN       39) SARAJEVO        53) ZAGREB
+ 12) COPENHAGEN      26) MINSK           40) SIMFEROPOL      54) ZAPOROZHYE
+ 13) DUBLIN          27) MONACO          41) SKOPJE          55) ZURICH
+ 14) GIBRALTAR       28) MOSCOW          42) SOFIA
+
+Press "Return" to redisplay, enter "=" to search or "?" for help, or
+Select the number above that best represents the desired time zone: <b>1</b>
+
+You selected EUROPE / AMSTERDAM as your time zone.
+Is this correct? (Yes/No) [YES]: <b>yes</b>
+
+
+    Configuring the Time Differential Factor (TDF)
+
+
+    Default Time Differential Factor for standard time is 1:00.
+    Default Time Differential Factor for daylight saving time is 2:00.
+
+    The Time Differential Factor (TDF) is the difference between your
+    system time and Coordinated Universal Time (UTC).  UTC is similar
+    in most respects to Greenwich Mean Time (GMT).
+
+    The TDF is expressed as hours and minutes, and should be entered
+    in the hh:mm format.  TDFs for the Americas will be negative
+    (-3:00, -4:00, etc.); TDFs for Europe, Africa, Asia and Australia
+    will be positive (1:00, 2:00, etc.).
+
+This time zone supports daylight saving time.
+Is this time zone currently on daylight saving time? (Yes/No): <b>yes</b>
+
+Enter the Time Differential Factor [2:00]: <b><i>&lt;RETURN&gt;</i></b>
+
+    NEW SYSTEM TIME DIFFERENTIAL FACTOR = 2:00
+
+Is this correct? [Y]: <b>yes</b>
+
+
+    If you have Product Authorization Keys (PAKs) to register,
+    you can register them now.
+
+Do you want to register any Product Authorization Keys? (Yes/No) [Yes] <b>no</b>
+
+
+    You can install the following products along with the OpenVMS
+    operating system:
+
+        o Availability Manager (base) for OpenVMS Alpha (required part of OpenVMS)
+        o CDSA for OpenVMS Alpha (required part of OpenVMS)
+        o KERBEROS for OpenVMS Alpha (required part of OpenVMS)
+        o SSL for OpenVMS Alpha (required part of OpenVMS)
+        o Performance Data Collector (base) for OpenVMS Alpha (required part of OpenVMS)
+        o DECwindows Motif for OpenVMS Alpha
+        o DECnet-Plus for OpenVMS Alpha
+        o DECnet Phase IV for OpenVMS Alpha
+        o HP TCP/IP Services for OpenVMS
+
+    If you want to change your selections, you can do so later in the
+    installation by answering "NO" to the following question:
+
+        "Do you want the defaults for all options?"
+
+
+
+    Do you want to install DECwindows Motif for OpenVMS Alpha V1.6? 
+(Yes/No) [Yes] <b><i>&lt;RETURN&gt;</i></b>
+
+
+
+
+    Beginning with OpenVMS V7.1, the DECnet-Plus kit is provided with
+    the OpenVMS operating system kit.  HP strongly recommends that
+    DECnet users install DECnet-Plus.  DECnet Phase IV applications are
+    supported by DECnet-Plus.
+
+    DECnet Phase IV is also provided as an option.
+
+    If you install DECnet-Plus and TCP/IP you can run DECnet
+    applications over a TCP/IP network.  Please see the OpenVMS
+    Management Guide for information on running DECnet over TCP/IP.
+
+    Do you want to install DECnet-Plus for OpenVMS Alpha V8.3?
+(Yes/No) [Yes] <b>no</b>
+
+
+
+    Do you want to install DECnet Phase IV for OpenVMS Alpha V8.3?
+(Yes/No) [Yes] <b>no</b>
+
+
+
+    Do you want to install HP TCP/IP Services for OpenVMS V5.6-9?
+(Yes/No) [Yes] <b>yes</b>
+
+
+
+
+
+    The installation operation can provide brief or detailed descriptions.
+    In either case, you can request the detailed descriptions by typing ?.
+
+Do you always want detailed descriptions? (Yes/No) [No] <b>no</b>
+
+Performing product kit validation ...
+
+The following product has been selected:
+    DEC AXPVMS OPENVMS V8.3                Platform (product suite)
+
+Configuration phase starting ...
+
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+
+DEC AXPVMS OPENVMS V8.3: OPENVMS and related products Platform
+
+    COPYRIGHT 1976, 24-JUL-2006
+
+    Hewlett-Packard Development Company, L.P.
+
+Do you want the defaults for all options? [YES] <b>yes</b>
+
+    Availability Manager (base) for OpenVMS Alpha (required part of OpenVMS)
+
+    CDSA for OpenVMS Alpha (required part of OpenVMS)
+
+    KERBEROS for OpenVMS Alpha (required part of OpenVMS)
+
+    SSL for OpenVMS Alpha (required part of OpenVMS)
+
+    Performance Data Collector (base) for OpenVMS Alpha (required part of OpenVMS)
+
+Do you want to review the options? [NO] <b>no</b>
+
+Execution phase starting ...
+
+The following products will be installed to destinations:
+    CPQ AXPVMS CDSA V2.2-271               DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS DWMOTIF V1.6                DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS DWMOTIF_SUPPORT V8.3        DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS OPENVMS V8.3                DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS TCPIP V5.6-9                DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS V8.3                    DISK$ALPHASYS:[VMS$COMMON.]
+    HP AXPVMS AVAIL_MAN_BASE V8.3          DISK$ALPHASYS:[VMS$COMMON.]
+    HP AXPVMS KERBEROS V3.0-103            DISK$ALPHASYS:[VMS$COMMON.]
+    HP AXPVMS SSL V1.3-281                 DISK$ALPHASYS:[VMS$COMMON.]
+    HP AXPVMS TDC_RT V2.2-107              DISK$ALPHASYS:[VMS$COMMON.]
+
+Portion done: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%
+%PCSI-I-PRCOUTPUT, output from subprocess follows ...
+% - Execute SYS$MANAGER:TCPIP$CONFIG.COM to proceed with configuration of
+%   HP TCP/IP Services for OpenVMS.
+%
+Portion done: 100%
+
+The following products have been installed:
+    CPQ AXPVMS CDSA V2.2-271               Layered Product
+    DEC AXPVMS DWMOTIF V1.6                Layered Product
+    DEC AXPVMS DWMOTIF_SUPPORT V8.3        Layered Product
+    DEC AXPVMS OPENVMS V8.3                Platform (product suite)
+    DEC AXPVMS TCPIP V5.6-9                Layered Product
+    DEC AXPVMS VMS V8.3                    Operating System
+    HP AXPVMS AVAIL_MAN_BASE V8.3          Layered Product
+    HP AXPVMS KERBEROS V3.0-103            Layered Product
+    HP AXPVMS SSL V1.3-281                 Layered Product
+    HP AXPVMS TDC_RT V2.2-107              Layered Product
+
+DEC AXPVMS OPENVMS V8.3: OPENVMS and related products Platform
+
+    HP AXPVMS KERBEROS V3.0-103
+
+      Configure and set up Kerberos
+
+      If Kerberos will be run on this system, but has not been
+      used previously, you need to perform the following steps.
+
+       o Run the Kerberos configuration procedure:
+
+          @SYS$STARTUP:KRB$CONFIGURE.COM
+
+       o Add the following line to SYS$MANAGER:SYSTARTUP_VMS.COM:
+
+          $ @SYS$STARTUP:KRB$STARTUP
+
+       o Add the following line to SYS$MANAGER:SYLOGIN.COM:
+
+          $ @SYS$MANAGER:KRB$SYMBOLS
+
+
+      Press RETURN to continue: <b><i>&lt;RETURN&gt;</i></b>
+
+    HP AXPVMS SSL V1.3-281: SSL for OpenVMS Alpha V1.3 (Based on OpenSSL 0.9.7e)
+
+      There are post installation tasks that you must complete
+
+      after upgrading from previous SSL versions
+
+      including verifying startup command procedures and logical names.
+
+      Refer to SYS$HELP:SSL013.RELEASE_NOTES for more information.
+
+    HP AXPVMS TDC_RT V2.2-107: The Performance Data Collector (base) for OpenVMS
+
+      Users of this product require the following privileges:
+          (CMKRNL,LOG_IO,WORLD,PHY_IO,SYSPRV,SYSLCK)
+
+      Users of this product require the following process resource limits:
+          WSQUO minimum 6000
+
+      A read-me file is available in SYS$COMMON:[TDC]TDC_README.TXT
+
+      Release notes are available in SYS$COMMON:[TDC]TDC_RELEASE_NOTES.TXT
+
+    DEC AXPVMS TCPIP V5.6-9: HP TCP/IP Services for OpenVMS.
+
+      Check the release notes for current status of the product.
+
+
+
+    The installation is now complete.
+
+    When the newly installed system is first booted, a special
+    startup procedure will be run.  This procedure will:
+
+        o  Configure the system for standalone or OpenVMS Cluster operation.
+        o  Run AUTOGEN to set system parameters.
+        o  Reboot the system with the newly set parameters.
+
+
+    You may shut down now or continue with other operations.
+
+
+  Process AXPVMS_INSTALL logged out at  9-AUG-2006 22:16:05.51
+
+Press Return to continue... <b><i>&lt;RETURN&gt;</i></b>
+
+    ****************************************************************
+
+    You can install or upgrade the OpenVMS ALPHA operating system
+    or you can install or upgrade layered products that are included
+    on the OpenVMS ALPHA distribution media (CD/DVD).
+
+    You can also execute DCL commands and procedures to perform
+    "standalone" tasks, such as backing up the system disk.
+
+    Please choose one of the following:
+
+        1)  Upgrade, install or reconfigure OpenVMS ALPHA Version V8.3
+        2)  Display layered products that this procedure can install
+        3)  Install or upgrade layered products
+        4)  Show installed products
+        5)  Reconfigure installed products
+        6)  Remove installed products
+        7)  Find, Install or Undo patches; Show or Delete Recovery Data
+        8)  Execute DCL commands and procedures
+        9)  Shut down this system
+
+Enter CHOICE or ? for help: (1/2/3/4/5/6/7/8/9/?) <b>8</b>
+
+
+
+    WARNING --
+
+    The normal OpenVMS startup procedure has not executed.
+    Some commands and utilities will not work as documented.
+    HP does not support PRODUCT INSTALL and other
+    PRODUCT operations in this environment.
+
+
+    Enter DCL commands -- Enter "LOGOUT" when done.
+    When you enter "LOGOUT" a message will be displayed saying
+    "Process SA_STARTUP_DCL  logged out at &lt;date&gt; &lt;time&gt;",
+    and you will be returned to the menu.
+
+$$$ <b>show device d</b>
+
+Device                  Device           Error    Volume         Free  Trans Mnt
+ Name                   Status           Count     Label        Blocks Count Cnt
+DKB0:                   Mounted alloc        0  ALPHASYS      16324640     1   1
+DKB100:                 Mounted wrtlck       0  ALPHA083      34078870    86   1
+DKB200:                 Online               0
+DKB300:                 Online               0
+DKB400:                 Online               0
+DKB500:                 Online               0
+DVA0:                   Online               0
+DQA0:                   Offline              1
+DQA1:                   Offline              1
+DQB0:                   Online               0
+DQB1:                   Offline              1
+DKA0:                   Online               0
+DKA100:                 Online               0
+DKA200:                 Online               0
+DKA300:                 Online               0
+DKA500:                 Online               0
+DKA600:                 Online               0
+DAD0:                   Online               0
+$$$ <b>show device dkb0/full</b>
+
+Disk DKB0:, device type COMPAQ BB00911CA0, is online, allocated, deallocate on
+    dismount, mounted, file-oriented device, shareable, available to cluster,
+    error logging is enabled.
+
+    Error count                    0    Operations completed             117529
+    Owner process       "SA_STARTUP"    Owner UIC                         [1,4]
+    Owner process ID        00000024    Dev Prot            S:RWPL,O:RWPL,G:R,W
+    Reference count                2    Default buffer size                 512
+    Total blocks            17773524    Sectors per track                   168
+    Total cylinders             5290    Tracks per cylinder                  20
+    Logical Volume Size     17773524    Expansion Size Limit         2147475456
+
+    Volume label          "ALPHASYS"    Relative volume number                0
+    Cluster size                  16    Transaction count                     1
+    Free blocks             16324640    Maximum files allowed          16711679
+    Extend quantity                5    Mount count                           1
+    Mount status             Process    Cache name           "_DKB100:XQPCACHE"
+    Extent cache size             64    Maximum blocks in extent cache  1632464
+    File ID cache size            64    Blocks in extent cache           502000
+    Quota cache size               0    Maximum buffers in FCP cache       2935
+    Volume owner UIC           [1,1]    Vol Prot    S:RWCD,O:RWCD,G:RWCD,W:RWCD
+
+  Volume Status:  ODS-5, subject to mount verification, file high-water marking,
+      write-back caching enabled, hard links enabled.
+
+$$$ <b>set volume/nohigh dkb0</b>
+$$$ <b>show device dkb0/full</b>
+
+Disk DKB0:, device type COMPAQ BB00911CA0, is online, allocated, deallocate on
+    dismount, mounted, file-oriented device, shareable, available to cluster,
+    error logging is enabled.
+
+    Error count                    0    Operations completed             117628
+    Owner process       "SA_STARTUP"    Owner UIC                         [1,4]
+    Owner process ID        00000024    Dev Prot            S:RWPL,O:RWPL,G:R,W
+    Reference count                2    Default buffer size                 512
+    Total blocks            17773524    Sectors per track                   168
+    Total cylinders             5290    Tracks per cylinder                  20
+    Logical Volume Size     17773524    Expansion Size Limit         2147475456
+
+    Volume label          "ALPHASYS"    Relative volume number                0
+    Cluster size                  16    Transaction count                     1
+    Free blocks             16324640    Maximum files allowed          16711679
+    Extend quantity                5    Mount count                           1
+    Mount status             Process    Cache name           "_DKB100:XQPCACHE"
+    Extent cache size             64    Maximum blocks in extent cache  1632464
+    File ID cache size            64    Blocks in extent cache           502000
+    Quota cache size               0    Maximum buffers in FCP cache       2935
+    Volume owner UIC           [1,1]    Vol Prot    S:RWCD,O:RWCD,G:RWCD,W:RWCD
+
+  Volume Status:  ODS-5, subject to mount verification, write-back caching
+      enabled, hard links enabled.
+
+$$$ <b>logout</b>
+  Process SA_STARTUP_DCL logged out at  9-AUG-2006 22:19:12.45
+
+    ****************************************************************
+
+    You can install or upgrade the OpenVMS ALPHA operating system
+    or you can install or upgrade layered products that are included
+    on the OpenVMS ALPHA distribution media (CD/DVD).
+
+    You can also execute DCL commands and procedures to perform
+    "standalone" tasks, such as backing up the system disk.
+
+    Please choose one of the following:
+
+        1)  Upgrade, install or reconfigure OpenVMS ALPHA Version V8.3
+        2)  Display layered products that this procedure can install
+        3)  Install or upgrade layered products
+        4)  Show installed products
+        5)  Reconfigure installed products
+        6)  Remove installed products
+        7)  Find, Install or Undo patches; Show or Delete Recovery Data
+        8)  Execute DCL commands and procedures
+        9)  Shut down this system
+
+Enter CHOICE or ? for help: (1/2/3/4/5/6/7/8/9/?) <b>9</b>
+
+    Shutting down the system
+
+        SYSTEM SHUTDOWN COMPLETE
+
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = ffffffff8008fb24
+Resetting I/O buses...
+&gt;&gt;&gt;
+</pre>
+  </blockquote>
+            <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <div class="footerpart" id="sponsorsun">
+      <p><a href="http://www.sun.com/software/star/openoffice/index.html">
+        <img title="Sponsored by Sun Microsystems, Inc." alt="Sun Microsystems Logo" src="/branding/images/sun_logo.gif" /></a><br />
+      </p>
+    </div>
+
+    <div class="footerpart" id="sponsorhp">
+      <p><a href="http://www.hp.com/go/openvms">
+        <img title="Powered by OpenVMS" alt="Powered by OpenVMS logo" src="/branding/images/powered_1ovms.gif" id="poweredby" /></a>
+      </p>
+    </div>
+
+    <div id="smallprint">
+      <ul class="horizontalmenu">
+        <li><a title="Give feedback, or ask for assistance" href="/project/www/contact.html">Contact us</a></li>
+        <li><a title="Sitemap" href="/project/www/sitemap.html">Sitemap</a></li>
+        <li><a title="What should happen on the matter listed on this page..." href="/project/development/todo.html">To-Dos</a></li>
+        <li><a href="http://www.openoffice.org/nonav/servlets/HelpTOC">Site Help
+</a></li>
+        <li><a href="/project/www/press/1.1/">Press room</a></li>
+      </ul>
+
+      <p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+      <p>HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P., Sun, Sun Microsystems, the Sun logo, Java, Solaris, StarOffice are
+trademarks or registered trademarks of Sun Microsystems, Inc., UNIX &reg; is a registered Trademark of The Open Group, POSIX &reg; is a registered Trademark of
+The IEEE.</p>
+    </div>
+  </div>
+
+</body>
+</html>

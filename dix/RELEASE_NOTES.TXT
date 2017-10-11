@@ -1,0 +1,829 @@
+V0860 19-jul-2016
+1. Updated f$parse to allow multiple (even negative) fields
+2. Updated f$search. It did not work correctly if no wildcards present
+3. Changed the edit command. It uses qualifiers now to select what to edit
+4. Changed the close command /log qualifier. If you do not specify /log DIX
+    will not report a new current file (or no file)
+5. Added the checksum command to compute md5/sha1/sha2 checksums
+6. Updated the f$checksum lex function to include the md5/sha* checksums
+7. a/b and a-b for a and b decimal type did not work correct. This has been solved
+8. Added the /dispose= qualifier for the close command.
+9. Added memory files. Output can be saved in memory e.g. dir/out=mem:memfile.txt
+10. Printing an empty line, printed nothing. Now it prints an empty line
+11. Allow a line with open " in dcl mode to be more dcl compatible
+12. Added the read/noecho 
+V0850 1-mar-2016
+1. Fixed dir/sort=date. It did not work
+2. Removed the nofileopen from  dix/int without files
+3. Added the /nosort to directory/fast
+4. Fixed a bug in f$add et al (decimal funcs). They did not return the correct result
+5. Support for tan, atan, acos,asin (trigonometric functions) for complex input
+6. support for unary negate of a complex number e.g. : DIX>say -(1,0) 
+7. The f$cvtime did not accept deltatime values. This has been solved.
+8. Split the dix_plot*.for in more files to make compilation easier.
+9. Enhanced real overflow on ia64. It will now jump to a larger real mode (if present)
+10. Added the set disp sep=none to allow empty separation characters
+11. Fixed /screen output if text is longer than screen width.
+12. Added /sort=case_blind to the directory.
+13. Fixed a bug in table_get_value. This resulted in f.e. wrong sorting in directory
+14. Added a readonly flag for symbols
+15. Added the char(alias or f$char) and the ichar(alias for f$ichar) functions
+16. Added the // (string append) operator as alias for +
+17. Updated the search status after a multifile search (dix/file *.for something/stat
+     the status will now be printed at the end instead of after every file.
+18. Added support for the symb[offs,size]=val and := val
+19. In the evaluate (say) the tab and beep are no longer changed to .
+20. Added font selection to the plot mode.
+21. Added multiple columns to the t4 plot mode
+22. Support for input for .zip files for t4 files (you do need an unzip tool)
+23. Added plot output in .pdf format
+24. Complete rewrite of the dix/decw part to make it more in line with dix/plot
+25. dir/sort=size should have sorted on used size, it did not, but it does now
+26. Added the dir/sel=flag='item'. This allows you to select files on file attributes
+      f.e. dir/sel=flag=nobackup  
+27. Added the f$crc and the f$crc_table functions
+28. Add open file/memory to read file in memory table. It can be used as a normal file (readonly)
+29. Added the cshift function (circular shift)
+30. Added the dot_product function  for tables
+v0840 1-jun-2014
+1. Fixed f$control. It could return an invalid elapsed time.
+2. Added the >> (shiftr), << (shiftl), and >% (shift right arithmetic) operator
+3. Fixed a problem in dcl mode: continuation lines did not work correctly 
+4. Added the /append qualier to the open statement
+5. Change argument parsing on call/@ in DCL mode. Arguments are now strings or integers
+6. Fixed a bug using gosubs in subroutines, DIX would crash.
+7. Added a procedure cvt_help_to_html in the example scripts part
+8. Added the option to run command procedures stored in dix_des*.tlb files
+9. Structures can now be loaded from .mlb files too
+10. fix the display for type/col=..../full. The line would be preceeded by a lot of *
+11. Fixed the make file. It had a reference to a local logical PROGRAMS_TOP
+12. Added support for parameters/value/type for each command level
+13. Changed the syntax for search command in dcl_compat mode to make it dcl compatible
+14. Added the option to evaluate expressions without the eval command like dix> 10*10
+     See the help about set parse_expression
+15. Added the convert commmand, just like dcl convert
+16. Added the possibility for valuenames to have aliases.
+17. Allow the F$SEARCH to look in libraries also via the libnam(mod) or mod@lib
+18. DIX now prints offset/fieldname to file (pf1-p) in smg mode, not only fieldvalues
+19. Prevent file tags to be one of the process permanent files (sys$output, error, input)
+20. Enhance the .lts., .gts. etc functions in dcl mode. They now work as in DCL.
+21. Allow evaluation to build up a line before printing. See the help about 
+      /[no]TERMINATE in the evaluate  command
+22. Added the COMPLEX datatype (*8 (2 real*4) and *16 (2 real*8))
+23. Added the EXP function
+24. FIxed a bug in statement "if logexp then goto label". DIX would crash.
+25. Fixed a bug in DCL mode with the .lts.,.gts. etc . The evaluation was not correct
+26. Added a new special symbol $DIX_VERSION. You can now check in (dcl-)scripts
+    if you are running under DIX by checking the value of F$TYPE($DIX_VERSION)
+27. Added a LIBRARY command in DIX (/list and /extract only). See the help
+28. Added 2 example scripts that run under DCL as well as under DIX
+     EXTRACT_MLB      : Extract a module from starlet.mlb and convert to 
+                           fortran/dix definition file
+     CVT_HELP_TO_HTML : COnvert a help file/library to a number of html files 
+29. Fixed a bug in date conversion to binary. If the date is in DCL format
+     dd-mmm-yyyy:hh:mm , DIX would see the hh as minutes instead of hours.
+30. Fixed a bug in t4 plotting. Sometimes DIX would not recognize a date field.
+31. Added set term/auto to use auto command completion (see the help about set term/auto)
+32. fixed a problem with dix/comm dir file.ext;* . Dix would see the ; as pipe character
+v0830 1-oct-2013
+1. Enhanced F$REPLACE to support wildcards for the search string
+2. Enhanced the plot function to change the vertical size of a data window
+3. Allow blockmode io to express recordlength in bytes. See help file
+4. Show prompt would display all kind of error messages, this has been solved.
+5. The f$split did not work for csv type data, only the first char of a
+     value was selected.
+6. the f$read did not work for unitrecord devices (like sys$input). 
+    This has been solved 
+7. Added the y-offset value for data plotting
+8. Added a second y-axis for data plotting.
+9. Added the average and the sum function
+10. Added an enhanced command line input mode (multi line edit , a
+    long standing wish for DCL) : set term/extend
+11. Enhanced the /limit=value=endnr to /limit=value=(begnr,endnr).
+12. Added the ILEN function
+13. Fixed the dispay of show description/expand. The display was garbled.
+14. Added a PAD NATURAL|PACKED statement in the descriptions for alignment
+        policies.
+15. Added a new symbol-type. A description type, like in file buffers (with descriptions)
+    See the help in "dix/help interact symbols description" about its features.
+16. Fixed a bug when trying to change a record while changing a key value.
+    DIX would try to do a delete/write, but failed (without modifying),
+16. Added a new symbol-type: The structure. See the help in
+    "dix/help interact symbols structured" for its features
+17. Added a F$RAD50 function to convert between text and rad50 values
+18. Added a RAD50 datatype (integer*2 containing 3 chars)
+19. Added the F$FLOAT function to convert reals to text in a fixed format
+20. Added the radix converions as 'dddd'r12, convert using radix 12
+21. Added a description for sys$update:vms$system_images.idx
+22. Restored the working of the ^(not) operator. It did not work at all.
+23. Added an option in the search command to search multiple files.
+24. The search command can now define the SEARCH$* symbols after the search
+25. Update the date*4 and udate to disallow illegal input (seconds, ticks)
+26. Fixed a bug for %xdddddddd constants with 9 digits, and %O, and %b
+27. Allow modules in libraries to be used as filenames like module@library or
+        library(module)
+28. Directory has been enhanced with a /fast qualifier to search via indexf.sys
+      and directory of modules in libraries
+29. Directory now has a /SYMBOL qualifier to store the results of directory 
+      command in symbols (DIRECTORY$...)
+30. Added a /select=aces=ident=(id1[,id2...) to the directory[/fast] command 
+     to select files that have aces that use the ID1[,ID2..]
+31. Added a third parameter to f$message to search messages in files
+32. Added a directory selection argument to select files that contain acls
+     for a (combination of) identifiers.
+33. Added a directory selection on LBN's. Select files that are mapped to
+     the specified LBN's on disk.
+v0820 30-oct-2012
+1. Enhanced plot-display when using common x-axis and zoom.
+2. DIX would not process the /TYPE, /STACKED qualifier for the csv and t4 plot.
+3. Enhanced the autodetection for csv files for separator, x-field , header
+4. F$TYPE(NOSYMB) would return an error. Changed the behaviour to return
+    an empty string for a notexisting symbol( to be more DCL compatible)
+5. Added the SHIFT(v,amount) function, amount>0 is left shift, else right
+6. Restored the recall command, it did not work anymore, and added the
+    /input and /output option
+7. Plot: Make sure that the data point is always displayed during scrolling of
+    zoomed-in data.
+8. Plot: Fixed the setting of min-x/max-x in case of time-only
+9. Added the F$GETUAI function
+10. Added the set proc/priv=..., set proc/priority command
+11. Added the show proc/priv, show proc/prio command
+12. Fixed a conversion problem with Unsigned integers
+13. Fixed a problem using fastio and keyed access. DIX would not read the
+     record correctly
+14. Fixed a problem in views, when reaching the EOF, DIX would switch 
+         to description mode.
+15. The directory command now supports a list of files (like the DCL directory)
+16. Added the CD command (change directory)
+17. Added the /versions qualifier to the directory command
+17. Added the /exclude qualifier to the directory command
+18. Fixed a problem with fieldnames that are only one character long. 
+      DIX would not find them.
+19. Merged the demo definitions in the normale dix_def.tlb, making the 
+      dix_demo.tlb obsolete
+20. Added the DEMO command in interactive mode
+21. Added the /MERGE, /SINCE and /BEFORE qualifier for the plot/t4 command
+22. Fixed a problem with t4 files that had more than 2 columns average lines.
+23. Enhanced the plot of completely zero data. The dataline will now be 
+      plotted in the middle.
+24. Added the possibility to add all type of strings together, not only char type
+25. Added the #INSERT description line to add fields computed from other fields
+26. Added the INSERT command for views to add fields computed from other fields
+27. Allow plot/fields=-fieldmask to deselect fields.
+28. Allow plot/fields=@filename to specify the fieldnames/deselects from a file.
+29. Added support for the *string datatypes in expressions. They will be 
+       treated as char type. 
+30. Allow integer expression in IF statement in dcl compat mode
+31. Enhanced string input in plot mode to allow input of long string 
+         (multiple lines)
+32. Added the PLOT/PIE command
+33. Added support for closing windows with the alt-f4 key, without crashing
+    the program.
+34. Performance for displaying "all data" in decwindow mode was poor. 
+         This has been solved
+35. Added the F$DEVICE function
+36. Added the F$MORSE function (lots of fun, it's a pity the system does not
+          support sound)
+37. Added the F$ to the reserved names for symbols
+38. Enhanced the btest, ibset, ibclr function to accept a table of bits to 
+           be set/clear/tested
+39. Shifted some datastructures to p2 space (on alpha/ia64). This feature
+     is not (yet) default, it can be enabled via the DIX_ENABLE_P2 symbol (Y)
+     See the help about SETUP.
+40. Added the F$REPLACE function to replace strings in text
+41. Added general output to (DCL_)symbol via /output=#symbolname
+42. Added documentation about startup symbols, see dix/help SETUP
+43. Added a show process/continuous command
+V0810 22-mar-2012
+1. Dir/date gave 2 error messages "no such token ...", this has been solved
+2. SOme small enhancements in the display of correlation plots
+3. Added the expired,modified,created,backup tokens for the /since and /before
+    qualifiers of the directory command
+4. Fixed problem like "DIX>follow V(1).name". v(1).name should be a single 
+    token, but DIX saw it as 2, so you got a message like "dix_e_climanpar".
+     This has been solved
+5. Better syntax check on range/block (low:high) and not (low,high)
+6. Fixed a buckcheck on raw display.
+7. Added descriptions for acmsudf and acmsddf files
+8. Added the ASHIFT shift function (arithmetic shift (right))
+9. Added macro's in description files.
+10. Fixed problem in plot mode displaying more than 1 data stream (show data)
+    DIX would complain about "link too long"
+11. Added a [stacked] header when plotting in stacked mode.
+12. Added plotting of csv files.
+13. Added support for plotting deltatime type values
+14. Better support for TAB's in strings
+15. Added the /format qualifier to the evaluate command.
+16. Added the dix/plot/csv command : plot csv files.
+17. Added the /offset=time qualifier for the plot/t4 command to allow
+    comparisons of t4 files coming from systems with different localtimes.
+18. A lot of (smaller) enhancements in the plot [/t4] module. 
+19. Added a3 size for postscript plotting.
+V0800 1-oct-2011
+1. In the grep command the qualifier /case_sens worked the wrong way around.
+2. Fixed some case sensitivity issues.
+3. Fixed an accvio in parsing part.
+4. Added the faculty and combination functions (fac(n) and comb(n,m) )
+5. Updated the directory command to get info from locked files.
+6. Display extents and acls for opened files and for the directory command
+7. Added the NB_ACL,ACLS,HEADERS,EXTENTS,EXTLIST selectors to the F$FILE
+   function.
+8. Fixed an accvio in raw decwindows mode.
+9. Fixed a bug in scrolling vfc data in decwindows mode
+10. Fixed a bug in displaying vfc data with no fieldnames. It would not display
+    correctly in all cases.
+11. In smg mode, dix would not display the last character of the longest fieldname.
+12. Fixed a bug in input of more than 1 continuation lines.
+13. Added descriptions for NETPROXY and NET$PROXY files
+14. Fixed a bug for the DUMP command. If the user had previously executed a search
+     DIX would remember the search even after a file close/open
+15. Added to option to have more than 1 search_pattern, and to attach a search_parttern
+    to a file, so DIX will only display records matching this searchpatterns
+16. Added the option to do a backward search
+17. Updated the prev key command to work for relative files
+18. Added the PLOT command to make decwindow/postscript plots. This also 
+     allows you to plot t4 files (like TLVIZ, but now on VMS).
+19. Added the option to use the DECWINDOW help of the FSHELP package. 
+    FSHELP has been supported a long time, but was never documented.
+20. Fixed a bug in using [large] arrays in expressions. Dix would crash.
+21. Added an FFT function.
+22. Fixed a problem in string (wildcard-)matching: AA would match A. 
+23. Parsing went wrong for negated values. SO F$DCL_GET_VALUE would not
+    return the  NO in front of the keyword.
+24. Fixed a problem using int*8 keys in read/eq=nn
+25. Fixed a spurious message after a for statement with a zero repeat count
+26. Fixed a problem using tables in if statements. Dix would complain about
+        "result of xyz) not integer:
+27. Added a /NICE option to the directory command to translate ods-5 filenames.
+      also the NICE token is added to the f$parse function
+28. Fixed spurious messages after for-loops with 0 execution-count. 
+29. Fixed problem "@proc 2 -2" would be seen to have one argument 0 (2-2)
+    It should be 2 (2 and -2). This has been solved.
+30. Added an option to skip trailing zeros on reals SET REAL [NO]SKIP
+V0730 25-oct-2010
+1. Fixed dix/verify. It complained about 'shared' qualifier
+2. No longer us the $default description for dix/info
+3. Fixed overflow in keynames of dix/info
+4. Added the /format qualifier for the examine and deposit command
+5. Changed the dir/sort=name to dir/sort=file, and also the dir/wi=name to
+   dir/wi=file to be dcl compatible
+6. Speeded up expansion of large descriptions(some 10000 entries)
+7. Removed some newer lib$ routines to make dix runnable on old(er) vms versions
+8. Added the 16 parameters option in dcl_compat mode for vms8.4 (and dcl_ctlflag=8)
+9. Fixed a problem on fieldselection with descriptions e.g. file\descr\field.
+10. Fixed a problem with eval #integer"0", DIX would complain about the #.
+11. Fixed a problem with ;$type sys$input;line1;line2 : line1/line2 would not be printed
+12. Added the WRAP option to the display format. Default is WRAP.
+13. In some cases an error message would not be printed, this has been solved.
+14. Fixed the F$FILE("KVALUE") for not string keys to return integer types
+15. Fixed a problem with nested switches in description file.
+16. Added the /fall_though for a case statement.
+18. Renamed the ACL datatype to ACE. THe old name will still accepted.
+19. Fixed a problem with CUT to a dix/dcl symbol. It did not work at all.
+20. Added instruction names to break/trace points in the debugger
+21. Allow the keys in dix_des.tlb to have multiple name separated by |
+     This allows the same description to be used for multiple file names.
+22. Added a description for save_set files. Name is ".BCK|.SAV" See number 21.
+23. Fixed a bug in filesearch in screen/decwindow mode. Dix crashed.
+24. The := assignment broke during the last version. This has been fixed.
+25. Support for a[d,d]=value in dcl compat mode for integers/chars
+26. Allow offsets to be displayed in octal and binary.
+27. Added the "set display bit_offset" to force display offsets with bit offsets.
+28. Fixed a bug on dir/sel=size=min=nn and dir/sel=vers=max. 
+29. Fixed a bug on using startup files in interactive mode.
+30. Fixed a bug in the assign command
+31. Added the VERB command.
+32. Switched from dcl parsing to own parsing, using CLD table format.
+33. Added the case_sensitive mode to DIX.
+34. Fixed a problem with if/endif, if the expression in the IF failed,
+     DIX would complain about the ENDIF, this has been solved.
+35. Changed the while to a have default value of TRUE
+36. Added the direc/sel=header,exten and dire/ext=full qualifiers
+    to selec on and display extents/headers. Also added the /sel=file=field
+    like the normal directory command has.
+37. Updated the /display qualifier to allow changing the separation character
+      (between offsets/fieldnames/value) from a default | to any other.
+38. Added support for operators and,not,ge,le... etc besides the dix format
+         ^,>=,<=.
+39. Added the Askrecord menu item in decwindows mode. It was displaced, but
+    now it's there again 
+40. Added the support for the .gt., .lt.,.gts. etc operators in DCL mode
+41. Fixed a bug displaying a : in the first column. DIX would skip the :
+42. In simple expressions like ival=ival+10, DIX would not detect overflow
+     from 32 to 64 bits. This has been solved
+43. Added options to highlight with underline,bold,reverse,blink in various
+     commands (grep, set output, examine)
+44. Fixed a heavy alignment fault problem
+45. Added the F$BASE64 function
+46. Moved the sources to the [.source] subdirectory
+47. Added the trig functions cos,sin,tan, etc
+48. Added the LOG and LOG10 functions
+49. Fixed a problem using non-native real formats
+V0720 19-dec-2009
+1. Allow for loop commands (for,while,..) in interactive mode
+2. Changed the scope of symbols, see the help about "interac symbols"
+3. Added the indexed variables, see the help about "intera symbols index"
+4. Added the /MAX_BYTES qualifier to limit the recordsize
+5. Added the f$identifier,f$integer,f$string,F$user,f$setprv,f$privilege functions
+6. Fixed a bug in F$SEARCH. It crashed
+7. Added support for the dcl date (mark the: after the year) dd-mmm-yyyy:hour...
+8. Added the f$context,f$pid functions
+9. Added the ^ (not) operator
+10. Added the .and. .not. .or. in dcl_compat mode
+11. Fixed a problem incrementing integer*2 from -1 to 0.
+12. Added a description for quota.sys
+13. Added the all mode to f$search: If set, it now returns a table of filenames
+14. Added user written functions.
+15. Allow expressions after the EXIT statement. Upto now only integers 
+      numbers were allowed
+16. Fixed a problem in the switch/endswitch command. It did not work
+17. Added the UPCASE in f$edit besides the UPPERCASE
+18. Added the /verify to the @ command
+19. Follow command did not work in command files. This has been solved
+20. Added the "read sys$input/sys$command"
+21. Allowed the prefix statement to be an expression
+22. Fixed a bug for descriptions with large repeat counts. The name of the
+     field got scrambled.
+23. Added the define/deassign/show logical commands
+24. Added a description for monitor recording files
+25. Fieldname value conversion in search did not use the "fieldnames". This is fixed.
+26. Added the compile command, to generate "compiled" scripts.
+27. Added the delete (file) command.
+28. Had to change the arguments in f$locate, from source,substring to
+      substring,source to make the function dcl compatible (sorry about this)
+29. Changed the name of the F$LOCASE to F$LOWCASE to differentiate better with
+      F$LOCATE
+30. Changed the create command to use qualifiers instead of parameters to
+      make the create command dcl compatible
+31. Changed the evaluation order to check for symbols first
+32. Added the TIME command. It outputs a ^T status line after the command.
+V0710 14-apr-2009 
+1. Added the comment statement in descriptions
+2. Fixed a bug in the range statement in views
+3. Allowed override of link info in follow statements
+4. A new 'special' symbol %RECID : giving the current key/recnr
+5. add a sort option in the directory command
+5. Added the f$READ and F$SORT fuctions
+6. Fixed a problem when opening locked files. DIX should switch to fastio
+    (if the file is opened readonly), but this did not work correctly.
+7. Added the /output/page/screen to the evaluate (say) command.
+8. Added the option /type=datatype[*size] the the exa/raw offset command
+    to force translation by a specific datatype (f.e. ACL?)
+9. Added the [u]byte,[u]word,[u]longword,[u]quadword datatypes as aliases for
+    [u]integer*1,2,4,8 
+10. Fixed a bug in declare : declare/int a(10,10),b would set b to dim(10,10)
+    instead of a scalar.
+11. Fixed a bug in expressions like 5*"X" and "ABCABC"/"C"
+12. Updated the F$SPLIT to allow for table input
+13. Add the move command to interactive mode
+14. Added the F$HTONL and F$REVERSE functions
+15. Added a parameter to dump to specify another file
+16. Assigning to a field in other file (file\fieldname) did not work.
+     This is corrected
+16. Sometimes an assign to a non-valid fieldname would not be signalled.
+     This is corrected.
+17. Allow labels starting with a digit (like DCL)
+18. Added the F$CONVERT function 
+19. Added the [$]DECK/[$]EOD statements to allow data in dix-procedures
+     this data can be read via the SYS$INPUT file (like dcl)
+20. Enhanced F$ENUM to display parameters/values/symbols
+21. Fixed a bug in LOAD. LOAD LIBRARY.TLB/MOD=xyz did not work while
+                         LOAD LIBRARY/MOD=xyz did. This is solved.
+     Now the LIBRARY is default SYS$SHARE:STARLET.MLB
+22. Enhanced the IF to:
+      a. allow for IF logexpr THEN command (one if-line command)
+         this is the DCL style IF
+      b. Allow the THEN to be on the next line
+      c. Allow for a statement after the THEN
+      d. Allow for a statement after the ELSE
+     this will make DIX understand DCL scripts better
+23. Added the functions F$DIRECTORY and F$SETPRV
+24. Added the set/show evaluation_order 
+25. There was problem with compressed mode in *string types. This has been
+    solved
+26. Added the F$GETJPI, and F$GETQUI function
+27. Added the F$CSID and updated the F$GETSYI to use the nodename or cluster_id
+28. Fixed a bug in F$INSV. It always returned a logical value of true instead of the value.
+29. Added enable/disable command for flags as an alias to set .. ena/disa
+30. added a lot of example scripts to the help file
+31. Fixed a bug in deposit, it would always convert text to uppercase.
+32. Added subfields for a lot of fields (see the help about subfields)
+33. Added the load/include statement for description files
+34. Fixed bug in set output_filter, it just did not work.
+35. Added the /radix=nn (nn=2..36) as more general /hex/oct..
+36. Enhanced the editting in decwindows mode
+37. Added a debug mode for scripts. @script/debug will enter a debugger
+      See the help about "interactive_commands debugger"
+38. Added the $DOINDEX special symbol for the index of the DO nn "command"
+39. Added the "set/show prefix","show process" and the "show prompt" command
+40. Added the $ARCHITECTURE special symbol (VAX,ALPHA,IA64)
+41. Added the F$HASH_PASSWORD function
+42. Added the f$cvtime lexical function
+43. Fixed a bug in fastio sequential files on VAX. Dix would not set EOF 
+    correctly.
+44. Added the f$match_cond function and the load/mess to load dix message definitions
+45. Changed key highlighting for output to files. The default is now off.
+V0700 16-jun-2008
+1. Fixed a definition error in bucketheaders/dataheaders in fastio. Some
+   fields were defined bytesize while they were wordsize.
+2. Added the option to open files by fileid. See the help about
+   parameters.
+3. Replaced the THISFIELD symbol by the more general $FIELD symbol
+   in link structures in description records
+4. Added f$left,f$right,f$fis,f$fnis,f$translate lexical functions
+5. There was a small bug in repositioning in screen mode after redisplay.
+6. Integer*1 (in fieldmode) was disallowed, this has been fixed
+7. Added the /range qualifier to the POINTER statement, to disallow following
+   the link if no valid pointer is present (see the help record_f field pointer)
+8. Added a description for the accountng file (its fun)
+9. Fixed a problem using block mode on indexed files
+10. Fixed problems depositing in raw mode. Dix would not accept "deposit offset=value"
+11. Allowed decriptions for block mode access (see also 12).
+12. Added default descriptions $PROLOGUE,$KEY,$AREA,$BUCKET to allow easier
+    patching in indexed files in block mode (be very careful)
+13. Updated the WRITE command to allow output to an opened file.
+    This prevents a lot of file open/closes when copying a lot of records
+14. If a logical operator & or | and both parts are integer, the result is integer
+    Previous versions of DIX returned a logical value
+15. Added the option for the open to create the file with an optional FDL file
+    See the help about open (interactive open /fdl)    
+16. Enhanced the dimension of tables to allow for negative increment 
+    You can now specify f.e. table(10:1:-1) = table(10)..table(1)
+17. Added datatype bytearray. THis allows the display of a number of bytes
+    in one line
+18. Added the BLOCK/ENDBLOCK structure. This is the same as a RANG/ENDRANGE
+    but after reaching the ENDBLOCK, the offset is not changed
+19. Added new datatypes [bkt]rfa. The bktrfa is the rfa as stored in the
+    bucket of indexed files and has a length of 4, 5 or 6 bytes.
+    the rfa is the normal rfa type structure
+20. Added support to reference parts of a field via the fieldname{bitname}
+    See the help record_f field subfield
+21. Support for parameters has been extended. Previous versions of DIX only
+    allowed integer parameters, this version allows all supported types.
+    If the expression cannot be evaluated during the read of the description,
+    (if the expression depends on field-values), DIX will evaluate the
+    expression at expand time (when a record has been read).
+22. New values for F$FILE (BLOCKED,FIXED,RECORDLENGTH,MAXRECORDLENGTH,
+            MINRECORDLENGTH,FILEID,DEVNAM,PARFILEID,PARNAME)
+23. Fixed a bug in fastio. If the file is fixed and key and data compression are off
+    the data bucket does not contain a recordlength (it it the file.maxrecl).
+    The  previous version of DIX assumed there was a length word.
+24. Added a verify option for indexed files. This will check indexed files for 
+    corrupt buckets. See the help about dix/verify
+25. Added a help text how to repair corrupt indexed files. See the help in
+    dix/help mode verify
+26. Added the GREP interactive command
+27. Added the show file/fdl. This will output an FDL file te be used with the
+    create file/fdl or the open/crea/fdl
+28. Allow multiple commands on a line separated by ; in interactive mode
+    See the help about "interactive_commands"
+29. Add a do command. THis allows you to repeat a command a number of times
+    f.e.  do 10 exam ; next rec
+30. Modified the analyze qualifier of info to be on the top level
+    DIX /ANALYZE instead of DIX/INFO/ANALYZE 
+    See the help about "dix mode analyze "
+31. Added dimensions to symbols, You can declare a symbol to be a table 
+    (of max 3 dimensions) of any supported symbol type.
+    You can assing multiple values like declare a(10,10); a(1:3,*) = 10
+    See the help interactive symbols
+32. Added the auto save mode. This allows you to exit DIX, and restart
+    it with the same settings (files/records, and recall buffer)
+    See the help about dix/restore
+33. Fixed a problem with date conversion. DIX would complain while
+    it a was a valid date. THis has been solved.
+34. Added the F$PARSE,F$SYMBOL and the F$SEARCH function.
+35. Allowed the f$TYPE, F$FTYPE argument to be specified without the
+    quotes around the name. THis looks a bit more like DCL 
+36. Allow deposit to modify multiple fields. Also updated the UNDO command
+    to undo the change of the last deposit.
+37. Added the directory command in interactive mode with some extra's
+    See the help interact direc
+38. Added the ** (exponentiation) operator
+39. FIxed a problem with the <= test, it would only check for <
+40. Added the MINIDX and MAXIDX functions for the min/max element of a table
+41. Added the set integer size 8 on vax. Computations are done via real*16
+42. Added the "FOR symbol IN Expression". This allowes enumeration for the
+    for loop like " for k in [1,5,20]" or even " for k in "ABCD"{*} "
+43. The /record now accepts an expression. This allows you to do some 
+    computation like /record="f$getdvi(""mydisk"",""FID"",1234)"
+44. Allow for character ranges "A":"Z" delivers a string ABC...XYZ
+45. Added the set/show default command
+46. Added the "one-line" command file. This allows you to specify a
+    list of commands on one line Example DIX>; for k=1,10 ; eval k;endfor
+    See the help in DIX INTERACTIVE
+47. Added support for datafiles containing EBCDIC data.
+48. Added the F$GETSYI function
+49. Added a SWITCH/CASE/ENDSWITCH to the description syntax
+50. Added a SWITCH/CASE/ENDSWITCH command for interactive mode
+51. Increased the performance for scripts (at least if verb substitition is
+     off).
+52. Added the datatype privilege (64 bits with the known names) 
+53. Added the VIEWS, see the help about views DIX/HELP VIEW
+54. Added the set quoted command to change the printing of strings
+55. show symbol $status is default in hex.
+56. Added global parameters (see the LOAD and PARAMETER command)
+57. Allow parameters for F$GETSYI and F$GETDVI to be integers (parameters
+     f.e. loaded via the LOAD STARLET/MODULE=$SYIDEF)
+58. Added SQRT function (square root)
+59. added the f$numtim, f$vectim function
+60. Allow a (table) result in an expression to be subsetted with a dimension
+       f$numtim()(1:3) : deliver a 3 element integer table instaed of a 7.
+61. Enhanced support for unsigned integers.
+61. Added a Unix date/time spec (#seconds sinc 1-jan-1970)
+62. Allow links to other files with RFA/BYTEOFFSET.
+63. Added F$FID_TO_NAME function
+64. The () in the IF statement are no longer required, so IF A>1 say "yes"
+     will work now, as well as IF (A>1) say "Yes" 
+64. Added the F$SPLIT function
+V0600 28-nov-2006
+1. Added a decwindows interface to DIX.
+2. If you changed data in the "all_formats" display and then returned,
+   the screen was not updated. This has been fixed.
+3. Fixed a bug in fastio, when searching for multiple-records, FASTIO
+   could not correctly reset the RFA.
+4. Changed the "all_format" display to allow a discard of changes via the
+   F10 key or an accept of changes via the Do key.
+5. Included the current key of indexed files in the header in screen mode
+6. Add the the /keyboard=keyboardtype and the "set keyboard keyboardtype"
+   command, added the ^F,^G, ^K,^L as pf1..pf4 for keyboard=laptop
+7. Allow the /record=-10 : Start 10 records before EOF
+8. Added the /LIMIT qualifier for a file. Record beyond the limit
+   will return the limitreached message.
+9. Added the /progess qualifier for interactive search
+10. Added the ^T for search progress
+11. For fastio and stream-files the VT and FF were not recognized as
+    terminators. This has been solved.
+12. Fixed a bug on reading previous records when the key has duplicate keys.
+13. Fixed an ACCVIO in dix/inter file/nodes/raw : examine command
+14. Changed the fastio option to be more general. You can now also open
+    "locked" files. DIX will open the file in fastio mode (ignoring
+    RMS locks) and allow you to read records (keyed, relative, sequential)
+15. IN raw mode in the ascii part the moving around went wrong. THis has
+    been solved. 
+16. If Recordsize >32767 we now return rms$_IRC in fastio mode
+17. In interactive mode the WRITE function has been enhanced to write
+    more than one record
+18. DIX now saves the byte offset and the binary/ascii setting over
+    switching to different (screen-) display modes. The setting is also
+    saved over record switching.
+19. Added a RMS analyze option for indexed files. THis gives a lot of detail
+    about rms internal structures. See the "DIX/help modes info/analyze"
+v0510 8-jun-2006
+1. Added the #IFDEF function for conditional expansion of descriptions
+2. Fixed a problem with "fixed" symbols. If you explicitly declare a
+   symbol with a type, DIX did not always forbid you to change the type.
+3. Added the /FAST qualifier for the search commands. If you use this
+   qualifier, DIX will bypass RMS, and it may be faster. See the help
+    dix/help record_search/fast
+4. Allow /record on indexed files, together with the /key, you now can
+   read record "n" on key "key"
+5. Allow search selection on record_length with lt,le,eq,ge,gt and range.
+6. Included a /rfa= qualifier to select a specific record.
+   the previous /rfa qualifier is replaced with the /mark. See the help
+V0500 1-may-2006
+1. Enhanced the wrap. Sometimes DIX would wrap output lines when not necessary.
+2. Enhanced qualifiers for the DUMP command.
+3. Changed the record header for dump/file to a one line display containing
+   recordlength,recordnumber,vfc_record size and RFA. The output to symbols 
+   is still separated.
+4. Fixed some integer*8 problems
+5. Added the FILECOUNT() function.
+6. Enhanced the values for /FIELD and /SELECT to optionally include a
+   filenamemask and descriptionmask
+7. Changed the name of the BINASC key (TAB) to NEXT_WINDOW.
+8. Fixed a small problem with the /next_record search qualifier.
+9. Added the /FORMAT qualifier and the SET/SHOW format command, to allow
+   the display of unprintable data in character strings.
+10. Fixed a bug in the raw screen display with scrolling. If the data contained
+     more than one screen, the display went wrong.
+11. Inluded the MOUSE-usage on a decwindows-terminal, and menu_key in screenmode.
+12. Included the context for a key definition. This allow you to define
+     keys with different meaning in different screens. 
+13. Added funtions BTEST, IBSET and IBCLR (bit manipulation)
+14. There was a problem with hex input for character fields, that has been solved
+15. Fixed some (non-)alignment problems on VAX
+16. Fixed the (signed) display of bytes and words. They were converted as unsigned data
+17. Included the DEMO mode
+18. Added the RFA of the current record to the header in screen mode (thanks to Hein)
+19. Fixed an error when doing screen_print and leaving the filename empty.
+20. Added binary and octal display in all modes
+21. Added support for previous record for an indexed and a relative file
+22. Changed the key PF1-H to PF4-H and v.v.
+23. Changed the search order for .des files, first currentdir, then filedir
+     then userlib and finally systemlib
+24. Added fieldnames for dates (none, expired etc). If you have your own descriptions
+    with date types, make sure you add the [0=none] to the description line
+25. Added new datatype deltatime
+26. Added symbol substitution for verbs. 
+27. Added the f$mode and the f$radix function
+28. Added the decimal symbol type and the [u]decimal datatype.
+29. The set strict command is now per level. Each @file can set its own.
+30. Added the f$verify function.
+31. Removed the "onelinecommand" from interactive mode, but added a
+    /command=("command1","command2",..) qualifier.
+
+V0430 21-jan-2006
+1. Greatly enhanced the record search. You can now search in (fields of)
+   multiple records with a lot of compare options. See the help about
+   record_seaches.
+2. In the interactive mode , the FIND and SEARCH commands have be changed.
+   THe FIND now searches data in the record, the SEARCH records in the file.
+3. Added the SHOW SEARCH, SET SEARCH and the EDIT SEARCH commands.
+4. Added the set integer size 8 on alpha and ia64 (sorry not on vax)
+   This allows symbols with 64 bit integers and all operations on them.
+   Fields with 64 bit integers have always been supported.
+5. Enhanced the CSV in dump/file.
+6. Included a DUMP command in interactive mode (including a CSV qualifiers)
+7. There was a problem with the make-file. The procedure used an undefined 
+   symbol SAY. This problem is solved.
+8. There was a link problem with older (pre 7.3 Alpha) versions of VMS.
+   DIX used the routines OTS$CVT_T_S (concert text to bin for REAL*4 IEEE)
+   and OTS$CVT_T_T (convert text to bin for REAL*8(IEEE). I replaced 
+   these routines, and this problem should no longer occur.
+V0421 1-jan-2006
+1. Added the %Recordnumber() function
+2. Fixed a bug in the create record when no description available
+3. Fixed a bug in the control code for exit with modified data
+4. Added show release_notes command
+
+V0420 16-nov-2005
+1. Added contional statements #IF,#ELSE,#ELSEIF,#ENDIF in descriptions
+2. Fixed a bug in delete/symbol
+3. Allow symbols to start with an _
+4. Added #MESSAGE in descriptions
+6. Enhanced the find options (record search)
+7. Added the set file/[no]modify in interactive mode
+8. Added the /relative qualifier for the position in the descriptions
+  I have access to an IA64 machine now, so the kit now again includes
+  the IA64 objects and binaries
+V0412 28-oct-2005
+1. Added f$add, f$sub, f$mul and F$divide
+2. Added recall statement in the interactive mode
+V0411 13-sep-2005
+1. Added set process/name= command and the F$environment("PRCNAM")
+V0410 8-jul-2005
+1. Added the /LIMIT qualifier to stop a repeat sequence
+2. Added the POINTER statement to allow pointer in records
+   See the help about pointer_syntax
+3. Added support for IEEE reals. We now accept the real types
+   REAL_F,REAL_G,REAL_D,REAL_H,REAL_S,REAL_T,REAL_X
+   REAL*nn are accepted as aliases, with different policies for
+   the different platforms (see the help). 
+4. Added the SET REAL FORMAT, and SET REAL SIZE command to
+   allow the real symbols in any (supported) precision.
+5. Changed the EXIT command to do the exit dependend on data.
+6. Leave the text on screen after EXIT (screen mode).
+7. Better support for VFC files. In screen mode the screen will display
+   two displays (one for the data and one for the VFC data).
+8. The /EQ,/LT,/LE,/GE,/GT,/RECORD are now position dependend
+   So you can now open mulitple files, each with their own record specification.
+9. Added the /locking qualifier . See the help
+10. Major rewrite for the RMS library
+11. Added /CSV in file mode, This allows you to generate a CSV 
+   (comma separated values) file for import to excell
+12. Fixed a bug for the RBITS value. This conversion did not function 
+    correctly when you specified field=+value (addition of one bit).
+
+
+  Since I no longer have access to an IA64 machine, I cannot compile the
+  newer versions. I successfully compiled the 4.0 version to IA64, so it should
+  be possible to build dix0410 and later on IA64, if you have the fortran compiler.
+
+V0400 13-sep-2004
+1. Added user defined types. See help about user defined types.
+   This allowes the user to define his own datatypes.
+2. Added function NOT, ODD, EVEN
+3. Fixed bug in label accessibility. Sometimes lables could not
+   be found, while they should have been found.
+4. Fixed bug in interactive mode. When depositing text all text was 
+   uppercased.
+5. Added /UPPERCASE and /LOWERCASE to descriptor entries
+6. Added the reference to fields from non-current file/descriptions
+    e.g. filetag\descriptiontag\fieldname
+7. Added unsigned qualifier for examine in raw mode
+V0351 1-jun-2004
+1. Added a show version command
+2. Updated the show file /all command.
+3. Added the oneline command to interactive mode
+4. Restored the /MUTI_FILE functionality
+5. Added function(s) F$INSV,F$EXTZV,F$EXTV
+6. Fixed a bug when changing length of fields in screen mode
+    Data was not correctly copied.
+7. Fixed a bug when changing length of fields in interactive mode
+    Record length was not adapted for idx/rel (not fixed) files.
+
+V0350 1-mar-2004
+1. Added commands  LOOP/TESTLOOP/ENDLOOP
+                   CYCLE
+                   ENTRY 
+                   declaration statements (REAL/LOG/CHARACTER/DATE/INTEGER)
+2. Added functions F$ENVIRONMENT 
+                   F$FAO
+                   LOGICAL
+3. Changed the maximum stringlength from 255 to 65535
+4. Fixed some bugs in output handling
+5. Added UNIX wildcard matches
+6. Added define/key for interactive mode and startup
+   Changed the keydefinitions for screen mode to define/skey
+7. Added display of VFC data from the file mode, and include /display qualifier
+8. Added strict mode for explicit declaration
+9. Added screen-mode display in interactive mode (SMG)
+
+V0340 1-oct-2003
+1. Added  IF()THEN/ELSE/ENDIF,
+          FOR K=BEG,END[,INTERVAL]/ENDFOR
+          REPEAT/UNTIL
+          CALL,SUBROUTINE,ENDSUBROUTINE
+          LEAVE
+2. Fixed GOTO problem
+3. Added functions F$ENUMERATE
+                   F$GETDVI with some fields
+                   F$FILE to get file information about the open file.
+                   F$FIELD to get field information
+                   F$TRNLNM
+                   F$ENUMERATE to list all descriptor entries
+                   F$DATE 
+                   F$RANDOM
+
+4. Added parameters for @ and call
+5. Added local symbols, see help in dix/help.
+6. Added new symbol type "date"
+
+V0330 1-sep-2003
+1. Added support for fields that contain links to other files
+2. Enhanced parsing of expressions
+3. Support for user textlibrary for description records.
+4. New functions (%(B)LOC, F$(F)TYPE, F$(F)EXISTS, F$CHECKSUM
+5. Support for while/endwhile in scripts
+
+  Known problem: While it is possible to "GOTO" into or out of a 
+  while/endwhile structure, this is not supported , and will be disallowed
+  in a next version.
+V0321 1-jul-2003
+1. Added support for logical symbols and & (and) and | (or) operator
+2. Enhanced parsing of expressions
+3. Fixed stackdump on help function in screen mode
+
+V0320 1-jun-2003
+1. Added open/close/add/remove command in interactive mode
+2. Fixed a bug in all_display modes when asking for record-offset.
+   The previous version crashed the second time this procedure was called
+3. Updated the display_all mode to make it more readable
+4. Fixed a filesize error in display files.
+5. Added support for user definable keys. See the help for more info
+
+V0310 1-apr-2003 
+Initial distributed release
+
+V0100 1-jan-1991
+First release, it was a long time ago
+
+
+V9999
+Known restrictions.
+1.
+ When using GOSUB, the RETURN statement must be at the same syntax level
+ as the entry point. This is NOT checked, and violation will result in
+ strange behaviour. This problem does not exist with the CALL statement.
+ Example
+  IF (exp) THEN
+    Statement
+    WHILE (expr)
+      Statement
+      GOSUB test
+    ENDWHILE
+  test:           -
+    Statement     |
+  ENDIF           | Gosub/return block runs into an endif
+ statement        | Not supported
+ RETURN           -
+
+  IF (exp) THEN
+    Statement
+    WHILE (expr)
+      Statement
+      GOSUB test
+    ENDWHILE
+   goto lab1	 Do not runinto, since RETURN will be unexpected
+  test:           -
+    statement     | Gosub/return block at the same syntax level
+    Statement     | This is supported
+    RETURN        _ 
+ lab1:
+  ENDIF           
+
+2. For the not-native real values 
+    a.REAL_S, REAL_T and REAL_H on VAX
+    b.REAL_H                    on Alpha/IA64
+    c.REAL_F, REAL_G and REAL_D on IA64
+
+   Conversions are done via tranformations to the other equivalent types
+
+    a. REAL_S via REAL_F, REAL_T via REAL_G, REAL_X via REAL_H on VAX
+    b. REAL_H via REAL_X on Alpha/IA64
+    c. REAL_F via REAL_S, REAL_G and REAL_D via REAL_X on IA64
+
+   Since not all types have exactly the same range, some data will convert
+   to overflow on one platform, and not on the other. This will only happen
+   on data near the edge of the range, and should not make a difference
+   for normal values.

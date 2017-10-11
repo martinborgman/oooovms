@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>PATCH</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>PATCH 2.5.4</FONT></I></U></B></P>
+<p>
+GNU version of Larry Wall's program that takes  "diff's" output and applies it to an original file to generate a  modified version of that file. Normally, the
+patched versions are put  in place of the originals. Backups can be made.
+</p>
+<p>
+<b><u>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.</u></b>
+<br>
+</P>
+<P>
+This port of patch 2.5.4 was posted by:
+<pre>
+Bernard Giroud
+Credit Lyonnais (Suisse) SA
+</pre>
+</p>
+<P>
+Here is the <A href="GNV-AXPVMS-PATCH-V0205-4-1_PCSI.ZIP">patch 2.5.4 zipped PCSI package (<!--#fsize virtual="GNV-AXPVMS-PATCH-V0205-4-1_PCSI.ZIP" -->B)</A>. Unzip the
+file on OpenVMS using UNZIP to restore the original RMS file attributes.
+</P>
+<P>
+Here is the <A href="GNV-PATCH-2-5-4.TGZ">patch 2.5.4 source patch package (<!--#fsize virtual="GNV-PATCH-2-5-4.TGZ" -->B)</A>. You can download the original
+source package from <a href="http://www.gnu.org/software/patch/">http://www.gnu.org/software/patch/</a>.
+</P>
+<p>
+Please give your feedback to 
+<A href="mailto:patchdev@oooovms.dyndns.org">patchdev@oooovms.dyndns.org.</A>
+</p>
+<p>
+    <a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+
+<head>
+  <title>
+    porting:        OpenOffice.org for OpenVMS
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="version" content="2.6.2.4.8" />
+  <style type="text/css">
+    /*<![CDATA[*/
+    <!--
+    @import url("/branding/css/tigris.css");
+    @import url("/branding/css/inst.css");
+    -->
+    /*]]>*/
+  </style>
+  <link rel="stylesheet" type="text/css" href="/branding/css/print.css" media="print" />
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico" />
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO" />
+  <meta name="description" content="OpenOffice.org: The Open Office Suite" />
+
+</head>
+
+<body>
+  <p class="nonscreen"><a href="#content">Skip to content</a></p>
+
+
+  <div id="banner">
+    <div>
+      <a href="http://www.openoffice.org">
+      <img src="/branding/images/ooo-logo.png"
+           alt="Openoffice.org" id="ooologo" />
+      </a>
+    </div>
+
+    <div id="login">
+      <form name="bannerloginform" id="bannerloginform" action="http://porting.openoffice.org/servlets/TLogin" method="post">
+        <div>
+          <label for="loginID">User:</label>
+          <input type="text" alt="username" name="loginID" id="loginID" class="inputtext" size="10" maxlength="32" />
+          <label for="password">Password:</label>
+          <input type="password" alt="password" name="password" id="password" class="inputtext" size="10" maxlength="32" />
+          <input type="submit" name="Login" id="Button" class="inputbutton" value="Login" /> 
+          <a href="http://www.openoffice.org/servlets/Join">Register</a>  | 
+          <a href="http://www.openoffice.org/servlets/TLogin">Login help</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toptabs">
+    <ul class="tabs">
+      <li>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </li>
+
+      <li> <a href="http://download.openoffice.org/index.html" title="Get OpenOffice.org or browse for additions">Download</a> </li>
+
+      <li> <a href="http://support.openoffice.org/index.html" title="The place for both free and commercial support on OpenOffice.org">Support</a> </li>
+
+      <li> <a href="http://contributing.openoffice.org/index.html" title="Become part of the largest OpenSource project!">Contributing</a> </li>
+
+      <li class="th">   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </li>
+
+      <li>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </li>
+
+      <li> <a href="http://about.openoffice.org/index.html" title="Background information on OpenOffice.org">About</a> </li>
+
+    </ul>
+  </div>
+
+  <div class="contentpart" id="contextualinformation">
+    <div id="breadcrumbs">
+      <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+      <strong>
+        <a href="http://porting.openoffice.org/">porting</a>
+      </strong>
+    </div>
+  </div>
+
+  <div id="body">
+    <table id="main" summary="body">
+      <tr>
+        <td id="leftcol">
+          <div id="navcolumn">
+            <div id="projecttools" class="toolgroup">
+              <div class="label">
+                <strong>Project tools</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a>
+                </div>  
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+                </div>
+              </div> 
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a>
+                </div>
+              </div>
+            </div>
+            <form action="http://porting.openoffice.org/servlets/Search" method="get">
+              <div id="searchbox" class="toolgroup">
+                <div class="label">
+                  <strong>Search</strong>
+                </div>
+                <div class="body">
+                  <div>
+                    <select name="scope">
+                      <option value="projectAndSubs" selected="selected">This project</option>
+                      <option value="domain" >All projects</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="hidden" name="resultsPerPage" value="40" /> 
+                    <input type="text" name="query" size="10" /> 
+                    <input type="submit" name="Button" value="Go" />
+                  </div>
+                  <div>
+                    <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>
+                  </div>
+                  <div>
+                    <a href="http://support.openoffice.org/search.html">Google search</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="helptext" class="toolgroup">
+              <div class="label">
+                <strong>How do I...</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://www.openoffice.org/sitemap.html" class="helplink">Sitemap</a>
+                </div>
+                <div><a href="http://www.openoffice.org/faq.html" class="helplink">FAQ</a></div>
+                <div>
+                  <a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+                    title="Note: link may open in new window" class="helplink">Get help?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strut">
+            &nbsp;
+          </div>
+        </td>
+
+        <td id="bodytd">
+          <div id="bodycol">
+            <p class="nonscreen"><a name="content">start:</a></p>
+
+            <!--#config timefmt="%Y-%m-%d" --> 
+ 
+ <h1>
+        java GNV section 
+</h1>
+<p>
+        <i>
+                Updated <!--#echo var="LAST_MODIFIED" -->, by 
+                <a href="mailto:martin.borgman@oooovms.dyndns.org">
+                        Martin Borgman
+                </a>
+        </i>
+</p>
+
+<!-- edit this below -->
+
+<pre>
+
+ How to enable Java in GNV
+
+This was tested on a zx6000 with:
+----------------------------------- ----------- ------------
+PRODUCT                             KIT TYPE    STATE
+----------------------------------- ----------- ------------
+HP I64VMS AVAIL_MAN_BASE V8.2-1     Full LP     Installed
+HP I64VMS C V7.1-11                 Full LP     Installed
+HP I64VMS CDSA V2.1-355             Full LP     Installed
+HP I64VMS CSWS V2.1                 Full LP     Installed
+HP I64VMS CSWS_JAVA V3.0            Full LP     Installed
+HP I64VMS CSWS_PERL V2.1            Full LP     Installed
+HP I64VMS CSWS_PHP V1.3             Full LP     Installed
+HP I64VMS CXX V7.1-11               Full LP     Installed
+HP I64VMS DWMOTIF V1.5              Full LP     Installed
+HP I64VMS GNV V1.6-4                Full LP     Installed
+HP I64VMS JAVA142 V1.4-22           Full LP     Installed
+HP I64VMS KERBEROS V2.1-75          Full LP     Installed
+HP I64VMS OPENVMS V8.2-1            Platform    Installed
+HP I64VMS PERL V5.8-6               Full LP     Installed
+HP I64VMS TCPIP V5.5-11             Full LP     Installed
+HP I64VMS TDC_RT V2.1-78            Full LP     Installed
+HP I64VMS VMS V8.2-1                Oper System Installed
+JFP I64VMS LIBBZ2 V1.0-2            Full LP     Installed
+JFP I64VMS MYSQL V4.1-14            Full LP     Installed
+JFP I64VMS PYTHON235 V1.46-0        Full LP     Installed
+JFP I64VMS ZLIB V1.2-3              Full LP     Installed
+----------------------------------- ----------- ------------
+
+Note1:
+I'm using a HP internal version of bash, but I don't think that matters in this
+case.
+
+
+Prerequisites are:
+GNV 1.6-2 or better
+Java 1.4.2 SDK or better
+Alpha or IA64 system
+ODS-5 disk with hard links enabled
+extended parse style enabled
+case blind
+
+What to do:
+
+   1. create a file SYS$LOGIN:JAVA$CONFIG_SETUP.COM with the following content:
+
+$! JAVA$CONFIG_SETUP.COM
+$!
+$! --NOTE:
+$! --       THIS FILE WAS ORIGINALLY GENERATED BY
+$! --       SYS$COMMON:[JAVA$142.COM]JAVA$CONFIG_WIZARD.COM;1
+$! --       ON  7-JAN-2006 21:11:11.40
+$! --       IT MAY HAVE BEEN MANUALLY EDITTED SINCE THEN.
+$! --
+$! --       For more complete description of the logicals shown,
+$! --       please read the release notes.
+$!
+$! The following are useful in all environments.
+$!
+$ SET PROCESS/PARSE_STYLE=EXTENDED
+$ DEFINE/JOB DECC$ARGV_PARSE_STYLE TRUE
+$ DEFINE/JOB DECC$EFS_CASE_PRESERVE TRUE
+$ DEFINE/JOB JAVA$DAEMONIZE_MAIN_THREAD TRUE
+$ DEFINE/JOB JAVA$DISABLE_CMDFILE_WHITESPACE_PARSING TRUE
+$ DEFINE/JOB DECC$ENABLE_GETENV_CACHE TRUE
+$!
+$! Omitting logicals useful in debugging environment.
+$!
+$! Logicals useful for mimicing UNIX-like environments:
+$!
+$ DEFINE/JOB JAVA$CREATE_DIR_WITH_OWNER_DELETE TRUE ! make mkdir & rmdir symmetric --
+$!  no need to change dir. protection before delete
+$ DEFINE/JOB JAVA$DELETE_ALL_VERSIONS TRUE ! delete all copies of file on delete operation
+$ DEFINE/JOB JAVA$RENAME_ALL_VERSIONS TRUE ! rename all copies of file on rename operation
+$ DEFINE/JOB DECC$POSIX_SEEK_STREAM_FILE TRUE ! make seek() beyond EOF not extend file if no write happened
+$!
+$! Logicals useful for applications with many children:
+$!
+$ DEFINE/JOB JAVA$FORK_PIPE_STYLE 2 ! use buffered Mailbox devices and TCP/IP devices for interprocess communication
+$ DEFINE/JOB JAVA$FORK_SUPPORT_CHDIR TRUE ! simulate chdir behavior on runtime.exec()
+$ DEFINE/JOB JAVA$FORK_MAILBOX_MESSAGES 8  ! default -- increase for better buffering
+$ DEFINE/JOB JAVA$WAIT_FOR_CHILDREN 5 ! seconds to delay exiting main to allow children to exit first
+$!
+$! Logicals useful for supporting file sharing:
+$!
+$ DEFINE/JOB DECC$FILE_SHARING TRUE  ! ask for C-RTL support for file sharing
+$!
+$! Omitting logicals useful for bypassing secondary stat() call.
+$!
+$! Logicals useful to set up caching of file/directory information
+$!
+$ DEFINE/JOB JAVA$CACHING_INTERVAL 60  ! to disable, undefine logical or set value to 0
+$ DEFINE/JOB JAVA$CACHING_DIRECTORY TRUE ! enable special case -- don't look in directory if directory known to be absent
+$!
+$! Logicals useful for supporting ODS-5 operation only.
+$!
+$! NOTE:
+$! The value of JAVA$FILENAME_CONTROLS generated below is different than the one set in JAVA$142_SETUP.COM
+$! To make this new value be in effect, be sure to run JAVA$CONFIG_SETUP.COM after you run JAVA$142_SETUP.COM.
+$ DEFINE/JOB DECC$EFS_CHARSET  TRUE  !
+$ DEFINE/JOB DECC$EFS_CASE_SPECIAL  TRUE  !
+$ DEFINE/JOB JAVA$FILENAME_CONTROLS 8 ! only enable the mixed UNIX/VMS filespec mapping
+$ DEFINE/JOB JAVA$READDIR_CASE_DISABLE TRUE ! turns off auto. class/source case-sensitive name extraction
+$!
+$! See: SYS$COMMON:[JAVA$142.COM]JAVA$FILENAME_CONTROLS.COM for explanation of bits enabled above.
+$!
+$! Logicals useful for workstations with PC-style keyboard:
+$!
+$ DEFINE/JOB JAVA$KEYBOARD_TYPE_DEC TRUE ! make PC-style keyboard transmit keycodes like DEC-style keyboard
+$!
+
+   2. run SYS$STARTUP:JAVA$142_SETUP.COM (on Alpha with parameter FAST, on
+      Itanium with parameter HOTSPOT)
+      Note: you way want to add this to your LOGIN.COM
+   3. run SYS$LOGIN:JAVA$CONFIG_SETUP.COM
+      Note1: you way want to add this to your LOGIN.COM
+      Note2: you must add this after @SYS$STARTUP:JAVA$142_SETUP.COM
+   4. Create the necessary links in /usr/local/bin
+
+$CREATE/DIRECTORY GNU:[usr.local.bin]
+$SET FILE /ENTER=GNU:[usr.local.bin]appletviewer. SYS$COMMON:[JAVA$142.BIN]JAVA$APPLETVIEWER.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]extcheck. SYS$COMMON:[JAVA$142.BIN]JAVA$EXTCHECK.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]idlj. SYS$COMMON:[JAVA$142.BIN]JAVA$IDLJ.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]jar. SYS$COMMON:[JAVA$142.BIN]JAVA$JAR.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]jarsigner. SYS$COMMON:[JAVA$142.BIN]JAVA$JARSIGNER.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]java. SYS$COMMON:[JAVA$142.BIN]JAVA$JAVA.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]javac. SYS$COMMON:[JAVA$142.BIN]JAVA$JAVAC.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]javadoc. SYS$COMMON:[JAVA$142.BIN]JAVA$JAVADOC.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]javah. SYS$COMMON:[JAVA$142.BIN]JAVA$JAVAH.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]javap. SYS$COMMON:[JAVA$142.BIN]JAVA$JAVAP.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]jdb. SYS$COMMON:[JAVA$142.BIN]JAVA$JDB.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]keytool. SYS$COMMON:[JAVA$142.BIN]JAVA$KEYTOOL.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]native2ascii. SYS$COMMON:[JAVA$142.BIN]JAVA$NATIVE2ASCII.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]ordb. SYS$COMMON:[JAVA$142.BIN]JAVA$ORDB.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]orbd. SYS$COMMON:[JAVA$142.BIN]JAVA$ORBD.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]policytool. SYS$COMMON:[JAVA$142.BIN]JAVA$POLICYTOOL.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]rmic. SYS$COMMON:[JAVA$142.BIN]JAVA$RMIC.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]rmid. SYS$COMMON:[JAVA$142.BIN]JAVA$RMID.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]rmiregistry. SYS$COMMON:[JAVA$142.BIN]JAVA$RMIREGISTRY.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]serialver. SYS$COMMON:[JAVA$142.BIN]JAVA$SERIALVER.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]servertool. SYS$COMMON:[JAVA$142.BIN]JAVA$SERVERTOOL.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]tnameserv. SYS$COMMON:[JAVA$142.BIN]JAVA$TNAMESERV.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]kinit. SYS$COMMON:[JAVA$142.BIN]JAVA$KINIT.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]klist. SYS$COMMON:[JAVA$142.BIN]JAVA$KLIST.EXE
+$SET FILE /ENTER=GNU:[usr.local.bin]ktab. SYS$COMMON:[JAVA$142.BIN]JAVA$KTAB.EXE
+$SET FILE /ENTER=GNU:[usr.local]java142.DIR SYS$COMMON:[000000]JAVA$142.DIR
+
+   5. Make sure /usr/local/bin is in your PATH
+   6. Set the JAVA_HOME environment variable in bash to /usr/local/java142:
+      export JAVA_HOME=/usr/local/java142
+      Note you may want to add this to you .bashrc
+
+Now you can add Apache Ant to your bash environment.
+
+   1. Download the Apache Ant 1.6.5 binary distribution from the apache web
+      site http://ant.apache.org/
+   2. Start bash
+   3. cd <location of the downloaded ant kit>
+   4. gunzip apache-ant-1.6.5-bin.tar.gz or bunzip2 apache-ant-1.6.5-bin.tar.bz2
+   5. cd /usr/local
+   6. gnutar xf <location of the downloaded ant kit>/apache-ant-1.6.5-bin.tar
+   7. Add the following to your environment:
+      export ANT_HOME=/usr/local/apache-ant-1.6.5
+      export PATH=$ANT_HOME/bin:$PATH
+      Note: you want to add these lines to your .bashrc
+
+And now you can use java and ant from within bash.
+
+Regards,
+
+Martin Borgman,
+OpenOffice.org On OpenVMS porting group
+
+
+</pre>
+
+
+            <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <div class="footerpart" id="sponsorsun">
+      <p><a href="http://www.sun.com/software/star/openoffice/index.html">
+        <img title="Sponsored by Sun Microsystems, Inc." alt="Sun Microsystems Logo" src="/branding/images/sun_logo.gif" /></a><br />
+      </p>
+    </div>
+	
+    <div class="footerpart" id="sponsorhp">
+      <p><a href="http://www.hp.com/go/openvms">
+        <img title="Powered by OpenVMS" alt="Powered by OpenVMS logo" src="/branding/images/powered_1ovms.gif" id="poweredby" /></a>
+      </p>
+    </div>
+	
+    <div id="smallprint">
+      <ul class="horizontalmenu">
+        <li><a title="Give feedback, or ask for assistance" href="/project/www/contact.html">Contact us</a></li>
+        <li><a title="Sitemap" href="/project/www/sitemap.html">Sitemap</a></li>
+        <li><a title="What should happen on the matter listed on this page..." href="/project/development/todo.html">To-Dos</a></li>
+	<li><a href="http://www.openoffice.org/nonav/servlets/HelpTOC">Site Help</a></li>
+	<li><a href="/project/www/press/1.1/">Press room</a></li>			
+      </ul>
+
+      <p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+      <p>HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P., Sun, Sun Microsystems, the Sun logo, Java, Solaris, StarOffice are 
+trademarks or registered trademarks of Sun Microsystems, Inc., UNIX &reg; is a registered Trademark of The Open Group, POSIX &reg; is a registered Trademark of
+The IEEE.</p>
+    </div>
+  </div>
+
+</body>
+</html>

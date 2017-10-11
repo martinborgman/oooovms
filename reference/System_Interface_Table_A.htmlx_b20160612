@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"><!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>UNIX® System Interface Table</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p>
+    <p>These web pages contain tables of interfaces defined in the Single UNIX Specification Version 3, complete with an indication of their availability in other related standards, such as UNIX 98, UNIX 95, the ISO POSIX-1 standard, the ISO POSIX-2 standard, the ISO C standard, SVID3, 4.3BSD, the Linux Standard Base Specification version 1.3 and OpenVMS 7.3-2.</p>
+    <p>These tables are intended for porters of UNIX® applications to the OpenVMS 7.3-2 platform. It lists all the OpenVMS 7.3-2 interfaces either in the CRTL or other libraries, such as as POSIX Threads. If an interface is only available on the Alpfa® platform they are listed with the "α" sign.</p>
+    <p>In the near future all the interfaces that show non standard behavior will be marked.</p>
+    <p>The UNIX® System Interfaces are split into several tables and organized alphabetically:</p>
+    <table data-toggle="table" data-search="true" data-pagination="true" data-url="unix_interfaces.json">
+      <thead>
+        <tr>
+          <th data-field="Interface">Interface</th>
+          <th data-field="XSI">XSI</th>
+          <th data-field="POSIX Base">POSIX Base</th>
+          <th data-field="U98">U98</th>
+          <th data-field="U95">U95</th>
+          <th data-field="P96 P92">P96 P92</th>
+          <th data-field="C99">C99</th>
+          <th data-field="C89">C89</th>
+          <th data-field="SVID3">SVID3</th>
+          <th data-field="BSD">BSD</th>
+          <th data-field="LSB 1.3">LSB 1.3</th>
+          <th data-field="OpenVMS 7.3-2">OpenVMS 7.3-2</th>
+        </tr>
+      </thead>
+    </table>
+    <hr>
+    <p><b>Conventions for System Interface Tables</b></p>
+    <dl>
+      <dt><b>m</b></dt>
+      <dd>Indicates that the interface is defined as mandatory.</dd>
+      <dt><b>α</b></dt>
+      <dd>Indicates that the interface is defined as mandatory on Alpha® systems.</dd>
+      <dt><b>o</b></dt>
+      <dd>Indicates that the interface is part of an Option or Feature Group.</dd>
+      <dt><b>ob</b></dt>
+      <dd>Indicates that the interface is Obsolescent, and although mandatory for the implementation, applications are discouraged from its use.</dd>
+      <dt><b>l</b></dt>
+      <dd>In the XSI column, indicates that the interface is part of the Legacy option group and need not be available on all implementations.</dd>
+      <dt><i>opt</i></dt>
+      <dd>In the POSIX Base column, two or three letter option codes are used as described in Section 2 denoting the option to which the interface belongs.</dd>
+      <dt><b>r</b></dt>
+      <dd>In the POSIX.1-1996 column this indicates that the interface is part of the POSIX Realtime Extension.</dd>
+      <dt><b>t</b></dt>
+      <dd>In the POSIX.1-1996 column this indicates that the interface is part of the POSIX Threads Extension.</dd>
+      <dt><b>1</b></dt>
+      <dd>In the C89 column this indicates that the interface is part of ISO/IEC 9899:1990/Amendment 1:1995 (E).</dd>
+      <dt><b>libname</b></dt>
+      <dd>In the LSB 1.3 column indicates that the interface is part of the specified library. The (ob) addition means that the interface is considered obsolete.</dd>
+      <dt><b>.</b></dt>
+      <dd>Indicates that the interface is not specified.</dd>
+    </dl>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script> <!-- Latest compiled and minified JavaScript -->
+   
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js">
+  </script>
+</body>
+</html>

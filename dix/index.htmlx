@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenVMS DIX main page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h2 class="text-center">DIX 8.6</h2>
+    <p>Here is the <a href="dix_086.zip">dix 8.6 package (<!--#fsize virtual="dix_086.zip" -->B.zip file)</a>. This package contains all sources, objects and executables for all platforms. Since this file is getting bigger we also supply platform specific kits. These kits contain all sources, and the objects and executable for the specific platform</p>
+    <p>Here is the VAX <a href="dix_086_v.zip">dix 8.6 package (<!--#fsize virtual="dix_086_v.zip" -->B.zip file)</a>.</p>
+    <p>Here is the Alpha <a href="dix_086_a.zip">dix 8.6 package (<!--#fsize virtual="dix_086_a.zip" -->B.zip file)</a>.</p>
+    <p>Here is the IA64 <A href="dix_086_i.zip">dix 8.6 package (<!--#fsize virtual="dix_086_i.zip" -->B.zip file)</a>.</p>
+    <p>The help file of DIX is now available here <a href="dix_help.html">DIX_HELP</a></p>
+    <p>I am very interested in your ideas about DIX. For example what you would like to be included in a next version, so please send your questions and/or feedback to <a href="mailto:dixdev@oooovms.dyndns.org">dixdev@oooovms.dyndns.org.</a><br /></p>
+    <p><u><b>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.</b></u></p>
+    <h4>RELEASE_NOTES</h4>
+    <pre>
+    <!--#include virtual="RELEASE_NOTES.TXT" -->
+    </pre>
+    <h4>FREEWARE_README</h4>
+    <pre>
+    <!--#include virtual="freeware_readme.txt" -->
+    </pre>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

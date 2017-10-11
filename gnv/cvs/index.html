@@ -1,0 +1,661 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>OpenVMS CVS main page</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>CVS 1.11.11</FONT></I></U></B></P>
+<p>
+<br>
+<b><u>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.
+</u></b>
+<br>
+</P>
+<P>
+Martin Borgman writes:
+</p> 
+<p>
+<pre>
+To: bug-cvs@gnu.org
+
+L.S.,
+
+On an OpenVMS 7.3-2 (alpha) system running GNV 1.5-6, I ran into the  
+following problems:
+
+- The configure script correctly states that I don't have, io.h,  
+direct.h, vfork.h, sys/param.h, fchdir, fchmod, mknod and valloc, but  
+config.h states I do.
+- The files diff/util.c, src/client.c and src/error.c do an incorrect  
+#ifndef test
+		#   ifndef strerror
+		extern char *strerror ();
+		#   endif
+	 this should be:
+		#   ifndef HAVE_STRERROR
+		extern char *strerror ();
+		#   endif
+- getpass.h is not declared in any .h file or at least in src/login.c
+- src/buffer.c does not check for valloc before using it.
+
+For your information:
+
+After fixing the above problems you can build cvs by doing the  
+following:
+
+Before entering bash I define the following logicals to make the  
+OpenVMS C Runtime Library behave more UNIX like:
+
+   "DECC$ARGV_PARSE_STYLE" = "ENABLE"
+   "DECC$DISABLE_TO_VMS_LOGNAME_TRANSLATION" = "ENABLE"
+   "DECC$EFS_CASE_PRESERVE" = "ENABLE"
+   "DECC$EFS_CHARSET" = "ENABLE"
+   "DECC$EFS_FILE_TIMESTAMPS" = "ENABLE"
+   "DECC$EXEC_FILEATTR_INHERITANCE" = "ENABLE"
+   "DECC$FILENAME_UNIX_NO_VERSION" = "ENABLE"
+   "DECC$FILENAME_UNIX_REPORT" = "ENABLE"
+   "DECC$FILE_OWNER_UNIX" = "ENABLE"
+   "DECC$FILE_PERMISSION_UNIX" = "ENABLE"
+   "DECC$FILE_SHARING" = "ENABLE"
+   "DECC$FIXED_LENGTH_SEEK_TO_EOF" = "ENABLE"
+   "DECC$GLOB_UNIX_STYLE" = "ENABLE"
+   "DECC$PIPE_BUFFER_SIZE" = "65000"
+   "DECC$POSIX_SEEK_STREAM_FILE" = "ENABLE"
+   "DECC$READDIR_DROPDOTNOTYPE" = "ENABLE"
+   "DECC$RENAME_NO_INHERIT" = "ENABLE"
+   "DECC$SELECT_IGNORES_INVALID_FD" = "ENABLE"
+   "DECC$STDIO_CTX_EOL" = "ENABLE"
+   "DECC$STRTOL_ERANGE" = "ENABLE"
+   "DECC$USE_RAB64" = "ENABLE"
+   "DECC$VALIDATE_SIGNAL_IN_KILL" = "ENABLE"
+
+And set the process parse style to expended mode (set proc/pars=ext).
+
+Within the bash environment, you have to set the following environment  
+variable:
+
+bash$ export GNV_DISABLE_DCL_FALLBACK=1
+
+Then you can do configure:
+bash$ ./configure --build=alpha-hp-vms --host=alpha-hp-vms  
+--disable-dependency-tracking --disable-server
+
+Then rename lib/getpass.c to lib/getpass.c.org and copy vms/getpass.c  
+to lib/getpass.c before running make:
++
+------------------------------------------------------------------------ 
+------------------------------------------------------------------------ 
+-
+bash$ make
+make  all-recursive
+make[1]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11'
+Making all in lib
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/lib'
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'argmatch.c' || echo './'`argmatch.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'getdate.c' || echo './'`getdate.c
+
+     if (Minutes < 0 || Minutes > 59 || Seconds < 0 || Seconds > 59)
+........^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression  
+"Minutes" is being compared with a relational operator to a constant
+whose value is not greater than zero.  This might not be what you  
+intended.
+at line number 585 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+     if (Minutes < 0 || Minutes > 59 || Seconds < 0 || Seconds > 59)
+.......................................^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression  
+"Seconds" is being compared with a relational operator to a constant
+whose value is not greater than zero.  This might not be what you  
+intended.
+at line number 585 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+         if (Hours < 0 || Hours > 23)
+............^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression "Hours"  
+is being compared with a relational operator to a constant wh
+ose value is not greater than zero.  This might not be what you  
+intended.
+at line number 589 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+     if (Year < 0)
+........^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression "Year"  
+is being compared with a relational operator to a constant who
+se value is not greater than zero.  This might not be what you intended.
+at line number 633 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+     if ((tod = ToSeconds(Hours, Minutes, Seconds, Meridian)) < 0)
+........^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression  
+"(tod=ToSeconds(...))" is being compared with a relational operator t
+o a constant whose value is not greater than zero.  This might not be  
+what you intended.
+at line number 661 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+     now += 7 * SECSPERDAY * (DayOrdinal <= 0 ? DayOrdinal : DayOrdinal  
+- 1);
+.............................^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression  
+"DayOrdinal" is being compared with a relational operator to a consta
+nt whose value is not greater than zero.  This might not be what you  
+intended.
+at line number 697 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+         if (Start < 0)
+............^
+%CC-I-QUESTCOMPARE, In this statement, the unsigned expression "Start"  
+is being compared with a relational operator to a constant wh
+ose value is not greater than zero.  This might not be what you  
+intended.
+at line number 981 in file /u/scjones/cvs-nightly/lib/getdate.y
+
+     return Start == -1 ? 0 : Start;
+...........^
+%CC-I-QUESTCOMPARE1, In this statement, the unsigned expression "Start"  
+is being compared with an equality operator to a constant wh
+ose value is negative.  This might not be what you intended.
+at line number 1000 in file /u/scjones/cvs-nightly/lib/getdate.y
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'getline.c' || echo './'`getline.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'getopt.c'  
+|| echo './'`getopt.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'getopt1.c' || echo './'`getopt1.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'getpass.c' || echo './'`getpass.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'md5.c' ||  
+echo './'`md5.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'regex.c'  
+|| echo './'`regex.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'savecwd.c' || echo './'`savecwd.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'sighandle.c' || echo './'`sighandle.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'stripslash.c' || echo './'`stripslash.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'xgetwd.c'  
+|| echo './'`xgetwd.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'yesno.c'  
+|| echo './'`yesno.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f  
+'fnmatch.c' || echo './'`fnmatch.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../src     -g -c `test -f 'fncase.c'  
+|| echo './'`fncase.c
+rm -f libcvs.a
+ar cru libcvs.a argmatch.o getdate.o getline.o getopt.o getopt1.o  
+getpass.o md5.o regex.o savecwd.o sighandle.o stripslash.o xgetwd.
+o yesno.o fnmatch.o fncase.o
+Warning: u unrecognized switch
+: libcvs.a
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/lib'
+Making all in zlib
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/zlib'
+gcc -g   -c -o adler32.o adler32.c
+gcc -g   -c -o compress.o compress.c
+gcc -g   -c -o crc32.o crc32.c
+gcc -g   -c -o gzio.o gzio.c
+gcc -g   -c -o uncompr.o uncompr.c
+gcc -g   -c -o deflate.o deflate.c
+gcc -g   -c -o trees.o trees.c
+gcc -g   -c -o zutil.o zutil.c
+gcc -g   -c -o inflate.o inflate.c
+gcc -g   -c -o infblock.o infblock.c
+gcc -g   -c -o inftrees.o inftrees.c
+gcc -g   -c -o infcodes.o infcodes.c
+gcc -g   -c -o infutil.o infutil.c
+gcc -g   -c -o inffast.o inffast.c
+ar rc libz.a adler32.o compress.o crc32.o gzio.o uncompr.o deflate.o  
+trees.o zutil.o inflate.o infblock.o inftrees.o infcodes.o infu
+til.o inffast.o
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/zlib'
+Making all in diff
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/diff'
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'diff.c' ||  
+echo './'`diff.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'diff3.c'  
+|| echo './'`diff3.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'analyze.c'  
+|| echo './'`analyze.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'cmpbuf.c'  
+|| echo './'`cmpbuf.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'io.c' ||  
+echo './'`io.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'context.c'  
+|| echo './'`context.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'ed.c' ||  
+echo './'`ed.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'normal.c'  
+|| echo './'`normal.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'ifdef.c'  
+|| echo './'`ifdef.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'util.c' ||  
+echo './'`util.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'dir.c' ||  
+echo './'`dir.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'version.c'  
+|| echo './'`version.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib    -g -c `test -f 'side.c' ||  
+echo './'`side.c
+rm -f libdiff.a
+ar cru libdiff.a diff.o diff3.o analyze.o cmpbuf.o io.o context.o ed.o  
+normal.o ifdef.o util.o dir.o version.o side.o
+Warning: u unrecognized switch
+: libdiff.a
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/diff'
+Making all in src
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/src'
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'add.c' || echo './'`add.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'admin.c' || echo './'`admin.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'annotate.c' || echo './'`annotate.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'buffer.c' || echo './'`buffer.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'checkin.c' || echo './'`checkin.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'checkout.c' || echo './'`checkout.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'classify.c' || echo './'`classify.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'client.c' || echo './'`client.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'commit.c' || echo './'`commit.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'create_adm.c' || echo './'`create_adm.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'cvsrc.c' || echo './'`cvsrc.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'diff.c' || echo './'`diff.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'edit.c' || echo './'`edit.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'entries.c' || echo './'`entries.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'error.c' || echo './'`error.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'expand_path.c' || echo './'`expand_path.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'fileattr.c' || echo './'`fileattr.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'filesubr.c' || echo './'`filesubr.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'find_names.c' || echo './'`find_names.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'hardlink.c' || echo './'`hardlink.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'hash.c' || echo './'`hash.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'history.c' || echo './'`history.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'ignore.c' || echo './'`ignore.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'import.c' || echo './'`import.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'lock.c' || echo './'`lock.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'log.c' || echo './'`log.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'login.c' || echo './'`login.c
+
+         tmp = getpass ("CVS password: ");
+..............^
+%CC-I-IMPLICITFUNC, In this statement, the identifier "cvs_getpass" is  
+implicitly declared as a function.
+at line number 535 in file  
+USER50:[KITS.GNU.cvs.cvs-1^.11^.11.src]login.c;1
+
+         tmp = getpass ("CVS password: ");
+........^
+%CC-W-CVTDIFTYPES, In this statement, "cvs_getpass(...)" of type "int",  
+is being converted to "pointer to char".
+at line number 535 in file  
+USER50:[KITS.GNU.cvs.cvs-1^.11^.11.src]login.c;1
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'logmsg.c' || echo './'`logmsg.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'main.c' || echo './'`main.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'mkmodules.c' || echo './'`mkmodules.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'modules.c' || echo './'`modules.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'myndbm.c' || echo './'`myndbm.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'no_diff.c' || echo './'`no_diff.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'parseinfo.c' || echo './'`parseinfo.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'patch.c' || echo './'`patch.c
+
+         if ((t.actime = t.modtime = RCS_getrevtime (rcsfile, vers_tag,
+............^
+%CC-I-QUESTCOMPARE1, In this statement, the unsigned expression  
+"(t.actime=t.modtime=RCS_getrevtime(...))" is being compared with an
+  equality operator to a constant whose value is negative.  This might  
+not be what you intended.
+at line number 543 in file  
+USER50:[KITS.GNU.cvs.cvs-1^.11^.11.src]patch.c;1
+
+         if ((t.actime = t.modtime = RCS_getrevtime (rcsfile, vers_head,
+............^
+%CC-I-QUESTCOMPARE1, In this statement, the unsigned expression  
+"(t.actime=t.modtime=RCS_getrevtime(...))" is being compared with an
+  equality operator to a constant whose value is negative.  This might  
+not be what you intended.
+at line number 566 in file  
+USER50:[KITS.GNU.cvs.cvs-1^.11^.11.src]patch.c;1
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'rcs.c' || echo './'`rcs.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'rcscmds.c' || echo './'`rcscmds.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'recurse.c' || echo './'`recurse.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'release.c' || echo './'`release.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'remove.c' || echo './'`remove.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'repos.c' || echo './'`repos.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'root.c' || echo './'`root.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'run.c' || echo './'`run.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'scramble.c' || echo './'`scramble.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'server.c' || echo './'`server.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'status.c' || echo './'`status.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'subr.c' || echo './'`subr.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'tag.c' || echo './'`tag.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'update.c' || echo './'`update.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'version.c' || echo './'`version.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'vers_ts.c' || echo './'`vers_ts.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'watch.c' || echo './'`watch.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'wrapper.c' || echo './'`wrapper.c
+gcc -DHAVE_CONFIG_H -I. -I. -I.. -I../lib -I../diff -I../zlib     -g -c  
+`test -f 'zlib.c' || echo './'`zlib.c
+gcc  -g   -o cvs  add.o admin.o annotate.o buffer.o checkin.o  
+checkout.o classify.o client.o commit.o create_adm.o cvsrc.o diff.o ed
+it.o entries.o error.o expand_path.o fileattr.o filesubr.o find_names.o  
+hardlink.o hash.o history.o ignore.o import.o lock.o log.o l
+ogin.o logmsg.o main.o mkmodules.o modules.o myndbm.o no_diff.o  
+parseinfo.o patch.o rcs.o rcscmds.o recurse.o release.o remove.o rep
+os.o root.o run.o scramble.o server.o status.o subr.o tag.o update.o  
+version.o vers_ts.o watch.o wrapper.o zlib.o ../diff/libdiff.a
+../lib/libcvs.a ../zlib/libz.a -lnsl
+? cc: Warning: library "nsl" not found
+%LINK-W-WRNERS, compilation warnings
+         in module LOGIN file  
+USER50:[KITS.GNU.cvs.cvs-1^.11^.11.src]login.o;1
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/src'
+Making all in man
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/man'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/man'
+Making all in doc
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/doc'
+Making all in contrib
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/contrib'
+cd .. && /bin/sh ./config.status contrib/check_cvs
+config.status: creating contrib/check_cvs
+cd .. && /bin/sh ./config.status contrib/clmerge
+config.status: creating contrib/clmerge
+cd .. && /bin/sh ./config.status contrib/cln_hist
+config.status: creating contrib/cln_hist
+cd .. && /bin/sh ./config.status contrib/commit_prep
+config.status: creating contrib/commit_prep
+rm -f cvs2vendor
+cp cvs2vendor.sh cvs2vendor
+chmod +x cvs2vendor
+cd .. && /bin/sh ./config.status contrib/cvs_acls
+config.status: creating contrib/cvs_acls
+rm -f cvscheck
+cp cvscheck.sh cvscheck
+chmod +x cvscheck
+rm -f debug_check_log
+cp debug_check_log.sh debug_check_log
+chmod +x debug_check_log
+cd .. && /bin/sh ./config.status contrib/log
+config.status: creating contrib/log
+cd .. && /bin/sh ./config.status contrib/log_accum
+config.status: creating contrib/log_accum
+cd .. && /bin/sh ./config.status contrib/mfpipe
+config.status: creating contrib/mfpipe
+cd .. && /bin/sh ./config.status contrib/pvcs2rcs
+config.status: creating contrib/pvcs2rcs
+rm -f rcs-to-cvs
+cp rcs-to-cvs.sh rcs-to-cvs
+chmod +x rcs-to-cvs
+cd .. && /bin/sh ./config.status contrib/rcs2log
+config.status: creating contrib/rcs2log
+cd .. && /bin/sh ./config.status contrib/rcslock
+config.status: creating contrib/rcslock
+cd .. && /bin/sh ./config.status contrib/sccs2rcs
+config.status: creating contrib/sccs2rcs
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/contrib'
+Making all in tools
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/tools'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/tools'
+Making all in windows-NT
+make[2]: Entering directory  
+`/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT'
+Making all in SCC
+make[3]: Entering directory  
+`/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT/SCC'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory  
+`/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT/SCC'
+make[3]: Entering directory  
+`/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT'
+sed "s/%PACKAGE_VERSION%/1.11.11/" <./config.h.in \
+   >>config.tmp
+make[3]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT'
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/windows-NT'
+Making all in os2
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/os2'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/os2'
+Making all in emx
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/emx'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/emx'
+Making all in vms
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11/vms'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11/vms'
+make[2]: Entering directory `/user50/kits/gnu/cvs/cvs-1.11.11'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11'
+make[1]: Leaving directory `/user50/kits/gnu/cvs/cvs-1.11.11'
+------------------------------------------------------------------------ 
+------------------------------------------------------------------------ 
+-
+-
+
+To make the defines for the C Runtime Library more permanent you need  
+to add code like the following and link it with cvs:
+
++
+------------------------------------------------------------------------ 
+------------------------------------------------------------------------ 
+-
+/*
+
+  Module that provides a LIB$INITIALIZE routine for the GNV toolset that
+  will turn on some CRTL features that are not enabled by default.
+
+  The CRTL features can also be turned on via logical names, but that
+  impacts all programs and some aren't ready, willing, or able to handle
+  the settings that GNV needs.
+
+  Edit History
+
+  1-001  John Reagan     Initial version using the old style interface
+                         but with the new version commented out.
+
+  1-002  John Reagan     Switch to new API for setting features
+
+  1-003  Steve Pitcher   Add DECC$RENAME_NO_INHERIT.
+
+  1-004  Steve Pitcher   Quiet these, if the DECC feature doesn't exist.
+
+  1-005  Martin Borgman  Using the suggested UNIX level of 30
+*/
+
+#include <stdio.h>
+#include <errno.h>
+
+int   decc$feature_get_index (char *name);
+int   decc$feature_set_value (int index, int mode, int value);
+
+/*
+** Sets current value for a feature
+*/
+static void set(char *name, int value)
+{
+      int index;
+      errno = 0;
+
+      index = decc$feature_get_index(name);
+
+      if (index > 0)
+         decc$feature_set_value(index, 1, value);
+}
+
+/*
+** Sets default value for a feature
+*/
+static void set_default(char *name, int value)
+{
+      int index;
+      errno = 0;
+
+      index = decc$feature_get_index(name);
+
+      if (index > 0)
+         decc$feature_set_value (index, 0, value);
+}
+
+static void set_coe ( void )
+{
+     /* New style interface that works only on very recent
+        (Apr 2001 and beyond) CRTLs */
+
+     /*
+      * Only setting defaults allows logical names to
+      * override these settings.
+      */
+
+     /*   General Corrections          (DECC$UNIX_LEVEL == 1) */
+
+      set_default ("DECC$FIXED_LENGTH_SEEK_TO_EOF", TRUE);
+      set_default ("DECC$POSIX_SEEK_STREAM_FILE", TRUE);
+      set_default ("DECC$SELECT_IGNORES_INVALID_FD", TRUE);
+      set_default ("DECC$STRTOL_ERANGE", TRUE);
+      set_default ("DECC$VALIDATE_SIGNAL_IN_KILL", TRUE);
+
+     /*   General Enhancements        (DECC$UNIX_LEVEL == 10) */
+
+      set_default ("DECC$ARGV_PARSE_STYLE", TRUE);
+      set_default ("DECC$EFS_CASE_PRESERVE", TRUE);
+      set_default ("DECC$STDIO_CTX_EOL", TRUE);
+      set_default ("DECC$PIPE_BUFFER_SIZE", 8192);
+      set_default ("DECC$USE_RAB64", TRUE);
+
+     /*   UNIX-style file names       (DECC$UNIX_LEVEL == 20) */
+
+      set_default ("DECC$DISABLE_TO_VMS_LOGNAME_TRANSLATION", TRUE);
+      set_default ("DECC$EFS_CHARSET", TRUE);
+      set_default ("DECC$FILENAME_UNIX_NO_VERSION", TRUE);
+      set_default ("DECC$FILENAME_UNIX_REPORT", TRUE);
+      set_default ("DECC$READDIR_DROPDOTNOTYPE", TRUE);
+      set_default ("DECC$RENAME_NO_INHERIT", TRUE);
+      set_default ("DECC$GLOB_UNIX_STYLE", TRUE);
+
+     /*   UNIX-like file attributes     (DECC$UNIX_LEVEL == 30) */
+
+      set_default ("DECC$EFS_FILE_TIMESTAMPS", TRUE);
+      set_default ("DECC$EXEC_FILEATTR_INHERITANCE", TRUE);
+      set_default ("DECC$FILE_OWNER_UNIX", TRUE);
+      set_default ("DECC$FILE_PERMISSION_UNIX", TRUE);
+      set_default ("DECC$FILE_SHARING", TRUE);
+
+     /****
+
+          UNIX-compliant behavior       (DECC$UNIX_LEVEL == 90)
+
+      set_default ("DECC$FILENAME_UNIX_ONLY", TRUE);
+      set_default ("DECC$POSIX_STYLE_UID", TRUE);
+      set_default ("DECC$USE_JPI$_CREATOR", TRUE);
+      set_default ("DECC$DETACHED_CHILD_PROCESS", TRUE);
+
+     ****/
+}
+
+int lib$initialize();
+
+#pragma nostandard
+globaldef { "LIB$INITIALIZ" } readonly _align (LONGWORD)
+         int spare [8] = {0};
+globaldef { "LIB$INITIALIZE" } readonly _align (LONGWORD)
+      void (*x_set_coe)() = set_coe;
+
+/*
+** Force a reference to LIB$INITIALIZE to ensure it
+** exists in the image.
+*/
+globaldef int (*lib_init_ref)() = lib$initialize;
+#pragma standard
+------------------------------------------------------------------------ 
+------------------------------------------------------------------------ 
+-
+-
+
+Using this version of cvs I could retrieve the OpenOffice.org source  
+from the OpenOffice.org cvs site.
+
+The following problems still exist:
+- no server support yet (no fork() yet, no syslog functions yet)
+- no termios.h, fixed by using the old vms/getpass.c
+- on OpenVMS systems you cannot have a file named fonts.dir and a  
+directory named fonts in the same directory. You can work around by  
+renaming the "fonts.dir" file to "fonts.dir.", and restarting cvs.
+- when creating a file on UNIX you overwrite an already existing file  
+with the same name. On OpenVMS you create a new version of the file.  
+This problem leeds to directory not empty messages during cvs cleanup.  
+This can be fixed by specifying the correct open mode.
+- fileio is slow. This too can be fixed by specifying additional  
+parameters with the open function.
+
+Regards,
+
+Martin Borgman,
+OpenOffice.org porting group.
+</pre>
+</p>
+<p>
+Please give your feedback to 
+<A href="mailto:cvsdev@oooovms.dyndns.org">cvsdev@oooovms.dyndns.org.</A>
+</p>
+<p>
+    <a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

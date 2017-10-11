@@ -1,0 +1,37 @@
+
+This document describes the known issues associated with the version of 
+OpenOffice.org 1.0 ported onto Tru64 UNIX V5.1A in the Linux and Tru64 UNIX 
+Portability CD. The issues are as follows:
+
+MOZILLA
+=======
+Currently, OpenOffice 1.0 uses Mozilla 0.9.5, a version that Tru64 UNIX does
+not support.  This release of OpenOffice 1.0 is not built with Mozilla.  You 
+You may encounter problems with the following functions:
+1)  Address Data Source AutoPilot:
+    One of the first few windows that pops up at the start of an application.
+2)  Address Book:
+    
+3)  'Help'->'Contents':
+    Help contents cannot be displayed when clicking on 'Help' from the top bar,
+    then selecting 'Contents'.
+  
+KDE
+===
+This release of OpenOffice.org 1.0 does not work with KDE 3.0 under Tru64 UNIX. 
+The installation application would seem to work but most of the applications
+will not.  It is advised that this release of OpenOffice.org 1.0 to be used
+with CDE or GNOME.
+
+FONTS
+=====
+This release of OpenOffice.org 1.0 does not support certain fonts.  Fonts from
+documents written in software other than OpenOffice.org may be displayed
+differently that what are expected.
+
+'Tools'->'Bibliography'
+=======================
+This release of OpenOffice.org 1.0 crashes when clicking 'Tools' from the top 
+bar, then selecting 'Bibliography' in all applications with these options
+e.g. swriter.  This is a problem caused by flex.
+

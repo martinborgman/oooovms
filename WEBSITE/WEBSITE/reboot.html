@@ -1,0 +1,3001 @@
+<pre>
+*** keyboard not plugged in...
+512 Meg of system memory
+probing hose 0, PCI
+probing PCI-to-ISA bridge, bus 1
+bus 0, slot 9 -- ewa -- DE500-BA Network Controller
+bus 0, slot 11 -- ewb -- DE500-BA Network Controller
+bus 0, slot 13 -- dqa -- Acer Labs M1543C IDE
+bus 0, slot 13 -- dqb -- Acer Labs M1543C IDE
+bus 0, slot 17 -- pka -- NCR 53C895
+initializing GCT/FRU at 1f0000
+Testing the System
+Testing the Disks (read only)
+Testing ew* devices.
+System Temperature is 27 degrees C
+
+AlphaServer DS10L 617 MHz Console V6.5-15, Jun 16 2003 16:12:26
+&gt;&gt;&gt;<b>show device d</b>
+dka0.0.0.17.0              DKA0              COMPAQ BD01874554  3B08
+dka100.1.0.17.0            DKA100            COMPAQ BB00911CA0  3B07
+dka200.2.0.17.0            DKA200            COMPAQ BD018122C0  3B07
+dka300.3.0.17.0            DKA300                     RZ2ED-LS  0306
+dka400.4.0.17.0            DKA400            COMPAQ BD018122C0  3B09
+dka500.5.0.17.0            DKA500                     RZ1DF-CB  0372
+dka600.6.0.17.0            DKA600                     RZ1DF-CB  0372
+dqb0.0.1.13.0              DQB0                        CD-224E  9.5B    
+dva0.0.0.0.0               DVA0                               
+&gt;&gt;&gt;<b>b dka600</b>
+(boot dka600.6.0.17.0 -flags 0,0)
+block 0 of dka600.6.0.17.0 is a valid boot block
+reading 1134 blocks from dka600.6.0.17.0
+bootstrap code read in
+base = 200000, image_start = 0, image_bytes = 8dc00(580608)
+initializing HWRPB at 2000
+initializing page table at 1ff30000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+    © Copyright 1976-2003 Hewlett-Packard Development Company, L.P.
+
+
+%PKA0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.21 ROM V2.0
+%PKA0, SCSI Chip is SYM53C895, Operating mode is SE Ultra SCSI
+
+    Installing required known files...
+
+    Configuring devices...
+%RUN-S-PROC_ID, identification of created process is 00000024
+%SYSTEM-I-BOOTUPGRADE, security auditing disabled
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:00.31  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:00.34  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:00.56  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;1
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:00.56  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;1
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:00.56  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:01.37  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:01.37  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%LICENSE-F-EMTLDB, license database contains no license records
+%SYSTEM-I-BOOTUPGRADE, security server not started
+%SYSTEM-I-BOOTUPGRADE, ACME server not started
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:02.71  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:04.27  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+
+
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+Startup processing continuing...
+
+%SYSTEM-I-BOOTUPGRADE, Coordinated Startup not performed
+%EWA0, Fast mode set by console
+%EWB0, Twisted-Pair mode set by console
+
+
+
+    AUTOGEN will now be run to compute the new system parameters.  The system
+    will then shut down and reboot, and the installation or upgrade will be
+    complete.
+
+    After rebooting you can continue with such system management tasks as:
+
+            Decompressing System Libraries
+            Configuring networking software (TCP/IP Services, DECnet, other)
+            Using SYS$MANAGER:CLUSTER_CONFIG.COM to create an OpenVMS Cluster
+            Creating FIELD, SYSTEST and SYSTEST_CLIG accounts if needed
+
+%AUTOGEN-I-BEGIN, GETDATA phase is beginning.
+%AUTOGEN-I-NEWFILE,  Previous contents of SYS$SYSTEM:CLU$PARAMS.DAT have
+  been copied to SYS$SYSTEM:CLU$PARAMS.OLD.  You may wish to purge
+  SYS$SYSTEM:CLU$PARAMS.OLD.
+%AUTOGEN-I-NEWFILE,  Previous contents of SYS$SYSTEM:CLU$PARAMS.DAT have
+  been copied to SYS$SYSTEM:CLU$PARAMS.OLD.  You may wish to purge
+  SYS$SYSTEM:CLU$PARAMS.OLD.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:PARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GETDATA phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENPARAMS phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$MANAGER:VMSIMAGES.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:SETPARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GENPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENFILES phase is beginning.
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]SYS$ERRLOG.DMP;1 extended
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]PAGEFILE.SYS;1 extended
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]PAGEFILE.SYS;1 extended
+%SYSGEN-I-CREATED, SYS$SYSROOT:[SYSEXE]SYSDUMP.DMP;1 created
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]SWAPFILE.SYS;1 extended
+
+%AUTOGEN-I-REPORT, AUTOGEN has produced some informational messages which
+        have been stored in the file SYS$SYSTEM:AGEN$PARAMS.REPORT.  You may
+        wish to review the information in that file.
+
+%AUTOGEN-I-END, GENFILES phase has successfully completed.
+%AUTOGEN-I-BEGIN, SETPARAMS phase is beginning.
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:30.53  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SYSGEN-I-WRITECUR, CURRENT system parameters modified by process ID 00000023 in
+to file SYS$SYSROOT:[SYSEXE]ALPHAVMSSYS.PAR;2
+
+%AUTOGEN-I-SYSGEN, parameters modified
+%AUTOGEN-I-END, SETPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, REBOOT phase is beginning.
+
+The system is shutting down to allow the system to boot with the
+generated site-specific parameters and installed images.
+
+The system will automatically reboot after the shutdown and the
+upgrade will be complete.
+
+
+
+        SHUTDOWN -- Perform an Orderly System Shutdown
+                    on node STAR
+
+
+%SHUTDOWN-I-BOOTCHECK, performing reboot consistency check...
+%SHUTDOWN-I-CHECKOK, basic reboot consistency check completed
+
+%SHUTDOWN-I-OPERATOR, this terminal is now an operator's console
+%SHUTDOWN-I-DISLOGINS, interactive logins will now be disabled
+%SET-I-INTSET, login interactive limit = 0, current interactive value = 0
+%SHUTDOWN-I-STOPQUEUES, the queues on this node will now be stopped
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:33.26  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:33.26  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+
+SHUTDOWN message on STAR from user SYSTEM at STAR Batch   14:45:33
+STAR will shut down in 0 minutes; back up soon.  Please log off node STAR.
+Reboot system with AUTOGENerated parameters
+
+
+%SHUTDOWN-I-SITESHUT, the site-specific shutdown procedure will now be invoked
+%SHUTDOWN-I-STOPUSER, all user processes will now be stopped
+%SHUTDOWN-I-REMOVE, all installed images will now be removed
+%SHUTDOWN-I-DISMOUNT, all volumes will now be dismounted
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:45:35.42  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+STARTUP, STAR shutdown was requested by the operator.
+
+**** SYS$ERRLOG.DMP is too small to save all error log buffers
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = ffffffff800abfdc
+
+CPU 0 booting
+
+Resetting I/O buses...
+(boot dka600.6.0.17.0 -flags 0,0)
+block 0 of dka600.6.0.17.0 is a valid boot block
+reading 1134 blocks from dka600.6.0.17.0
+bootstrap code read in
+base = 200000, image_start = 0, image_bytes = 8dc00(580608)
+initializing HWRPB at 2000
+initializing page table at 1ff30000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+    © Copyright 1976-2003 Hewlett-Packard Development Company, L.P.
+
+
+%PKA0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.21 ROM V2.0
+%PKA0, SCSI Chip is SYM53C895, Operating mode is SE Ultra SCSI
+%SYSINIT-W- dump file write errors - error log buffers not saved
+%STDRV-I-STARTUP, OpenVMS startup begun at 22-APR-2004 14:46:29.72
+%EWA0, Fast mode set by console
+%EWB0, Twisted-Pair mode set by console
+%RUN-S-PROC_ID, identification of created process is 00000204
+%RUN-S-PROC_ID, identification of created process is 00000205
+%SET-I-NEWAUDSRV, identification of new audit server process is 0000020A
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:45.52  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:45.64  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%LICENSE-F-EMTLDB, license database contains no license records
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:45.91  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:45.91  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:45.91  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:46.31  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-NEWSERVERDB, new audit server database created
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:46.32  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:46.32  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:47.61  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-REMENABLED, resource monitoring enabled for journal SECURITY
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:46:47.90  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-NEWOBJECTDB, new object database created
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.63  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVERSTART, ACME_SERVER starting
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.88  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.89  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.91  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIACRECLUDB, security server created cluster intrusion database
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.91  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSTARTINGU, security server starting up
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:34.99  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASTARTINGUP, breakin detection and evasion processing now starting u
+p
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:40.63  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:41.68  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+Warning: DECdtm log file not found (SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL)
+        %RMS-E-FNF, file not found
+        TP server process waiting
+
+
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:41.68  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+
+
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+Startup processing continuing...
+
+%STARTUP-I-AUDITCONTINUE, audit server initialization complete
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:50:42.99  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Audit server starting up
+Event time:               22-APR-2004 14:50:42.88
+PID:                      00000203        
+Username:                 SYSTEM          
+
+
+The OpenVMS system is now executing the site-specific startup commands.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:51:20.70  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Identifier added
+Event time:               22-APR-2004 14:51:20.70
+PID:                      00000203        
+Process name:             STARTUP         
+Username:                 SYSTEM          
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA600:[SYS0.SYSCOMMON.][SYSEXE]AUTHORIZE.EXE
+Identifier name:          SYS$NODE_STAR                   
+Identifier value:         %X80010000      
+Attributes:               none
+Posix UID:                -2              
+Posix GID:                -2 (%XFFFFFFFE) 
+
+%UAF-I-RDBADDMSG, identifier SYS$NODE_STAR value %X80010000 added to rights data
+base
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:51:21.96  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Identifier added
+Event time:               22-APR-2004 14:51:21.96
+PID:                      00000203        
+Process name:             STARTUP         
+Username:                 SYSTEM          
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA600:[SYS0.SYSCOMMON.][SYSEXE]AUTHORIZE.EXE
+Identifier name:          DECW$WS_QUOTA                   
+Identifier value:         %X80010001      
+Attributes:               none
+Posix UID:                -2              
+Posix GID:                -2 (%XFFFFFFFE) 
+
+%UAF-I-RDBADDMSG, identifier DECW$WS_QUOTA value %X80010001 added to rights data
+base
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:51:23.14  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Identifier added
+Event time:               22-APR-2004 14:51:23.14
+PID:                      00000203        
+Process name:             STARTUP         
+Username:                 SYSTEM          
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA600:[SYS0.SYSCOMMON.][SYSEXE]IMGDMP_RIGHTS.EXE
+;1
+Identifier name:          IMGDMP$READALL                  
+Identifier value:         %X90390001      
+Attributes:               none
+Posix UID:                -2              
+Posix GID:                -2 (%XFFFFFFFE) 
+
+%PROCDUMP-I-CREATED, rights identifier IMGDMP$READALL successfully created
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:51:24.12  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Identifier added
+Event time:               22-APR-2004 14:51:24.12
+PID:                      00000203        
+Process name:             STARTUP         
+Username:                 SYSTEM          
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA600:[SYS0.SYSCOMMON.][SYSEXE]IMGDMP_RIGHTS.EXE
+;1
+Identifier name:          IMGDMP$PROTECT                  
+Identifier value:         %X90390002      
+Attributes:               RESOURCE
+Posix UID:                -2              
+Posix GID:                -2 (%XFFFFFFFE) 
+
+%PROCDUMP-I-CREATED, rights identifier IMGDMP$PROTECT successfully created
+%SET-I-INTSET, login interactive limit = 64, current interactive value = 0
+%RUN-S-PROC_ID, identification of created process is 00000210
+%%%%%%%%%%%  OPCOM  22-APR-2004 14:51:25.98  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SMHANDLER-S-STARTUP, server management event handler startup
+
+  SYSTEM       job terminated at 22-APR-2004 14:51:28.08
+
+  Accounting information:
+  Buffered I/O count:               3070      Peak working set size:       7248
+  Direct I/O count:                 1638      Peak virtual size:         184736
+  Page faults:                      3085      Mounted volumes:                0
+  Charged CPU time:        0 00:00:01.39      Elapsed time:       0 00:04:58.79
+<b><i>&lt;return&gt;</i></b>
+ Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+
+Username: <b>system</b>
+Password: <b><i>&lt;password not echoed&gt;</i></b>
+%LICENSE-I-NOLICENSE, no license is active for this software product
+%LOGIN-S-LOGOPRCON, login allowed from OPA0:
+   Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2
+
+$ <b>show device d</b>
+
+Device                  Device           Error    Volume         Free  Trans Mnt
+ Name                   Status           Count     Label        Blocks Count Cnt
+STAR$DKA0:              Online               0
+STAR$DKA100:            Online               0
+STAR$DKA200:            Online               0
+STAR$DKA300:            Online               0
+STAR$DKA400:            Online               0
+STAR$DKA500:            Online               0
+STAR$DKA600:            Mounted              0  ALPHASYS      15091554   256   1
+STAR$DQA0:              Online               1
+STAR$DQA1:              Online               1
+STAR$DQB0:              Online               0
+STAR$DQB1:              Online               1
+STAR$DVA0:              Online               0
+
+<b><i>&lt;We prepared a disk containing the files we need during the following
+sessions. In the directory [download] all the distributionsets of patches,
+layered and third party products are collected. In the direcctory [build]
+are the hobbyistlicense files obtained from the hobbyist program.
+You may need to edit the files to remove the linewrapping.
+For information about the OpenVMS hobbyist see your local VMS sig or
+http://www.montagar.com/.&gt;</i></b>
+
+$ <b>mount star$dka100 oo1src oo1src</b>
+%MOUNT-I-MOUNTED, OO1SRC mounted on _STAR$DKA100:
+$ <b>set def oo1src:[000000]</b>
+$ <b>dir</b>
+
+Directory OO1SRC:[000000]
+
+000000.DIR;1        BACKUP.SYS;1        BADBLK.SYS;1        BADLOG.SYS;1       
+BITMAP.SYS;1        build.DIR;1         CONTIN.SYS;1        CORIMG.SYS;1       
+download.DIR;1      INDEXF.SYS;1        SECURITY.SYS;1      VOLSET.SYS;1       
+
+Total of 12 files.
+$ <b>set def [build]</b>
+$ <b>dir</b>
+
+Directory OO1SRC:[build]
+
+alphalic2004.txt;1  laylic2004.txt;1    vaxlic2004.txt;1    
+
+Total of 3 files.
+$ <b>@alphalic2004.txt</b>
+$ <b>@laylic2004.txt</b>
+$ <b>license load</b>
+%LICENSE-I-LOADED, DEC ACMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMS-REM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMSXP-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMSXP-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ADA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ADA-PDO was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-DW-CLIENT was successfully loaded with 0 unit
+s
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-SERVER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-SERVER-USER was successfully loaded with 0 un
+its
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-VT-CLIENT was successfully loaded with 0 unit
+s
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-VT-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-WAN-SERVER was successfully loaded with 0 uni
+ts
+%LICENSE-I-LOADED, DEC BASIC was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC C was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC CMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC COBOL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC CXX-V was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-APP-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-CDS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-SECURITY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCPS-OPEN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCPS-PLUS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECDCS-SRV-VA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECMIGRATE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECRAM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECWRITE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECWRITE-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DESKTOP-ACMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DFG was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DFS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DQS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTR-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DVNETEND was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DVNETEXT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-CESKY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-DEUTSC was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-ESPANO was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-FRANCA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANYU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANZI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HEBREW was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-ITALIA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-JAPANE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-MAGYAR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-POLSKI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-RUSSKI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-SLOVEN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-SVENSK was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-SNA-3270-TE-VMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC EXT-MATH-LIB was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC EXT-MATH-LIB-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-RT-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT-UI-HANYU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORTRAN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-RT-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS3D was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS3D-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC LSE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MACRO64 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MAILBUS-400-API was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MAILBUS-400-MTA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMOV-DV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMOV-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC NOTES was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-ALPHA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-ALPHA-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-HOBBYIST was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPS5 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PASCAL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PCA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS-RUNTIME was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS-RUNTIME-UI-JAPAN was successfully loaded with 0 uni
+ts
+%LICENSE-I-LOADED, DEC PHIGS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RMSJNL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RTR-CL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RTR-SVR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC SQL-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC SSU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-NFS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VAXCLUSTER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VAXSET was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VMS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VMSCLUSTER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VOLSHAD was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X25 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X25-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X500-ADMIN-FACILITY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X500-DIRECTORY-SERVER was successfully loaded with 0 unit
+s
+$
+
+<b><i>&lt;We increase the pagefilesize quite dramaticly because we expect to work
+with a few people on the build of OpenOffice. As this is a mayor project we don't
+want to run into a 'pagefile badly fragmented' situation...;-)
+If you work alone or are just doing 'normal' things you probably won't need
+to increase the pagefilesize.&gt;</i></b>
+
+$ <b>@sys$update:swapfiles</b>
+To leave a file size at its current value type a
+carriage return in response to its size prompt.
+Current file sizes are:
+
+Directory SYS$SPECIFIC:[SYSEXE]
+
+PAGEFILE.SYS;1          1056800
+SYSDUMP.DMP;1            200822
+SWAPFILE.SYS;1            44200
+
+Total of 3 files, 1301822 blocks.
+
+There are 15091497 available blocks on SYS$SYSDEVICE.
+
+Enter new size for paging file: <b>5000000</b>
+%SYSGEN-I-EXTENDED, SYS$SPECIFIC:[SYSEXE]PAGEFILE.SYS;1 extended
+Enter new size for system dump file: <b><i>&lt;return&gt;</i></b>
+Enter new size for swapping file: <b><i>&lt;return&gt;</i></b>
+
+************************************************************************
+*  Please reboot in order for the new files to be used by the system.  *
+*  After rebooting, purge obsolete copies of the files.                *
+*  DO NOT delete the old files until after the reboot.                 *
+************************************************************************
+
+<b><i>&lt;We discovered in the early porting days that using shadowed disks
+not only saved the day in case of diskfailures, but that avoiding the '$'
+sign in disknames made porting more easy. Unix (and thus GNV) thought that
+whereever there is a $ sign, it had to do something we didn't expect...;-)
+So every disk we use is at least a single member shadowset.&gt;</i></b>
+
+
+$ <b>edit sys$system:modparams.dat</b>
+<b><i>&lt;Add the following lines during the editing session&gt;</i></b>
+ADD_GBLSECTIONS=512
+MIN_GBLSECTIONS=2000    ! sufficient for now...
+MIN_GBLPAGES=40000000   ! sufficient for now...
+MIN_channelcnt=2048     ! for unzip ..
+min_GH_res_data=512     ! for motif
+add_npagedyn=1000000    ! for motif
+add_pagedyn=500000      ! for motif
+min_gh_res_code=4096    ! for motif
+min_GH_EXEC_DATA=1024
+min_GH_EXEC_CODE=2048
+max_wsmax=150000
+!
+! parameters for shadowing...
+!
+ALLOCLASS=1
+SHADOWING=2
+SHADOW_SYS_DISK=1
+SHADOW_SYS_UNIT=100
+!
+!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PAGEFILE=0              ! prevent addaption by autogen
+$ <b>@sys$update:autogen savparams setparams feedback</b>
+%AUTOGEN-I-BEGIN, SAVPARAMS phase is beginning.
+%AUTOGEN-I-FEEDBACK, Gathering feedback
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:AGEN$FEEDBACK.DAT
+        has been created. You may wish to purge this file.
+%AUTOGEN-I-END, SAVPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GETDATA phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:PARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GETDATA phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENPARAMS phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$MANAGER:VMSIMAGES.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:SETPARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GENPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENFILES phase is beginning.
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]SYSDUMP.DMP;1 extended
+%SYSGEN-I-CREATED, SYS$SYSROOT:[SYSEXE]SWAPFILE.SYS;2 created
+
+******************
+%AUTOGEN-W-REPORT, Warnings were detected by AUTOGEN.  Please review the
+        information given in the file SYS$SYSTEM:AGEN$PARAMS.REPORT
+******************
+
+%AUTOGEN-I-REPORT, AUTOGEN has produced some informational messages which
+        have been stored in the file SYS$SYSTEM:AGEN$PARAMS.REPORT.  You may
+        wish to review the information in that file.
+
+%AUTOGEN-I-END, GENFILES phase has successfully completed.
+%AUTOGEN-I-BEGIN, SETPARAMS phase is beginning.
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:02:50.39  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SYSGEN-I-WRITECUR, CURRENT system parameters modified by process ID 00000211 in
+to file SYS$SYSROOT:[SYSEXE]ALPHAVMSSYS.PAR;2
+
+%AUTOGEN-I-SYSGEN, parameters modified
+%AUTOGEN-I-END, SETPARAMS phase has successfully completed.
+$ <b>type SYS$SYSTEM:AGEN$PARAMS.REPORT</b>
+AUTOGEN Parameter Calculation Report on node: STAR
+  This information was generated at 22-APR-2004 15:02:40.16
+  AUTOGEN was run from SAVPARAMS to SETPARAMS using FEEDBACK
+
+
+Processing Parameter Data files
+-------------------------------
+
+Including parameters from: SYS$SYSTEM:MODPARAMS.DAT
+
+The following concerns were detected within MODPARAMS.DAT
+
+** Note ** - Multiple ADD values for ADD_GBLSECTIONS found.
+        VMS value (280) combining with MODPARAMS value (512)
+        Value used is 792
+
+** Note ** - Multiple MIN values found for MIN_GBLSECTIONS.
+        Using MODPARAMS value (2000) which is superseding VMS value (600)
+
+** Note ** - Multiple MIN values found for MIN_GBLPAGES.
+        Using MODPARAMS value (40000000) which is superseding VMS value (150000)
+
+** WARNING ** - The system was up for less than 24 hours (uptime = 0 hrs)
+   when the feedback information was recorded. This could result in feedback
+   information that does not accurately reflect your typical workload.
+   However, this feedback information will be used in this run.
+
+Feedback information was collected on 22-APR-2004 15:02:39.63
+  Old values below are the parameter values at the time of collection.
+  The feedback data is based on 0 hours of up time.
+  Feedback information will be used in the subsequent calculations
+
+
+Parameter information follows:
+------------------------------
+
+MAXPROCESSCNT parameter information:
+        Feedback information.
+           Old value was 345, New value is 276
+           Maximum Observed Processes: 14
+
+Information on OpenVMS executable image Processing:
+
+        Processing SYS$MANAGER:VMS$IMAGES_MASTER.DAT
+           Total global pagelets counted = 49186
+           Total global sections counted = 207
+           Total global pagefile counted = 320
+           Total resident code pages counted = 458
+           Total resident data pages counted = 0
+
+
+GBLPAGES parameter information:
+        Feedback information.
+           Old value was 971513, New value is 40000000
+           Maximum used GBLPAGES: 110000
+           Global buffer requirements: 49152
+           Pagelets reserved for memory resident sections: 0
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 918432.  The value 40000000
+           will be used in accordance with the following requirements:
+           GBLPAGES minimum value is 40000000.
+
+GBLSECTIONS parameter information:
+        Feedback information.
+           Old value was 630, New value is 2000
+           Current used GBLSECTIONS: 494
+           Memory resident sections: 0
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 590.  The value 2000
+           will be used in accordance with the following requirements:
+           GBLSECTIONS has been increased by 512.
+           GBLSECTIONS minimum value is 2000.
+
+LOCKIDTBL parameter information:
+        Feedback information.
+           Old value was 1792, New value is 1792
+           Current number of locks: 245
+           Peak number of locks: 2048
+
+RESHASHTBL parameter information:
+        Feedback information.
+           Old value was 2048, New value is 2048
+           Current number of resources: 241
+
+MSCP_BUFFER parameter information:
+        Feedback information.
+           Old value was 1024, New value is 1024
+           MSCP server I/O rate: 0 I/Os per 10 sec.
+           I/Os that waited for buffer space: 0
+           I/Os that fragmented into multiple transfers: 0
+
+SCSCONNCNT parameter information:
+        Feedback information.
+           Old value was 5, New value is 5
+           Peak number of nodes: 1
+           Number of CDT allocation failures: 0
+
+SCSRESPCNT parameter information:
+        Feedback information.
+           Old value was 300, New value is 300
+           RDT stall count: 0
+
+SCSBUFFCNT parameter information:
+        Feedback information.
+           Old value was 50, New value is 50
+           CIBDT stall count: 0
+
+NPAGEDYN parameter information:
+        Feedback information.
+           Old value was 3252224, New value is 4096576
+           Maximum observed non-paged pool size: 3252224 bytes.
+           Non-paged pool request rate: 17 requests per 10 sec.
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 3096576.  The value 4096576
+           will be used in accordance with the following requirements:
+           NPAGEDYN has been increased by 1000000.
+           NPAGEDYN minimum value is 1998848.
+
+LNMSHASHTBL parameter information:
+        Feedback information.
+           Old value was 512, New value is 512
+           Current number of shareable logical names: 396
+
+ACP_DIRCACHE parameter information:
+        Feedback information.
+           Old value was 686, New value is 686
+           Hit percentage: 100%
+           Attempt rate: 46 attempts per 10 sec.
+
+ACP_DINDXCACHE parameter information:
+        Feedback information.
+           Old value was 171, New value is 171
+           Hit percentage: 100%
+           Attempt rate: 33 attempts per 10 sec.
+
+ACP_HDRCACHE parameter information:
+        Feedback information.
+           Old value was 686, New value is 686
+           Hit percentage: 77%
+           Attempt rate: 25 attempts per 10 sec.
+
+ACP_MAPCACHE parameter information:
+        Feedback information.
+           Old value was 171, New value is 171
+           Hit percentage: 80%
+           Attempt rate: 3 attempts per 10 sec.
+
+PAGEDYN parameter information:
+        Feedback information.
+           Old value was 3489792, New value is 3670304
+           Current paged pool usage: 1499296 bytes.
+           Paged pool request rate: 19 requests per 10 sec.
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 3170304.  The value 3670304
+           will be used in accordance with the following requirements:
+           PAGEDYN has been increased by 500000.
+           PAGEDYN minimum value is 600000.
+
+GH_EXEC_CODE parameter information:
+        Feedback information.
+           Old value was 1024, New value is 2048
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1024.  The value 2048
+           will be used in accordance with the following requirements:
+           GH_EXEC_CODE minimum value is 2048.
+
+GH_EXEC_DATA parameter information:
+        Feedback information.
+           Old value was 512, New value is 1024
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 256.  The value 1024
+           will be used in accordance with the following requirements:
+           GH_EXEC_DATA minimum value is 1024.
+
+GH_RES_CODE parameter information:
+        Feedback information.
+           Old value was 1024, New value is 4096
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1024.  The value 4096
+           will be used in accordance with the following requirements:
+           GH_RES_CODE minimum value is 4096.
+
+GH_RES_DATA parameter information:
+        Feedback information.
+           Old value was 0, New value is 512
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 0.  The value 512
+           will be used in accordance with the following requirements:
+           GH_RES_DATA minimum value is 512.
+
+VAXCLUSTER parameter information:
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1.  The value 0
+           will be used in accordance with the following requirements:
+           VAXCLUSTER has been specified by a hard-coded value of 0.
+
+ Calculations for page, swap, and dump files.
+ --------------------------------------------
+
+    Errorlog dumpfile calculations:
+
+        No errorlog dump file modifications should be made.
+        Errorlog dumpfile will remain at 42 blocks.
+
+    Dump file calculations:
+
+        A 290638 block dump file should be created.
+
+    Page file calculations:
+
+        PAGEFILE information:
+        Feedback information.
+           Old value was 5000000, New value is 5000000
+           Maximum observed usage: 0
+        Override Information - parameter calculation has been overridden.
+           The calculated value was 1056800.  The new value is 5000000.
+           PAGEFILE calculation has been set to current size by user.
+           PAGEFILE will not be modified. The file size is within 10%.
+
+    Swap file calculations:
+
+        SWAPFILE1_SIZE information (for SYS$SYSTEM:SWAPFILE.SYS):
+        Feedback information.
+           Old value was 44200, New value is 35300
+           Maximum observed usage (blocks): 0
+           SWAPFILE1_SIZE will be modified to hold 35300 blocks
+
+You will want to purge SYS$SYSTEM:SWAPFILE.SYS after rebooting.
+$ 
+$ <b>reboot</b> <b><i>&lt;reboot is a symbol defined in the standard login.com for system&gt;</i></b>
+
+
+        SHUTDOWN -- Perform an Orderly System Shutdown
+                    on node STAR
+
+
+%SHUTDOWN-I-OPERATOR, this terminal is now an operator's console
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:35.50  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%SHUTDOWN-I-DISLOGINS, interactive logins will now be disabled
+%SET-I-INTSET, login interactive limit = 0, current interactive value = 1
+%SHUTDOWN-I-STOPQUEUES, the queues on this node will now be stopped
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:36.10  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+
+SHUTDOWN message on STAR from user SYSTEM at _STAR$OPA0:   15:57:36
+STAR will shut down in 0 minutes; back up LATER.  Please log off node STAR.
+SHUTDOWN
+
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:36.10  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+1 terminal has been notified on STAR.
+%SHUTDOWN-I-SITESHUT, the site-specific shutdown procedure will now be invoked
+%SHUTDOWN-I-STOPUSER, all user processes will now be stopped
+%SHUTDOWN-I-STOPACMESRV, the ACME server will now be shut down
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:43.62  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVEREXIT, ACME_SERVER exiting
+
+%SHUTDOWN-I-STOPAUDIT, the security auditing subsystem will now be shut down
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.11  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Audit server shutting down
+Event time:               22-APR-2004 15:57:45.11
+PID:                      00000211        
+Username:                 SYSTEM          
+
+%SHUTDOWN-I-STOPSECSRV, the security server will now be shut down
+%SHUTDOWN-I-REMOVE, all installed images will now be removed
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.95  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASHUTDOWN, breakin detection and evasion processing is shutting down
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.95  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-PROXYSHUTDOWN, proxy processing is shutting down
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:46.35  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSHUTDOWN, security server shutting down
+
+%SHUTDOWN-I-DISMOUNT, all volumes will now be dismounted
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.20  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+_STAR$OPA0:, STAR shutdown was requested by the operator.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.22  %%%%%%%%%%%
+Logfile was closed by operator _STAR$OPA0:
+Logfile was STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.26  %%%%%%%%%%%
+Operator _STAR$OPA0: has been disabled, username SYSTEM
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = ffffffff800abfdc
+
+CPU 0 booting
+
+Resetting I/O buses...
+(boot dka600.6.0.17.0 -flags 0,0)
+block 0 of dka600.6.0.17.0 is a valid boot block
+reading 1134 blocks from dka600.6.0.17.0
+bootstrap code read in
+base = 200000, image_start = 0, image_bytes = 8dc00(580608)
+initializing HWRPB at 2000
+initializing page table at 1ff30000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+    © Copyright 1976-2003 Hewlett-Packard Development Company, L.P.
+
+
+%PKA0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.21 ROM V2.0
+%PKA0, SCSI Chip is SYM53C895, Operating mode is SE Ultra SCSI
+%SHADOW-I-VOLPROC, DSA100: shadow master has changed.  Dump file WILL be written
+ if system crashes.
+
+%EWA0, Fast mode set by console
+%EWB0, Twisted-Pair mode set by console
+%STDRV-I-STARTUP, OpenVMS startup begun at 22-APR-2004 15:58:49.73
+%RUN-S-PROC_ID, identification of created process is 00000205
+%RUN-S-PROC_ID, identification of created process is 00000206
+%SET-I-NEWAUDSRV, identification of new audit server process is 0000020B
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:04.86  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:04.97  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;3
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;3
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Deleting all bitmaps represented by this WBMB.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+DSA100: shadow master changed.  Dump WILL be written if system crashes.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.75  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.75  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:06.76  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SHADOW_SERVER-I-SSRVINICMP, shadow server has completed initialization
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:07.64  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVERSTART, ACME_SERVER starting
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.00  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.02  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.03  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIACRECLUDB, security server created cluster intrusion database
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.03  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSTARTINGU, security server starting up
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.07  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASTARTINGUP, breakin detection and evasion processing now starting u
+p
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:13.41  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:14.48  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+Warning: DECdtm log file not found (SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL)
+        %RMS-E-FNF, file not found
+        TP server process waiting
+
+
+%STARTUP-I-AUDITCONTINUE, audit server initialization complete
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:14.96  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Audit server starting up
+Event time:               22-APR-2004 15:59:14.83
+PID:                      00000204        
+Username:                 SYSTEM          
+
+
+The OpenVMS system is now executing the site-specific startup commands.
+
+%SET-I-INTSET, login interactive limit = 64, current interactive value = 0
+%RUN-S-PROC_ID, identification of created process is 00000212
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:16.83  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SMHANDLER-S-STARTUP, server management event handler startup
+
+%DECW$DEVICE-I-NODEVICE, no graphics devices found.
+  SYSTEM       job terminated at 22-APR-2004 15:59:22.91
+
+  Accounting information:
+  Buffered I/O count:               2992      Peak working set size:       7248
+  Direct I/O count:                 1551      Peak virtual size:         184848
+  Page faults:                      3017      Mounted volumes:                0
+  Charged CPU time:        0 00:00:01.60      Elapsed time:       0 00:00:33.61
+<b><i>&lt;return&gt;</i></b>
+ Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+
+Username: <b>system</b>
+Password: <b><i>&lt;password not echoed&gt;</i></b>
+   Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2
+    Last interactive login on Thursday, 22-APR-2004 14:51:39.47
+
+$ 
+
+<b><i>&lt;Batches are handy....&gt;</i></b>
+
+$ <b>start/queue/manager/new_version</b>
+%%%%%%%%%%%  OPCOM  22-APR-2004 16:02:41.33  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-I-CREATED, SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT; created
+
+$ <b>init/queue/batch/job=2/base=1 sys$batch/start</b>
+$ <b>show queue/all/full</b>
+Batch queue SYS$BATCH, idle, on STAR::
+  /BASE_PRIORITY=1 /JOB_LIMIT=2 /OWNER=[SYSTEM] /PROTECTION=(S:M,O:D,G:R,W:S)
+$ 
+
+<b><i>&lt;We don't need the transaction log, but we don't mind it being there.
+So just get rid of the nasty warning during the boot.&gt;</i></b>
+
+$ <b>mcr lmcp</b>
+ 
+Log Manager Control Program V1.1
+ 
+LMCP&gt; <b>create log/size=5000 SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL</b>
+Transaction log SYS$COMMON:[SYSEXE]SYSTEM$STAR.LM$JOURNAL;1 created.
+LMCP&gt; <b>Exit</b> 
+$ 
+
+<b><i>&lt;As we will be accessing a lot of libraries, make it as fast as possible..&gt;</i></b>
+
+$ <b>@sys$update:libdecomp</b>
+
+                 OpenVMS Library Decompression Utility
+                   Candidate Libraries to be expanded
+   (Libraries not present and libraries already expanded are not listed)
+
+     1  ACLEDT.HLB           13  SDA.HLB              24  VAXCRTLD.OLB          
+     2  BKM$HELP.HLB         14  SHWCLHELP.HLB        25  VAXCRTLDX.OLB         
+     3  DBG$HELP.HLB         15  SYSGEN.HLB           26  VAXCRTLT.OLB          
+     4  DBG$UIHELP.HLB       16  SYSMANHELP.HLB       27  VAXCRTLTX.OLB         
+     5  EDTHELP.HLB          17  TPUHELP.HLB          28  VAXCRTLX.OLB          
+     6  EVE$HELP.HLB         18  UAFHELP.HLB          29  ERFLIB.TLB            
+     7  EVE$KEYHELP.HLB      19  LANIDEF.MLB          30  LIB_ADA_SUBSET.TLB    
+     8  EXCHNGHLP.HLB        20  LIB.MLB              31  NTA.TLB               
+     9  LANCP$HELP.HLB       21  STARLET.MLB          32  STARLETSD.TLB         
+    10  LATCP$HELP.HLB       22  STARLET.OLB          33  SYS$LIB_C.TLB         
+    11  MAILHELP.HLB         23  VAXCRTL.OLB          34  SYS$STARLET_C.TLB     
+    12  NCPHELP.HLB                                                             
+
+         35  VMS$VOLATILE_PRIVATE_INTERFACES.OLB
+         36  STARLET_RECENT_ADA_SUBSET.TLB
+
+          A  ALL libraries to be expanded
+          H  Display HELP information for LIBDECOMP
+          E  EXIT this procedure
+
+* Enter a letter or the number(s) of libraries to be expanded
+  (Separate multiple numbers with a comma) <b>a</b>
+
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]ACLEDT.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]BKM$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]DBG$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]DBG$UIHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EDTHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EVE$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EVE$KEYHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EXCHNGHLP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]LANCP$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]LATCP$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]MAILHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]NCPHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SDA.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SHWCLHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SYSGEN.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SYSMANHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]TPUHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]UAFHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LANIDEF.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LIB.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTL.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLD.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLDX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLT.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLTX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]ERFLIB.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LIB_ADA_SUBSET.TL
+B
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]NTA.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLETSD.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]SYS$LIB_C.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]SYS$STARLET_C.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VMS$VOLATILE_PRIV
+ATE_INTERFACES.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET_RECENT_AD
+A_SUBSET.TLB
+$ <b>show device d</b>
+
+Device                  Device           Error    Volume         Free  Trans Mnt
+ Name                   Status           Count     Label        Blocks Count Cnt
+DSA100:                 Mounted              0  ALPHASYS      10964136   261   1
+$1$DKA0:        (STAR)  Online               0
+$1$DKA100:      (STAR)  Online               0
+$1$DKA200:      (STAR)  Online               0
+$1$DKA300:      (STAR)  Online               0
+$1$DKA400:      (STAR)  Online               0
+$1$DKA500:      (STAR)  Online               0
+$1$DKA600:      (STAR)  ShadowSetMember      0  (member of DSA100:)
+$1$DQA0:        (STAR)  Online               1
+$1$DQA1:        (STAR)  Online               1
+$1$DQB0:        (STAR)  Online               0
+$1$DQB1:        (STAR)  Online               1
+$1$DVA0:        (STAR)  Online               0
+$ <b>mount/system $1$dka100: oo1src oo1src</b>
+%MOUNT-I-MOUNTED, OO1SRC mounted on _$1$DKA100: (STAR)
+$ <b>set def oo1src:[download]</b>
+$ <b>dir</b>
+
+Directory OO1SRC:[download]
+
+ADX072.A;1          ADX072.B;1          ADX072.C;1          CC065.A;1          
+CC065.B;1           CPQ-AXPVMS-CSWS-V0200--1.PCSI-DCX-AXPEXE;1
+CPQ-AXPVMS-CSWS_JAVA-V0201--1.PCSI-DCX-AXPEXE;1             
+CPQ-AXPVMS-CSWS_PERL-V0200--1.PCSI-DCX-AXPEXE;1             
+CPQ-AXPVMS-CSWS_PHP-V0102--1.PCSI-DCX-AXPEXE;1              
+CPQ-AXPVMS-PERL-V0506-1-1.PCSI-DCX-AXPEXE;1                 
+CPQ-AXPVMS-PERL561_UPDATE-V0300--4.PCSI-DCX-AXPEXE;1        CXX065.A;1         
+DEC-AXPVMS-GNV-V0105-006-1.PCSI-DCX_AXPEXE;1                
+DEC-AXPVMS-JAVA142-V0104-21-1.PCSI_SFX_AXPEXE;1             DIX035.ZIP;1       
+FSHELP0213.ZIP;1    GNV-AXPVMS-BISON-V0135--1.PCSI;1        
+GNV-AXPVMS-BZIP2-V0100-2-1_PCSI.ZIP;1   GNV-AXPVMS-FLEX-V0205-4-1.PCSI;1
+GNV-AXPVMS-PATCH-V0205-4-1.PCSI;1       GZIP-1_2_4C.TAR-GZ;1
+LIBBZ2-V0100-2-1.ZIP;1                  MOZILLA-OPENVMS-ALPHA-M150.SFX_AXPEXE;1
+MYSQL-V0400-18-1.ZIP;1                  OOO_1_1_1_SOURCE.TAR;1
+OPENVMS_ALPHA_7_3-2_04120610.ZIP;1      OPENVMS_PORTING_GUIDE_V031.PDF;1
+PAX-2_1.ZIP;1       PUTTY-0_54-INSTALLER.EXE;1              PUTTY.ZIP;1        
+PYTHON-V0203-3-1.ZIP;1                  REGEDIT.ZIP;1       
+ZLIB-V0102-1-1.ZIP;1                    
+
+Total of 33 files.
+
+<b><i>&lt;Install some product...
+First the compilers and GNV. GNV is needed because it delivers the unzip utility.&gt;</i></b>
+
+$ <b>@sys$update:vmsinstal</b>
+
+
+        OpenVMS AXP Software Product Installation Procedure V7.3-2
+
+
+It is 22-APR-2004 at 16:11.
+
+Enter a question mark (?) at any time for help.
+
+* Are you satisfied with the backup of your system disk [YES]? <b><i>&lt;return&gt;</i></b>
+* Where will the distribution volumes be mounted: <b>oo1src:[download]</b>
+
+Enter the products to be processed from the first distribution volume set.
+* Products: <b>cc</b>
+* Enter installation options you wish to use (none): <b><i>&lt;return&gt;</i></b>
+
+The following products will be processed:
+
+  CC V6.5
+
+
+        Beginning installation of CC V6.5 at 16:11
+
+%VMSINSTAL-I-RESTORE, Restoring product save set A ...
+%VMSINSTAL-I-RELMOVED, Product's release notes have been moved to SYS$HELP.
+
+  Compaq C Version 6.5 for OpenVMS Alpha Systems
+
+  Copyright 2002 Compaq Information Technologies Group, L.P.
+
+  Compaq and the Compaq logo are trademarks of Compaq Information
+  Technologies Group, L.P. in the U.S. and/or other countries.
+
+  Confidential computer software. Valid license from Compaq required for
+  possession, use or copying. Consistent with FAR 12.211 and 12.212,
+  Commercial Computer Software, Computer Software Documentation, and
+  Technical Data for Commercial Items are licensed to the U.S. Government
+  under vendor's standard commercial license.
+
+
+
+        Product:      C
+        Producer:     DEC
+        Version:      6.5
+        Release Date: 01-NOV-2001
+
+
+* Does this product have an authorization key registered and loaded? <b>yes</b>
+
+    This kit contains an Installation Verification Procedure (IVP)
+    to verify the correct installation of Compaq C.  The IVP will
+    be left in:
+
+        SYS$TEST:DECC$IVP.COM
+
+    After the installation is complete, you can invoke the command
+    file at any time to verify that Compaq C is installed and
+    working correctly.
+
+
+* Do you want to run the IVP after the installation [YES]? <b>yes</b>
+
+    HTML, postscript and text versions of the Compaq C Users Guide,
+    Language Reference Manual and RTL Reference Manual may be optionally
+    installed into SYS$COMMON:[SYSHLP.CC$ALPHA_HELP_065].
+    These documents consume approximately 60000 blocks.
+
+* Should these manuals be provided [NO]: <b>yes</b>
+
+    This kit contains a file summarizing the new features, changes,
+    restrictions, and compatibility issues in this release of Compaq C.
+    This file is named CC065.RELEASE_NOTES and has been placed in
+    SYS$HELP:.
+
+    This file contains information valuable to Compaq C programmers.
+    Please inform your user community of this file's existence. 
+
+* Do you want to purge files replaced by this installation [YES]? <b><i>&lt;return&gt;</i></b>
+
+    You have answered all of the questions for this installation.  The
+    installation will now execute in 5 to 15 minutes without further
+    intervention, depending on your configuration, installation media,
+    and so forth.
+
+
+     The existing version of ALPHA$LIBRARY:DECC$RTLDEF.TLB has a
+     later creation date than the one on this installation kit.
+     Installation of the kit version will not be performed.
+
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  VMI$ROOT:[SYSHL
+P.CC$ALPHA_HELP_065].
+%VMSINSTAL-I-RESTORE, Restoring product save set B ...
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  VMI$ROOT:[SYSHL
+P.EXAMPLES.CRTL].
+
+    Your OpenVMS system will now be modified to include the
+    following new and modified files:
+
+    [SYSEXE]DECC$COMPILER.EXE             [new]
+    [SYSMSG]DECC$COMPILER_MSG.EXE         [new]
+    [SYSLIB]DCLTABLES.EXE                 [modified]
+    [SYSHLP]HELPLIB.HLB                   [modified]
+    [SYSHLP]CC$HELP*.HTML                 [new]
+    [SYSHLP.CC$ALPHA_HELP_065]            [new]
+    [SYSHLP]CC065.RELEASE_NOTES           [new]
+    [SYSHLP]CC065_RELEASE_NOTES.PS        [new]
+    [SYSLIB]DECC$CRTL.OLB                 [new]
+    [SYSLIB]DECC$CRTL.EXE                 [new]
+    [SYSLIB]DECC$CRTL.README              [new]
+    [SYS$STARTUP]DECC$STARTUP.COM         [modified]
+    [SYSEXE]CXX$DEMANGLE.EXE              [new]
+    [SYSMSG]CXX$LINK_MSG.EXE              [new]
+    [SYSEXE]DECC$SET_VERSION.COM          [new]
+    [SYSEXE]DECC$SHOW_VERSIONS.COM        [new]
+    [SYSTEST]DECC$IVP.COM                 [new]
+
+
+    The file SYS$STARTUP:DECC$STARTUP.COM contains commands to be
+    executed at system startup to allow for the best compilation
+    performance.  You may want to invoke this command file from your
+    system's site-specific start up file.  This command file does not
+    have to be invoked for correct operation of Compaq C.
+
+%VMSINSTAL-I-MOVEFILES, Files will now be moved to their target directories...
+
+    Copyright 2002 Compaq Information Technologies Group, L.P.
+
+    Compaq and the Compaq logo are trademarks of Compaq Information
+    Technologies Group, L.P. in the U.S. and/or other countries.
+    
+    Confidential computer software. Valid license from Compaq required for
+    possession, use or copying. Consistent with FAR 12.211 and 12.212,
+    Commercial Computer Software, Computer Software Documentation, and
+    Technical Data for Commercial Items are licensed to the U.S. Government
+    under vendor's standard commercial license.
+
+
+    Beginning COMPAQ C V6.5 Installation Verification Procedure
+    Image Check Complete
+    License Check Complete
+    Version Check Complete
+    Message Check Complete
+    Header Check Complete
+    Run Time Library Check Complete
+
+    COMPAQ C V6.5 Installation Verification Procedure Successful
+
+
+        Installation of CC V6.5 completed at 16:14
+
+    Adding history entry in VMI$ROOT:[SYSUPD]VMSINSTAL.HISTORY
+
+    Creating installation data file: VMI$ROOT:[SYSUPD]CC065.VMI_DATA
+
+Enter the products to be processed from the next distribution volume set.
+* Products: <b>cxx</b>
+
+The following products will be processed:
+
+  CXX V6.5
+
+
+        Beginning installation of CXX V6.5 at 16:15
+
+%VMSINSTAL-I-RESTORE, Restoring product save set A ...
+%VMSINSTAL-I-RELMOVED, Product's release notes have been moved to SYS$HELP.
+
+
+    Compaq C++ Version V6.5 for OpenVMS Alpha Systems
+
+    Copyright 2002 Compaq Information Technologies Group, L.P.
+
+    Compaq, the Compaq logo, Alpha, DEC, OpenVMS, and VMS are trademarks
+    of Compaq Information Technologies Group, L.P. in the U.S. and/or
+    other countries.  All other product names mentioned herein may be
+    trademarks of their respective companies.
+
+    Confidential computer software. Valid license from Compaq required for
+    possession, use or copying. Consistent with FAR 12.211 and 12.212,
+    Commercial Computer Software, Computer Software Documentation, and
+    Technical Data for Commercial Items are licensed to the U.S. Government
+    under vendor's standard commercial license.
+
+
+* Do you want to purge files replaced by this installation [YES]? <b><i>&lt;return&gt;</i></b>
+
+
+    This kit contains an Installation Verification Procedure
+    (IVP) to  verify  the  correct  installation of the
+    Compaq C++ compiler component and  class library headers.
+    The IVP will be placed in:
+
+                SYS$TEST:CXX$IVP.COM
+
+    After the  installation  is complete, you can invoke the
+    command file at any time to reverify that Compaq C++ is
+    installed and working correctly.   If you wish to invoke
+    it automatically  at the completion of this installation
+    procedure, answer Yes to the following question.
+
+* Do you want to run the IVP after this installation  [YES]? <b><i>&lt;return&gt;</i></b>
+
+
+    The C Runtime Library, and C++ Class Library,  headers
+    will be installed as Text Libraries (.TLBs).   If you 
+    also wish to install the traditional text form  of the
+    headers (.H and .HXX  files) for  reference  purposes,
+    please answer yes to the following question.  The text
+    headers will be placed in a subdirectory that will not
+    be searched  by the compiler.   Instead, they  will be
+    placed the subdirectory tree: 
+
+            SYS$COMMON:[CXX$LIB.REFERENCE...]
+
+    (SYS$COMMON:[DECC$LIB.REFERENCE...] for the Compaq C RTL
+    header library, DECC$RTLDEF, and the system definition
+    header library, SYS$STARLET_C.)
+
+    Note that doing this may double the disk space used for
+    the headers.
+
+* Do you want to install the text form of the headers?  [YES]? <b><i>&lt;return&gt;</i></b>
+
+
+    The Compaq C++ compiler component requires a Product
+    Authorization Key (PAK) for Compaq C++ to be registered and
+    loaded.   Answer the following question with YES if a PAK
+    with the specified product name and a date equal to or
+    later than the date shown is registered and loaded, otherwise
+    answer NO.
+
+
+        Product:      CXX-V
+        Producer:     DEC
+        Version:      6.5
+        Release Date: 01-NOV-2001
+
+
+* Does this product have an authorization key registered and loaded? <b>yes</b>
+
+    All questions and validations regarding the installation of Compaq C++
+    kit components have now been asked.  Depending upon your configuration,
+    time estimates for the installation(s) are as follows:
+
+    Compiler/Linker/Library:   2  minutes
+    Text form of headers:      4  minutes
+    IVP:                       2  minutes
+    Moving files:              6  minutes
+
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  VMI$ROOT:[SYSHL
+P.CXX$HELP].
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  VMI$ROOT:[SYSHL
+P.EXAMPLES.CXX].
+
+    The existing version of VMI$ROOT:[SYSLIB]DECC$CRTL.OLB is 
+    identical or newer than the one on this installation kit.
+    Installation of the kit version will not be performed.
+
+
+    You may optionally add the the SYS$STARTUP:CCXX$STARTUP.COM to the 
+    system startup procedure.  To use Compaq C++ for OpenVMS Alpha on 
+    other Alpha nodes of a VMScluster, from a privileged account on each 
+    such node enter the command @SYS$STARTUP:CCXX$STARTUP.COM.  This 
+    will install images.
+
+
+    The existing version of VMI$ROOT:[SYSLIB]DECC$RTLDEF.TLB is 
+    identical or newer than the one on this installation kit.
+    Installation of the kit version will not be performed.
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[CXX
+$LIB.REFERENCE.CXXL$ANSI_DEF].
+
+
+    Your OpenVMS system will now be updated to include the following new and
+    modified file(s):
+
+    SYS$HELP:CXX065.RELEASE_NOTES                     [new]
+    SYS$HELP:CXX065_RELEASE_NOTES.PS                  [new]
+    SYS$TEST:CXX$IVP.COM                              [new]
+    SYS$SYSTEM:CXX$COMPILER.EXE                       [new]
+    SYS$MESSAGE:CXX$COMPILER_MSG.EXE                  [new]
+    SYS$LIBRARY:DCLTABLES.EXE                         [modified]
+    SYS$COMMON:[CXX$LIB]CXX$CLD.CLD                   [new]
+    SYS$HELP:HELPLIB.HLB                              [modified]
+    SYS$SYSTEM:CXX$LINK.EXE                           [new]
+    SYS$MESSAGE:CXX$LINK_MSG.EXE                      [new]
+    SYS$COMMON:[CXX$LIB]CXXLINK.CLD                   [new]
+    SYS$SYSTEM:CXX$DEMANGLE.EXE                       [new]
+    SYS$COMMON:[CXX$LIB]CXXDEMANGLE.CLD               [new]
+    SYS$HELP:[CXX$HELP]INTZLN.PDF                     [new]
+    SYS$HELP:[CXX$HELP]IOSTREAM.PDF                   [new]
+    SYS$HELP:[CXX$HELP]INTZLN.PS                      [new]
+    SYS$HELP:[CXX$HELP]IOSTREAM.PS                    [new]
+    SYS$HELP:[CXX$HELP]CXX_CLASSLIB.PS                [new]
+    SYS$HELP:[CXX$HELP]CXX_USERSGUIDE.PS              [new]
+    SYS$HELP:[CXX$HELP]CXX_CLASSLIB.TXT               [new]
+    SYS$HELP:[CXX$HELP]CXX_USERSGUIDE.TXT             [new]
+    SYS$STARTUP:CCXX$STARTUP.COM                      [new]
+    SYS$LIBRARY:LIBCXXSTD.OLB                         [new]
+    SYS$LIBRARY:LIBCXXSTD_MA.OLB                      [new]
+    SYS$LIBRARY:LIBCXXSTD_NOINST.OLB                  [new]
+    SYS$LIBRARY:LIBCXXSTD_MA_NOINST.OLB               [new]
+    SYS$LIBRARY:CXXL$ANSI_DEF.TLB                     [new]
+
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[CXX
+$LIB].
+%CREATE-I-EXISTS, SYS$COMMON:[CXX$LIB] already exists
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[DEC
+C$LIB.INCLUDE.DECC$RTLDEF].
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[DEC
+C$LIB.INCLUDE.SYS$STARLET_C].
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[DEC
+C$LIB.REFERENCE.DECC$RTLDEF].
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[DEC
+C$LIB.REFERENCE.SYS$STARLET_C].
+%VMSINSTAL-I-SYSDIR, This product creates system disk directory  SYS$COMMON:[CXX
+$LIB.INCLUDE.CXXL$ANSI_DEF].
+%VMSINSTAL-I-MOVEFILES, Files will now be moved to their target directories...
+
+    Beginning Compaq C++ V6.5-004 Installation Verification Procedure
+
+    Copyright 2002 Compaq Information Technologies Group, L.P.
+  
+    Compaq and the Compaq logo are trademarks of Compaq Information
+    Technologies Group, L.P. in the U.S. and/or other countries.
+  
+    Confidential computer software. Valid license from Compaq required for
+    possession, use or copying. Consistent with FAR 12.211 and 12.212,
+    Commercial Computer Software, Computer Software Documentation, and
+    Technical Data for Commercial Items are licensed to the U.S. Government
+    under vendor's standard commercial license.
+  
+
+    Test compiler operation and error messages...
+
+    Test Class Library operation...
+ 
+
+    Compaq C++ V6.5-004 Installation Verification Procedure completed successful
+ly
+
+        Installation of CXX V6.5 completed at 16:21
+
+    Adding history entry in VMI$ROOT:[SYSUPD]VMSINSTAL.HISTORY
+
+    Creating installation data file: VMI$ROOT:[SYSUPD]CXX065.VMI_DATA
+
+Enter the products to be processed from the next distribution volume set.
+* Products:  <b>Exit</b> 
+
+        VMSINSTAL procedure done at 16:45
+
+
+$ 
+$ <b>run oo1src:[download]DEC-AXPVMS-GNV-V0105-006-1.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b>dsa100:[000000]</b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: _KOSRAE"PITCHER password"::GNVDEV:[GNV.CVSK
+IT_2003-11-21.KITTING.GNV]DEC-AXPVMS-GNV-V0105-006-1.PCSI;1
+        Decompressed file specification: DSA100:[000000]DEC-AXPVMS-GNV-V0105-006
+-1.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 44490.28 Blocks, 22245.14 Kbytes, 22779023 bytes
+        Decompression ratio is 1 to 1.77 ( 77.01 % expansion )
+        Elapsed CPU time:    0 00:00:06.05
+        Elapsed time    :    0 00:00:13.95
+        Speed : 338681.16 Blocks/min, 169340.58 Kbytes/min, 2890079.00 bytes/sec
+$ <b>set def dsa100:[000000]</b>
+$ <b>product install *</b>
+ 
+The following product has been selected:
+    DEC AXPVMS GNV V1.5-6                  Layered Product
+ 
+Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Configuration phase starting ...
+ 
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+ 
+DEC AXPVMS GNV V1.5-6
+ 
+Do you want the defaults for all options? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Do you want to review the options? [NO] <b>yes</b>
+ 
+DEC AXPVMS GNV V1.5-6
+    DEC AXPVMS VMS V7.3-2 [Installed]
+    Do you want to install GNV source code?: YES
+ 
+Are you satisfied with these options? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Execution phase starting ...
+
+The following product will be installed to destination:
+    DEC AXPVMS GNV V1.5-6                  DISK$ALPHASYS:[VMS$COMMON.]
+ 
+Portion done: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+The following product has been installed:
+    DEC AXPVMS GNV V1.5-6                  Layered Product
+$ <b>dir *.pcsi</b>
+
+Directory DSA100:[000000]
+
+DEC-AXPVMS-GNV-V0105-006-1.PCSI;1       
+
+Total of 1 file.
+$ <b>del DEC-AXPVMS-GNV-V0105-006-1.PCSI;1</b>
+$ <b>run oo1src:[download]CPQ-AXPVMS-CSWS-V0200--1.PCSI-DCX-AXPEXE;1  </b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: APACHE_ROOT:[BUILD.VMS.OBJ]CPQ-AXPVMS-CSWS-
+V0200--1.PCSI;1
+        Decompressed file specification: DSA100:[000000]CPQ-AXPVMS-CSWS-V0200--1
+.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 20454.50 Blocks, 10227.25 Kbytes, 10472704 bytes
+        Decompression ratio is 1 to 1.70 ( 70.37 % expansion )
+        Elapsed CPU time:    0 00:00:02.76
+        Elapsed time    :    0 00:00:06.51
+        Speed : 321019.22 Blocks/min, 160509.61 Kbytes/min, 2739364.00 bytes/sec
+$ <b>product install *</b>
+ 
+The following product has been selected:
+    CPQ AXPVMS CSWS V2.0                   Layered Product
+ 
+Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Configuration phase starting ...
+ 
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+ 
+CPQ AXPVMS CSWS V2.0
+ 
+    Hewlett-Packard Company & The Apache Software Foundation.
+ 
+* This product does not have any configuration options.
+ 
+Execution phase starting ...
+
+The following product will be installed to destination:
+    CPQ AXPVMS CSWS V2.0                   DISK$ALPHASYS:[VMS$COMMON.]
+ 
+Portion done: 0%...10%...20%...30%...40%...50%...60%...70%...90%...100%
+
+The following product has been installed:
+    CPQ AXPVMS CSWS V2.0                   Layered Product
+ 
+CPQ AXPVMS CSWS V2.0
+ 
+    Release notes are available in SYS$HELP:CSWS0200.RELEASE_NOTES. 
+ 
+    
+    hp highly recommends that you read these release notes.
+    
+    For the most up-to-date documentation, including release notes,
+    Frequently Asked Questions (FAQs), and information about configuring 
+    and running the hp Secure Web Server, please see the web pages at:
+    
+    http://www.hp.com/products/openvms/securewebserver
+    
+ 
+    Post-installation tasks are required for the hp Secure Web Server.
+ 
+    
+    The OpenVMS Installation and Configuration Guide gives detailed directions.
+    This information is a brief checklist.
+    
+    
+    Configure OpenVMS aspects of the hp Secure Web Server by:
+    
+        $ @SYS$MANAGER:APACHE$CONFIG
+    
+    If the OpenVMS username APACHE$WWW does not exist, you will be
+    prompted to create that username.  File ownerships are set to UIC 
+    [APACHE$WWW], etc.
+    
+    After configuration, start the hp Secure Web Server manually by 
+    entering:
+       
+        $ @SYS$STARTUP:APACHE$STARTUP
+    
+    Check that neither SYLOGIN.COM nor the LOGIN.COM write any output to 
+    SYS$OUTPUT:.  Look especially for a 
+    
+        $ SET TERMINAL/INQUIRE.
+                   
+    Start the hp Secure Web Server at system boot time by adding the
+    following lines to SYS$MANAGER:SYSTARTUP_VMS.COM:
+         
+        $ file := SYS$STARTUP:APACHE$STARTUP.COM
+        $ if f$search("''file'") .nes. "" then @'file'
+         
+    Shutdown the Apache server at system shutdown time by adding the 
+    following lines to SYS$MANAGER:SYSHUTDWN.COM:
+             
+        $ file := SYS$STARTUP:APACHE$SHUTDOWN.COM
+        $ if f$search("''file'") .nes. "" then @'file'
+    
+    Test the installation using your favorite Web browser.
+    Replace host.domain in the following URL (Uniform Resource Locator)
+    with the information for the hp Secure Web Server just installed,
+    configured, and started.
+    
+    
+    URL http://host.domain/ should display the standard introductory page
+    from the Apache Software Foundation. This has the bold text "It 
+    Worked! The Apache Web Server is Installed on this Web Site!" at the 
+    top  and the Apache server logo prominently displayed at the bottom.
+    If you do not see this page, check the hp Secure Web Server 
+    release notes, particularly the Frequently Asked Questions section.
+    
+    If you'd like to use secure connections with the hp Secure Web Server
+    then you'll need to create a server certificate.  We recommend that 
+    you start by creating a 30 day self signed certificate using the 
+    following certificate tool:
+    
+        $ @APACHE$COMMON:[OPENSSL.COM]OPENSSL_AUTO_CERT.COM
+    
+    Once the certificate has been created you'll need to uncomment the 
+    following directive in the APACHE$COMMON:[CONF]HTTPD.CONF file to 
+    enable SSL.
+    
+        Include /apache$root/conf/ssl.conf
+    
+    Thank you for using the hp Secure Web Server.
+    
+    
+$ <b>dir *.pcsi</b>
+
+Directory DSA100:[000000]
+
+CPQ-AXPVMS-CSWS-V0200--1.PCSI;1         
+
+Total of 1 file.
+$ <b>del *.pcsi;</b>
+$ 
+$ <b>run oo1src:[download]MOZILLA-OPENVMS-ALPHA-M150.SFX_AXPEXE;1   </b>
+UnZipSFX 5.41 of 16 April 2000, by Info-ZIP (Zip-Bugs@lists.wku.edu).
+
+
+This self-extracting archive file contains PCSI kits for:
+
+  - Mozilla
+  - GTK+
+  - OpenVMS Porting Library (OPL)
+
+Once the PCSI files are extracted, use the PRODUCT INSTALL command to
+install Mozilla. If you don't already have the required versions of 
+GTK+ and OPL installed, they will be automatically installed too.
+
+  inflating: CPQ-AXPVMS-MOZILLA-M0105--1.PCSI  
+  inflating: CPQ-AXPVMS-GTK-V0102-10-1.PCSI  
+  inflating: CPQ-AXPVMS-OPL-V0100-0A9-1.PCSI  
+$ <b>product install *</b>
+ 
+   1 - CPQ AXPVMS GTK V1.2-10              Layered Product
+   2 - CPQ AXPVMS MOZILLA M1.5             Layered Product
+   3 - CPQ AXPVMS OPL V1.0-0A9             Layered Product
+   4 - All products listed above
+   5 - Exit
+ 
+Choose one or more items from the menu separated by commas: <b>4</b>
+ 
+The following products have been selected:
+    CPQ AXPVMS GTK V1.2-10                 Layered Product
+    CPQ AXPVMS MOZILLA M1.5                Layered Product
+    CPQ AXPVMS OPL V1.0-0A9                Layered Product
+ 
+Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Configuration phase starting ...
+ 
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+ 
+CPQ AXPVMS GTK V1.2-10
+ 
+* This product does not have any configuration options.
+ 
+    GTK+ for OpenVMS Alpha
+ 
+CPQ AXPVMS MOZILLA M1.5
+ 
+Do you want the defaults for all options? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Mozilla for OpenVMS Alpha
+ 
+    CPQ AXPVMS OPL V1.0-0A9
+ 
+      OpenVMS Porting Library for OpenVMS Alpha
+ 
+Do you want to review the options? [NO] <b>yes</b>
+ 
+CPQ AXPVMS MOZILLA M1.5
+    CPQ AXPVMS GTK V1.2-10
+    CPQ AXPVMS OPL V1.0-0A9
+ 
+Are you satisfied with these options? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+CPQ AXPVMS OPL V1.0-0A9
+ 
+* This product does not have any configuration options.
+ 
+    OpenVMS Porting Library for OpenVMS Alpha
+ 
+Execution phase starting ...
+
+The following products will be installed to destinations:
+    CPQ AXPVMS GTK V1.2-10                 DISK$ALPHASYS:[VMS$COMMON.]
+    CPQ AXPVMS MOZILLA M1.5                DISK$ALPHASYS:[VMS$COMMON.]
+    CPQ AXPVMS OPL V1.0-0A9                DISK$ALPHASYS:[VMS$COMMON.]
+ 
+Portion done: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+The following products have been installed:
+    CPQ AXPVMS GTK V1.2-10                 Layered Product
+    CPQ AXPVMS MOZILLA M1.5                Layered Product
+    CPQ AXPVMS OPL V1.0-0A9                Layered Product
+$
+$ <b>dir *.pcsi</b>
+
+Directory DSA100:[000000]
+
+CPQ-AXPVMS-GTK-V0102-10-1.PCSI;1        CPQ-AXPVMS-MOZILLA-M0105--1.PCSI;1
+CPQ-AXPVMS-OPL-V0100-0A9-1.PCSI;1       
+
+Total of 3 files.
+$ <b>del *.pcsi;</b>
+$ <b>dir *.pcsi</b>
+%DIRECT-W-NOFILES, no files found
+
+
+<b><i>&lt;Now we need the unzip. So start up GNV!&gt;</i></b>
+
+$ <b>@sys$startup:gnv$startup</b>
+%CREATE-I-EXISTS, gnu:[bin] already exists
+%CREATE-I-EXISTS, gnu:[lib] already exists
+%CREATE-I-EXISTS, gnu:[etc] already exists
+%CREATE-I-EXISTS, gnu:[usr] already exists
+$ <b>@gnu:[lib]gnv_setup</b>
+$ <b>unzip</b>
+UnZip 5.42 of 14 January 2001, by Info-ZIP.  For more details see: unzip -v.
+
+Usage: unzip [-Z] [-opts[modifiers]] file[.zip] [list] [-x xlist] [-d exdir]
+  Default action is to extract files in list, except those in xlist, to exdir;
+  file[.zip] may be a wildcard.  "-Z" =&gt; ZipInfo mode (`unzip "-Z"' for usage).
+=&gt; define foreign command symbol in LOGIN.COM:  $ unzip :== $dev:[dir]unzip.exe
+
+  -p  extract files to pipe, no messages     -l  list files (short format)
+  -f  freshen existing files, create none    -t  test compressed archive data
+  -u  update files, create if necessary      -z  display archive comment
+  -x  exclude files that follow (in xlist)   -d  extract files into exdir
+
+modifiers:                                   -q  quiet mode (-qq =&gt; quieter)
+  -n  never overwrite existing files         -a  auto-convert any text files
+  -o  overwrite files WITHOUT prompting      -aa treat ALL files as text
+  -j  junk paths (do not make directories)   -v  be verbose/print version info
+ "-C" match filenames case-insensitively    "-L" make (some) names lowercase
+ "-X" restore owner/protection info         "-V" retain VMS version numbers
+                                            "-M" pipe through "more" pager
+Examples (see unzip.txt for more info):
+  unzip data1 -x joe   =&gt; extract all files except joe from zipfile data1.zip
+  unzip "-V" foo "Bar" =&gt; must quote uppercase options and filenames in VMS
+  unzip -fo foo vms.c  =&gt; quietly replace existing vms.c if archive file newer
+$ <b>show def</b>
+  DSA100:[000000]
+$ <b>create/dir [patch]</b>
+$ <b>set def [patch]</b>
+$ <b>show def</b>
+  DSA100:[patch]
+$ 
+$ <b>unzip "-V" oo1src:[download]OPENVMS_ALPHA_7_3-2_04120610.ZIP;1</b>
+Archive:  OO1SRC:[download]OPENVMS_ALPHA_7_3-2_04120610.ZIP;1
+  inflating: ALPHA_V732_MASTER_ECO_LIST.DCX_AXPEXE  
+  inflating: VMS732_DCL-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_F11X-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_FIBRE_SCSI-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_FIBRE_SCSI-V0200.PCSI-DCX_AXPEXE  
+  inflating: VMS732_GRAPHICS-V0200.PCSI-DCX_AXPEXE  
+  inflating: VMS732_LAN-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_MANAGE-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_PCSI-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_RPC-V0100.PCSI-DCX_AXPEXE  
+  inflating: VMS732_SYS-V0200.PCSI-DCX_AXPEXE  
+  inflating: VMS732_UPDATE-V0100.PCSI-DCX_AXPEXE  
+  inflating: ADVANCEDSERVER-V0703-A2.PCSI-DCX_AXPEXE  
+  inflating: DEC-AXPVMS-TCPIP_ECO-V0504-151-4.PCSI-DCX_AXPEXE  
+$ <b>dir</b>
+
+Directory DSA100:[patch]
+
+ADVANCEDSERVER-V0703-A2.PCSI-DCX_AXPEXE;1                   
+ALPHA_V732_MASTER_ECO_LIST.DCX_AXPEXE;1 
+DEC-AXPVMS-TCPIP_ECO-V0504-151-4.PCSI-DCX_AXPEXE;1          
+VMS732_DCL-V0100.PCSI-DCX_AXPEXE;1      VMS732_F11X-V0100.PCSI-DCX_AXPEXE;1
+VMS732_FIBRE_SCSI-V0100.PCSI-DCX_AXPEXE;1                   
+VMS732_FIBRE_SCSI-V0200.PCSI-DCX_AXPEXE;1                   
+VMS732_GRAPHICS-V0200.PCSI-DCX_AXPEXE;1 VMS732_LAN-V0100.PCSI-DCX_AXPEXE;1
+VMS732_MANAGE-V0100.PCSI-DCX_AXPEXE;1   VMS732_PCSI-V0100.PCSI-DCX_AXPEXE;1
+VMS732_RPC-V0100.PCSI-DCX_AXPEXE;1      VMS732_SYS-V0200.PCSI-DCX_AXPEXE;1
+VMS732_UPDATE-V0100.PCSI-DCX_AXPEXE;1   
+
+Total of 14 files.
+$ <b>run ALPHA_V732_MASTER_ECO_LIST.DCX_AXPEXE;1 </b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_DATA$:[MASTER_ECO_LIST]ALPHA_V732_MASTE
+R_ECO_LIST.TXT;22
+        Decompressed file specification: DSA100:[PATCH]ALPHA_V732_MASTER_ECO_LIS
+T.TXT;22
+Successful decompression, decompression report follows:
+        File Size: 102.12 Blocks, 51.06 Kbytes, 52283 bytes
+        Decompression ratio is 1 to 0.02 ( -97.53 % expansion )
+        Elapsed CPU time:    0 00:00:00.01
+        Elapsed time    :    0 00:00:00.55
+        Speed : 271.49 Blocks/min, 135.74 Kbytes/min, 2316.68 bytes/sec
+$ <b>run DEC-AXPVMS-TCPIP_ECO-V0504-151-4.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: DISK$SQADISK:[V5SQA.OPEN.54-ECO-1]DEC-AXPVM
+S-TCPIP_ECO-V0504-151-4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-TCPIP_ECO-V050
+4-151-4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 35208.82 Blocks, 17604.41 Kbytes, 18026917 bytes
+        Decompression ratio is 1 to 1.83 ( 83.05 % expansion )
+        Elapsed CPU time:    0 00:00:05.55
+        Elapsed time    :    0 00:00:12.61
+        Speed : 306490.16 Blocks/min, 153245.08 Kbytes/min, 2615382.50 bytes/sec
+$<b> run VMS732_DCL-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.D
+CL.V0100]DEC-AXPVMS-VMS732_DCL-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_DCL-V01
+00--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 1200.22 Blocks, 600.11 Kbytes, 614515 bytes
+        Decompression ratio is 1 to 1.40 ( 39.97 % expansion )
+        Elapsed CPU time:    0 00:00:00.14
+        Elapsed time    :    0 00:00:00.94
+        Speed : 106418.36 Blocks/min, 53209.18 Kbytes/min, 908103.31 bytes/sec
+$ <b>run VMS732_F11X-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.F
+11X.V0100]DEC-AXPVMS-VMS732_F11X-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_F11X-V0
+100--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 843.94 Blocks, 421.97 Kbytes, 432097 bytes
+        Decompression ratio is 1 to 1.25 ( 25.13 % expansion )
+        Elapsed CPU time:    0 00:00:00.09
+        Elapsed time    :    0 00:00:00.74
+        Speed : 84564.67 Blocks/min, 42282.34 Kbytes/min, 721618.56 bytes/sec
+$ <b>run VMS732_FIBRE_SCSI-V0200.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.F
+IBRE_SCSI.V0200]DEC-AXPVMS-VMS732_FIBRE_SCSI-V0200--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_FIBRE_S
+CSI-V0200--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 1974.80 Blocks, 987.40 Kbytes, 1011099 bytes
+        Decompression ratio is 1 to 1.39 ( 39.36 % expansion )
+        Elapsed CPU time:    0 00:00:00.22
+        Elapsed time    :    0 00:00:01.08
+        Speed : 152749.50 Blocks/min, 76374.75 Kbytes/min, 1303462.38 bytes/sec
+$ <b>run VMS732_GRAPHICS-V0200.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.G
+RAPHICS.V0200]DEC-AXPVMS-VMS732_GRAPHICS-V0200--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_GRAPHIC
+S-V0200--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 15112.78 Blocks, 7556.39 Kbytes, 7737744 bytes
+        Decompression ratio is 1 to 1.56 ( 55.52 % expansion )
+        Elapsed CPU time:    0 00:00:02.16
+        Elapsed time    :    0 00:00:04.52
+        Speed : 311917.50 Blocks/min, 155958.75 Kbytes/min, 2661696.00 bytes/sec
+$ <b>run VMS732_LAN-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.L
+AN.V0100]DEC-AXPVMS-VMS732_LAN-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_LAN-V01
+00--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 2155.27 Blocks, 1077.64 Kbytes, 1103500 bytes
+        Decompression ratio is 1 to 1.34 ( 33.63 % expansion )
+        Elapsed CPU time:    0 00:00:00.22
+        Elapsed time    :    0 00:00:01.05
+        Speed : 163095.42 Blocks/min, 81547.71 Kbytes/min, 1391747.63 bytes/sec
+$ <b>run VMS732_MANAGE-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.M
+ANAGE.V0100]DEC-AXPVMS-VMS732_MANAGE-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_MANAGE-
+V0100--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 645.95 Blocks, 322.97 Kbytes, 330725 bytes
+        Decompression ratio is 1 to 1.16 ( 16.42 % expansion )
+        Elapsed CPU time:    0 00:00:00.04
+        Elapsed time    :    0 00:00:00.79
+        Speed : 56763.93 Blocks/min, 28381.96 Kbytes/min, 484385.50 bytes/sec
+$ <b>run VMS732_PCSI-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.PCSI.V010
+0]DEC-AXPVMS-VMS732_PCSI-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_PCSI-V0
+100--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 2858.37 Blocks, 1429.19 Kbytes, 1463486 bytes
+        Decompression ratio is 1 to 1.57 ( 56.73 % expansion )
+        Elapsed CPU time:    0 00:00:00.38
+        Elapsed time    :    0 00:00:01.32
+        Speed : 202106.33 Blocks/min, 101053.16 Kbytes/min, 1724640.63 bytes/sec
+$ <b>run VMS732_RPC-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.R
+PC.V0100]DEC-AXPVMS-VMS732_RPC-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_RPC-V01
+00--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 5660.49 Blocks, 2830.25 Kbytes, 2898171 bytes
+        Decompression ratio is 1 to 1.60 ( 59.99 % expansion )
+        Elapsed CPU time:    0 00:00:00.76
+        Elapsed time    :    0 00:00:02.10
+        Speed : 257848.11 Blocks/min, 128924.05 Kbytes/min, 2200303.75 bytes/sec
+$ <b>run VMS732_SYS-V0200.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE2.S
+YS.V0200]DEC-AXPVMS-VMS732_SYS-V0200--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_SYS-V02
+00--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 10142.90 Blocks, 5071.45 Kbytes, 5193165 bytes
+        Decompression ratio is 1 to 1.59 ( 59.32 % expansion )
+        Elapsed CPU time:    0 00:00:01.55
+        Elapsed time    :    0 00:00:03.27
+        Speed : 295692.06 Blocks/min, 147846.03 Kbytes/min, 2523239.00 bytes/sec
+$ <b>run VMS732_UPDATE-V0100.PCSI-DCX_AXPEXE;1</b>
+
+                FTSV DCX auto-extractible compressed file for OpenVMS (AXP)
+                FTSV V3.0 -- FTSV$DCX_AXP_AUTO_EXTRACT
+                Copyright (c) Digital Equipment Corp. 1993
+
+Options: [output_file_specification [input_file_specification]]
+
+The decompressor  needs to know  the filename to use for the 
+decompressed file. If you don't specify any, it will use the
+original name  of the  file before it  was  compressed,  and
+create  it in  the  current  directory.  If  you  specify  a
+directory name, the file will be created in that directory.
+
+Decompress into (file specification):<b><i>&lt;return&gt;</i></b>
+        Opening and checking compressed file...
+Decompressing (press Ctrl-T to watch the evolution)...
+        Creating decompressed file...
+        Original file specification: VKC_KITS$:[KIT_BUILD.ALP.PCSI.732.UPDATE1.U
+PDATE.V0100]DEC-AXPVMS-VMS732_UPDATE-V0100--4.PCSI;1
+        Decompressed file specification: DSA100:[PATCH]DEC-AXPVMS-VMS732_UPDATE-
+V0100--4.PCSI;1
+Successful decompression, decompression report follows:
+        File Size: 46352.86 Blocks, 23176.43 Kbytes, 23732665 bytes
+        Decompression ratio is 1 to 1.73 ( 72.97 % expansion )
+        Elapsed CPU time:    0 00:00:06.78
+        Elapsed time    :    0 00:00:15.79
+        Speed : 304559.09 Blocks/min, 152279.55 Kbytes/min, 2598904.25 bytes/sec
+$ <b>product instal *</b>
+ 
+   1 - DEC AXPVMS TCPIP_ECO V5.4-151       Patch (maintenance update)
+   2 - DEC AXPVMS VMS732_DCL V1.0          Patch (maintenance update)
+   3 - DEC AXPVMS VMS732_F11X V1.0         Patch (maintenance update)
+   4 - DEC AXPVMS VMS732_FIBRE_SCSI V2.0   Patch (maintenance update)
+   5 - DEC AXPVMS VMS732_GRAPHICS V2.0     Patch (maintenance update)
+   6 - DEC AXPVMS VMS732_LAN V1.0          Patch (maintenance update)
+   7 - DEC AXPVMS VMS732_MANAGE V1.0       Patch (maintenance update)
+   8 - DEC AXPVMS VMS732_PCSI V1.0         Patch (maintenance update)
+   9 - DEC AXPVMS VMS732_RPC V1.0          Patch (maintenance update)
+  10 - DEC AXPVMS VMS732_SYS V2.0          Patch (maintenance update)
+  11 - DEC AXPVMS VMS732_UPDATE V1.0       Patch (maintenance update)
+  12 - All products listed above
+  13 - Exit
+ 
+Choose one or more items from the menu separated by commas: <b>8</b>
+ 
+The following product has been selected:
+    DEC AXPVMS VMS732_PCSI V1.0            Patch (maintenance update)
+ 
+Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Configuration phase starting ...
+ 
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+ 
+DEC AXPVMS VMS732_PCSI V1.0: OpenVMS V7.3-2 PCSI V1.0
+
+
+               *********************
+
+You have the option of saving directories, files, and libraries
+that are replaced, modified, or deleted by the installation of
+this remedial kit.  These files along with a copy of the product
+database will be stored on the system disk in a separate
+directory tree.  Choosing to save this recovery data will allow
+you to uninstall this patch at a later time using the PRODUCT
+UNDO PATCH command.  If recovery data is not saved you will not
+be able to remove this remedial kit from your system.
+
+               **** WARNING ****
+
+If you choose to install this kit without saving recovery
+data, you will lose your ability to uninstall any previously
+installed remedial kits for which recovery data has been saved.
+
+Do you wish to save this recovery data [YES] ?: <b><i>&lt;return&gt;</i></b>
+
+               *********************
+
+Recovery data will be saved which will allow you to un-install
+this kit.  In the past, kit installations provided some level
+of recovery capability by renaming all replaced files to
+file_name.ext_OLD.  If you wish, you can continue to do this.
+
+Note that this will triple the disk space required for
+this kit - one for the installed files, once for the saved
+recovery data and once for the file_name.ext_OLD files.
+
+Do you wish to have replaced files renamed
+to file_name.ext_OLD [NO] ?: <b><i>&lt;return&gt;</i></b>
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Execution phase starting ...
+
+The following product will be installed to destination:
+    DEC AXPVMS VMS732_PCSI V1.0            DISK$ALPHASYS:[VMS$COMMON.]
+ 
+Portion done: 0%...10%...20%...30%...70%...80%...90%...100%
+
+The following product has been installed (and a recovery data set created):
+    DEC AXPVMS VMS732_PCSI V1.0            Patch (maintenance update)
+ 
+DEC AXPVMS VMS732_PCSI V1.0: OpenVMS V7.3-2 PCSI V1.0
+ 
+    VMS732_PCSI-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_PCSI-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+$ <b>product instal *</b>
+ 
+   1 - DEC AXPVMS TCPIP_ECO V5.4-151       Patch (maintenance update)
+   2 - DEC AXPVMS VMS732_DCL V1.0          Patch (maintenance update)
+   3 - DEC AXPVMS VMS732_F11X V1.0         Patch (maintenance update)
+   4 - DEC AXPVMS VMS732_FIBRE_SCSI V2.0   Patch (maintenance update)
+   5 - DEC AXPVMS VMS732_GRAPHICS V2.0     Patch (maintenance update)
+   6 - DEC AXPVMS VMS732_LAN V1.0          Patch (maintenance update)
+   7 - DEC AXPVMS VMS732_MANAGE V1.0       Patch (maintenance update)
+   8 - DEC AXPVMS VMS732_PCSI V1.0         Patch (maintenance update)
+   9 - DEC AXPVMS VMS732_RPC V1.0          Patch (maintenance update)
+  10 - DEC AXPVMS VMS732_SYS V2.0          Patch (maintenance update)
+  11 - DEC AXPVMS VMS732_UPDATE V1.0       Patch (maintenance update)
+  12 - All products listed above
+  13 - Exit
+ 
+Choose one or more items from the menu separated by commas: <b>1,2,3,4,5,6,7,9,10,1
+1</b>
+ 
+The following products have been selected:
+    DEC AXPVMS TCPIP_ECO V5.4-151          Patch (maintenance update)
+    DEC AXPVMS VMS732_DCL V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_F11X V1.0            Patch (maintenance update)
+    DEC AXPVMS VMS732_FIBRE_SCSI V2.0      Patch (maintenance update)
+    DEC AXPVMS VMS732_GRAPHICS V2.0        Patch (maintenance update)
+    DEC AXPVMS VMS732_LAN V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_MANAGE V1.0          Patch (maintenance update)
+    DEC AXPVMS VMS732_RPC V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_SYS V2.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_UPDATE V1.0          Patch (maintenance update)
+ 
+Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Information has been saved to allow you to uninstall the following patches:
+ 
+RECOVERY DATA SET 001 created 22-APR-2004 17:35:36.54
+   -------------------------------------- --------------------------------------
+   PATCH                                  APPLIED TO                            
+   -------------------------------------- --------------------------------------
+   DEC AXPVMS VMS732_PCSI V1.0            DEC AXPVMS VMS V7.3-2                 
+   -------------------------------------- --------------------------------------
+ 
+* If you continue, recovery data for the patches listed above will be deleted.
+* The deletion of recovery data does not affect the installation status of
+* patches applied to products that are not participating in this operation.
+* However, continuing with this operation prevents you from uninstalling
+* these patches at a future time by use of the PRODUCT UNDO PATCH command.
+ 
+Do you want to continue? [NO] <b>yes</b>
+ 
+Configuration phase starting ...
+ 
+You will be asked to choose options, if any, for each selected product and for
+any products that may be installed to satisfy software dependency requirements.
+ 
+DEC AXPVMS TCPIP_ECO V5.4-151: Compaq TCP/IP Services for OpenVMS.
+ 
+    (c) Compaq Computer Corporation 2004. All Rights Reserved.
+ 
+    Compaq Computer Corporation
+ 
+    COMPAQ TCP/IP Services for OpenVMS offers several license options.
+ 
+* This product does not have any configuration options.
+ 
+DEC AXPVMS VMS732_DCL V1.0: OpenVMS V7.3-2 DCL V1.0
+
+
+               *********************
+
+You have the option of saving directories, files, and libraries
+that are replaced, modified, or deleted by the installation of
+this remedial kit.  These files along with a copy of the product
+database will be stored on the system disk in a separate
+directory tree.  Choosing to save this recovery data will allow
+you to uninstall this patch at a later time using the PRODUCT
+UNDO PATCH command.  If recovery data is not saved you will not
+be able to remove this remedial kit from your system.
+
+               **** WARNING ****
+
+If you choose to install this kit without saving recovery
+data, you will lose your ability to uninstall any previously
+installed remedial kits for which recovery data has been saved.
+
+Do you wish to save this recovery data [YES] ?: <b><i>&lt;return&gt;</i></b>
+
+               *********************
+
+Recovery data will be saved which will allow you to un-install
+this kit.  In the past, kit installations provided some level
+of recovery capability by renaming all replaced files to
+file_name.ext_OLD.  If you wish, you can continue to do this.
+
+Note that this will triple the disk space required for
+this kit - one for the installed files, once for the saved
+recovery data and once for the file_name.ext_OLD files.
+
+Do you wish to have replaced files renamed
+to file_name.ext_OLD [NO] ?: <b><i>&lt;return&gt;</i></b>
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_F11X V1.0: OpenVMS V7.3-2 F11X V1.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    Compaq  strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_FIBRE_SCSI V2.0: OpenVMS V7.3-2 FIBRE_SCSI V2.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    HP strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_GRAPHICS V2.0: OpenVMS V7.3-2 GRAPHICS V2.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    Compaq  strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_LAN V1.0: OpenVMS V7.3-2 LAN V1.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    Compaq  strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_MANAGE V1.0: OpenVMS V7.3-2 MANAGE V1.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_RPC V1.0: OpenVMS V7.3-2 RPC V1.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_SYS V2.0: OpenVMS V7.3-2 SYS V2.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    Compaq  strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+DEC AXPVMS VMS732_UPDATE V1.0: OpenVMS V7.3-2 UPDATE V1.0
+
+Files will not be renamed
+ 
+* This product does not have any configuration options.
+ 
+    &lt;&lt; System Disk Backup &gt;&gt;
+ 
+    
+    This kit will make functional changes to your system.
+    Before installing this kit you should make a backup
+    copy of your system disk.  If you do not make a copy
+    of your system disk you will not be able to restore
+    your system to a pre-kit installation state.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+    Installing this patch kit requires a reboot.
+ 
+    
+    Compaq  strongly  recommends that you reboot your system
+    immediately after installation  of  this kit.  The images
+    in this kit will not fully take effect until the system
+    is rebooted.  However, if you do not re-boot immediately
+    after kit installation, the system may become unstable and
+    may not function as expected.
+    
+    If you have other nodes in your VMS cluster, they must also
+    be rebooted in order to make use of the new image(s).  If it
+    is not possible or convenient to reboot the entire cluster
+    at this time, a rolling re-boot (kit installation and reboot
+    on one node at a time) may be performed.
+    
+ 
+    Do you want to continue? [YES] <b><i>&lt;return&gt;</i></b>
+ 
+Execution phase starting ...
+
+The following products will be installed to destinations:
+    DEC AXPVMS TCPIP_ECO V5.4-151          DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_DCL V1.0             DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_F11X V1.0            DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_FIBRE_SCSI V2.0      DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_GRAPHICS V2.0        DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_LAN V1.0             DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_MANAGE V1.0          DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_RPC V1.0             DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_SYS V2.0             DISK$ALPHASYS:[VMS$COMMON.]
+    DEC AXPVMS VMS732_UPDATE V1.0          DISK$ALPHASYS:[VMS$COMMON.]
+ 
+Portion done: 0%...10%...20%...30%
+%PCSI-I-PRCOUTPUT, output from subprocess follows ...
+% TCPIP-W-PCSI_INSTALL 
+% - Execute SYS$MANAGER:TCPIP$CONFIG.COM to proceed with configuration of
+%   HP TCP/IP Services for OpenVMS.
+% 
+Portion done: 40%...50%...60%...70%...80%...90%...100%
+
+The following products have been installed (and a recovery data set created):
+    DEC AXPVMS TCPIP_ECO V5.4-151          Patch (maintenance update)
+    DEC AXPVMS VMS732_DCL V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_F11X V1.0            Patch (maintenance update)
+    DEC AXPVMS VMS732_FIBRE_SCSI V2.0      Patch (maintenance update)
+    DEC AXPVMS VMS732_GRAPHICS V2.0        Patch (maintenance update)
+    DEC AXPVMS VMS732_LAN V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_MANAGE V1.0          Patch (maintenance update)
+    DEC AXPVMS VMS732_RPC V1.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_SYS V2.0             Patch (maintenance update)
+    DEC AXPVMS VMS732_UPDATE V1.0          Patch (maintenance update)
+ 
+DEC AXPVMS VMS732_DCL V1.0: OpenVMS V7.3-2 DCL V1.0
+ 
+    VMS732_DCL-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_DCL-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_F11X V1.0: OpenVMS V7.3-2 F11X V1.0
+ 
+    VMS732_F11X-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_F11X-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_FIBRE_SCSI V2.0: OpenVMS V7.3-2 FIBRE_SCSI V2.0
+ 
+    VMS732_FIBRE_SCSI-V0200 Release notes available
+ 
+    
+           Release notes for the VMS732_FIBRE_SCSI-V0200 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_GRAPHICS V2.0: OpenVMS V7.3-2 GRAPHICS V2.0
+ 
+    VMS732_GRAPHICS-V0200 Release notes available
+ 
+    
+           Release notes for the VMS732_GRAPHICS-V0200 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_LAN V1.0: OpenVMS V7.3-2 LAN V1.0
+ 
+    VMS732_LAN-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_LAN-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_MANAGE V1.0: OpenVMS V7.3-2 MANAGE V1.0
+ 
+    VMS732_MANAGE-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_MANAGE-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_RPC V1.0: OpenVMS V7.3-2 RPC V1.0
+ 
+    VMS732_RPC-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_RPC-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_SYS V2.0: OpenVMS V7.3-2 SYS V2.0
+ 
+    VMS732_SYS-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_SYS-V0200 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+ 
+DEC AXPVMS VMS732_UPDATE V1.0: OpenVMS V7.3-2 UPDATE V1.0
+ 
+    VMS732_UPDATE-V0100 Release notes available
+ 
+    
+           Release notes for the VMS732_UPDATE-V0100 kit are available
+           at SYS$COMMON:[000000.SYSHLP]
+    
+$ 
+</pre>

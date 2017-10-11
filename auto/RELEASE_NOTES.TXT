@@ -1,0 +1,21 @@
+010 8 sep 2005
+ First release
+011 15 sep 2005
+ Enhanced search for files/directories
+012 27-sep 2005
+ Enhanced search for dates
+ Support for XXX_PARAMETER symbol
+ support for online toggling of VERBONE state
+020 17-oct-2005
+ -Included the HELP function. You now can ask help about
+  the command. Included are the AUTO_HELP.HL% for help about
+  AUTO itself, and all dcl-type verbs and foreign commands.
+ -Support online toggling of EXECUTE state.
+ -Removed a bug in syntax changed where only image changed.
+  Previously AUTO did not check for the presence of parameters
+  or qualifier in the new syntax
+021 12-dec-2005
+ -Included VAX and IA64 support
+ -Fixed a problem with terminal set to overstrike
+ -Included the option to (do not) load the symbol table,
+  and selective logical tables. 

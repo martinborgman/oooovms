@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TCSH porting to OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h2 class="text-center">TCSH porting to OpenVMS</h2>
+    <p>For the port of OpenOffice a working TCSH is needed. We found this version (6.12.00 dated 07/23/2002) of TCSH on <a href="ftp://ftp.astron.com/pub/tcsh/">ftp://ftp.astron.com/pub/tcsh/</a>.</p>    <p>The home page for TCSH can be found at <a href="http://www.tcsh.org/Home">http://www.tcsh.org/Home</a>. There seems to be no recent port (including ODS5 support) of TCSH.</p>
+    <p>We hope to get a working TCSH soon so we can get on with our port of OpenOffice for OpenVMS.<br></p>
+    <p>You can download the software from the <a href="ftp://ftp.astron.com/pub/tcsh/">original location</a> or from this site.</p>
+    <p>If you have questions or something to share please send it to <A href="mailto:tcshdev@oooovms.dyndns.org">tcshdev@oooovms.dyndns.org</a>. We will publish your contributions or questions on these webpages.<br></p>
+    <h4>READMETCSH.TXT</h4>
+    <pre>   
+    <!--#include file="READMETCSH.TXT" -->
+    </pre>  
+    <h4>Announce-6_12_00.txt</h4>
+    <pre>   
+    <!--#include file="Announce-6_12_00.txt" -->
+    </pre>  
+    <h4>FAQ.txt</h4>
+    <pre>   
+    <!--#include file="FAQ.txt" -->
+    </pre>  
+    <p>The following gzip file contains the full build environment.</p>
+    <p>Because of the low bandwidth of this server please have patience if you decide to download.</p>
+    <p><a href="/todo/tcsh/tcsh-6_12_00.tar-gz">tcsh-6_12_00.tar-gz (810 KB)</a></p>
+
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

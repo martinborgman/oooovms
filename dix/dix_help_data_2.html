@@ -1,0 +1,2568 @@
+<html>
+<head>
+<title>Help about dix_help
+</title>
+<body>
+<a name="top_2">
+<center>
+<a href="dix_help_data_1.html#bottom_1"target="data">previous</a>
+</center>
+<a name="867">
+<h3 Align=center><a href="dix_help_idx_3.html#231" target="index">DIX Example scripts EXAMINE_BITS </a> </h3>
+<pre>
+
+  exa/bits
+
+  $DIX/INTER SYSUAF.WORK/MOD
+  for flag in ["hex","oct","bin"]
+   exa/hex/raw 0
+   for k=1,64
+    exam /'flag'/bits='k' 4.2
+    xtest &LT; exam /'flag'/bits='k' 4.2
+    deposit /'flag'/bits='k' 'xtest'
+    exam /'flag'/bits='k' 4.2
+   end for
+   exa/hex/raw 0
+  end for
+</pre>
+<a name="868">
+<h3 Align=center><a href="dix_help_idx_3.html#232" target="index">DIX Example scripts FEATURES_LIM_EXIT </a> </h3>
+<pre>
+  $DIX/INTER
+  ! CHeck for the limit/exit statement
+  !
+  open  mypend pending.org
+  open  myuaf sysuaf.org
+  show file/all/des
+  read/ge="MAIL 01C" mypend
+  examine mypend\*
+  close mypend
+</pre>
+<a name="869">
+<h3 Align=center><a href="dix_help_idx_3.html#233" target="index">DIX Example scripts FILE_SEARCH </a> </h3>
+<pre>
+
+  Search options
+
+  $DIX/FILE SYSUAF.ORG TCPIP *SNMP*/MAT=MAT/WILD=STAND/FIELD=*USER*
+</pre>
+<a name="870">
+<h3 Align=center><a href="dix_help_idx_3.html#234" target="index">DIX Example scripts FILE_LIMIT </a> </h3>
+<pre>
+  $DIX/INT
+  open lun sysuaf.org/limit=(value=borgman,key=0)
+  read lun
+  exa *user*
+  read lun
+  exa *user*
+  read lun
+  exa *user*
+  set file lun /nolimit
+  read lun
+  exa *user*
+  set file lun /limit=(value=CHKPWD,key=0)
+  read lun
+  exa *user*
+  read lun/err=notfnd
+  say "Should not come here"
+  goto done
+  notfnd:
+  error = $status
+  say "Correct error label"
+  say "status = ",f$message(error)
+  done:
+</pre>
+<a name="871">
+<h3 Align=center><a href="dix_help_idx_3.html#235" target="index">DIX Example scripts FOR </a> </h3>
+<pre>
+  $DIX/INT
+  k = 20
+  @for_sub 40,k
+  sho symb k
+  @for_sub
+
+   And the file for_sub.dix contains
+
+  entry jan,piet/symb
+  show symb jan
+  show symb piet
+  integer k = 10
+  integer a = 10
+  for k=1,11,2
+   integer a
+   if (k&GT;5) leave
+   a = k
+   echo "k = ''k' ''a'"
+  endfor
+  for k=1,11,2
+   integer a
+   if (k&GT;5) cycle
+   a = k
+   echo "k = ''k' ''a'"
+  endfor
+  say "k=''k'"
+  sh symb *
+  for k=11,1,-2
+   echo "k = ''k'"
+  endfor
+  say "k=''k'"
+  piet=k
+  
+
+</pre>
+<a name="872">
+<h3 Align=center><a href="dix_help_idx_3.html#236" target="index">DIX Example scripts FUNCTIONS </a> </h3>
+<pre>
+ 
+  interactive mode functions
+
+  $DIX/INT 
+  open sysuaf.org
+  say and(15,3)
+  say or(8,3)
+  say not(4)
+  say not(false)
+  say even(2)
+  say odd(2)
+  say lshift(2,4)
+  say lshift(%x7fffffff,4)
+  say rshift(8,1)
+  say rshift(%xffffffff,4)
+  say mod(11,5)
+  say max(3,6,9,10.9)
+  say max(3,6,9,10.9,12)
+  say min(3,6,9,1.9)
+  say min(3,6,9,10.9)
+  say real(4)
+  say string(12)
+  say logi(22)
+  say int(12.73)
+  say nint(12.73)
+  say hex(12)
+  say btest(12,3)
+  say btest(12,4)
+  say ibset(12,4)
+  say ibset(12,3)
+  say ibclr(12,4)
+  say ibclr(12,3)
+  say filecount()
+  say f$mode()
+  say f$decima(12,"-",3)
+  say f$decimal(12.4)
+  say f$radix(137,36)
+  say f$add("12","23",6)
+  say f$add("12","23",-6)
+  say f$sub("12","23",6)
+  say f$sub("12","23",-6)
+  say f$mul("12","23")
+  say f$divi("12","23",,4)
+  say f$extzv(2,2,%x89)
+  say f$extv(2,2,%x89)
+  say f$insv(12,2,2,1)
+  say f$envi("depth")
+  say f$getdvi("sys$sysdevice","exists")
+  say f$edit(" aldfklfa ","uppercase,collapse")
+  say f$fao("!12AS = !12UL","X",12)
+  say f$fis("TESTSTRING","SR")
+  say f$fis("TESTSTRING","s","CASE")
+  say f$fnis("AAATESTSTRING","A")
+  say f$fnis("AAATESTSTRING","a","CASE")
+  say f$date("12-OCT-2006")
+  say f$date(1.3,"HOURS")
+  say f$time("YEAR","23-OCT-2006")
+  say f$check(0,644)
+  say f$enum(2,"*BYT*")
+  say f$trim("  asdlkj  ")
+  say f$left("  asdlkj  ")
+  say f$right("  asdlkj  ")
+  say f$collapse("  asdlkj  ")
+  say f$length(" af l ")
+  say f$trnlnm("SYS$SYSTEM","LNM$SYSTEM")
+  say f$descr(1)
+  say f$file("NOK")
+  say f$file("KLENGTH",,2)
+  say f$file("KSPOS",,1,1)
+  say f$element(3,"|","A|B|C|D|E|F")
+  say f$element(-1,"|","A|B|C|D|E|F")
+  say f$extra(2,2,"ABCDEF")
+  say f$extra(-1,2,"ABCDEF")
+  say f$messa(12)
+  say f$match("AXY","*Y")
+  say f$match("AXY","*Y%~","EXTEN")
+  say f$upcase("AjAkAk")
+  say f$lowcase("AjAkAk")
+  say f$locate("A","ABCABCABC","A")
+  say f$locate("*X*","ABCXBCABC","*X*","STAND")
+  say f$locate("C~","ABCXBCABC","EXTEN")
+  say f$locate("c~","ABCXBCABC","EXTEN","NOCASE")
+  say f$char(65)
+  mysymb = "jan"
+  say f$exists("mysymb")
+  say f$type("mysymb")
+  say f$fexists("Uaf$L_UIC")
+  say f$verify()
+  say f$ichar("A")
+  a = %DATA("DATA")
+  sh symb a
+  say f$key(0,"PRESENT")
+  say f$key(1,"VBNDATA","SYSUAF")
+  say f$area(0,"EXTENSION","SYSUAF")
+  say %recordnumber()
+  say %recordsize()
+  say %loc("UAF$L_UIC")
+  say %bloc("UAF$L_UIC")
+  say %bloc("UAF$B_PRIMEDAYS{"tuesday"}")
+  say %bloc(UAF$B_PRIMEDAYS{"tuesday"})
+  say UAF$B_PRIMEDAYS{"tuesday"}
+</pre>
+<a name="873">
+<h3 Align=center><a href="dix_help_idx_3.html#237" target="index">DIX Example scripts IF </a> </h3>
+<pre>
+
+  If statement
+
+  $DIX/INT
+  x=0
+  if (x=0) then
+   say "x=0"
+   goto tst
+  else
+   say "x&LT;&GT;0"
+  endif
+  tst:
+  x=3
+  if (x=0) then
+   say "x=0"
+  else
+   say "x&LT;&GT;0"
+  endif
+  if (x&GT;0) say "jopied"
+  if (x&GT;0) then
+   say "X again &GT; 0"
+  endif
+  x=0
+  if (x&GT;0) then
+   say "X again &GT; 0"
+  endif
+  !
+  a=10
+  if a&GT;100
+  then say "a&GT;10"
+   say "na then"
+  else say "a&LT;=10"
+   say "na else"
+  endif
+  a=101
+  if a&GT;100
+  then say "a&GT;10"
+   say "na then"
+  else say "a&LT;=10"
+   say "na else"
+  endif
+</pre>
+<a name="874">
+<h3 Align=center><a href="dix_help_idx_3.html#238" target="index">DIX Example scripts INFO </a> </h3>
+<pre>
+
+  FILE/INFO command
+
+  $DIX/INFO/FULL SYSUAF.ORG
+</pre>
+<a name="875">
+<h3 Align=center><a href="dix_help_idx_3.html#239" target="index">DIX Example scripts KEYS </a> </h3>
+<pre>
+
+  define/key 
+
+  $DIX/INTER
+  !
+  define/key f20 "show time"
+  define/key f19/if="test" "show vi"
+  show keys
+  show keys/state=test
+  dele/key f20
+  show keys
+  del/key f19
+  del/key f19/state=test
+  show keys 
+  exit
+</pre>
+<a name="876">
+<h3 Align=center><a href="dix_help_idx_3.html#240" target="index">DIX Example scripts LOCKED </a> </h3>
+<pre>
+
+  Locked file access
+
+  $DIX/INTER
+  open sys1 sysuaf.work/modify
+  read sys1 /eq=stubbf
+  open sys2 sysuaf.work/modify
+  read sys2 /eq=stubbf
+  ne fi
+  sh file
+  exam/tag *bytlm*
+  dep uaf$l_pbytlm=5000
+  update/err=should
+  echo "***error-Unexpected "
+  should:close sys1
+  exam/tag *bytlm*
+  update/err=should2/canc
+  echo "***error-Unexpected "
+  should2:read sys2 /eq=stubbf
+  close sys2
+  exam/tag *bytlm*
+</pre>
+<a name="877">
+<h3 Align=center><a href="dix_help_idx_3.html#241" target="index">DIX Example scripts LOOP </a> </h3>
+<pre>
+  $DIX/INT
+  integer a = 10
+  loop 
+   a = a + 1
+   test a&LT;16
+   say "New value of a = ",a
+  endloop
+</pre>
+<a name="878">
+<h3 Align=center><a href="dix_help_idx_3.html#242" target="index">DIX Example scripts LOOP_TEST </a> </h3>
+<pre>
+
+  all kind of loop statemements
+
+  $DIX/INTER
+  goto jan
+  jan:
+  
+  for k=1,5
+   say   -    
+   "FOR:the value of k = ",k
+  call test
+  endfor
+  
+  
+  k = 1
+  while (k&LT;=6)
+   say "WHILE:the value of k = ",k
+   k = k + 1
+   
+  endwhile
+  k=1
+  repeat
+   say "REPEAT:the value of k = ",k
+   k = k + 1
+  until k=6
+  
+  test: subroutine
+   say "In subroutine"
+   l = 1
+   repeat
+    say "REPEAT:the value of l = ",l
+    l = l + 1
+   until l=6
+    
+  endsubroutine
+  
+  k = 1
+  loop
+   say "LOOP:the value of k = ",k
+  testloop k&LT;=6
+   k = k + 1
+  endloop
+  
+  for k=1,4
+   say "FOR:the value of k = ",k
+   if (k&GT;2) goto done
+  endfor
+   
+  done:
+  say "Test completed" 
+</pre>
+<a name="879">
+<h3 Align=center><a href="dix_help_idx_3.html#243" target="index">DIX Example scripts MODIFY </a> </h3>
+<pre>
+  $DIX/INTER
+  open haay programs_top:[dix.regres]sysuaf.work/modify
+  sel file haay
+  say "This proc = ",f$envir("PROCEDURE")
+  read/eq="STUBBF"
+  exa *dev*
+  deposit uaf$t_defdev="TEstdisk"
+  Update
+  read /eq="STUBBF1"/err=not_found
+  echo "Unexpected position"
+  not_found:
+  echo "status from read = ''$status'"
+  read/eq="SYSTEM"
+  exa *de*
+  read/eq="STUBBF"
+  exa *dev*
+  close haay
+</pre>
+<a name="880">
+<h3 Align=center><a href="dix_help_idx_3.html#244" target="index">DIX Example scripts MOVE </a> </h3>
+<pre>
+  $DIX/INTER
+        cnt= 0
+        open file1 sysuaf.org
+        open file2 x.x /create/modify /des=newdes_move.des
+  lp:   crea/ record file2
+        move file1 file2/log
+        cnt=cnt+1
+        file2\cnt = cnt
+        update file2
+        read file1/end=done
+        if cnt&LT;4 goto lp
+  done:
+        dump file2/rewind
+        close file2
+        close file1
+        spawn delete x.x;
+</pre>
+<a name="881">
+<h3 Align=center><a href="dix_help_idx_3.html#245" target="index">DIX Example scripts MULTIPLE_FILES_DES </a> </h3>
+<pre>
+
+  Test for multiple files/descriptions
+
+  $DIX/INT
+  open sysuaf sysuaf.org
+  sel file sysuaf
+  open pend pending.org
+  next file
+  open pend partition.org
+  add des profile
+  prev file
+  say "First file=", f$file("NAME",2)
+  tag = f$file("TAG",2)
+  k = 1
+  lp1:xx = f$file("des",tag,"name",k)
+  if (xx &LT;&GT; "") then
+   say "Descriptor ''k' is = ",xx
+   k = k + 1
+   desc = xx
+   goto lp1
+  endif
+  show file/all/des
+  desc = f$file("des",tag,"name",1)
+  fn1 = tag+"\"+desc+"\"
+  !
+  say "Second file = ",f$file("name",3)
+  tag = f$file("TAG",3)
+  k = 1
+  lp2:xx = f$file("des",tag,"name",k)
+  if (xx &LT;&GT; "") then
+   say "Descriptor ''k' is = ",xx
+   desc = xx
+   k = k + 1
+   goto lp2
+  endif
+  !
+  fd1 = fn1+"uaf$w_fillm"
+  say "examine ",fd1
+  exa 'fd1'
+  desc = f$file("des",3,"tag",1)
+  fn2 = tag+"\"+desc+"\"
+  fd2 = fn2 + "total_attr_size"
+  desc = f$file("des",3,"tag",2)
+  fn3 = tag+"\"+desc+"\"
+  fd3 = fn3 + "a1naam"
+  say "examine ",fd2
+  exa 'fd2'
+  exa 'fd3'
+  exa uaf$w_fillm
+  next file
+  exa 'fd1'
+  exa 'fd2'
+  exa 'fd3'
+  exa total_attr_size
+  next des
+  exa 'fd1'
+  exa 'fd2'
+  exa 'fd3'
+  exa a1naam
+  close 'tag'
+  close sysuaf
+</pre>
+<a name="882">
+<h3 Align=center><a href="dix_help_idx_3.html#246" target="index">DIX Example scripts NUMOPER </a> </h3>
+<pre>
+  
+  typd assignments
+
+  $DIX/INT
+  !
+  ! Try i*4/8 /i4
+  !
+  v1=#inte*4"10"
+  v2=#inte*4"1234567"
+  v21=#inte*4"5"
+  gosub test_all
+  !
+  v1=#inte*8"10"
+  v2=#inte*4"1234567"
+  v21=#inte*4"5"
+  gosub test_all
+  !
+  ! Try*4/8 with i8
+  !
+  v1=#inte*4"10"
+  v2=#inte*8"12345678912"
+  v21=#inte*8"5"
+  gosub test_all
+  !
+  v1=#inte*8"10"
+  v2=#inte*8"12345678912"
+  v21=#inte*8"5"
+  gosub test_all
+  !
+  ! try real*4/8/16 with all real*4
+  !!
+  v1=#real*4"10.0"
+  v2=#real*4"12345678912.0"
+  v21=#real*4"5"
+  gosub test_all
+  !
+  v1=#real*8"10.0"
+  v2=#real*4"12345678912"
+  v21=#real*4"5"
+  gosub test_all
+  !
+  v1=#real*16"10.0"
+  v2=#real*4"12345678912"
+  v21=#real*4"5"
+  gosub test_all
+  !
+  ! try real*4/8/16 with all real*8
+  !
+  v1=#real*4"10.0"
+  v2=#real*8"12345678912"
+  v21=#real*8"5"
+  gosub test_all
+  !
+  v1=#real*8"10.0"
+  v2=#real*8"12345678912"
+  v21=#real*8"5"
+  gosub test_all
+  !
+  v1=#real*16"10.0"
+  v2=#real*8"12345678912"
+  v21=#real*8"5"
+  gosub test_all
+  !
+  ! try real*4/8/16 with all real*16
+  !!!
+  v1=#real*4"10.0"
+  v2=#real*16"12345678912"
+  v21=#real*16"5"
+  gosub test_all
+  !
+  v1=#real*8"10.0"
+  v2=#real*16"12345678912"
+  v21=#real*16"5"
+  gosub test_all
+  !
+  v1=#real*16"10.0"
+  v2=#real*16"12345678912"
+  v21=#real*16"5"
+  gosub test_all
+  !
+  exit
+  
+  test_all:
+  show symb/fu v*
+  q=v1+v2
+  show symb/fu q
+  q=v1-v2
+  show symb/fu q
+  q=v1*v2
+  show symb/fu q
+  q=v1/v2
+  show symb/fu q
+  q=v1**v21
+  show symb/fu q
+  !
+  q=v2+v1
+  show symb/fu q
+  q=v2-v1
+  show symb/fu q
+  q=v2*v1
+  show symb/fu q
+  q=v2/v1
+  show symb/fu q
+  q=v21**v1
+  show symb/fu q
+  return
+</pre>
+<a name="883">
+<h3 Align=center><a href="dix_help_idx_3.html#247" target="index">DIX Example scripts OVERFLOW </a> </h3>
+<pre>
+
+  Test overflow function
+
+  $DIX/INTER
+  !
+  !CHeck assignments
+  !
+  set noon
+  big = 10000000
+  say big*big
+  say "overflow seen = ",%overflow
+  say big*big*big
+  say "overflow seen = ",%overflow
+  !
+  set overflow dis
+  say big*big
+  say "overflow seen = ",%overflow
+  say big*big*big
+  say "overflow seen = ",%overflow
+  !
+  on overflow goto seen_ov1
+  say big*big*big
+  ECHO "** error, Unexpected1"
+  goto jmp1
+  seen_ov1:say "overflow1 seen = ",%overflow
+  jmp1:
+  !
+  on overflow goto seen_ov2
+  set over enab
+  say big*big*big
+  ECHO "** error, Unexpected2 "
+  goto jmp2
+  seen_ov2:say "overflow2 seen ",%overflow
+  jmp2:
+  !
+  on overflow goto seen_ov3
+  set over enab
+  say big+big
+  say "Oke ",%overflow
+  goto jmp3
+  seen_ov3:echo "** error, Seen overflow3"
+  jmp3:
+  !
+  on overflow goto seen_ov4
+  set over disa
+  say big+big
+  say "Oke ",%overflow
+  goto jmp4
+  seen_ov3:echo "** error, Seen overflow4"
+  jmp4:
+  !
+  set over disa
+  on overflow say "Seen overflow ",%overflow
+  say big*big
+  say "oke ",%overflow
+  !
+  set over ena
+  on overflow say "Seen overflow ",%overflow
+  say big*big
+  say "oke ",%overflow
+  !
+  on overflow
+  say big*big
+  say "oke ",%overflow
+  
+  say big+big
+  say "All test done ",%overflow
+</pre>
+<a name="884">
+<h3 Align=center><a href="dix_help_idx_3.html#248" target="index">DIX Example scripts REALS </a> </h3>
+<pre>
+
+  Check for reals (native and non-native)
+
+  $DIX/INTER REALS.WORK/MODIFY
+  exa
+  real_f = real_x*10
+  real_s = real_x*100
+  real_g = real_x*1000
+  real_d = real_x*10000
+  real_t = real_x*100000
+  real_h = real_x*1000000
+  real_x = real_x*10000000
+  exa
+  undo
+  real_f = real_h/10
+  real_s = real_h/100
+  real_g = real_h/1000
+  real_d = real_h/10000
+  real_t = real_h/100000
+  real_h = real_h/1000000
+  real_x = real_h/10000000
+  exa
+  undo
+  a=real_f
+  sh symb/full a
+  a=real_s
+  sh symb/full a
+  a=real_g
+  sh symb/full a
+  a=real_d
+  sh symb/full a
+  a=real_t
+  sh symb/full a
+  a=real_h
+  sh symb/full a
+  a=real_x
+  sh symb/full a
+</pre>
+<a name="885">
+<h3 Align=center><a href="dix_help_idx_3.html#249" target="index">DIX Example scripts REDIR </a> </h3>
+<pre>
+
+  Output redirection to symbol
+
+  $DIX/INTER
+  show symb 
+  #&LT;show symb
+  #test&LT;show symb
+  show symb/fu/all test
+  #test2&LT;show symb
+  show symb/fu/all test2
+  #test&LT;show symb
+  show symb/fu/all test
+</pre>
+<a name="886">
+<h3 Align=center><a href="dix_help_idx_3.html#250" target="index">DIX Example scripts SORT_READ </a> </h3>
+<pre>
+
+  Test for f$sort
+
+  $DIX/INTER
+  a = f$read("sort_read.dix")
+  show symb /fu a
+  say/tab/vert a
+  b = f$sort(a)
+  show symb /fu b
+  say/tab/vert b
+  b = f$sort(a,,"REV")
+  show symb /fu b
+  say/tab/vert b
+  a=[[[1,2,3][4,5,6][7,8,9]][[19,18,17][56,55,54][53,52,51]][[21,22,23][24,25,26][27,28,29]]]
+  say/tab a
+  say/tab f$sort(a)
+  say/tab f$sort(a,[2,1])
+  say/tab f$sort(a,[1,2])
+</pre>
+<a name="887">
+<h3 Align=center><a href="dix_help_idx_3.html#251" target="index">DIX Example scripts SUBFIELDS </a> </h3>
+<pre>
+
+  Test subfields
+
+  $DIX/INTER SYSUAF.WORK/MODIFY
+  exam *prime*{*}
+  exam *prim*{1:2}
+  exam *prim*{*:2}
+  exam *prim*{1:*}
+  exam *prim*{*:*}
+  exam *prim*{*}
+  deposit *prim*{*}=false
+  deposit *prim*{"*f*"}=true
+  exa *prim*{*}
+  deposit *prim*{*}=true
+  undo/last
+  exa *prim*{*}
+  !
+  say uaf$q_priv{"*"}
+  say uaf$q_priv{*}
+  uaf$q_priv{1:4}=true
+  say uaf$q_priv{0:5}
+  uaf$q_priv{1:4}=false
+  say uaf$q_priv{0:5}
+  exit
+</pre>
+<a name="888">
+<h3 Align=center><a href="dix_help_idx_3.html#252" target="index">DIX Example scripts SUBROUTINE </a> </h3>
+<pre>
+
+ Test call
+
+  $DIX/INT
+  call jan 10,20
+  say "just before 2nd time subr jan"
+  call jan 20,20
+  say "just after second time"
+  jan: subroutine a,b
+  sh symb a
+  if(a&GT;12) exit
+  sh symb b
+  endsubroutine
+  say "just after subr"
+</pre>
+<a name="889">
+<h3 Align=center><a href="dix_help_idx_3.html#253" target="index">DIX Example scripts SYMBOL_TABLE </a> </h3>
+<pre>
+
+   Define symbols/tables
+
+  $DIX/INT
+  set ver
+  declar a(4:10:3,5:6)
+  sh symb /all a
+  a(4,*) = 12
+  sh symb /all a
+  sh symb a(*,*)
+  a(5,5)=1
+  a(4,4)=1
+</pre>
+<a name="890">
+<h3 Align=center><a href="dix_help_idx_3.html#254" target="index">DIX Example scripts SYSUAF_UPD </a> </h3>
+<pre>
+
+  test field update
+ 
+  $DIX/INTER
+  !
+  	open programs_top:[dix.regres]sysuaf.work/mod
+  	show file/all
+  	sel file sysuaf
+  !
+  	cut
+  	deposit uaf$w_account=10
+  	paste
+  !
+  	nmod = 0
+  	nfnd = 0
+  	on error goto done
+  	read /GE="TEST_DIX"
+  	deposit uaf$l_bytlm=50000
+  	update/quiet
+  	read /GE="TEST_DIX"
+  loop:
+  	nfnd = nfnd + 1
+  	echo "Found user ''uaf$t_username'"
+  	if (f$matchwild(uaf$t_username,"*TEST_DIX*")) goto next
+  	if (uaf$l_bytlm &LT; 50000) goto next
+  	deposit uaf$l_bytlm='uaf$l_bytlm + 1000'
+  	nmod = nmod + 1
+  	update/quiet
+  	echo "Updated ''uaf$t_username' to ''uaf$l_bytlm'"
+  next:	
+  	next record
+  	goto loop
+  done:
+  	echo "status = ''$status'"
+  	echo "Found ''nfnd' users , modified ''nmod' users"
+  	close sysuaf
+</pre>
+<a name="891">
+<h3 Align=center><a href="dix_help_idx_3.html#255" target="index">DIX Example scripts SYSUAF_OLD_USER </a> </h3>
+<pre>
+
+  Make a list of users not logged in for a numnber of days
+
+        nday = p1
+        if nday = 0 then inquire nday "How many days"
+        check_date = f$cvtime("-''nday' 0:00:0","BINARY")
+        say "Check for users not logged in since ",check_date
+        open sysuaf
+        n_users = 0
+        n_old   = 0
+  loop: last_date = max(UAF$Q_LASTLOGIN_I,UAF$Q_LASTLOGIN_N)
+
+        if last_date &LT; check_date  then
+          say "User ",UAF$T_USERNAME," last logged in at ",last_date
+          n_old = n_old + 1
+        endif
+        next record /end=done
+        goto loop
+  done: close sysuaf
+        say "Found ''n_users' users, ''n_old' have not logged in for ''nday' days"
+        exit
+
+</pre>
+<a name="892">
+<h3 Align=center><a href="dix_help_idx_3.html#256" target="index">DIX Example scripts SYSUAF_UPD_USER </a> </h3>
+<pre>
+
+  test for user define field type
+ 
+  $DIX/INTER
+  !
+  	open programs_top:[dix.regres]sysuaf.work/mod/desc=sysuaf_user.des
+  	exami *lastlogin*
+  	depo uaf$q_lastlogin_n=0,0,0,0,0,0,0,10
+  	exami *lastlogin*
+  	undo
+  	trunc 40
+  	exa
+  	trunc 644
+  	exa
+  	exit
+
+  And the file sysuaf_user.des contains
+
+  BYTE         UAF$B_RTYPE       !  UAF-record type
+  ....
+  mytype*8/user UAF$Q_LASTLOGIN_N
+  bits*8       UAF$Q_PRIV -
+  [CMKRNL,CMEXEC,SYSNAM,GRPNAM,ALLSPOOL,IMPERSONATE,DIAGNOSE,LOG_IO,GROUP,NOACNT,PRMCEB,PRMMBX,PSWAPM,SETPRI,SETPRV,TMPMBX,-
+  WORLD,MOUNT,OPER,EXQUOTA,NETMBX,VOLPRO,PHY_IO,BUGCHK,PRMGBL,SYSGBL,PFNMAP,SHMEM,SYSPRV,BYPASS,SYSLCK,SHARE,UPGRADE,DOWNGRADE,-
+  GRPPRV,READALL,IMPORT,AUDIT,SECURITY,,,ACNT,,,,ALTPRI]
+  ..
+  !here starts the user_defined field type
+  symbol no
+  #type mytype
+   if (action = "SIZE") then	!return symbol SIZE (size in bits)
+    size = 8*8			!will not be called since the size is
+    stat = 1			!fixed at 8 bytes (is 8*8 bits)
+   endif
+
+   if (action = "BINASC") then	!return symbol RESULT
+    nk = f$length(data)
+    stat = 0			!assume all bytes are ZERO
+    result = ""
+    for k=1,nk
+     kar = f$extract(k-1,1,data)
+     byt = f$extzv(0,8,kar)
+     if (byt &LT;&GT; 0) stat = 1	!not all bytes ZERO
+     result = result + "," + string(byt)
+    endfor
+    result = f$extract(1,-1,result)
+   endif
+
+   if (action = "ASCBIN") then	!return symbol RESULT and SIZE
+    set noon
+    result = ""
+    k = 0
+    stat = 2			!assmume error in conversion
+   lp2: part = f$element(k,",",data)
+    if (part &LT;&GT; ",") then
+     byt = int(part)
+     if (even($status)) goto err
+     if ((byt &LT; 0) | (byt &GT; 255)) goto err
+     result = result + f$char(byt)
+     k = k + 1
+     goto lp2
+    endif
+    size   = f$length(result)*8	!return length in bits
+    stat = 1			!successful convert
+   err:
+   endif
+   exit 'stat'			!return  conversion result
+  #endtype
+
+
+</pre>
+<a name="893">
+<h3 Align=center><a href="dix_help_idx_3.html#257" target="index">DIX Example scripts TABLES </a> </h3>
+<pre>
+
+  Table tests
+
+  $DIX/INT
+  a=[[[1,2][3,4]][[5,6][9,10]]]
+  sho symb/a  a
+  a(1,*,1)=301
+  show symb/all a
+  c=a(2,*,1)
+  sh symb /al c
+</pre>
+<a name="894">
+<h3 Align=center><a href="dix_help_idx_3.html#258" target="index">DIX Example scripts TABLE_APPEND </a> </h3>
+<pre>
+
+  TEsting table append function
+  
+  $DIX/INT
+  a1=[[1,2,3][4,5,6]]
+  b1=[[11,12,13][14,15,16]]
+  b11=[[11][14]]
+  say f$append(a1,b1)
+  say f$append(a1,b11)
+  !
+  a2=[1,2,3]
+  b2=[14,15,16]
+  b21=11
+  say f$append(a2,b2)
+  say f$append(a2,b21)
+  !
+  say f$appe(1,[2,3],5)
+  say f$appe(1,[2,3],5,[7,8])
+  ! 
+  ! This one should fail
+  !
+  say f$append(a2,b1)
+  exit
+</pre>
+<a name="895">
+<h3 Align=center><a href="dix_help_idx_3.html#259" target="index">DIX Example scripts TEST_DATES </a> </h3>
+<pre>
+
+ Test all kinds of dates
+
+  $DIX/INT
+  cpu=#cpu"10 10:00:00.00"
+  del=#delta"10 10:00:00.00"
+  tim=#date"1-JAN-2008 10:00:00.00"
+  tim4=#date*4"1-JAN-2008 10:00:00.00"
+  udat=#udate"1-JAN-2008 10:00:00.00"
+  sh symb/fu cpu
+  sh symb/fu del
+  sh symb/fu tim
+  sh symb/fu tim4
+  sh symb/fu udat
+  ! adds
+  ; a =tim+cpu ; show symb/fu a
+  ; a =tim+del ; show symb/fu a
+  ; a =tim4+cpu ; show symb/fu a
+  ; a =tim4+del ; show symb/fu a
+  ; a =udat+cpu ; show symb/fu a
+  ; a =udat+del ; show symb/fu a
+  ; a =cpu+cpu ; show symb/fu a
+  ; a =cpu+del ; show symb/fu a
+  ; a=del+tim ; show symb/fu a
+  ; a=del+tim4 ; show symb/fu a
+  ; a=del+cpu ; show symb/fu a
+  ; a=del+del ; show symb/fu a
+  ; a=del+udat ; show symb/fu a
+  !subs
+  ; a =tim-cpu ; show symb/fu a
+  ; a =tim-del ; show symb/fu a
+  ; a =tim4-cpu ; show symb/fu a
+  ; a =tim4-del ; show symb/fu a
+  ; a =udat-cpu ; show symb/fu a
+  ; a =udat-del ; show symb/fu a
+  ; a =cpu-cpu ; show symb/fu a
+  ; a =cpu-del ; show symb/fu a
+  ; a =udat-cpu ; show symb/fu a
+  ; a =udat-del ; show symb/fu a
+  ; a =del-cpu ; show symb/fu a
+  ; a =del-del ; show symb/fu a
+  ;
+  ; a=del*2 ; show symb/fu a
+  ; a=cpu*2 ; show symb/fu a
+  ; a=2*del ; show symb/fu a
+  ; a=2*cpu ; show symb/fu a
+  ; a=del/2 ; show symb/fu a
+  ; a=cpu/2 ; show symb/fu a
+</pre>
+<a name="896">
+<h3 Align=center><a href="dix_help_idx_3.html#260" target="index">DIX Example scripts TEST_READ </a> </h3>
+<pre>
+
+  Test read function
+
+  $DIX/INTERACT
+  open programs_top:[dix.regres]sysuaf.org
+  sel file sysuaf
+  read/eq=stubbf/err=notf
+  exa *
+  exam/all *name*
+  
+  read/eq=jans78/err=notf
+  goto weg
+  notf:echo "record not found"
+  close /log
+</pre>
+<a name="897">
+<h3 Align=center><a href="dix_help_idx_3.html#261" target="index">DIX Example scripts TEST_SUBFIELD </a> </h3>
+<pre>
+
+  Test subfields
+
+  $DIX/INT
+  set noon
+  open test_subfield.work/des=sys$input/mod
+  deck   		!inline description
+   integer*4 int_val
+   uinteger*4 uint_val
+   bits*4 bit_val
+   rbits*4 rbit_val
+   date*4 date4_val
+   date date_val
+   udate udate_val
+   cpu cpu_val
+   deltatime delta_val
+   privilege priv_val
+   bytearr*20 bytearr_val
+   character*20 char_val
+   protection prot_val
+   fileid fileid_val
+   rfa rfa_val
+   bktrfa*6 bkrtra6_val
+   bktrfa*5 bkrtra5_val
+   bktrfa*4 bkrtra4_val
+   byte %fill(644)
+  eod
+  exa *
+  exa *{*}
+  value_int_val = int_val 
+  value_uint_val =  uint_val 
+  value_bit_val =  bit_val 
+  value_rbit_val =  rbit_val 
+  value_date4_val =  date4_val
+  value_date_val = date_val
+  value_udate_val = udate_val
+  value_cpu_val = cpu_val
+  value_delta_val = delta_val
+  value_priv_val = priv_val
+  value_bytearr_val = bytearr_val
+  value_char_val = char_val
+  value_prot_val = prot_val
+  value_fileid_val = fileid_val
+  value_rfa_val = rfa_val
+  value_bkrtra6_val = bkrtra6_val
+  value_bkrtra5_val = bkrtra5_val
+  value_bkrtra4_val = bkrtra4_val
+  !
+  say value_int_val 
+  say value_int_val{*}
+  say int_val 
+  say int_val{*}
+  say value_uint_val 
+  say value_uint_val{*}
+  say  uint_val 
+  say  uint_val{*}
+  say value_bit_val 
+  say value_bit_val{*}
+  say  bit_val 
+  say  bit_val{*}
+  say value_rbit_val 
+  say value_rbit_val{*}
+  say  rbit_val 
+  say  rbit_val{*}
+  say value_date4_val 
+  say value_date4_val{*}
+  say  date4_val
+  say  date4_val{*}
+  say value_date_val 
+  say value_date_val{*}
+  say date_val
+  say date_val{*}
+  say value_udate_val 
+  say value_udate_val{*}
+  say udate_val
+  say udate_val{*}
+  say value_cpu_val 
+  say value_cpu_val{*}
+  say cpu_val
+  say cpu_val{*}
+  say value_delta_val 
+  say value_delta_val{*}
+  say delta_val
+  say delta_val{*}
+  say value_priv_val 
+  say value_priv_val{*}
+  say priv_val
+  say priv_val{*}
+  say value_bytearr_val 
+  say value_bytearr_val{*}
+  say value_char_val 
+  say value_char_val{*}
+  say bytearr_val
+  say bytearr_val{*}
+  say value_prot_val 
+  say value_prot_val{*}
+  say prot_val
+  say prot_val{*}
+  say value_fileid_val 
+  say value_fileid_val{*}
+  say fileid_val
+  say fileid_val{*}
+  say value_rfa_val 
+  say value_rfa_val{*}
+  say rfa_val
+  say rfa_val{*}
+  say value_bkrtra6_val 
+  say value_bkrtra6_val{*}
+  say bkrtra6_val
+  say bkrtra6_val{*}
+  say value_bkrtra5_val 
+  say value_bkrtra5_val{*}
+  say bkrtra5_val
+  say bkrtra5_val{*}
+  say value_bkrtra4_val 
+  say value_bkrtra4_val{*}
+  say bkrtra4_val
+  say bkrtra4_val{*}
+  !
+  ! Int/bit
+  !
+  nam = "int_val"
+  val = 1
+  idx = 2
+  gosub test
+  nam = "uint_val"
+  gosub test
+  nam = "bit_val" 
+  gosub test
+  nam=  "rbit_val" 
+  gosub test
+  nam= "priv_val"
+  gosub test
+  !
+  ! Date test
+  !
+  nam=  "date4_val"
+  gosub test
+  nam= "date_val"
+  gosub test
+  nam= "udate_val"
+  gosub test
+  nam= "cpu_val"
+  gosub test
+  nam= "delta_val"
+  gosub test
+  !
+  !
+  ! 
+  nam= "bytearr_val"
+  gosub test
+  !
+  ! Special cases
+  !
+  nam= "prot_val"
+  gosub test
+  nam= "fileid_val"
+  gosub test
+  nam= "rfa_val"
+  gosub test
+  nam= "bkrtra6_val"
+  gosub test
+  nam= "bkrtra5_val"
+  gosub test
+  nam = "bkrtra4_val"
+  gosub test
+  !
+  ! Character type
+  !
+  nam = "char_val"
+  val = "x"
+  gosub test
+  !
+  ! Extra tests
+  !
+  value_int_val{1:2}=[1,0]
+  say/hex value_int_val 
+  value_int_val{7:10}=1
+  say/hex value_int_val
+  value_int_val{10:7}=0
+  say/hex value_int_val
+  value_int_val{1:10:2}=1
+  say/hex value_int_val
+  value_int_val{10:1:-2}=0
+  say/hex value_int_val
+  !
+  exit
+  test:
+  say/hex value_'nam'
+  say value_'nam'
+  value_'nam'{'idx'}=val
+  say/hex value_'nam'
+  say value_'nam'
+  !
+  exa/hex 'nam'
+  exa 'nam'
+  dep 'nam'{'idx'}='val'
+  exa/hex 'nam'
+  exa 'nam'
+  return
+</pre>
+<a name="898">
+<h3 Align=center><a href="dix_help_idx_3.html#262" target="index">DIX Example scripts TYPES </a> </h3>
+<pre>
+
+  test types
+
+  $DIX/INT
+  add type days="0=sun,1=mon,2=tue,3=wed,4=thu,5=fri,6=sat"
+  integer/type=#days r=wed
+  sh symb /fu r
+  r=sat
+  say r
+  sh symb /fu r
+  r=4
+  sh symb r
+  r=40
+  sh symb r
+</pre>
+<a name="899">
+<h3 Align=center><a href="dix_help_idx_3.html#263" target="index">DIX Example scripts VIEW </a> </h3>
+<pre>
+
+  Test views
+
+  $DIX/INT DIX.CRF_CROSS/VIEW=CROSS.VIEW/MOD
+  examin
+  deposit mod_name=dox
+  examin
+  undo
+  examin
+
+  And the file cross.view contains
+
+  field caller_nr
+  follow caller_nr
+  gosub do_it
+  field/readonly called_nr
+  follow/read called_nr
+  gosub do_het
+  exit
+
+  do_it:
+    field mod_name
+    follow/read file_nr
+    field file_name
+    back
+    back
+  return
+
+</pre>
+<a name="900">
+<h3 Align=center><a href="dix_help_idx_3.html#264" target="index">DIX Example scripts VIEW_LINE </a> </h3>
+<pre>
+
+  Views in file mode
+
+  $DIX/FILE/COUNT=1 DIX.CRF_CROSS/FOLL=(BEGIN,SKIP)/CSV=HEADER
+</pre>
+<a name="901">
+<h3 Align=center><a href="dix_help_idx_3.html#265" target="index">DIX Example scripts VIEW_LINE1 </a> </h3>
+<pre>
+
+  Views in file mode(csv output)
+
+  $DIX/FILE/COUNT=1 DIX.CRF_CROSS/FOLL=(FIELD)/CSV=HEADER
+</pre>
+<a name="902">
+<h3 Align=center><a href="dix_help_idx_3.html#266" target="index">DIX Example scripts WHILE </a> </h3>
+<pre>
+
+ Test of the WHILE
+
+  $DIX/INTER
+  x = 2
+  loop:
+  a = 3
+  while a&GT;0
+   b = 2
+   repeat
+    say "a = ''a' b = ''b'"
+    b = b - 1
+   until b=0
+   show symb a
+   a = a-1
+   show symb a
+  endwhile
+  x = x-1
+  show symb x
+  if (x&GT;0) goto loop
+  if (x=0) then
+   say "x=0"
+  else
+   say "x&LT;&GT;0"
+  endif
+  x=3
+  if (x=0) then
+   say "x=0"
+  else
+   say "x&LT;&GT;0"
+  endif
+</pre>
+<a name="903">
+<h3 Align=center><a href="dix_help_idx_3.html#267" target="index">DIX Example scripts INDEX_SYMBOLS </a> </h3>
+<pre>
+  a=f$read("release_notes.txt",,,"White")	!read the file and split
+  sh symb/fu a					!will be a 2 dim table
+  integer/index=char/sort count			!declare an index symbol
+  for x in a                                    !increment for all elements in a
+   count(x)++
+  end for
+  show symb/fu count  !is a table indexed by a string 
+                      !counting how often "text" occurs
+  say count("the")
+  say count("and")
+  count("the")+= + 1
+  say count("the")
+  count("the")=count("and") + 1
+  say count("the")
+  delete/symb count
+  !
+  declare/index=date present/log	!another example (index=date)
+  present(#DATE"1-JAN-2008")=true
+  present(#DATE"1-JAN-2009:12:12:13.12")=true
+  present(#DATE"1-JAN-2020")=false
+  show symbo/fu/all present
+  say "the value of 2008 = ",present(#DATE"1-JAN-2008")
+  say "the value of 2012 = ",present(#DATE"1-JAN-2012")
+  
+</pre>
+<a name="904">
+<h3 Align=center><a href="dix_help_idx_3.html#268" target="index">DIX Example scripts DCL_COMPAT_SCRIPT </a> </h3>
+<pre>
+ 
+  A script to read a make file and create a fortran include file
+  with names/versions/creation dates
+
+ $DIX/INT
+ DIX&GT; @SYS$INPUT/DCL	!execute in DCL mode
+  $	version_inc_file = "x.x"  !output file
+  $	open/read fi dix.version  !read the version file
+  $	read fi version
+  $	close fi
+  $	open/read lun dix.make    !open the make file
+  $	cnt_inc = 0
+  $	cnt_src = 0
+  $	max_len = 0
+  $	def_ext = ".FOR"
+  $	
+  $10:	read lun line/end=done
+  $	line = f$edit(line,"UPCASE,COLLAPSE,UNCOMMENT")
+  $	if line .eqs. "" then goto 10
+  $	if f$extract(0,1,line) .eqs. ":"	!make options
+  $	 then
+  $	  if f$extra(1,3,line) .eqs. "INC"      !include file?
+  $	   then
+  $	    ipos = f$locate("=",line)		!the line contains , separated
+  $         names = f$extra(ipos+1,-1,line)     !include files
+  $         k12 = 0
+  $lpf1:    name = f$element(k12,",",names)
+  $         if name .nes. ","
+  $          then
+  $           gosub add_inc                     !add one more include file
+  $           k12 = k12 + 1
+  $           goto lpf1
+  $          endif
+  $        endif
+  $	 else
+  $	  idx = 0
+  $	  name = f$element(idx,",",line)	!normal file line
+  $	  name = f$element(0,"/",name)          !source[/quals][,include files]
+  $	  gosub add_src				!first line is source
+  $15:	  idx = idx + 1				!now test all includefiles
+  $	  name = f$element(idx,",",line)
+  $	  if name .nes. ","
+  $	   then
+  $	    gosub add_inc
+  $	    goto 15
+  $	   endif
+  $	 endif
+  $	goto 10
+  $done:
+  $ 	close lun
+  $	gosub print				!start printing
+  $	return
+  $add_inc:
+  $	nm = "inc"	
+  $	goto add_file
+  $add_src:
+  $	nm = "src"				!source can have _'architecture'
+  $	ipos = f$locate("'ARCHITECTURE'",name)
+  $	if ipos .ne. f$length(name) 
+  $	 then
+  $	  nam1 = f$extra(0,ipos,name)		!try all 3 architectures
+  $	  name = nam1 + "VAX"
+  $	  gosub add_file
+  $	  name = nam1 + "ALPHA"
+  $	  gosub add_file
+  $	  name = nam1 + "IA64"
+  $	 endif
+  $	ipos = f$locate("'ARCHITECTURE_",name)  !or 'architecture_xyz
+  $	if ipos .ne. f$length(name)             !file_vax and file_not_vax
+  $	 then
+  $	  nam1 = f$extra(0,ipos,name)
+  $	  nam2 = f$extract(ipos+14,-1,name)     !get the arch name
+  $	  nam2 = f$element(0,"'",nam2)          !add source with _not_arch
+  $	  name = nam1 + "NOT_"+nam2
+  $	  gosub add_file
+  $	  name = nam1 +nam2                     !and one with _arch
+  $	 endif
+  $add_file:
+  $!
+  $! Add the default extension
+  $!
+  $	if f$locate(".",name) .eq. f$length(name) then name = name + def_ext
+  $	fn1 = f$search(name)                   !see if the file exists
+  $	if name .eqs. version_inc_file         !for the versionfile itself
+  $	 then
+  $	  dt = f$time()                        !get now
+  $	 else
+  $	  dt = ""                              !else leave it open
+  $	 endif
+  $	name = name + f$parse(fn1,,,"VERSION")
+  $	k = 1
+  $ lp1:	                               !see if we already have it
+  $	if k .le. cnt_'nm'
+  $	 then
+  $	  if name_'nm'_'k' .eqs. name then goto dn1
+  $	  k = k + 1
+  $	  goto lp1
+  $	 endif                                 !no , we have one more
+  $	cnt_'nm' = cnt_'nm' + 1
+  $	k = cnt_'nm'                           !add the name to the list
+  $	name_'nm'_'k' = name
+  $	if dt .eqs. "" then dt = f$file(name,"CDT")  !get creation date
+  $	date_'nm'_'k' = dt
+  $	if f$length(name) .gt. max_len then max_len = f$length(name)
+  $dn1:	return
+  $!
+  $print:
+  $	max_len = max_len
+  $!
+  $	open/write out 'version_inc_file'      !create output file
+  $	write out "	character*(*) dix_version"
+  $	write out "	parameter    (dix_version = '",version,"')"
+  $	write out "	character*(*) dix_creation_date"
+  $	write out "	parameter    (dix_creation_date = '",f$time(),"')"
+  $!
+  $	ntot = cnt_inc + cnt_src		!so many lines
+  $	write out "	INTEGER N_MODULES"
+  $	write ouT "	PARAMETER (N_MODULES = ''ntot')"
+  $	write out "	INTEGER MAX_LEN_MODULES"
+  $	write ouT "	PARAMETER (MAX_LEN_MODULES = ''max_len')"
+  $	write out "	CHARACTER*(''max_len') MODULE_NAMES(''ntot')"
+  $	write out "	CHARACTER*(23) MODULE_DATES(''ntot')"
+  $	nm = "inc"
+  $	gosub print_them			!print include files
+  $	nm = "src"
+  $	gosub print_them                        !print the source files
+  $	close out
+  $	return
+  $print_them:
+  $!
+  $! Find the smallest
+  $!
+  $lp2:	small_nam = "~"	!Large value
+  $	idx_nam = 0
+  $	k = 1
+  $lp21:
+  $	if k .le. cnt_'nm'
+  $	 then
+  $	  nam = name_'nm'_'k'                   !get the name
+  $	  if nam .nes. ""                       !if not empty (already processed)
+  $	   then
+  $	    if nam .lts. small_nam 
+  $	     then
+  $	      small_nam = nam			!new smal name
+  $	      idx_nam = k                       !and remember the index
+  $	     endif
+  $	   endif
+  $	  k=k+1
+  $	  goto lp21
+  $	 endif
+  $	if idx_nam .ne. 0
+  $	 then
+  $	  nam = name_'nm'_'idx_nam'          	!we have the smallest name
+  $	  write out "	DATA MODULE_NAMES(''idx') /'" + nam + "'/"
+  $	  nam = date_'nm'_'idx_nam'
+  $	  write out "	DATA MODULE_DATES(''idx') /'" + nam + "'/"
+  $	  name_'nm'_'idx_nam' = ""		!and clear it
+  $	  idx = idx + 1
+  $	  goto lp2
+  $	 endif
+  $	return
+
+ The same script can be done much faster using sorted indexed symbols
+ This means we are not interested if a name comes twice, and this
+ also takes care of the sorting 
+
+  $	version_inc_file = "x.x"
+  $	open/read fi dix.version		!get the version
+  $	read fi version
+  $	close fi
+  $	open/read lun dix.make			!open make file
+  $	def_ext = ".FOR"
+  $	integer*4/index=character/sorted list_inc !create sorted indexed symbol
+  $	integer*4/index=character/sorted list_src !for include files / sources
+  $	max_len = 0	
+  $10:	read lun line/end=done
+  $	line = f$edit(line,"UPCASE,COLLAPSE,UNCOMMENT")
+  $	if line .eqs. "" then goto 10
+  $	if f$extract(0,1,line) .eqs. ":"
+  $	 then
+  $	  if f$extra(1,3,line) .eqs. "INC"
+  $	   then
+  $	    ipos = f$locate("=",line)
+  $            names = f$extra(ipos+1,-1,line)
+  $           k12 = 0
+  $lpf1:      name = f$element(k12,",",names)
+  $           if name .nes. ","
+  $            then
+  $             gosub add_inc
+  $             k12 = k12 + 1
+  $             goto lpf1
+  $            endif
+  $          endif
+  $	 else
+  $	  idx = 0
+  $	  name = f$element(idx,",",line)
+  $	  name = f$element(0,"/",name)
+  $	  gosub add_src
+  $15:	  idx = idx + 1
+  $	  name = f$element(idx,",",line)
+  $	  if name .nes. ","
+  $	   then
+  $	    gosub add_inc
+  $	    goto 15
+  $	   endif
+  $	 endif
+  $	goto 10
+  $done:
+  $	close lun
+  $	gosub print
+  $	return
+  $add_inc:
+  $	nm = "inc"	
+  $	goto add_file
+  $add_src:
+  $	nm = "src"
+  $	ipos = f$locate("'ARCHITECTURE'",name)
+  $	if ipos .ne. f$length(name) 
+  $	 then
+  $	  nam1 = f$extra(0,ipos,name)
+  $	  name = nam1 + "VAX"
+  $	  gosub add_file
+  $	  name = nam1 + "ALPHA"
+  $	  gosub add_file
+  $	  name = nam1 + "IA64"
+  $	 endif
+  $	ipos = f$locate("'ARCHITECTURE_",name)
+  $	if ipos .ne. f$length(name) 
+  $	 then
+  $	  nam1 = f$extra(0,ipos,name)
+  $	  nam2 = f$extract(ipos+14,-1,name)
+  $	  nam2 = f$element(0,"'",nam2)
+  $	  name = nam1 + "NOT_"+nam2
+  $	  gosub add_file
+  $	  name = nam1 +nam2
+  $	 endif
+  $add_file:
+  $!
+  $! Add the default extension
+  $!
+  $	if f$locate(".",name) .eq. f$length(name) then name = name + def_ext
+  $	fn1 = f$search(name)
+  $	name = name + f$parse(fn1,,,"VERSION")		!add the version
+  $	list_'nm'(name)++		!store a new name (increment counter)
+  $	if f$length(name) .gt. max_len then max_len = f$length(name)
+  $	return
+  $!
+  $print:
+  $	max_len = max_len
+  $!
+  $	open/write/log out 'version_inc_file'
+  $	write out "	character*(*) dix_version"
+  $	write out "	parameter    (dix_version = '",version,"')"
+  $	write out "	character*(*) dix_creation_date"
+  $	write out "	parameter    (dix_creation_date = '",f$time(),"')"
+  $!
+  $	cnt_inc = f$symbol(list_inc,"highdim",2)	!get # include files
+  $	cnt_src = f$symbol(list_src,"highdim",2)        !get # sources
+  $	sh symb cnt*
+  $	ntot = cnt_inc + cnt_src
+  $	write out "	INTEGER N_MODULES"
+  $	write ouT "	PARAMETER (N_MODULES = ''ntot')"
+  $	write out "	INTEGER MAX_LEN_MODULES"
+  $	write ouT "	PARAMETER (MAX_LEN_MODULES = ''max_len')"
+  $	write out "	CHARACTER*(''max_len') MODULE_NAMES(''ntot')"
+  $	write out "	CHARACTER*(23) MODULE_DATES(''ntot')"
+  $	nm = "inc"
+  $	idx = 0
+  $	gosub print_them
+  $	nm = "src"
+  $	gosub print_them
+  $	close out
+  $	return
+  $print_them:
+  $!
+  $! Find the smallest
+  $!
+  $	for nam in list_'nm'(,2)	!go through all elements and
+  $					!return index (not value)
+  $	  write out "	DATA MODULE_NAMES(''idx') /'" + nam + "'/"
+  $       dt = f$file(nam,"CDT")	!get creation date
+  $	  write out "	DATA MODULE_DATES(''idx') /'" + dt + "'/"
+  $	endfor
+  $	return
+ 
+</pre>
+<a name="905">
+<h3 Align=center><a href="dix_help_idx_3.html#269" target="index">DIX Example scripts MONITOR_FILES </a> </h3>
+<pre>
+  Example how to use elements of types 
+   type hdr_types is defined in the monitor description
+
+  open monitor.dat             !open monitor recording file
+  on error then goto l1
+  nrec = 0
+  nfound = 0
+  while true
+   nrec++   
+   if MNR_HDR$B_TYPE=#hdr_types"modes" then  !select modes value from hdr_types
+     exa/dis=recnr *q*
+     nfound++
+   endif
+   next record
+  end while
+  l1: say "Found ''nrec' records, of which ''nfound' are modes records "
+</pre>
+<a name="906">
+<h3 Align=center><a href="dix_help_idx_3.html#270" target="index">DIX Example scripts Plotting sunup/sundown </a> </h3>
+<pre>
+  $DIX/INT
+  data = f$read("sys$input",,,"CSV",,",")	!read the data in the file
+  deck                                          !sunup,sundown,gmt offs
+  8:48,16:46,1
+  8:46,16:56,1
+  8:41,17:08,1
+  8:33,17:20,1
+  8:24,17:33,1
+  8:13,17:46,1
+  8:00,17:59,1
+  7:46,18:12,1
+  7:31,18:25,1
+  7:16,18:37,1
+  7:00,18:50,1
+  6:44,19:02,1
+  7:28,20:14,2
+  7:11,20:26,2
+  6:55,20:38,2
+  6:40,20:50,2
+  6:25,21:02,2
+  6:11,21:13,2
+  5:58,21:25,2
+  5:46,21:35,2
+  5:36,21:45,2
+  5:28,21:53,2
+  5:23,21:59,2
+  5:19,22:03,2
+  5:18,22:04,2
+  5:20,22:03,2
+  5:24,21:59,2
+  5:31,21:53,2
+  5:39,21:44,2
+  5:48,21:34,2
+  5:58,21:22,2
+  6:09,21:09,2
+  6:21,20:55,2
+  6:32,20:39,2
+  6:43,20:24,2
+  6:55,20:08,2
+  7:06,19:51,2
+  7:18,19:35,2
+  7:29,19:18,2
+  7:41,19:02,2
+  7:53,18:47,2
+  8:05,18:32,2
+  8:17,18:18,2
+  7:30,17:05,1
+  7:42,16:53,1
+  7:55,16:44,1
+  8:07,16:36,1
+  8:19,16:30,1
+  8:29,16:28,1
+  8:37,16:28,1
+  8:43,16:31,1
+  8:47,16:36,1
+  eod
+  nlines = f$symbol(data,"HIGHDIM",1)	!the the number of values (should be 52)
+  decla/type=deltatime sunup('nlines')  !declare a table for sunups (as deltatime)
+  decla/type=deltatime sundown('nlines')!declare a table for sundowns
+  decla/type=date dates('nlines')       !and one for the x values(the dates)
+  shift = #deltatime"10:00"		!to let sunup/sundown overlap a bit
+  bdat = f$date("1-JAN-2012")		!start date for the x values
+  for k=1,nlines
+   gmtoff = data(k,3)                   !get the gmt offset
+   gmtd = #deltatime"0''gmtoff':00"     !and make it a delta time
+   val = data(k,1)                      !get sunup value
+   val = #deltatime"''val'"             !make it delta
+   sunup(k) = val-gmtd                  !store in sunup (and adjust for gmt)
+  !
+   val = data(k,2)                      !get sundown
+   val = #deltatime"''val'"             !make is delta
+   sundown(k) = val-gmtd - shift        !store and adjust for gmt and a shift
+  !
+   dates(k) = bdat                      !store date
+   bdat = bdat + f$date(7,"DAYS")       !and increment date by a week
+  end for
+  plot/x=symb=dates sunup,sundown	!plot them with dates as x
+  
+</pre>
+<a name="907">
+<h3 Align=center><a href="dix_help_idx_2.html#18" target="index">DIX HELP_SCREENS </a> </h3>
+<pre>
+</pre>
+<a name="908">
+<h3 Align=center><a href="dix_help_idx_3.html#272" target="index">DIX HELP_SCREENS PLOT </a> </h3>
+<pre>
+</pre>
+<a name="909">
+<h3 Align=center><a href="dix_help_idx_4.html#623" target="index">DIX HELP_SCREENS PLOT MAIN_PAGE </a> </h3>
+<pre>
+Help for main window
+Buttons:
+ File     : File options
+   Close Window       : Close this window
+   Print(ps)          : Make a .ps file of the whole window
+   Print(csv)         : Make a .csv file of the whole window
+   Open  t4-file      : Add a t4-file in a new window (in t4 mode)
+   Merge t4-file      : Merge a t4-file in the current window (in t4 mode)
+   Close t4-file      : Close a t4-file (in t4 mode)
+   Open  csv-file     : Add a csv-file in a new window (in csv mode)
+   Merge csv-file     : Merge a csv-file in the current window (in csv mode)
+   Close csv-file     : Close a csv-file (in csv mode)
+   Read marker file   : Add markers from a .mrk file(t4 mode).
+   Add marker         : Add a single marker
+   Remove marker      : Remove marker from the list
+   Save setup         : Save the current plot setup to sys$login:dix_plot.setup
+                        This can be used in plot/setup
+   Set Font           : Change the font
+   Exit               : Exit the plotting mode
+
+ Options : General options
+   [NO]Mouse          : En/disable continuous reporting of data values
+                          After you left-clicked in a data-window
+   Skip/display zero  : Remove all legends with all datavalues 0
+   Legend mask        : Give a (list of) masks for the display of legends
+                         * and % wildcards are supported
+                        You may insert a #nn at the end of each mask, 
+                         selecting only topics from file nn
+   Default Smooth=nn  : Set the default smooth factor (default=10)
+   [NO]timeonly       : Toggle the timeonly flag (see dix help)
+   Common/Multiple    : Display only one x-axis over all data windows
+          x-axis         or one per datawindow
+   Sort legend        : Sort the legend forward or backward
+      [back][for]ward 
+   Sort legend        : Sort the legend names on the the whole text
+      [name][full]       or the part after the ] (t4 files)    
+   Only positive corr : Display only positive correlations
+    Pos and neg correl: Display pos and neg correlation
+   Correl threshold   : Set correlation threshold (default 0.5)
+   Merged mode/Normal : For t4 files with more than one file open.
+          mode           In merged mode datalines with the same name
+                         will be seen as a single entity. This is only
+                         valid if the t4 types of all files are the same
+   filename tag/Number tag: For t4 files only. If more than one file open, 
+                         DIX will append the dataline name with the
+                         date/time/type of the file, or just a number.
+                         If all filenames are different the filename tag
+                         will be empty.
+
+ Data-windows : Data window options
+   n More windows     : add n more data windows in this display
+   n Less windows     : remove n data windows in this display
+   Next Page          : display the next data
+   Prev Page          : display the previous data
+   One more column    : Add one colums to the display
+   One less column    : Remove a column from the display
+   Reset all sizes    : Reset all datawindows to the default size
+
+
+In the top left corner of the datawindows a small square is present. 
+ You can click on it and move the line to change the size of :
+ If this is the highest datawindow:
+  If it is the leftmost column (or the only column), you can change the size
+  of the legend window. If it is not the most left column, you can change
+  the size of that column.
+ If this in not the highest datawindow you can change the vertical size
+  of that datawindow 
+
+ A closed square is a data item displayed in one of the datawindows    
+  Left Clicking on it will remove the data line from all windows
+
+  Left Clicking on it and dragging it to a data window will display the data
+   item in that data window, and remove it from its previous location(s) 
+   If you hold the shift key, DIX will not remove it from its original
+    location, so you can display data in multiple windows
+
+ An open square is a data item not yet displayed
+  Left Clicking on it will display the data item in the least used data window
+  Left Clicking on it and drawing: See above
+
+ Right clicking will open a menu with the following options
+  Show data : Open a window with the data values in text
+  FFT       : Open a new window with the FFT of this data
+  WindowN   : Display the data in datawindow N
+  Offset    : Allows you to define an offset to this data line
+               You can also set an offset to all datalines in a file in the
+               file menu
+
+ When the legend display is the current, you can type commands using the keyboard
+ DOWn-arrow : Display the next dataline
+ UP-Arrow   : Display the previous dataline
+ NEXT-page  : Display the next set of datalines (as many as you datawindows) 
+ PREV-page  : Display the previous set of datalines (as many as you datawindows) 
+ Other text : Build up a search string. If you have a search string present,
+              there will be an up- and down-arrow in the button area that you
+              can use to position the legend display to the line containing 
+              the string.
+
+Filenames:
+  Clicking on a filename opens a menu
+   Info  : Show info about this file
+   Close : Close this file
+  Clicking on the box in front of the filename will add or remove the dats
+   line fro the data windows.
+
+</pre>
+<a name="910">
+<h3 Align=center><a href="dix_help_idx_4.html#624" target="index">DIX HELP_SCREENS PLOT DATA_PAGE </a> </h3>
+<pre>
+  Help for the data window
+Buttons:
+ File    : File options   
+  Close Window      : Close this data window
+  Print Window(ps)  : Make a .ps file of this data window
+  Print Window(csv  : Make a .csv file of this data window
+  Empty window      : Remove all data lines from this data window
+  Enable marker line: Enable markers as a line only. In this mode DIX will
+                      display the marker text if you point the cursor on it.
+  Enable marker text: Enable markers as a line including the marker text
+  Disable markers   : Disable markers in this data-display.
+ Grid    : Set grid options 
+   Ena/disable x-grid : Draw/remove x-grid in this data window
+   Ena/Disable y-grid : Draw/Remove y-grid in this data window
+   X-grid interval    : Change the grid interval for the x-axis
+   Y-grid interval    : Change the grid interval for the y-axis
+
+ Chart   : Set chart options
+   [un]Stack          : [Un]Stack data lines
+   Line               : display data as a line
+   Filled             : display data as areas
+   Points             : Display data as points
+   Block              : Display data as block
+   Two/One y-axis     : Add / remove a second y-axis
+   Draw/remove y-zero : Add / remove a line for the y=0 value
+   Enlarge            : Open a new window with only this datawindow. This is
+                         the same as middle-clicking in the datawindow
+
+ Correl  : Correlation options
+  Correlate        : Open a new window with all data that correlates to the
+                      datalines in thie datawindow
+  FFT              : Make an new fft window for all datalines in this 
+                      data window
+  SUM              : Draw a new line witrh the sum of the current datalines
+  If the number of datalines is 2
+    DIFF           : Draw a new line with the difference of the current
+                      datalines.
+    COmpute        : DIX will compute the offset to be applied to the second
+                      dateline that will return the highest correlation to 
+                      the first dataline.
+
+ Values  : Set x-y value options
+  Y_zero            : Set the minimum y value to 0
+  NoY_zero          : Disable the y-min=0 option
+  Set/Clear Y-Min   : Explicitly set a minimum y value
+  Set/Clear Y-Max   : Explicitly set a maximum y value
+  Round/Exact Y-axis: Enable /disable rounding of y values
+
+  Set/Clear X-Min   : Explicitly set a minimum x value
+  Set/Clear X-Max   : Explicitly set a maximum x value
+  Round/Exact X-axis: Enable /disable rounding of x values
+
+ If the data window has 2 y-axis, all changes are to the right y axis
+   Y2_zero            : Set the minimum y value to 0
+   NoY2_zero          : Disable the y-min=0 option
+   Set/Clear Y2-Min   : Explicitly set a minimum y value
+   Set/Clear Y2-Max   : Explicitly set a maximum y value
+   Round/Exact Y2-axis: Enable /disable rounding of y values
+
+
+ Zoom : Use the zoom options. You may zoom in via the rigth mouse click
+        but also via the memu
+
+  Zoom-in X  : Zoom in by 10% on x-axis only
+  Zoom-out X : Zoom out by 10% on x-axis only (if you are zoomed in)
+  Zoom-in Y  : Zoom in by 10% on y-axis only
+  Zoom-out Y : Zoom out by 10% on y-axis only (if you are zoomed in)
+  Zoom-in    : Zoom in by 10% on x-axis and y-axis
+  Zoom-out   : Zoom out by 10% on x-axis and y-axis (if you are zoomed in)
+  Unzoom     : If you are zoomed in, this button will undo the zoom
+
+ On the right side of the display are two more buttons (at least if you have 
+  data lines present).
+
+ A cross : clicking on it will close the data_window, or the whole window
+            if this is the last data_window
+ A Square: Will open an enlarged version of this data_window.
+
+If you Right-Click on the legend name DIX will open a menu
+  Smooth       : Ask for a smooth factor (from the default) and
+                 Draw a new dataline smoothed by the smoothfactor
+  Close        : remove the dataitem from the display
+  Show data    : Open a new window with the raw data
+  Correlate    : Open a new window with the correlations to this data
+  FFT          : Open a new window containing a Fourier transform of this data
+  X-Offset     : Set a new (x-)offset value
+  Y-Offset     : Set a new (y-)offset value for this data line
+  Window n     : Move this data to another window, like drawing it
+  
+  If you have a second y-axis enabled (via the chart option)
+
+  To right y-axis : Move this data to the right y-axis
+  To left  y-axis : Move this data to the left y-axis
+
+Left-Clicking on a legend name and drawing it to another window, will move the
+ dataitem to the other window. It will be removed from the original window
+ unless you hold the shift key
+
+Left-Clicking on a legend name and dragging it to the legend
+  will remove the dataitem from the datawindow
+If you left click in a data window, DIX will create a marker line on the 
+ closest datapoint en display the value in the bottom line.
+ If you have mouse enabled in the main window, DIX will continuously
+ display the datavalues while you move the cursor.
+If you left-click in the display while holding the shift key, DIX will create
+ a second marker and display the difference between the both markers.
+If you have a marker present, you can use the following keys
+  Up-arrow   : Select the next highest data line in the current data window
+  Down-arrow : Select the next lower  data line in the current data window
+  Next_screen: Select the highest data line in the next data window
+  Prev_screen: Select the lowest data line in the previous data window
+ 
+
+Left clicking (with shift) outside the datawindow will remove the marker
+
+Right clicking in a data window allows you to zoom in. By moving the cursor
+ DIX will display a box, showing the data area zoomed. Releasing the cursor
+ DIX will zoom in. You can use the Unzoom button to unzoom
+
+Middle clicking will open a new display with only that datawindow. This may
+ be useful if you want to look in more detail.
+
+In the top left corner of the datawindows (if there are more than one) a
+ small square is present. 
+ You can click on it and move the line to change the size of :
+ If this is the highest data window:
+  If it is the leftmost column (or the only column), you can change the size
+  of the legend window. If it is not the most left column, you can change
+  the size of that column.
+ If this in not the highest datawindow you can change the vertical size
+  of that datawindow 
+
+If you have markers present, they will be plotted in the screen. 
+ If you position the cursor on the marker line, DIX will display the marker
+ text on the right side of the bottom line
+</pre>
+<a name="911">
+<h3 Align=center><a href="dix_help_idx_4.html#625" target="index">DIX HELP_SCREENS PLOT FONT_SELECTION </a> </h3>
+<pre>
+  Dix displays a list of possible fonts. 
+  You may select a new font
+  The first line is the default font (the one used when dix started)
+
+  On top you find 3 buttons
+
+  Close : Close the window, and do not change the font
+  Reset : reset the font to the one that is used when dix started)
+  Help  : Print this help
+  Fixed/All : Display only Fixed fonts or proportional too
+
+  On the second line you may specify a mask for the fontnames
+   The match is wildcarded, so do not forget the * in front or at the end 
+
+</pre>
+<a name="912">
+<h3 Align=center><a href="dix_help_idx_4.html#626" target="index">DIX HELP_SCREENS PLOT COLOUR_SELECTION </a> </h3>
+<pre>
+
+ Dix displays a list of possible colours. These are taken from the
+  sys$manager:decw$rgb.dat, or if that is not available the file
+  dix_rgb.dat in the same directory as the dix image.
+
+ You can select a colour by clicking on it, or reset to the default
+ by clicking on default.
+
+</pre>
+<a name="913">
+<h3 Align=center><a href="dix_help_idx_4.html#627" target="index">DIX HELP_SCREENS PLOT EDIT_KEYS </a> </h3>
+<pre>
+ The following keys are supported
+
+  ^H    : goto beginning of line
+  ^E/F12: goto end of line
+  ^A    : Toggle overstrike
+  ^U    : Clear entire line
+  Left  : Go one position to the left
+  Right : Go one position to the right
+  Delete: Delete character left of cursor
+  Enter : Accept
+  ^Z/F10: Abort
+
+ A small underscore as cursor means insert mode
+ A big underscore means overstrike mode
+
+</pre>
+<a name="914">
+<h3 Align=center><a href="dix_help_idx_4.html#628" target="index">DIX HELP_SCREENS PLOT EDIT_PAGE_FILE </a> </h3>
+<pre>
+Help for filename input
+
+ There are 5 buttons at the top
+  Close       : Just exit and do nothing
+  Print       : Create output file
+  Orientation : Toggle page orientation landscape/portrait
+  PageSize    : Toggle page size a4/a3/original(=the current screen size)
+  Help        : Display this help
+
+In the middle is the filename to be edited
+At the bottom is a summary line how the output file will be created.
+
+</pre>
+<a name="915">
+<h3 Align=center><a href="dix_help_idx_4.html#629" target="index">DIX HELP_SCREENS PLOT FILE_PAGE </a> </h3>
+<pre>
+Help for file selection
+Buttons :
+ Close    : Close window, no action
+ Mod_dat  : Display Modification date of files
+  Cre_dat : Display Creation date of files
+ Directory: Current directory
+ File     : Current file selection mask
+   Both file and directory can be changed by clicking on text
+
+ Clicking on a directory will make a new list
+
+ For a t4_file
+
+ Left Clicking on the name will open the file
+ Right clicking on a name will open a new window in which
+   you can view the contents of the file and then accept (read) it
+   change file attributes or skip it.
+
+ For a .csv file
+  DIX will always open a new window in which you can view the contents 
+  of the file and then accept (read) it, change file attributes or skip it.
+
+</pre>
+<a name="916">
+<h3 Align=center><a href="dix_help_idx_4.html#630" target="index">DIX HELP_SCREENS PLOT FILE_ARGUMENTS </a> </h3>
+<pre>
+  Help about file arguments
+Buttons : 
+ Close    : Close this window and back to fileselection
+ Read     : Read this file
+When opening/merging CSV files, 4 more buttons appear
+ Forward  : File is to be read in forward direction
+  Reverse : File is to be read in forward direction
+ Header   : First line of file is a header line
+  Noheader: First line of file contains data
+ X-Value  : Determines if and how the first column is to be treated 
+            None   : Just normal data
+            Number : Index on x-axis, as a number
+            Date   : Index on x-axis, as a date
+            Time   : Index on x-axis, as a time
+ Separator: The separation character between the fields
+            Space     : A space character
+            Comma     : A , character
+            Tab       : A tab(char(9)) character
+            Semicolon : A #; character
+            Colon     : A : character
+            Bar       : A | character
+            Slash     : A / character
+ Offset    : You can enter an offset for the x-axis
+ The first 10 lines of the data file are displayed
+  Changing rhe separator/x-values/header will change
+  The display, showing how the fields will be split
+</pre>
+<a name="917">
+<h3 Align=center><a href="dix_help_idx_4.html#631" target="index">DIX HELP_SCREENS PLOT FILE_INFO </a> </h3>
+<pre>
+ Help about the file info page
+ Buttons:
+  Close      : Close the window
+  EN/DISable : Add or Remove all names from this file from the legend display.
+               THis can also be done by clicking on the box in front of the
+               filename in the main display.
+  Offset     : The offset that should be applied to all datalines in this file
+               You can enter a (positive or negative x-) value.
+               All x-values will be adjusted using this offset
+               Note that you can also set an offet on each dataline. 
+ 
+ DIX will always display the full filename and the Offset value for this file 
+  For T4 files DIX will display
+
+    -The measuring interval (from the t4 header line)
+    -And per topic ([MON], [ALG]...)
+      -The number of time-values
+      -The number of meassurement values in the file
+      -The number of measurement values displayed (depends on the legend mask)
+      -The first and last timestamp for this type
+  For normal csv files one line will be displayed with the number of 
+   topics(columns) and the number of values(rows).
+   
+</pre>
+<a name="918">
+<h3 Align=center><a href="dix_help_idx_4.html#632" target="index">DIX HELP_SCREENS PLOT PIE_CHART </a> </h3>
+<pre>
+  Help about the pie chart plot.
+ Total window buttons
+  File     : File options
+   Close Window       : Close this window
+   Print(ps)          : Make a .ps file of the whole window
+   Exit               : Exit the plotting mode
+  Options  : general options      
+   [NO]Mouse          : En/disable continuous reporting of data values
+  WIndow   : Window options, only if more than 1 pie in the plot
+   One more vertical  : Increase the count of vertical data-windows 
+   One less vertical  : Decrease the count of vertical data-windows 
+   Automatic          : Let DIX choose the best window layout
+   Ask vertical       : Start an input window to choose the number of vertical
+                        windows.
+  Help                : Display help
+ Data window buttons
+  show_data           : Open a new window containg the raw-data
+  Under the options menu item
+    Adapt Angle       : Choose the view angle beween 0 and 80 degrees
+    Segment count     : Choose the number of pie segments
+                        If there are more values than segment count they
+                        will be bundled with a label other. 
+    Show/Remove info  : Show/remove the labels+values in the display 
+    Sorted/Unsorted display : Change the order of display
+
+  If you click on the pie chart, DIX will display the value at the bottom
+  of the screen. If you have continuous mouse report enabled, positioning
+  your mouse above the pie is enough (no click needed)
+
+ Supported keys
+   Up-arrow   : Increase the viewing angle for the pie. If clicked in a 
+                data-window, only that pie changed. If clicked in the top
+                window, all pie angles are changed.
+   Down-arrow : Decrease the viewing angle for the pie. If clicked in a 
+                data-window, only that pie changed. If clicked in the top
+                window, all pie angles are changed.
+   Page-up    : Increase the vertical data-window count 
+   Page-down  : Decrease the vertical data-window count 
+</pre>
+<a name="919">
+<h3 Align=center><a href="dix_help_idx_4.html#633" target="index">DIX HELP_SCREENS PLOT LARGE_WINDOW </a> </h3>
+<pre>
+ This is an enlarged window of one of the data windows.
+ You can only close the window (or see the help)
+ In the data window you can do the same things as in a normal display
+</pre>
+<a name="920">
+<h3 Align=center><a href="dix_help_idx_4.html#634" target="index">DIX HELP_SCREENS PLOT ASK_KEY </a> </h3>
+<pre>
+ On the first line are the buttons
+  Close  : Cancel input
+  Start  : Use the current values to read the record
+  Help   : Show help
+
+  If the file is indexed
+   On the second line
+     5 buttons, EQ,GE,GT,LE,LT : The search mode
+   On the following lines
+     Key number : Input field for key number
+     Key value  : Input field for key value
+     Search xx  : gthe current search mode (change via button on top)
+  If file is relative
+   On the second line
+     3 buttons, EQ,GE,GT : The search mode
+   On the following lines
+     Cell number : Input field for celll number
+     Search xx  : gthe current search mode (change via button on top)
+  If the file is sequential      
+   On the second line
+     Record number : Input field for record number
+
+   
+</pre>
+<a name="921">
+<h3 Align=center><a href="dix_help_idx_4.html#635" target="index">DIX HELP_SCREENS PLOT decw_raw </a> </h3>
+<pre>
+ This is a display showing raw data 
+ On the top line are a number of buttons that will show a menu.
+  file
+   screen mode      : switch to screen mode (SMG)
+   interactive mode : Switch to interactive mode
+    If you have more than one file open
+     Next file        : show the next file
+     List of files    : Show the current opended files, and lets you select one
+     Previous file    : show the previous file
+   file information : Display information about the current file
+   set font         : Change the font
+   Exit             : Exit DIX
+  record
+   Next record        : Get the next record
+   Previous record    : Get the previous record. This may be a slow operation.
+   Ask record         : Ask for the record number/keyvalue
+   Rewind             : Go to the first record
+   Find record        : Open a window to get search parameters and find the record
+   Find next record   : Find the next (if you have search parameters present)
+    If the file is open for write
+     Update record    : Update the record with moddified data
+     Abort update     : Cancel updates, restore to original record value
+  layout
+   Interpreted display: Switch to raw display
+   Hex                : Display the field value in hex
+   Octal              : display the field value in octal
+   Binary             : Display the field value in binary
+   Byte               : display data by byte
+   Word               : display data by word (2 bytes)
+   Longword           : display data by longwords (4 bytes)
+   [NO]Offset         : do or do not show the offsets
+   Hex/dec Offsets    : Show offsets in hex or decimal
+
+  colours
+   You can change the colour for the following parts
+    Info text         : Used for fieldsnames, and filename
+    Offset            : FOr the offset part
+    Background 1      : Background in the header and the text
+    Background 2      : background in the rest
+    Foreground        : field value colour
+    Menu              : Menu display
+  options
+   All display          : Open a new display with a lot of different fieldtypes
+   Search               : Enter a string to search in this display
+   Next search forward  : find the string forward
+   Next search backward : Find the string backward
+  help
+   Show help, you are doing it now
+
+ On the right side is a square. If you click on it , DIX will close the display
+  (and end the program
+
+ On the second line are a number of shortcur-buttons. All these buttons can
+  also be found in one of the menu options, but these only need one click.
+  Interpreted: Switch to interpreted display (if the file has a description)
+  Hex        : Display the text in hex
+  Octal      : Display the text in octal
+  Binary     : Display the text in binary
+  Next Record: Read the next record in the file
+  Rewind     : Go to the first record in the file
+
+ On the third line is some info
+  Recsiz     : The recordsize of the current record (in bytes)
+  Offs       : The offset (in the record) of the current line. This is displayed 
+               as byte[.bit]
+  Type       : Sgn/uns : Signed/unsinged integers
+  Recnr      : The current reocrdnumber (or Unknown if keyed read)
+  RFA        : The record file address for the current record
+  Key        : The current keynumber (for indexed files)
+
+ On the fourth line is a list of offsets
+
+ below are three displays
+  On the left is the data display
+   This contains the data (in the selected radix) and the ascii value of each byte
+   You can position the cursor using the mouse or the arrow keys.
+   Right clicking opens a menu like the options menu.
+
+
+  If the file is open for write, you can type characters.
+   In the data part
+    If the radix is decimal you can enter the string 
+     If you then type a Return, DIX will validate the text. If the syntax
+     is correct, DIX will replace the vaue of the field. If the syntax is
+     not correct, DIX will restore the original value.
+    If the radix is hex/octal/binay, you can enter the digit value directly
+
+   In the ascii part you can type the text directly
+
+  On the right the offset display
+</pre>
+<a name="922">
+<h3 Align=center><a href="dix_help_idx_4.html#636" target="index">DIX HELP_SCREENS PLOT decw_des </a> </h3>
+<pre>
+ This is a display showing interpreted data (you need a description to do this)
+ On the top line are a number of buttons that will show a menu.
+  file
+   screen mode      : switch to screen mode (SMG)
+   interactive mode : Switch to interactive mode
+    If you have more than one file open
+     Next file        : show the next file
+     List of files    : Show the current opended files, and lets you select one
+     Previous file    : show the previous file
+   file information : Display information about the current file
+   follow link      : If the current field has link info to another record/file
+                       follow that link, possibly opening a new file
+   back link        : If you have followed a link, you cab backtrack.
+   set font         : Change the font
+   Exit             : Exit DIX
+  description
+   View description         : View the description source
+   View expanded description: View the expanded description 
+    If this file has more than one description
+     Next desscription        : Use the next description
+     Prev description         : Use the previous description
+     Directory description    : Show a list of descriptions, and lete you select one
+  record
+   Next record        : Get the next record
+   Previous record    : Get the previous record. This may be a slow operation.
+   Ask record         : Ask for the record number/keyvalue
+   Rewind             : Go to the first record
+   Find record        : Open a window to get search parameters and find the record
+   Find next record   : Find the next (if you have search parameters present)
+    If the file is open for write
+     Update record    : Update the record with moddified data
+     Abort update     : Cancel updates, restore to original record value
+  layout
+   Raw display        : Switch to raw display
+   Hex                : Display the field value in hex
+   Octal              : display the field value in octal
+   Binary             : Display the field value in binary
+   Descripted         : Display the field value descripted
+   [NO]Compress       : Do or do not show "empty" fields 
+    If the file has a view
+     Description      : show field values according the description
+     View             : Show field values according th the view
+   [NO]Offset         : do or do not show the offsets
+   [NO]FIelds         : do or do not show the fields
+   Hex/dec Offsets    : Show offsets in hex or decimal
+
+  colours
+   You can change the colour for the following parts
+    Info text         : Used for fieldsnames, and filename
+    Offset            : FOr the offset part
+    Background 1      : Background in the header and the text
+    Background 2      : background in the rest
+    Foreground        : field value colour
+    Menu              : Menu display
+  options
+   All display          : Open a new display with a lot of different fieldtypes
+   Descriptor display   : Open a new display with descriptor information
+   Subfield display     : Open a new display with subfields
+   Search text          : Enter a string to search in this display
+   Next search forward  : find the string forward
+   Next search backward : Find the string backward
+   Highlight            : Highlight all text matching searchstring
+   Field input          : If the current field has "fields" , open a new
+                          window to show/edit fieldvalues
+  help
+   Show help, you are doing it now
+
+ On the right side is a square. If you click on it , DIX will close the display
+  (and end the program)
+
+ On the second line are a number of shortcut-buttons. All these buttons can
+  also be found in one of the menu options, but these only need one click.
+  Raw        : Switch to raw display
+  Hex        : Display the text in hex
+  Binary     : Display the text in binary
+  Descripted : Display the text descripted (using the descriptor)
+  Next Record: Read the next record in the file
+  Rewind     : Go to the first record in the file
+
+ On the third line is some info
+  Recsiz     : The recordsize of the current record (in bytes)
+  Offs       : The offset (in the record) of the current line. This is displayed 
+               as byte[.bit]
+  Type       : Sgn/uns : Signed/unsinged integers
+  Recnr      : The current reocrdnumber (or Unknown if keyed read)
+  RFA        : The record file address for the current record
+  Key        : The current keynumber (for indexed files)
+
+ below are three displays
+  On the left is the offset display (can be hidden via the layout menu)
+  In the middle the fieldname       (can be hidden via the layout menu)
+  On the right the value
+
+   In the right display you can position to the wanted field by using the
+   mouse (just click on it), or by using the arrow keys.
+   Right clicking opens a menu like the options menu.
+  If the file is open for write, you can type characters (or enter) for
+   the current field, and DIX lets you modify the current line.
+   If you then type a Return, DIX will validate the text. If the syntax
+   is correct, DIX will replace the vaue of the field. If the syntax is
+   not correct, DIX will restore the original value.
+
+</pre>
+<a name="923">
+<h3 Align=center><a href="dix_help_idx_4.html#637" target="index">DIX HELP_SCREENS PLOT searchfile </a> </h3>
+<pre>
+  On the top line the buttons
+   Close           : close and do nothing
+   Search          : start search with the current selection
+   Current record  : Set start search from current record
+   Begin of file   : Set start search from begin of file
+   help            : show help
+  On the second file the current start position 
+
+ You can search multiple items in multiple records
+
+  On the third line the headers
+  nextrecord       : should this search item match in the next record
+  search string    : the item to find
+  show             : Will this be the record that is displayed
+  casebl           : search caseblind
+  match            : Locate : String must be in record/field
+                     Match  : string must match whole record /field
+                     lt     : String must be lt record /field
+                     le     : String must be le record /field
+                     eq     : String must be eq record /field
+                     ge     : String must be ge record /field
+                     gt     : String must be gt record /field
+                     valid  : String is valid for fieldtype
+                     exists : String is fieldname, and it must exist
+                     range  : String is low-high, value be be in range
+                     never  : String matches never
+                     always : String matches always
+
+  wild             : Wildcard mode (node,standard, extended)
+  loca             : Where to find (data/vfc/recl/both)
+  andor            : match and / or
+  not              : negate match
+  pos              : begin end size of part of the record
+  size             : to look in the record
+  type             : explicit field type
+  field            : fieldname
+
+ Help for the search record screen
+</pre>
+<a name="924">
+<h3 Align=center><a href="dix_help_idx_4.html#638" target="index">DIX HELP_SCREENS PLOT searchtext </a> </h3>
+<pre>
+ Help for the search text in display screen
+
+ On the top line are the buttons
+   Close           : close this window
+   Start           : Start the search
+   Forward         : Set the search to forward mode
+   Backward        : Set the search to backward mode
+   Help            : Show this help
+
+ Below is a line where the search string may be editted.
+ On the bottom line is the current search direction 
+
+ The search only highlights the first match, but does not change the current
+ offset. If you click on the highlighted part the offset will be set.
+</pre>
+<a name="925">
+<h3 Align=center><a href="dix_help_idx_4.html#639" target="index">DIX HELP_SCREENS PLOT dispdes </a> </h3>
+<pre>
+  In this window you see information about the current descriptor
+  On the top line are the buttons
+  Below are the following line
+   the name of the field
+   the type of the field
+   the flags for this field (if not emppty)
+   the fields (if not empty)
+
+  You can only close the window
+</pre>
+<a name="926">
+<h3 Align=center><a href="dix_help_idx_4.html#640" target="index">DIX HELP_SCREENS PLOT DISPDAT </a> </h3>
+<pre>
+  In this window you see the interpreted data in some formats.
+  In the top line are 4 buttons
+  Close : close this display
+  Left  : decrease the offset by one byte
+  Right : Increase the offset by one byte
+  Help  : show this help
+
+ On the right side is the current offset displayed
+  In the rest of the display you see the data displayed in various formats
+
+  You can also use the left and right arrow key to change the offset
+
+  If the file is open for modify, you can click on a line, and DIX will
+  let you modify the value using the datatype of that line.
+
+</pre>
+<a name="927">
+<h3 Align=center><a href="dix_help_idx_4.html#641" target="index">DIX HELP_SCREENS PLOT subfields </a> </h3>
+<pre>
+  In this window you see the various subfields of the data item.
+
+  In the top line are 2 buttons
+  Close : close this display
+  Help  : show this help
+
+  The subfields depend on the datatype
+
+  If the file is open for modify, you can click on a line, and DIX will
+  let you modify the subfield value.
+</body>
+</html>

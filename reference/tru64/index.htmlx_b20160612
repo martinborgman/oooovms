@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>Reference section</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p><!-- edit this below -->
+    <h2>OpenOffice.org 1.0 for Tru64</h2>
+    <p>We found this version of OpenOffice.org 1.0 for Tru64 Unix some time ago. We know very litle about this port, we only know that <a href="mailto:Yi.Wang@hp.com">Yi Wang</a> and <a href="mailto:Wendy.Rannenberg@hp.com">Wendy Rannenberg</a> were involved with this port.</p>
+    <p>Because the Tru64 port was done on the same hardware and with the same compiler suite we are using, we hope to benefit from the good work done on this port in our porting OpenOffice.org to OpenVMS.</p>
+    <p>At this moment we don't intend to support or even do something ourselves with the Tru64 material.</p>
+    <hr>
+      <p class="text-center"><b>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.</b></p>
+    <hr>
+    <p>We keep this software just for reference purposes. All of the components are listed here:</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="READMETRU64OO.TXT">READMETRU64OO.TXT</a>
+            </td>
+            <td>The README file for OpenOffice.org 1.0 for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="BUILD_INSTRUCTIONSTRU64OO.TXT">BUILD_INSTRUCTIONSTRU64OO.TXT</a>
+            </td>
+            <td>Build instructions for OpenOffice.org 1.0 for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="INIT_OO10TRU64OO.TXT">INIT_OO10TRU64OO.TXT</a>
+            </td>
+            <td>This script initializes the OpenOffice.org 1.0 source pools for building</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="INSTALL_STLPORTKSHTRU64OO.TXT">INSTALL_STLPORTKSHTRU64OO.TXT</a>
+            </td>
+            <td>KSH installation script for STLPORT for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="RELEASE_NOTESTRU64OO.TXT">RELEASE_NOTESTRU64OO.TXT</a>
+            </td>
+            <td>Release notes for OpenOffice.org 1.0 for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="INCSTLPORT_TARTRU64OO.GZ">INCSTLPORT_TARTRU64OO.GZ</a> (<!--#fsize file="INCSTLPORT_TARTRU64OO.GZ" -->)
+            </td>
+            <td>The STLPORT source files for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="install_tar.gz">install_tar.gz</a> (<!--#fsize file="install_tar.gz" -->)
+            </td>
+            <td>The OpenOffice.org 1.0 installation kit for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="LIBSTLPORTTARTRU64OO.GZ">LIBSTLPORTTARTRU64OO.GZ</a> (<!--#fsize file="LIBSTLPORTTARTRU64OO.GZ" -->)
+            </td>
+            <td>The LIBSTLPORT library for Tru64 UNIX</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="OO_10_SRCPATCHTARTRU64OO.GZ">OO_10_SRCPATCHTARTRU64OO.GZ</a> (<!--#fsize file="OO_10_SRCPATCHTARTRU64OO.GZ" -->)
+            </td>
+            <td>The source files of the OpenOffice.org 1.0 patches for Tru64 UNIX</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Because of the low bandwidth of this server please be patient when you download some of the files above.</p>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

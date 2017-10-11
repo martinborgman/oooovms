@@ -1,0 +1,246 @@
+AUTO, Command completion tool
+
+AUTO is a tool to let you use command completion.
+Each token of the command line (VERB, QUALIFIER, 
+QUALIFIER-VALUE or PARAMETER) can be expanded to completion
+or sequentially searched for the next or previous valid match.
+This tool is under development, and usage is mostly for
+demonstration, but if the specify the /EXECUTE qualifier,
+the buildup command will be executed via LIB$DO_COMMAND. 
+and AUTO will be started again.
+
+AUTO makes use of the DCL tables (so the link with /SYSEXE). 
+Symbols are also recognized, see the following table
+
+1. a symbol that executes a dcl_command (@)     : allow the /output and upto 8 parameters
+2. a symbol that executes a foreign command ($) : Look in the image for a command-table structure
+                                                  and use that for definitions. If none is found
+                                                  a $REST_OF_LINE parameter is assumed.
+3. a symbol that executes MC(R)                 : this will revert to case 2
+4. a symbol that translates to a normal verb    : Lookup the verb in the normal DCL tables
+
+
+Warning: this programs uses the DCL tables, so if the DCL tables 
+are not correct or incomplete, the command may not be executed 
+correctly.
+
+ AUTO:=$dev:[dir]AUTO_alpha
+
+Usage
+
+ AUTO[/qualifiers]
+
+  Qualifiers are
+	/debug=file      (default dbg$output) Show debug info
+	/flags=(all,disallow,routines,token,input) !what debug do you want
+        /verbone         See below
+	/info	         show information messages (default)
+	/execute         execute the buildup command 
+                           (via lib$do_command) NOT default
+	/override        Allow all types to be overridden (see below)
+        /use_arrows      Up and down arrow can be used for prev/next match
+                         The TAB and ^H/F12 key will also work.
+        /terminal=terminaltype
+                         Overrides the terminal type, AUTO will use the
+                         terminal type of SYS$COMMAND by default. The
+                         terminaltype must be defined in SMGTERMS.
+        /startup=file    Defines a startup file with key definitions.
+                         Default is /nostartup, and /startup without a
+                         value will search for AUTO_INI, defaulted
+                         by SYS$LOGIN:.INI and AUTO_IMAGEDIRECTORY:.INI
+                         In this file you can overrule the default keysettings
+
+If the verb points to an executable, and that executable contains a CLD
+table with only one verb, AUTO will assume the (one) verb will not be needed
+(the program will insert the verb itself). If you do need the verb you
+can define the /verbone qualifier, and AUTO will let (and demands) you to
+enter the verb.
+
+Normally AUTO will use the (in dcl-tables)defined types ($priv,$outfile..etc).
+If the type is string or restofline, AUTO will allow you to change
+the type to a more convenient one. The F11/^F key will toggle the type to
+the one you want. If the specify /override on the startup of AUTO , 
+you can override all types (not only string and restofline), of course 
+at your own risk.
+
+For @files and MCR files without CLD tables you can define a symbol
+to describe the expected parameters.
+Default for @file are 8 parameters (p1..p8) and a qualifier /OUTPUT=filename.
+  If you define a symbol 'VERB'_PARAMETER you can describe different parameters
+  for all parameters. F.e. if you have a procedure to changed you privileges
+  and have defined the verb PRIV as @'privileges', you know the first parameter
+  should be a (list-of) privileges. You can then define the symbol
+  PRIV_PARAMETERS as "PRIVILEGE*"
+
+Default for images without CLD tables is 1 parameter (restofline).
+  If you have an image "look.exe" that "looks" into a file and have defined
+  a symbol LOOK as $device:[directory]look.exe. This image has no CLD tables
+  but expects a filename as argument. In that case you can define a symbol
+  LOOK_PARAMETER as "INFILE" 
+
+The syntax for the *_PARAMETER symbol is "type[,type...]"
+Type can be : cld_type   a normal cld type
+              cld_type*  A normal cld type but with the list flag, so you
+                         can use a , separated list
+You can insert a # at any place to tell AUTO how many parameters are
+required, so "INFILE,#OUTFILE" means 1 parameter required (infile) and
+1 parameter optional (outfile)
+
+Valid cld types are  
+   STRING     : text input
+   INFILE     : Input file (must exist)
+   OUTFILE    : Output file (may exist, but directories must exist)
+   NUMBER     : A normal DCL number inclusive %X , %O
+   PRIVILEGE  : A normal privilege
+   DATETIME   : The normal DCL datetime (absolute) with a " between the
+                day and the hour
+   DELTATIME  : The normal DCL datetime (deltatime) with a " between the
+                day and the hour
+   PROTECTION : A protection string (WO:RWED,OW:...)
+   PROCESS    : A valid processname
+   INLOG      : A valid (and existing) logicalname
+   OUTLOG     : A valid logicalname
+   INSYM      : A valid (and existing) symbolname
+   OUTSYM     : A valid symbolname
+   NODE       : A valid nodename
+   DIRECTORY  : A valid directory name (possible with nodespec)
+   UIC        : A valid UIC string
+   RESTOFLINE : DCL does not parse this type, all further chars are valid
+   QUOTEDSTRING: A valid string , but leave " in string
+   FILE       : A valid output file
+   ACL        : A valid ACL specification
+   OLD_FILE   : A valid output file
+
+During the command buildup the following keys are supported
+
+ Normal text : Insert the text in the buffer. Invalid chars are disallowed
+ TAB         : take the next valid keyword
+ ^H or F12   : take the previous valid keyword
+ ^L/F8       : Display allowed keywords/tokens (max 1024 chars) 
+ PF2/HELP    : AUTO will try to display help info about the verb.
+ Space       : next parameter
+ /           : next qualifier
+ RETURN/ENTER: Complete line
+ ^Z or F10   : Abort the input
+ <- or ->    : move around (within token) 
+ ^E          : Goto the end of the line
+ DELETE      : Delete char
+ ^A/F14      : Toggle insert/overstrike
+ LF/F13      : Delete last token
+ ^R or ^W    : repaint screen
+ ^F or F11   : OVerride the "string" type to any other valid
+                This can be useful for @commands where you
+                know the parameter to be (f.e.) a filename.
+ All these keysettings can be overruled by a startup_file.
+ In this file you can define keys in the following syntax
+  DEFINE AUTO_KEY SMG_KEY[,SMG_KEY...]
+ AUTO_KEY can be
+
+    Key             Default  Meaning
+    KAR_DEBUG       ^D       Print debug info 
+    KAR_OVERRIDE    ^F,F11   Change the type of token
+    KAR_EXPAND      TAB      Take the next valid token
+    KAR_EXPAND_PREV ^H,F12   Take the previous valid token
+    KAR_HELP        PF2,HELP Print help about verb [/qual]
+    KAR_LIST        ^L,F8    List all allowable tokens
+    KAR_ABORT       ^Z,F10   Abort and exit AUTO
+    KAR_TOGGLE      ^A,F14   Toggle insert/overstrike
+    KAR_EOL         ^E       Goto END OF LINE
+    KAR_REPAINT     ^R,^W    Repaint the line (after a breakthru)
+    KAR_TOG_VERBONE ^F,F9    Toggle VERBONE state
+    KAR_DEL_TOKEN   ^J,F13   Delete current token
+    KAR_TOG_EXECUTE ^V,F7    Toggle execute flag
+
+   SMG_KEY can be any of the (non-printable) smgkeys
+     CTRLA..CTRLZ         CRTLC,CTRLQ,CTRLS,CTRLY are illegal
+     PF1..PF4
+     F7..F20              f1..f6 are illegal
+     E1..E6
+     KP0..KP9		  (if keypad mode set)
+     ENTER,MINUS,COMMA    (if keypad mode set)
+
+Examples:
+
+$AUTO/EXECUTE   !Will let you create a command and then execute it
+$AUTO/INFO      !Will let you create a command, and NOT execute it
+
+Below is a key sequence example
+
+Display                                 User types
+Auto>                                    c		buildup CO
+Auto>c                                   o
+Auto>co                                  TAB             NExt match
+Auto>CONTINUE                            TAB
+Auto>CONFIGURE                           TAB
+Auto>CONNECT                             TAB
+Auto>CONVERT                             TAB
+Auto>COPY                                F12             Prev match
+Auto>CONVERT                             TAB             Next match
+Auto>COPY                                /               Next qualifier
+Auto>COPY/                               TAB             Next match
+Auto>COPY/ALLOCATION                     =               Enter value
+Auto>COPY/ALLOCATION=(                   1               enter number
+Auto>COPY/ALLOCATION=(1                  )               Close value
+Auto>COPY/ALLOCATION=(1)                 space           First param
+Auto>COPY/ALLOCATION=(1)                 F               Filename begin
+Auto>COPY/ALLOCATION=(1) F               TAB             First file matching F
+Auto>COPY/ALLOCATION=(1) Firstfile.txt   space           Start second param
+Auto>COPY/ALLOCATION=(1) Firstfile.txt   x               Second filename
+Auto>COPY/ALLOCATION=(1) Firstfile.txt x Enter           All done 
+
+If the /exec was given, AUTO now executes the command and returns to AUTO
+otherwise AUTO just displayes the command and asks for the next
+
+Try HELP at different positions to get help information
+Try ^L/F8 at different positions to get a list of possible tokens
+
+THe expand/previousexpand keys has some special features for some of the
+types.
+
+Infile : Find the next/previous filename that matches the string appended with
+         a *.*. The default filename is taken from the CLD tables (or *.*)
+         If you are in the directory part of the filename, the next level
+         directory is searched. If you have finished the directory input 
+         AUTO will search files.
+
+Outfile: Since the outfile does not have to exist, AUTO cannot expand for
+         the filename, but it can for the directories. See the infile
+
+Datetime:If the type is datetime and the string is empty AUTO will
+         insert the value of TODAY (this_day:00:00:00)
+         The cursor position will be on the day field. By using (prev)expand
+         AUTO will in/decrease the day field. If you move the cursor over
+         another part of the date (f.e. the MONTH) AUTO will in/decrease
+         that field. All date fields can be changed in this way
+
+Deltatime: The same as Datetime, only the default value is 0 00:00:00.00
+         The expand rules are the same
+
+
+THe help key will taken the following action
+If the verb is found as verb in dcltables
+  Use SYS$HELP:HELPLIB.HLB
+  The help parameters are
+   1. The name of the verb
+   2. The name of the qualifier (if in qualifier input) or
+      the text "PARAMETER" (if in parameter input)
+
+If the verb is a symbol for an image
+   Try to locate the help-library SYS$HELP:'imagename'.HLB
+                               or SYS$HELP:'imagenameHLP'.HLB
+                               or SYS$HELP:'imagename$HELP'.HLB
+   IF that fails try the same sequence but in the same 
+    device/directory as the image
+   1. The name of the verb
+   2. The name of the qualifier (if in qualifier input) or
+      the text "PARAMETER" (if in parameter input)
+   
+If the verb is a symbol for a DCL procedure 
+   Try to locate the helplibrary SYS$HELP:AUTO_PROCECURES.HLB 
+                      or        auto_directory-dev'AUTO_PROCEDURES.HLB 
+   The help parameters are
+     1. The name of the verb
+     2. The text "PARAMETER"
+     3. The parameter number
+
+If the helplibrary cannot be located, a single line help.

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+		<title>
+			OpenVMS m4 main page
+		</title>
+	</head>
+	<body>
+                <p align=center><b><u><i><font style="font-size: 20pt" size=5>GNU m4 1.4</font></i></u></b>
+                </p>
+                <p>
+                	GNU m4 is an implementation of the traditional Unix macro processor. It is mostly SVR4 compatible although
+			it has some extensions (for example, handling more than 9 positional parameters to macros). GNU m4 also 
+			has built-in functions for including files, running shell commands, doing arithmetic, etc.
+                </p>                                                                    
+                <p>
+			GNU m4 is a macro processor in the sense that it copies its input to the output expanding macros as it 
+			goes. Macros are either builtin or user-defined and can take any number of arguments. Besides just doing 
+			macro expansion m4 has builtin functions for including named files, running UNIX commands, doing integer 
+			arithmetic, manipulating text in various ways, recursion etc... m4 can be used either as a front-end to a 
+			compiler or as a macro processor in its own right.
+                </p>                                                                    
+                <p>
+                	<br>
+                	<b><u>Use it at your own risk, because we cannot  take responsibility for crashes, dumps or even worse: loosing data.
+                	</u></b>
+                	<br>
+                </p>
+                <p>
+                	Martin Borgman writes:
+                </p>
+                <p>
+                	"With the new version of GNV, ./configure scripts do a much better job. With GNU m4 I only ran into i few
+			problems wen actually building m4 with the generated Makefile. And most of these problems are just
+			programatic stupidities in the source files.
+		</p>
+		<p>
+			For a quick fix, I added #include &lt;strings.h&gt; to config.h. I commented out the redefinition of 
+			strerror() in lib/error.c and I added #include &lt;stdlib.h&gt; to lib/obstack.h. This fixed all the 
+			compilation warnings.
+
+		</p>
+		<p>
+			The GNV ar wrapper gave we a warning that it didn't understand one of the parameters (cru) but did 
+			create a library.
+		</p>
+		<p>
+			The linker gave me some more warnings about duplicate definitions of getopt, optarg, optopt, optind and 
+			opterr. Many GNU sources include enhanced versions of these standard functions. Normally you can get rid 
+			of these problems by using the DECC compiler option 
+			/PREFIX_LIBRARY_ENTRIES=(ALL_ENTRIES,EXEPT=(getopt,optarg,optopt,optind,opterr)), but I have no idea
+			how to do this using the gcc wrapper.
+		</p>
+		<p>
+			And last but not least, you need to link something like vms_crtl_init	with the executable, but that's 
+			no real problem.
+		</p>
+		<p>
+			To get around my /PREFIX_LIBRARY_ENTRIES problem I did a make -n to see what make would have done and made
+			a dcl script to do the same. See below:
+		</p>
+		<pre>
+$ set noverify
+$! Makefile for VMS
+$! DCL-Shell-language. Edit the symbols section at the end.
+$!
+$! The following three symbols can be used to customize the build
+$!
+$!      XDEFFLAGS -- is added to the /define
+$!      XOBJECTS  -- is added to the object port of link
+$!      XLIBS     -- is added to the libs part of link
+$!      XINCLUDES -- is added to the /include
+$!
+$ cc := cc/prefix=(all,except=(getopt,optarg,optopt,optind,opterr))
+$! cc := 'cc'/include=('XINCLUDES')
+$ cc := 'cc'/define=(_XOPEN_SOURCE_EXTENDED,HAVE_CONFIG_H,_POSIX_EXIT 'XDEFFLAGS')
+$ cc := 'cc'/warn=(noinfo,disabl=(notconstqual))
+$! cc := 'cc'/list/show=(include,source)
+$ if p1 .eqs. "DEBUG"
+$ then
+$   write sys$output "Adding /noopt/debug to CC command"
+$   cc := 'cc'/noopt/debug
+$   write sys$output "Adding /debug to LINK command"
+$   link := link/debug
+$ endif
+$!
+$ On Control_Y Then Goto The_Exit
+$ On Error Then Goto The_Exit
+$ set verify
+$ set def [.lib]
+$ cc /include=([-],[]) regex.c
+$ cc /include=([-],[]) getopt.c
+$ cc /include=([-],[]) getopt1.c
+$ cc /include=([-],[]) error.c
+$ cc /include=([-],[]) obstack.c
+$ cc /include=([-],[]) xmalloc.c
+$ cc /include=([-],[]) xstrdup.c
+$ lib/create/object libm4 regex, getopt, getopt1, error, obstack, xmalloc, xstrdup  
+$ set def [-]
+$ set def [.src]
+$ cc /include=([-],[],[-.lib]) m4.c
+$ cc /include=([-],[],[-.lib]) builtin.c
+$ cc /include=([-],[],[-.lib]) debug.c
+$ cc /include=([-],[],[-.lib]) eval.c
+$ cc /include=([-],[],[-.lib]) format.c
+$ cc /include=([-],[],[-.lib]) freeze.c
+$ cc /include=([-],[],[-.lib]) input.c
+$ cc /include=([-],[],[-.lib]) macro.c
+$ cc /include=([-],[],[-.lib]) output.c
+$ cc /include=([-],[],[-.lib]) path.c
+$ cc /include=([-],[],[-.lib]) symtab.c
+$ Link /exec=m4.exe m4.obj,builtin.obj,debug.obj,eval.obj, -
+                     format.obj,freeze.obj,input.obj,macro.obj, -
+                     output.obj,path.obj,symtab.obj'XOBJECTS', -
+                     [-.lib]libm4.olb/lib,sys$input/opt
+SYS$LIBRARY:DECC$SHR/SHARE
+$ set def [-]
+$ set noverify
+$ purge [...]*.lis,*.obj,*.exe
+$The_Exit:
+$ Save_Status = $STATUS
+$ exit Save_Status
+		</pre>
+		<p>
+			To link in vms_crtl_init.obj, XOBJECTS should point to it (don't forget the comma in front of the XOBJECTS
+			string).
+                </p>
+                <p>
+                	Regards,
+                </p>
+                <p>
+                	Martin Borgman."
+                </p>
+                <p>
+                	Please give your feedback to <a href="mailto:m4dev@oooovms.dyndns.org">m4dev@oooovms.dyndns.org.</a>
+                </p>
+                <p>
+                	<a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+		</p>
+                <div align="CENTER">
+                	<img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+                </div>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+User-Agent: Sosospider
+Disallow: /
+
+User-Agent: Snoopy
+Disallow: /
+
+User-Agent: *
+Disallow: /branding/
+Disallow: /log/
+Disallow: /images/
+Disallow: /project/

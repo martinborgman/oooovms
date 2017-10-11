@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenVMS PAX main page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h2 class="text-center">PAX 2.1</h2>
+    <p>PAX is the POSIX.2 Portable Archive eXchange utility. With PAX you can read and write tar and cpio formatted archives.</p>
+    <p>Martin Borgman writes:</p>
+    <blockquote>
+      <p>Because the GNV tar utility is unable to extract all the files from the OpenOffice.org source distribution, I started to look for alternatives. I first started with GNU tar, but found it a bit hard to port. GNU tar depends on UNIX structures that we don't have on OpenVMS (jet). So after looking for alternatives I found PAX. I found several source distributions on the internet, and one of them looked quite easy to port. So I started with that particular one. The only real problem I had (and still have) is with the stat structure on OpenVMS (see issuelist on this site).<br /></p>
+      <p>The current version of PAX extracts all the files from the OpenOffice.org source distribution. As of this writing I have no idea if you can extract files from a cpio archive and I doubt that you can successfully create a tar or cpio archive with this version.<br /></p>
+      <p>Regards,<br /></p>
+      <p>Martin Borgman.</p>
+    </blockquote>
+    <p><br><b><u>Use it at your own risk, because we cannot  take responsibility for crashes, dumps or even worse: loosing data.</u></b><br></p>
+    <p>A zip file <a href="pax-2_1.zip"> (pax-2_1.zip, 50 KB)</a> containing the OpenVMS pax executable can be downloaded.</p>
+    <p>Please give your feedback to <a href="mailto:paxdev@oooovms.dyndns.org">paxdev@oooovms.dyndns.org.</a></p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

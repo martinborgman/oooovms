@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>Porting Hints and Tips</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p><!-- edit this below -->
+    <p>This is a list with some general hints and tips for porting UNIX (linux) tools to OpenVMS Alpha version 7.3-1 and up, using the most resent version of the GNV tools and the HP C and C++ compiler suite.</p>
+    <ol>
+      <li>Become a member of the gnv-develop mailing list (see <a href="http://gnv.sourceforge.net">http://gnv.sourceforge.net</a>). Some HP developers are active members of this list.
+      </li>
+      <li>Before starting a UNIX configure script raise your pipe buffer size by defining DECC$PIPE_BUFFER_SIZE with a higher value (the OpenVMS default is 512 and the current bash default is 8192). Some people reported good results with 32K while porting tools like flex and bison.</li>
+      <li>Start the configure script with at least the following parameters: -build=alpha-hp-vms -host=alpha-hp-vms.</li>
+      <li>Use the CRTL feature switches to change the behavior of several CRTL functions to a more standard UNIX kind of behavior (see CRTL documentation and GNU:[src.GNV.CRTLSUP.SRC]VMS_CRTL_INIT.C).</li>
+      <li>Compile GNU:[src.GNV.CRTLSUP.SRC]VMS_CRTL_INIT.C or make and compile your own version and simply link with your program. This way the CRTL feature switches will not mess up the program and DECC$ARGV_PARSE_STYLE will be set before the arguments are parsed.</li>
+      <li>The HP C and C++ compilers don't use system header files but system header file library. This library (DECC$RTLDEF.TLB) is located in the SYS$LIBRARY directory. If you want to look into one of the system header files you will need to extract it from the library. On some systems a copy of the system header files can be found in the SYS$COMMON:[DECC$LIB.REFERENCE.DECC$RTLDEF] directory. Be aware that these files may not be of the same version as the ones in the SYS$LIBRARY:DECC$RTLDEF.TLB library!</li>
+    </ol>
+    <p>If you have some more tips you would like to share, please mail to the address below.</p>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

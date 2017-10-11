@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>Porting Issuelist</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p><!-- edit this below -->
+    <p>This is a list of known areas where compatibility problems occur when porting from Unix to OpenVMS.</p>
+    <h2>Legend</h2>
+    <dl>
+      <dt>issue#:</dt>
+      <dd>sequential number (1...31 from cov list, rest locally generated)</dd>
+      <dt>sev/prio:</dt>
+      <dd>severity to <strong>our</strong> port (VMS encoded..)/<strong>our</strong> priority rating (VMS encoded..)</dd>
+      <dd>The severity and priority are encoded from the Openoffice porting group viewpoint.</dd>
+      <dd>(default = I/0)</dd>
+      <dt>status:</dt>
+      <dd>VMS encoded activity from the Openoffice group viewpoint.</dd>
+      <dd>CUR: activly being worked on.</dd>
+      <dd>COM: no local activity due to lack of local resources.</dd>
+      <dd>LEF: waiting for something under local control (f.i. media).</dd>
+      <dd>CEF: waiting for something under external control (f.i. patch from VMS-enginering).</dd>
+      <dd>(default = LEF)</dd>
+      <dt>description:</dt>
+      <dd>Short description of the issue.</dd>
+      <dt>explanation,status:</dt>
+      <dd>Explanation of the issue and known workarrounds, fixes and viewpoints.</dd>
+    </dl>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>issue#</th>
+            <th>sev/prio</th>
+            <th>status</th>
+            <th>description</th>
+            <th>explanation, status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1.</td>
+            <td>I/0</td>
+            <td>COM</td>
+            <td>stat and st_ino</td>
+            <td>
+              On Unix stat.h has:<br>
+              ino_t st_ino;<br>
+              but on OpenVMS it has<br>
+              ino_t st_ino[3];<br>
+              consequently the st_ino part of the stat structure is a value on Unix and a pointer on OpenVMS. Generally this means you have to replace something like<br>
+              if(inode == foo.st_ino)<br>
+              with
+              <pre>
+if(inode[0] == foo.st_ino[0] &amp;&
+inode[1] == foo.st_ino[1] &amp;&
+inode[2] == foo.st_ino[2[)
+</pre>
+            </td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>I/0</td>
+            <td>COM</td>
+            <td>write() to tcp/ip socket</td>
+            <td>write() is supposed to send as much of a buffer as it can to the output device and then return that value. On OpenVMS write() will fail if it attempts to write more than 64k bytes to a socket. So even though write() is usually used in a loop that cycles through until a buffer is written out it won't work correctly on OpenVMS if the buffer is too big. The <strong>workaround</strong> is to put in an #ifdef that restricts the transfer to &lt; 64k bytes at one time.</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>I/0</td>
+            <td>COM</td>
+            <td>use of select()</td>
+            <td>
+              OpenVMS select() only works on sockets, it does NOT work on files. Therefore code which uses select() to synchronize IO for both sockets and files will not function.<br>
+              The <strong>fix</strong> is reasonably complex. For an example see:<br>
+              <a href="http://seqaxp.bio.caltech.edu/pub/SOFTWARE/XTERM_VMS_122_TOP.ZIP">http://seqaxp.bio.caltech.edu/pub/SOFTWARE/XTERM_VMS_122_TOP.ZIP</a>
+            </td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td>E/16</td>
+            <td>CUR</td>
+            <td>foo.tar.gz</td>
+            <td>Unix doesn't care what a file is, OpenVMS does. ODS2 will only accept one ".extension" in a file name. ODS5 will accept pretty much anything that Unix will. So, if a program from unix assumes that it can append ".whatever" and have a valid file name it will fail frequently on OpenVMS. Currently the system disk cannot be ODS5, so even if a program does this and works on an ODS5 user volume, it will fail if it is run on the system disk.<br>
+            <strong>Workaround:</strong> Hunt through the code and use some other method to rename the files. My presonal preference is:<br>
+            blah.foo + .whatever -&gt; blah_foo.whatever<br>
+            <strong>(OO) using crtl_init.c from the GNV-tree promisses a (more) simple port when using only ODS5 disks. At this moment (apr-2003) we plan to do a ODS5 only port.</strong></td>
+          </tr>
+          <tr>
+            <td>5.</td>
+            <td>W/4</td>
+            <td>COM</td>
+            <td>A zillion warnings on compilation</td>
+            <td>Bad news Bucky, most software is crap and you're looking at it. The OpenVMS compilers are much pickier by default than those on other platforms and show you where the problems are. Your best bet in general is to fix the warnings you see, and make the compiler air out all the code's dirty laundry. Get your code to compile cleanly with<br>
+            /standard=ansi89/prefix=all/warn=enable=(level4,questcode)<br>
+            and you'll save yourself a lot of trouble later on. It will also make your code more portable.<br>
+            <strong>(OO) we know from the porting newsgroup and from direct contact that there will be lots of 64 bit issues and typical compiler version specific workarounds in the code. We'll try to produce clean code, but won't modify general code just for cleanlyness.</strong></td>
+          </tr>
+          <tr>
+            <td>6.</td>
+            <td>E/16</td>
+            <td>CUR</td>
+            <td>use of unix paths</td>
+            <td>
+              Most Unix code thinks that it can always take a path and add "/blah/foo.bar" to get a relative path. This will work on OpenVMS as well so long as the initial path is in Unix format. However if somebody entered: "USRDISK:[JOE.TEST]" then the full file spec will be a hybrid: "USRDISK:[JOE.TEST]/blah/foo.bar" which won't fly. Compaq C provides functions for converting back and forth between OpenVMS and Unix file/path specs. In general, you want to stick with Unix file paths since compilers on some other nonUnix platforms support them, but OpenVMS file paths are only useful on OpenVMS.<br>
+              <strong>Ultimate fix</strong>: a standard set of C routines which define a file/path structure something like:
+              <pre>
+char * nodename;
+struct ACCESSSTRU access;
+char * device;
+struct PATHSTRU path;
+char * name;
+char * type;
+char * version;
+</pre>which will hide all the delimiter information (so no more explicit testing of []:/\. etc. in the code). And even then programmers will have to stick to the routines which manipulate this structure. So long as all this information is lumped into one character string inside the code there will always be portability problems. This was a design flaw in the C language which should have been handled back when "fopen" was first defined.<br>
+              <strong>(OO) using crtl_init.c from the GNV-tree promisses a (more) simple port when using only ODS5 disks. At this moment (apr-2003) we plan to do a ODS5 only port.</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>7.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>stream-lf and long writes</td>
+            <td>The default file type produced by the C RTL on OpenVMS is stream-lf. It is very similar to the text file format on Unix EXCEPT that records can't go above 32767 bytes. Well, they can, but they get split and basically it doesn't quite work like it does on Unix.<br>
+            <strong>Workaround:</strong> If possible, use binary file types. Also complain loudly and bitterly (and most likely, futilely) to Compaq and maybe someday they'll fix it.</td>
+          </tr>
+          <tr>
+            <td>8.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>what about X11?</td>
+            <td>
+              That's a whole other subject. See: "X11/Motif portability concerns, Unix to OpenVMS" at <a href="http://seqaxp.bio.caltech.edu/www/X11_VMS_NOTES.TXT">http://seqaxp.bio.caltech.edu/www/X11_VMS_NOTES.TXT</a>
+            </td>
+          </tr>
+          <tr>
+            <td>9.</td>
+            <td>W/4</td>
+            <td>COM</td>
+            <td>data types</td>
+            <td>Ironically this will get you most often when you port from Tru64. "long int" there is 64 bits, but it's only 32 bits on OpenVMS. Tru64 also has a long long type which is 128 bits. For "long int" you can usually #ifdef in "unsigned __int64" on the OpenVMS version. For "long long" best hope that the code doesn't really need 128 bits, because you can't get it on this platform!<br>
+            <strong>(OO) we know from the porting newsgroup and from direct contact that there will be lots of 64 bit issues and typical compiler version specific workarounds in the code. We'll try to produce clean code, but won't modify general code just for cleanlyness.</strong></td>
+          </tr>
+          <tr>
+            <td>10.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>ioctl for terminals</td>
+            <td>If you encounter ioctl() calls being used to control a terminal you are out of luck. The only solution is to rewrite the code using QIO's. You will usually need to access the documentation from the source Unix, as ioctl isn't all that portable among unix's either.</td>
+          </tr>
+          <tr>
+            <td>11.</td>
+            <td>E/16</td>
+            <td>CUR</td>
+            <td>makefile</td>
+            <td>
+              OpenVMS has no "make". You can rewrite makefile to descrip.mms and use either MMS (part of DECset) or MMK (free) and obtain similar functionality. Your other choice is to install GNV from <a href="http://gnv.sourceforge.net/">http://gnv.sourceforge.net/</a>. It has bash and gmake. Use:
+              <pre>
+$ @gnv:setup
+$ bash
+bash&gt; make -n &gt; make_vms.com
+bash&gt; exit
+</pre>Then use an editor (I prefer NEDIT for this work) to convert the unix commands to their OpenVMS equivalents.<br>
+              <strong>(OO) We know we have to have DMAKE. This MAKE version is the achilles-heel of this port. The whole project depends on the availability of DMAKE. We have a alpha version working. Continued improvements in the CRTL and the porting library will make DMAKE a more stable and reliable product.</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>12.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>lines are too long to view</td>
+            <td>Many of the OpenVMS tools don't like the wide records which are often found in source code and other files originating on Unix systems. For instance, you can't TYPE many files, and EDIT/EDT chokes on long records too. I usually use NEDIT to handle these sorts of file problems.</td>
+          </tr>
+          <tr>
+            <td>13.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>why does it run so slowly?</td>
+            <td>After you complete your port you will often find that the OpenVMS version is much, much slower than the Unix version if it is very IO intensive. The ratio can be as high as 100X faster for Unix over OpenVMS. Most often this is due to the file caching speedup from Unix, plus the 2-6X slowdown that RMS imposes on record oriented files (as measured on a RAMdisk.) Binary IO speeds will be closer, the IO slowdown is primarily a problem for text/record oriented files. You can improve performance by using the SET RMS command to increase the block and buffer sizes. Also increase tbe /extend value to avoid a flurry of short extends. If you know ahead of time the final size of the output file set extend to that. (You can also set these parameters in the code by using OpenVMS specific extensions.) Improvements in the OpenVMS file caching system are in late stages of development, an dthose should help once they appear on production systems.<br>
+            That said, watch out for the use of, umm, unusual file techniques on programs from Unix. For instance, you may find frequent calls to freopen(), or other program methods which cause the disk heads to fly back and forth between the front of the file and the end. These sorts of bad design are masked on Unix by the file caching system, but are exposed in all their glory on OpenVMS.<br>
+            Programs may also run slowly on OpenVMS, or not at all, if they expect to be able to grab vast amounts of memory. User accounts on OpenVMS are usually allocated a relatively small amount of virtual and physical memory.<br>
+            <strong>(OO) We hope to reach a stadium we can experience this problem ourselves ;-).</strong></td>
+          </tr>
+          <tr>
+            <td>14.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>why do I get two (or more) copies of the output file?</td>
+            <td>Many Unix programs try to determine if they can write an output file by doing an fopen, and if it succeeds, doing another. On Unix the second one overwrites the first and no one's the wiser. On OpenVMS you get two versions. Sometimes scratch files are used in a similar manner, only for those they tend to be opened and closed many more times, resulting in a long string of files.<br>
+            <strong>Fix</strong>: find the offending second fopen() and #ifdef it and the fclose() before it out of the code. For scratch files, either reopen the existing file or be sure to delete the file after the fclose().</td>
+          </tr>
+          <tr>
+            <td>15.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>fseek/ftell don't work right</td>
+            <td>These assume a Unixlike file organization which may or may not be present on files being read by a C program in OpenVMS.<br>
+            <strong>Fix</strong>: rewrite the code to use fgetpos() and fsetpos().</td>
+          </tr>
+          <tr>
+            <td>16.</td>
+            <td>W/4</td>
+            <td>CUR</td>
+            <td>linker can't resolve ReadDir</td>
+            <td>By default Unix is case sensitive pretty much everywhere. OpenVMS is not. So the symbol "ReadDir" goes to "readdir" which is the standard function. You'll also see this a lot where people have a variable "foobar" and a function "Foobar". It's generally a problem any place code uses case to distinguish between variables and/or functions. (Constants, which only the compiler sees, tend not to cause so much havoc.) Code written this way is really a pain to port because you (usually) didn't write it, and so tend not to notice these minor case differences. The bugs which can result if the linker does manage to resolve things, but incorrectly, can be very messy.<br>
+            <strong>Preferred fix</strong>: rewrite the code so that all symbols are unique when uppercased.<br>
+            <strong>Other fix</strong>: use the compiler switch /names=as_is, which preserves case.<br>
+            <strong>(OO) We'll try to produce clean code, but won't modify general code just for cleanlyness.</strong></td>
+          </tr>
+          <tr>
+            <td>17.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>compiler gives an implicit function warning for a common function</td>
+            <td>This happens either because the appropriate header has been omitted or because the function in question is #ifdef'd off by language standard specific defines. Most Unix compilers are really sloppy about which function is in which language spec. Ok, they're not sloppy, but the programmers never put them into a mode where they check. So some function which is an XOPEN extension compiles in without warnings on Unix but raises a warning on OpenVMS.<br>
+            <strong>Fix</strong>: Use /define=(_XOPEN_SOURCE,_XOPEN_SOURCE_EXTENDED,_POSIX_SOURCE) as required to get the right lines of the header files processed.</td>
+          </tr>
+          <tr>
+            <td>18.</td>
+            <td>W/2</td>
+            <td>COM</td>
+            <td>where are the standard header files?</td>
+            <td>They always live in the text library:<br>
+            SYS$COMMON:[SYSLIB]DECC$RTLDEF.TLB<br>
+            but may also have been expanded into<br>
+            SYS$SYSDEVICE:[SYS0.SYSCOMMON.DECC$LIB.REFERENCE.DECC$RTLDEF]*.h<br>
+            <strong>(OO) We installed two platforms (solaris and LINUX) just for refence.</strong></td>
+          </tr>
+          <tr>
+            <td>19.</td>
+            <td>E/4</td>
+            <td>COM</td>
+            <td>what's wrong with #include &lt;../../foo/woo/blah.h&gt;?</td>
+            <td>Putting paths into includes is BAD, EVIL, YUCKY, etc., and unfortunately, fairly common. The example shown here is the worst case - you'll only ever have a hope of compiling this if the default directory is in exactly the right place.<br>
+            <strong>Preferred fix</strong>: Whenever possible eliminate the paths from the code and use /include=([-],[],[.foo]) and the like to tell the compiler where to find them. (These are the equivalent of using on Unix: -I.. -I. -Ifoo)<br>
+            <strong>Desperate measures fix</strong>: For an include like &lt;/foo/woo/moo/blah.h&gt; you can define a concealed logical "foo" which points to the correct place in the directory structure on your system and Compaq C will be able to look in the [.woo.moo] subdirectory of it and find the file blah.h.<br>
+            <strong>(OO) We made a <a href="/openoffice/current/oovms.html">oovms.com</a> file containing all discovered 'concealed logicals'</strong></td>
+          </tr>
+          <tr>
+            <td>20.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>the compiler includes "foo.h" but not "Foo.h"</td>
+            <td>OpenVMS is case insensitive. Even ODS5, which will preserve case, will not distinguish between these two files. Usually this shows up long before the compiler gets a shot at it when the archive is unpacked and complains/warns that it is overwriting FOO.H.<br>
+            <strong>Fix</strong>: rewrite the code to use case invariant file names.<br>
+            <strong>(OO) We'll try to produce clean code, but won't modify general code just for cleanlyness.</strong></td>
+          </tr>
+          <tr>
+            <td>21.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>how do I find a memory access problem?</td>
+            <td>
+              Often code which ran "correctly" on one platform will fail miserably on another if it access memory out of bounds. Such "working" code will usually fail when you port it to OpenVMS just because variables will be located in memory differently.<br>
+              One method of dealing with this is to do:
+              <pre>
+#ifdef __VMS
+#define free myfree
+int decc$free(void *ptr); /* prototype for decc$free */
+
+   void myfree( void *ptr) {
+
+#include &lt;lib$routines.h&gt;
+#include &lt;ssdef.h&gt;
+
+   if(decc$free(ptr) != 0){
+      (void) printf("illegal free() operation\n");
+      (void) lib$signal(SS$_ACCVIO);
+   }
+}
+#endif /* __VMS */
+</pre>decc$free will complain if you try to free a region of memory, whereas free() cannot warn you about the mayhem which is being committed. Many memory errors begin or end with an invalid free() and this will catch them.<br>
+              Here is a method suggested by Hoff (Stephen) Hoffman and posted in comp.os.vms<br>
+              Because of the likelyhood of application programming errors -- trampling past the end of the allocated storage being most common -- I almost never call malloc and free directly. Further, by intercepting the memory allocation calls, I can call lib$get_vm and similar, particularly using VM zones, and can tailor the particular behaviour most appropriate. With a "temporary mempory pool" VM zone, I can also flush all allocations in that zone in a single call, so that I can easily reset the pool... Also available with VM zones are the tools to traverse and report on the VM zones.<br>
+              Jacket your calls to malloc and free. Code the malloc jacket to add a quadword at the front of the allocated area and a quadword at the back and then call the actual malloc asking for the requested size plus sixteen bytes. Before returning the allocated storage -- the base address of the allocated block plus eight -- fill the front and back quadword with a known (and no zero bytes in the quadword) pattern, possibly based on the address and size, etc. Code the free jacket to check for the patterns and scream if it finds errors, and to call free if not -- remembering to back up the base of the buffer by eight bytes from what the caller passed in. (I typically refer to these quadwords as "fenceposts" -- straying from the expected behaviour is quite easy to track down.)<br>
+              If you were on more recent OpenVMS Alpha version, you could use the heap analyzer in the OpenVMS Debugger to poke around.
+            </td>
+          </tr>
+          <tr>
+            <td>22.</td>
+            <td>E/24</td>
+            <td>CEF</td>
+            <td>fork()</td>
+            <td>OpenVMS vfork() doesn't work like fork(). Search your code for fork() and if you find it, refer to gnuplot, or some other already ported application, for an example of how to replace the code.<br>
+            <strong>(OO) We know we have to have DMAKE. This MAKE version is the achilles-heel of this port. The whole project depends on the availability of DMAKE. We have a alpha version (non-distributed version) working. The distibuted version depends on the fork() function. Continued improvements in the CRTL and the porting library will make DMAKE a more stable and reliable product.</strong></td>
+          </tr>
+          <tr>
+            <td>23.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>where do I look for help?</td>
+            <td>
+              Post to the newsgroup comp.os.vms<br>
+              Use dejanews power search at<br>
+              <a href="http://www.dejanews.com/home_ps.shtml">http://www.dejanews.com/home_ps.shtml</a><br>
+              to search that newsgroup. (Be aware that the default setting only goes back about a year, use the date fields on the bottom to look back further.)<br>
+              "Ask the wizard" at<br>
+              <a href="http://h71000.www7.hp.com/wizard/">http://h71000.www7.hp.com/wizard/</a><br>
+              Get a copy of the freeware CD or other already ported programs and scan them for solutions to the current problem. The freeware CD is on the net at:<br>
+              <a href="http://h71000.www7.hp.com/openvms/freeware/freeware.html">http://h71000.www7.hp.com/openvms/freeware/freeware.html</a>
+            </td>
+          </tr>
+          <tr>
+            <td>24.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>system()</td>
+            <td>system() passes a command line to a subprocess, executes it, and then returns. Since the command line is by definition OS specific, any instances of system() in ported code must inevitably be rewritten. Ideally they should be removed entirely - find some way to do perform the desired action in code rather than by running a subprocess.</td>
+          </tr>
+          <tr>
+            <td>25(JEM).</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>getenv() behavior</td>
+            <td>The behavior of getenv() depends on the version and ECO of the DEC C RTL and possibly logical names defined on your system.<br>
+            <strong>Fix</strong>: use sys$trnlnm() instead.<br>
+            (DRM comment: I've also observed instances where symbols and logicals interfered with the expected behavior. This happened primarily when the symbol/logical involved was a "standard" symbol that getenv handled differently. For instance, if "term" was previously defined in DCL than getenv("term") would return the user defined value, which often was not at all the desired quantity, and the program would fail.)</td>
+          </tr>
+          <tr>
+            <td>26(JEM).</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>mmap() on text files</td>
+            <td>mmap() will open files in a binary mode. That is fine so long as the file is stream-lf or binary. However, if it is some other type of RMS file the program doing this will likely fail when it encounters the embedded RMS information.<br>
+            <strong>Fix</strong> (DRM): require input files to be either stream-lf or binary, or if that is not possible, do not use mmap(). Either way will likely require extensive recoding.</td>
+          </tr>
+          <tr>
+            <td>27(JEM).</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>/tmp and others map to locations, overridden by logical names</td>
+            <td>Apparently some versions of the C RTL map /tmp to SYS$SCRATCH /dev/null to NLA0:, and perhaps some others are translated as well. In the case of /tmp if you have defined a logical TMP and try to write to /tmp/foo.txt it will go to the directory set by the logical. This is consistent with the usage of logicals for paths which are not "special". Just be aware that the logical TMP or DEV may have been defined with some other meaning, so that /dev/null might end up creating a real file NULL in the directory pointed to by the logical DEV!</td>
+          </tr>
+          <tr>
+            <td>28(JEM).</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>setuid()</td>
+            <td>The setuid() function is a stub and just returns 0 to indicate "success". That may not be optimal, since it really failed (the UID did not change.) User written setuid() is possible, but when the transfer is to an account which does not have read access to the calling processes job table, then SYS$SCRATCH and SYS$LOGIN will not be available.</td>
+          </tr>
+          <tr>
+            <td>29(JEM).</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>uid_t/gid_t size inconsistencies</td>
+            <td>getuid() returns 16 bits (the member part of a UIC) with some compiler flags or on VMS 6.x and under, and 32 bits (the whole UIC) otherwise. stat() returns a 32 bit uid and a 16 bit gid. setuid() (user written) will need a 32 bit uid value.</td>
+          </tr>
+          <tr>
+            <td>30.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>Files produced by the C RTL have invalid RMS attributes</td>
+            <td>
+              This isn't a portability problem per se, but rather a general C RTL problem which will affects all ported programs. The problem is that sequential text files written by the C RTL default to having a Longest Record value of 32767, and this can cause havoc with some other programs which foolishly believe that the value is accurate. For instance, SORT will allocate 32767 bytes/record for any such file, so that it cannot easily sort even a relatively small file. ( The work around in this instance is to either use SORT/PROCESS=tag or to figure out how big LRL is and repair the file with SET FILE/ATTRIB=(lrl:whatever) before sorting it.)<br>
+              <strong>Partial fix</strong>: (This is really a sad excuse for a solution but it's all there is)
+              <pre>
+$ define/user decc$default_lrl 100
+</pre>will set the LRL value to 100 instead of 32767. However, the 100 can be just as wrong as the 32767 - write a record of length 16k into that file and the RMS value will stay at 100. The C RTL should really just keep track of the records it writes and put the REAL value.<br>
+              Section 1.6 of the Compaq C Run-Time Library Reference Manual is the only place this logical is mentioned:
+              <pre>
+In OpenVMS Version 7.0 the default LRL value on
+stream files was changed from 0 to 32767. This
+change caused significant performance degradation
+on certain file operations such as sort.
+<br><br>This is no longer a problem. The Compaq C
+Run-Time Library now lets you define the logi-
+cal DECC$DEFAULT_LRL to change the default
+record-length value on stream files.
+<br>The Compaq C Run-Time Library first looks for this
+logical. If it is found and it translates to a numeric
+value between 0 and 32767, that value is used for the
+default LRL.
+</pre>I disagree emphatically that "this is no longer a problem". The value of LRL set by DECC$DEFAULT_LRL is every bit as wrong as the default LRL. Its only advantage is that it can be "small and wrong" rather than "large and wrong."
+            </td>
+          </tr>
+          <tr>
+            <td>31.</td>
+            <td>I/0</td>
+            <td>LEF</td>
+            <td>Where do I obtain tools and libraries for porting?</td>
+            <td>
+              bash,gmake, and many others are part of GNV <a href="http://gnv.sourceforge.net/">http://gnv.sourceforge.net/</a><br>
+              qt 2.1 http://www.saalhausen.de/lehrig/qt21_bck.zip<br>
+              xforms 0.88 (warning, bugs in some versions of the C RTL and some graphics drivers are triggered by this software! Includes a port of XPM in shareable format) <a href="http://world.std.com/~xforms/">http://world.std.com/~xforms/</a><br>
+              parallel programming: pvm, tcgmsg (maybe MPICH too, but it wasn't there as this was written) <a href="ftp://v36.chemie.uni-konstanz.de/">ftp://v36.chemie.uni-konstanz.de/</a><br>
+              OpenVMS Porting Library from Compaq (released 22-JUN-2000) <a href="http://www.openvms.digital.com/openvms/products/ips/porting.html">http://www.openvms.digital.com/openvms/products/ips/porting.html</a><br>
+              Many libraries may be found in already completed ports see:<br>
+              <a href="http://www.openvms.digital.com/openvms/freeware/index.html">http://www.openvms.digital.com/openvms/freeware/index.html</a><br>
+              <a href="http://www.openvms.digital.com/openvms/freeware/freeware.html">http://www.openvms.digital.com/openvms/freeware/freeware.html</a><br>
+              Use advanced search from <a href="http://www.dejanews.com">http://www.dejanews.com</a> to look for posts in <a href="http://groups.google.com/groups?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;group=comp.os.vms">comp.os.vms</a> concerning the package of interest.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

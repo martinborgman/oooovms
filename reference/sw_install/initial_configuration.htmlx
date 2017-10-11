@@ -1,0 +1,1123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+
+<head>
+  <title>
+    porting:        OpenOffice.org for OpenVMS
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="version" content="2.6.2.4.8" />
+  <style type="text/css">
+    /*<![CDATA[*/
+    <!--
+    @import url("/branding/css/tigris.css");
+    @import url("/branding/css/inst.css");
+    -->
+    /*]]>*/
+  </style>
+  <link rel="stylesheet" type="text/css" href="/branding/css/print.css" media="print" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO" />
+  <meta name="description" content="OpenOffice.org: The Open Office Suite" />
+
+</head>
+
+<body>
+  <p class="nonscreen"><a href="#content">Skip to content</a></p>
+
+
+  <div id="banner">
+    <div>
+      <a href="http://www.openoffice.org">
+      <img src="/branding/images/ooo-logo.png"
+           alt="Openoffice.org" id="ooologo" />
+      </a>
+    </div>
+
+    <div id="login">
+      <form name="bannerloginform" id="bannerloginform" action="http://porting.openoffice.org/servlets/TLogin" method="post">
+        <div>
+          <label for="loginID">User:</label>
+          <input type="text" alt="username" name="loginID" id="loginID" class="inputtext" size="10" maxlength="32" />
+          <label for="password">Password:</label>
+          <input type="password" alt="password" name="password" id="password" class="inputtext" size="10" maxlength="32" />
+          <input type="submit" name="Login" id="Button" class="inputbutton" value="Login" /> 
+          <a href="http://www.openoffice.org/servlets/Join">Register</a>  | 
+          <a href="http://www.openoffice.org/servlets/TLogin">Login help</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toptabs">
+    <ul class="tabs">
+      <li>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </li>
+
+      <li> <a href="http://download.openoffice.org/index.html" title="Get OpenOffice.org or browse for additions">Download</a> </li>
+
+      <li> <a href="http://support.openoffice.org/index.html" title="The place for both free and commercial support on OpenOffice.org">Support</a> </li>
+
+      <li> <a href="http://contributing.openoffice.org/index.html" title="Become part of the largest OpenSource project!">Contributing</a> </li>
+
+      <li class="th">   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </li>
+
+      <li>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </li>
+
+      <li> <a href="http://about.openoffice.org/index.html" title="Background information on OpenOffice.org">About</a> </li>
+
+    </ul>
+  </div>
+
+  <div class="contentpart" id="contextualinformation">
+    <div id="breadcrumbs">
+      <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+      <strong>
+        <a href="http://porting.openoffice.org/">porting</a>
+      </strong>
+    </div>
+  </div>
+
+  <div id="body">
+    <table id="main" summary="body">
+      <tr>
+        <td id="leftcol">
+          <div id="navcolumn">
+            <div id="projecttools" class="toolgroup">
+              <div class="label">
+                <strong>Project tools</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a>
+                </div>  
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+                </div>
+              </div> 
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a>
+                </div>
+              </div>
+            </div>
+            <form action="http://porting.openoffice.org/servlets/Search" method="get">
+              <div id="searchbox" class="toolgroup">
+                <div class="label">
+                  <strong>Search</strong>
+                </div>
+                <div class="body">
+                  <div>
+                    <select name="scope">
+                      <option value="projectAndSubs" selected="selected">This project</option>
+                      <option value="domain" >All projects</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="hidden" name="resultsPerPage" value="40" /> 
+                    <input type="text" name="query" size="10" /> 
+                    <input type="submit" name="Button" value="Go" />
+                  </div>
+                  <div>
+                    <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>
+                  </div>
+                  <div>
+                    <a href="http://support.openoffice.org/search.html">Google search</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="helptext" class="toolgroup">
+              <div class="label">
+                <strong>How do I...</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://www.openoffice.org/sitemap.html" class="helplink">Sitemap</a>
+                </div>
+                <div><a href="http://www.openoffice.org/faq.html" class="helplink">FAQ</a></div>
+                <div>
+                  <a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+                    title="Note: link may open in new window" class="helplink">Get help?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strut">
+            &nbsp;
+          </div>
+        </td>
+
+        <td id="bodytd">
+          <div id="bodycol">
+            <p class="nonscreen"><a name="content">start:</a></p>
+
+            <!--#config timefmt="%Y-%m-%d" --> 
+ 
+	<h1>
+	        Reference section: initial configutation of OpenVMS 
+	</h1>
+	<p>
+	        <i>
+	                Updated <!--#echo var="LAST_MODIFIED" -->, by 
+	                <a href="mailto:ton.vanderzwet@oooovms.dyndns.org">
+	                        Ton van der Zwet
+	                </a>
+	        </i>
+	</p>
+<!-- edit this below -->
+
+	<h2>
+		Description of the initial configuration of Alpha OpenVMS.
+	</h2>
+	<hr />
+	<p>
+We prepared a disk containing the files we need during the following
+sessions. In the directory [download] all the distributionsets of patches,
+layered and third party products are collected. In the direcctory [build]
+are the hobbyistlicense files obtained from the hobbyist program.
+You may need to edit the files to remove the linewrapping.
+For information about the OpenVMS hobbyist see your local VMS sig or
+<a href="http://www.montagar.com/">Montagar Software Concepts</a>.
+	</p>
+	<blockquote>
+	<pre>
+$ <b>show device d</b>
+
+Device                  Device           Error    Volume         Free  Trans Mnt
+ Name                   Status           Count     Label        Blocks Count Cnt
+STAR$DKA0:              Online               0
+STAR$DKA100:            Online               0
+STAR$DKA200:            Online               0
+STAR$DKA300:            Online               0
+STAR$DKA400:            Online               0
+STAR$DKA500:            Online               0
+STAR$DKA600:            Mounted              0  ALPHASYS      15091554   256   1
+STAR$DQA0:              Online               1
+STAR$DQA1:              Online               1
+STAR$DQB0:              Online               0
+STAR$DQB1:              Online               1
+STAR$DVA0:              Online               0
+
+$ <b>mount star$dka100 oo1src oo1src</b>
+%MOUNT-I-MOUNTED, OO1SRC mounted on _STAR$DKA100:
+$ <b>set def oo1src:[000000]</b>
+$ <b>dir</b>
+
+Directory OO1SRC:[000000]
+
+000000.DIR;1        BACKUP.SYS;1        BADBLK.SYS;1        BADLOG.SYS;1       
+BITMAP.SYS;1        build.DIR;1         CONTIN.SYS;1        CORIMG.SYS;1       
+download.DIR;1      INDEXF.SYS;1        SECURITY.SYS;1      VOLSET.SYS;1       
+
+Total of 12 files.
+$ <b>set def [build]</b>
+$ <b>dir</b>
+
+Directory OO1SRC:[build]
+
+alphalic2004.txt;1  laylic2004.txt;1    vaxlic2004.txt;1    
+
+Total of 3 files.
+$ <b>@alphalic2004.txt</b>
+$ <b>@laylic2004.txt</b>
+$ <b>license load</b>
+%LICENSE-I-LOADED, DEC ACMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMS-REM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMSXP-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ACMSXP-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ADA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ADA-PDO was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-DW-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-SERVER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-SERVER-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-VT-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-VT-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC ALLIN1-MAIL-WAN-SERVER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC BASIC was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC C was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC CMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC COBOL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC CXX-V was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-APP-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-CDS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCE-SECURITY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCPS-OPEN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DCPS-PLUS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECDCS-SRV-VA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECMIGRATE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECRAM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECWRITE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DECWRITE-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DESKTOP-ACMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DFG was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DFS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DQS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTM was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DTR-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DVNETEND was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DVNETEXT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-CESKY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-DEUTSC was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-ESPANO was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-FRANCA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANYU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HANZI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-HEBREW was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-ITALIA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-JAPANE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-MAGYAR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-POLSKI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-RUSSKI was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-SLOVEN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-MOTIF-UI-SVENSK was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC DW-SNA-3270-TE-VMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC EXT-MATH-LIB was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC EXT-MATH-LIB-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-RT-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FMS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT-UI-HANGUL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORMS-RT-UI-HANYU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC FORTRAN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-RT-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS3D was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC GKS3D-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC LSE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MACRO64 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MAILBUS-400-API was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MAILBUS-400-MTA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMOV-DV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMOV-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC MMS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC NOTES was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-ALPHA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-ALPHA-USER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPENVMS-HOBBYIST was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC OPS5 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PASCAL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PCA was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS-RUNTIME was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS-RUNTIME-UI-JAPAN was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC PHIGS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RMSJNL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RTR-CL was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC RTR-SVR was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC SQL-DEV was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC SSU was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-NFS was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC UCX-IP-RT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VAXCLUSTER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VAXSET was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VMS-UI-JAPANESE was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VMSCLUSTER was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC VOLSHAD was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X25 was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X25-CLIENT was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X500-ADMIN-FACILITY was successfully loaded with 0 units
+%LICENSE-I-LOADED, DEC X500-DIRECTORY-SERVER was successfully loaded with 0 units
+$
+	</pre>
+	</blockquote>
+	<p>
+We increase the pagefilesize quite dramaticly because we expect to work
+with a few people on the build of OpenOffice. As this is a mayor project we don't
+want to run into a 'pagefile badly fragmented' situation...;-)
+If you work alone or are just doing 'normal' things you probably won't need
+to increase the pagefilesize.
+	</p>
+	<blockquote>
+	<pre>
+$ <b>@sys$update:swapfiles</b>
+To leave a file size at its current value type a
+carriage return in response to its size prompt.
+Current file sizes are:
+
+Directory SYS$SPECIFIC:[SYSEXE]
+
+PAGEFILE.SYS;1          1056800
+SYSDUMP.DMP;1            200822
+SWAPFILE.SYS;1            44200
+
+Total of 3 files, 1301822 blocks.
+
+There are 15091497 available blocks on SYS$SYSDEVICE.
+
+Enter new size for paging file: <b>5000000</b>
+%SYSGEN-I-EXTENDED, SYS$SPECIFIC:[SYSEXE]PAGEFILE.SYS;1 extended
+Enter new size for system dump file: <b><i>&lt;return&gt;</i></b>
+Enter new size for swapping file: <b><i>&lt;return&gt;</i></b>
+
+************************************************************************
+*  Please reboot in order for the new files to be used by the system.  *
+*  After rebooting, purge obsolete copies of the files.                *
+*  DO NOT delete the old files until after the reboot.                 *
+************************************************************************
+	</pre>
+	</blockquote>
+	<p>
+We discovered in the early porting days that using shadowed disks
+not only saved the day in case of diskfailures, but that avoiding the '$'
+sign in disknames made porting more easy. Unix (and thus GNV) thought that
+whereever there is a $ sign, it had to do something we didn't expect...;-)
+So every disk we use is at least a single member shadowset.
+	</p>
+	<blockquote>
+	<pre>
+$ <b>edit sys$system:modparams.dat</b>
+	</pre>
+	</blockquote>
+	<p>
+Add the following lines during the editing session
+	</p>
+	<blockquote>
+	<pre>
+ADD_GBLSECTIONS=512
+MIN_GBLSECTIONS=2000    ! sufficient for now...
+MIN_GBLPAGES=40000000   ! sufficient for now...
+MIN_channelcnt=2048     ! for unzip ..
+min_GH_res_data=512     ! for motif
+add_npagedyn=1000000    ! for motif
+add_pagedyn=500000      ! for motif
+min_gh_res_code=4096    ! for motif
+min_GH_EXEC_DATA=1024
+min_GH_EXEC_CODE=2048
+max_wsmax=150000
+!
+! parameters for shadowing...
+!
+ALLOCLASS=1
+SHADOWING=2
+SHADOW_SYS_DISK=1
+SHADOW_SYS_UNIT=100
+!
+!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PAGEFILE=0              ! prevent addaption by autogen
+	</pre>
+	</blockquote>
+	<p>
+Save your changes and leave the editor (Ctrl-Z or F10). Run outogen to make the system aware o these new system settings.
+	</p>
+	<blockquote>
+	<pre>
+$ <b>@sys$update:autogen savparams setparams feedback</b>
+%AUTOGEN-I-BEGIN, SAVPARAMS phase is beginning.
+%AUTOGEN-I-FEEDBACK, Gathering feedback
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:AGEN$FEEDBACK.DAT
+        has been created. You may wish to purge this file.
+%AUTOGEN-I-END, SAVPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GETDATA phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:PARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GETDATA phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENPARAMS phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$MANAGER:VMSIMAGES.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:SETPARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GENPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENFILES phase is beginning.
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]SYSDUMP.DMP;1 extended
+%SYSGEN-I-CREATED, SYS$SYSROOT:[SYSEXE]SWAPFILE.SYS;2 created
+
+******************
+%AUTOGEN-W-REPORT, Warnings were detected by AUTOGEN.  Please review the
+        information given in the file SYS$SYSTEM:AGEN$PARAMS.REPORT
+******************
+
+%AUTOGEN-I-REPORT, AUTOGEN has produced some informational messages which
+        have been stored in the file SYS$SYSTEM:AGEN$PARAMS.REPORT.  You may
+        wish to review the information in that file.
+
+%AUTOGEN-I-END, GENFILES phase has successfully completed.
+%AUTOGEN-I-BEGIN, SETPARAMS phase is beginning.
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:02:50.39  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SYSGEN-I-WRITECUR, CURRENT system parameters modified by process ID 00000211 in
+to file SYS$SYSROOT:[SYSEXE]ALPHAVMSSYS.PAR;2
+
+%AUTOGEN-I-SYSGEN, parameters modified
+%AUTOGEN-I-END, SETPARAMS phase has successfully completed.
+$ <b>type SYS$SYSTEM:AGEN$PARAMS.REPORT</b>
+AUTOGEN Parameter Calculation Report on node: STAR
+  This information was generated at 22-APR-2004 15:02:40.16
+  AUTOGEN was run from SAVPARAMS to SETPARAMS using FEEDBACK
+
+
+Processing Parameter Data files
+-------------------------------
+
+Including parameters from: SYS$SYSTEM:MODPARAMS.DAT
+
+The following concerns were detected within MODPARAMS.DAT
+
+** Note ** - Multiple ADD values for ADD_GBLSECTIONS found.
+        VMS value (280) combining with MODPARAMS value (512)
+        Value used is 792
+
+** Note ** - Multiple MIN values found for MIN_GBLSECTIONS.
+        Using MODPARAMS value (2000) which is superseding VMS value (600)
+
+** Note ** - Multiple MIN values found for MIN_GBLPAGES.
+        Using MODPARAMS value (40000000) which is superseding VMS value (150000)
+
+** WARNING ** - The system was up for less than 24 hours (uptime = 0 hrs)
+   when the feedback information was recorded. This could result in feedback
+   information that does not accurately reflect your typical workload.
+   However, this feedback information will be used in this run.
+
+Feedback information was collected on 22-APR-2004 15:02:39.63
+  Old values below are the parameter values at the time of collection.
+  The feedback data is based on 0 hours of up time.
+  Feedback information will be used in the subsequent calculations
+
+
+Parameter information follows:
+------------------------------
+
+MAXPROCESSCNT parameter information:
+        Feedback information.
+           Old value was 345, New value is 276
+           Maximum Observed Processes: 14
+
+Information on OpenVMS executable image Processing:
+
+        Processing SYS$MANAGER:VMS$IMAGES_MASTER.DAT
+           Total global pagelets counted = 49186
+           Total global sections counted = 207
+           Total global pagefile counted = 320
+           Total resident code pages counted = 458
+           Total resident data pages counted = 0
+
+
+GBLPAGES parameter information:
+        Feedback information.
+           Old value was 971513, New value is 40000000
+           Maximum used GBLPAGES: 110000
+           Global buffer requirements: 49152
+           Pagelets reserved for memory resident sections: 0
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 918432.  The value 40000000
+           will be used in accordance with the following requirements:
+           GBLPAGES minimum value is 40000000.
+
+GBLSECTIONS parameter information:
+        Feedback information.
+           Old value was 630, New value is 2000
+           Current used GBLSECTIONS: 494
+           Memory resident sections: 0
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 590.  The value 2000
+           will be used in accordance with the following requirements:
+           GBLSECTIONS has been increased by 512.
+           GBLSECTIONS minimum value is 2000.
+
+LOCKIDTBL parameter information:
+        Feedback information.
+           Old value was 1792, New value is 1792
+           Current number of locks: 245
+           Peak number of locks: 2048
+
+RESHASHTBL parameter information:
+        Feedback information.
+           Old value was 2048, New value is 2048
+           Current number of resources: 241
+
+MSCP_BUFFER parameter information:
+        Feedback information.
+           Old value was 1024, New value is 1024
+           MSCP server I/O rate: 0 I/Os per 10 sec.
+           I/Os that waited for buffer space: 0
+           I/Os that fragmented into multiple transfers: 0
+
+SCSCONNCNT parameter information:
+        Feedback information.
+           Old value was 5, New value is 5
+           Peak number of nodes: 1
+           Number of CDT allocation failures: 0
+
+SCSRESPCNT parameter information:
+        Feedback information.
+           Old value was 300, New value is 300
+           RDT stall count: 0
+
+SCSBUFFCNT parameter information:
+        Feedback information.
+           Old value was 50, New value is 50
+           CIBDT stall count: 0
+
+NPAGEDYN parameter information:
+        Feedback information.
+           Old value was 3252224, New value is 4096576
+           Maximum observed non-paged pool size: 3252224 bytes.
+           Non-paged pool request rate: 17 requests per 10 sec.
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 3096576.  The value 4096576
+           will be used in accordance with the following requirements:
+           NPAGEDYN has been increased by 1000000.
+           NPAGEDYN minimum value is 1998848.
+
+LNMSHASHTBL parameter information:
+        Feedback information.
+           Old value was 512, New value is 512
+           Current number of shareable logical names: 396
+
+ACP_DIRCACHE parameter information:
+        Feedback information.
+           Old value was 686, New value is 686
+           Hit percentage: 100%
+           Attempt rate: 46 attempts per 10 sec.
+
+ACP_DINDXCACHE parameter information:
+        Feedback information.
+           Old value was 171, New value is 171
+           Hit percentage: 100%
+           Attempt rate: 33 attempts per 10 sec.
+
+ACP_HDRCACHE parameter information:
+        Feedback information.
+           Old value was 686, New value is 686
+           Hit percentage: 77%
+           Attempt rate: 25 attempts per 10 sec.
+
+ACP_MAPCACHE parameter information:
+        Feedback information.
+           Old value was 171, New value is 171
+           Hit percentage: 80%
+           Attempt rate: 3 attempts per 10 sec.
+
+PAGEDYN parameter information:
+        Feedback information.
+           Old value was 3489792, New value is 3670304
+           Current paged pool usage: 1499296 bytes.
+           Paged pool request rate: 19 requests per 10 sec.
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 3170304.  The value 3670304
+           will be used in accordance with the following requirements:
+           PAGEDYN has been increased by 500000.
+           PAGEDYN minimum value is 600000.
+
+GH_EXEC_CODE parameter information:
+        Feedback information.
+           Old value was 1024, New value is 2048
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1024.  The value 2048
+           will be used in accordance with the following requirements:
+           GH_EXEC_CODE minimum value is 2048.
+
+GH_EXEC_DATA parameter information:
+        Feedback information.
+           Old value was 512, New value is 1024
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 256.  The value 1024
+           will be used in accordance with the following requirements:
+           GH_EXEC_DATA minimum value is 1024.
+
+GH_RES_CODE parameter information:
+        Feedback information.
+           Old value was 1024, New value is 4096
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1024.  The value 4096
+           will be used in accordance with the following requirements:
+           GH_RES_CODE minimum value is 4096.
+
+GH_RES_DATA parameter information:
+        Feedback information.
+           Old value was 0, New value is 512
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 0.  The value 512
+           will be used in accordance with the following requirements:
+           GH_RES_DATA minimum value is 512.
+
+VAXCLUSTER parameter information:
+        - AUTOGEN parameter calculation has been overridden.
+           The calculated value was 1.  The value 0
+           will be used in accordance with the following requirements:
+           VAXCLUSTER has been specified by a hard-coded value of 0.
+
+ Calculations for page, swap, and dump files.
+ --------------------------------------------
+
+    Errorlog dumpfile calculations:
+
+        No errorlog dump file modifications should be made.
+        Errorlog dumpfile will remain at 42 blocks.
+
+    Dump file calculations:
+
+        A 290638 block dump file should be created.
+
+    Page file calculations:
+
+        PAGEFILE information:
+        Feedback information.
+           Old value was 5000000, New value is 5000000
+           Maximum observed usage: 0
+        Override Information - parameter calculation has been overridden.
+           The calculated value was 1056800.  The new value is 5000000.
+           PAGEFILE calculation has been set to current size by user.
+           PAGEFILE will not be modified. The file size is within 10%.
+
+    Swap file calculations:
+
+        SWAPFILE1_SIZE information (for SYS$SYSTEM:SWAPFILE.SYS):
+        Feedback information.
+           Old value was 44200, New value is 35300
+           Maximum observed usage (blocks): 0
+           SWAPFILE1_SIZE will be modified to hold 35300 blocks
+
+You will want to purge SYS$SYSTEM:SWAPFILE.SYS after rebooting.
+$ 
+$ <b>reboot</b> <b><i>&lt;reboot is a symbol defined in the standard login.com for system&gt;</i></b>
+
+
+        SHUTDOWN -- Perform an Orderly System Shutdown
+                    on node STAR
+
+
+%SHUTDOWN-I-OPERATOR, this terminal is now an operator's console
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:35.50  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%SHUTDOWN-I-DISLOGINS, interactive logins will now be disabled
+%SET-I-INTSET, login interactive limit = 0, current interactive value = 1
+%SHUTDOWN-I-STOPQUEUES, the queues on this node will now be stopped
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:36.10  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+
+SHUTDOWN message on STAR from user SYSTEM at _STAR$OPA0:   15:57:36
+STAR will shut down in 0 minutes; back up LATER.  Please log off node STAR.
+SHUTDOWN
+
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:36.10  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+1 terminal has been notified on STAR.
+%SHUTDOWN-I-SITESHUT, the site-specific shutdown procedure will now be invoked
+%SHUTDOWN-I-STOPUSER, all user processes will now be stopped
+%SHUTDOWN-I-STOPACMESRV, the ACME server will now be shut down
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:43.62  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVEREXIT, ACME_SERVER exiting
+
+%SHUTDOWN-I-STOPAUDIT, the security auditing subsystem will now be shut down
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.11  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Audit server shutting down
+Event time:               22-APR-2004 15:57:45.11
+PID:                      00000211        
+Username:                 SYSTEM          
+
+%SHUTDOWN-I-STOPSECSRV, the security server will now be shut down
+%SHUTDOWN-I-REMOVE, all installed images will now be removed
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.95  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASHUTDOWN, breakin detection and evasion processing is shutting down
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:45.95  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-PROXYSHUTDOWN, proxy processing is shutting down
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:46.35  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSHUTDOWN, security server shutting down
+
+%SHUTDOWN-I-DISMOUNT, all volumes will now be dismounted
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.20  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+_STAR$OPA0:, STAR shutdown was requested by the operator.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.22  %%%%%%%%%%%
+Logfile was closed by operator _STAR$OPA0:
+Logfile was STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:57:49.26  %%%%%%%%%%%
+Operator _STAR$OPA0: has been disabled, username SYSTEM
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = ffffffff800abfdc
+
+CPU 0 booting
+
+Resetting I/O buses...
+(boot dka600.6.0.17.0 -flags 0,0)
+block 0 of dka600.6.0.17.0 is a valid boot block
+reading 1134 blocks from dka600.6.0.17.0
+bootstrap code read in
+base = 200000, image_start = 0, image_bytes = 8dc00(580608)
+initializing HWRPB at 2000
+initializing page table at 1ff30000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+    Copyright 1976-2003 Hewlett-Packard Development Company, L.P.
+
+
+%PKA0, Copyright (c) 1998 IntraServer Technology Inc. PKW V2.1.21 ROM V2.0
+%PKA0, SCSI Chip is SYM53C895, Operating mode is SE Ultra SCSI
+%SHADOW-I-VOLPROC, DSA100: shadow master has changed.  Dump file WILL be written
+ if system crashes.
+
+%EWA0, Fast mode set by console
+%EWB0, Twisted-Pair mode set by console
+%STDRV-I-STARTUP, OpenVMS startup begun at 22-APR-2004 15:58:49.73
+%RUN-S-PROC_ID, identification of created process is 00000205
+%RUN-S-PROC_ID, identification of created process is 00000206
+%SET-I-NEWAUDSRV, identification of new audit server process is 0000020B
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:04.86  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:04.97  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;3
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;3
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Deleting all bitmaps represented by this WBMB.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.31  %%%%%%%%%%%
+DSA100: shadow master changed.  Dump WILL be written if system crashes.
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.75  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:05.75  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:06.76  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SHADOW_SERVER-I-SSRVINICMP, shadow server has completed initialization
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:07.64  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVERSTART, ACME_SERVER starting
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.00  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.02  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.03  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIACRECLUDB, security server created cluster intrusion database
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.03  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSTARTINGU, security server starting up
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:08.07  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASTARTINGUP, breakin detection and evasion processing now starting u
+p
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:13.41  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:14.48  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+Warning: DECdtm log file not found (SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL)
+        %RMS-E-FNF, file not found
+        TP server process waiting
+
+
+%STARTUP-I-AUDITCONTINUE, audit server initialization complete
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:14.96  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6550
+0
+Auditable event:          Audit server starting up
+Event time:               22-APR-2004 15:59:14.83
+PID:                      00000204        
+Username:                 SYSTEM          
+
+
+The OpenVMS system is now executing the site-specific startup commands.
+
+%SET-I-INTSET, login interactive limit = 64, current interactive value = 0
+%RUN-S-PROC_ID, identification of created process is 00000212
+%%%%%%%%%%%  OPCOM  22-APR-2004 15:59:16.83  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SMHANDLER-S-STARTUP, server management event handler startup
+
+%DECW$DEVICE-I-NODEVICE, no graphics devices found.
+  SYSTEM       job terminated at 22-APR-2004 15:59:22.91
+
+  Accounting information:
+  Buffered I/O count:               2992      Peak working set size:       7248
+  Direct I/O count:                 1551      Peak virtual size:         184848
+  Page faults:                      3017      Mounted volumes:                0
+  Charged CPU time:        0 00:00:01.60      Elapsed time:       0 00:00:33.61
+<b><i>&lt;return&gt;</i></b>
+ Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2  
+
+Username: <b>system</b>
+Password: <b><i>&lt;password not echoed&gt;</i></b>
+   Welcome to OpenVMS (TM) Alpha Operating System, Version V7.3-2
+    Last interactive login on Thursday, 22-APR-2004 14:51:39.47
+
+$ 
+	</pre>
+	</blockquote>
+	<p>
+Batch queues are handy....
+	</p>
+	<blockquote>
+	<pre>
+$ <b>start/queue/manager/new_version</b>
+%%%%%%%%%%%  OPCOM  22-APR-2004 16:02:41.33  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-I-CREATED, SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT; created
+
+$ <b>init/queue/batch/job=2/base=1 sys$batch/start</b>
+$ <b>show queue/all/full</b>
+Batch queue SYS$BATCH, idle, on STAR::
+  /BASE_PRIORITY=1 /JOB_LIMIT=2 /OWNER=[SYSTEM] /PROTECTION=(S:M,O:D,G:R,W:S)
+$ 
+	</pre>
+	</blockquote>
+	<p>
+We don't need the transaction log, but we don't mind it being there.
+So just get rid of the nasty warning during the boot.
+	</p>
+	<blockquote>
+	<pre>
+$ <b>mcr lmcp</b>
+ 
+Log Manager Control Program V1.1
+ 
+LMCP&gt; <b>create log/size=5000 SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL</b>
+Transaction log SYS$COMMON:[SYSEXE]SYSTEM$STAR.LM$JOURNAL;1 created.
+LMCP&gt; <b>Exit</b> 
+$ 
+	</pre>
+	</blockquote>
+	<p>
+By the way you can disable the transaction manager completely if you want.
+Add the following line to the SYS$MANAGER:SYLOGICALS.COM command procedure:
+	</p>
+	<blockquote>
+	<pre>
+$ !
+$ DEFINE/SYSTEM/EXECUTIVE_MODE SYS$DECDTM_INHIBIT yes
+$ !
+	</pre>
+	</blockquote>
+	<p>
+This stops the TP_SERVER process being created the next time you boot the system.
+<br />
+<br />
+As we will be accessing a lot of help libraries, make it as fast as possible..
+	</p>
+	<blockquote>
+	<pre>
+$ <b>@sys$update:libdecomp</b>
+
+                 OpenVMS Library Decompression Utility
+                   Candidate Libraries to be expanded
+   (Libraries not present and libraries already expanded are not listed)
+
+     1  ACLEDT.HLB           13  SDA.HLB              24  VAXCRTLD.OLB          
+     2  BKM$HELP.HLB         14  SHWCLHELP.HLB        25  VAXCRTLDX.OLB         
+     3  DBG$HELP.HLB         15  SYSGEN.HLB           26  VAXCRTLT.OLB          
+     4  DBG$UIHELP.HLB       16  SYSMANHELP.HLB       27  VAXCRTLTX.OLB         
+     5  EDTHELP.HLB          17  TPUHELP.HLB          28  VAXCRTLX.OLB          
+     6  EVE$HELP.HLB         18  UAFHELP.HLB          29  ERFLIB.TLB            
+     7  EVE$KEYHELP.HLB      19  LANIDEF.MLB          30  LIB_ADA_SUBSET.TLB    
+     8  EXCHNGHLP.HLB        20  LIB.MLB              31  NTA.TLB               
+     9  LANCP$HELP.HLB       21  STARLET.MLB          32  STARLETSD.TLB         
+    10  LATCP$HELP.HLB       22  STARLET.OLB          33  SYS$LIB_C.TLB         
+    11  MAILHELP.HLB         23  VAXCRTL.OLB          34  SYS$STARLET_C.TLB     
+    12  NCPHELP.HLB                                                             
+
+         35  VMS$VOLATILE_PRIVATE_INTERFACES.OLB
+         36  STARLET_RECENT_ADA_SUBSET.TLB
+
+          A  ALL libraries to be expanded
+          H  Display HELP information for LIBDECOMP
+          E  EXIT this procedure
+
+* Enter a letter or the number(s) of libraries to be expanded
+  (Separate multiple numbers with a comma) <b>a</b>
+
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]ACLEDT.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]BKM$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]DBG$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]DBG$UIHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EDTHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EVE$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EVE$KEYHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]EXCHNGHLP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]LANCP$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]LATCP$HELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]MAILHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]NCPHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SDA.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SHWCLHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SYSGEN.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]SYSMANHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]TPUHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSHLP]UAFHELP.HLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LANIDEF.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LIB.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET.MLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTL.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLD.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLDX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLT.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLTX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VAXCRTLX.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]ERFLIB.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]LIB_ADA_SUBSET.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]NTA.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLETSD.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]SYS$LIB_C.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]SYS$STARLET_C.TLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]VMS$VOLATILE_PRIVATE_INTERFACES.OLB
+
+%UPGRADE-I-EXPANDING, decompressing library SYS$COMMON:[SYSLIB]STARLET_RECENT_ADA_SUBSET.TLB
+	</pre>
+	</blockquote>
+            <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <div class="footerpart" id="sponsorsun">
+      <p><a href="http://www.sun.com/software/star/openoffice/index.html">
+        <img title="Sponsored by Sun Microsystems, Inc." alt="Sun Microsystems Logo" src="/branding/images/sun_logo.gif" /></a><br />
+      </p>
+    </div>
+	
+    <div class="footerpart" id="sponsorhp">
+      <p><a href="http://www.hp.com/go/openvms">
+        <img title="Powered by OpenVMS" alt="Powered by OpenVMS logo" src="/branding/images/powered_1ovms.gif" id="poweredby" /></a>
+      </p>
+    </div>
+	
+    <div id="smallprint">
+      <ul class="horizontalmenu">
+        <li><a title="Give feedback, or ask for assistance" href="/project/www/contact.html">Contact us</a></li>
+        <li><a title="Sitemap" href="/project/www/sitemap.html">Sitemap</a></li>
+        <li><a title="What should happen on the matter listed on this page..." href="/project/development/todo.html">To-Dos</a></li>
+	<li><a href="http://www.openoffice.org/nonav/servlets/HelpTOC">Site Help</a></li>
+	<li><a href="/project/www/press/1.1/">Press room</a></li>			
+      </ul>
+
+      <p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+      <p>HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P., Sun, Sun Microsystems, the Sun logo, Java, Solaris, StarOffice are 
+trademarks or registered trademarks of Sun Microsystems, Inc., UNIX &reg; is a registered Trademark of The Open Group, POSIX &reg; is a registered Trademark of
+The IEEE.</p>
+    </div>
+  </div>
+
+</body>
+</html>

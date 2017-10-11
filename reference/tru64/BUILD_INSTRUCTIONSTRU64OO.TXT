@@ -1,0 +1,323 @@
+
+Building OpenOffice.org under Tru64 UNIX
+======================================== 
+
+This document describes the requirements and actions that you need to build 
+OpenOffice.org under Tru64 UNIX. Commands you have to type on the keyboard
+follow this syntax throughout this document:
+
+    > cd $SRC_ROOT/config_office
+    $SRC_ROOT/config_office> ./configure
+
+In this example, the script configure is executed in the directory 
+config_office. $SRC_ROOT will denote the directory in which the source code of
+OpenOffice.org is stored. 
+  
+Table of contents
+=================
+
+    Overview of Performing a Full Build
+    Build Requirements 
+    External Components 
+    Build Instruction
+        Get the Source Code 
+	Apply the patch
+        Generating the Build Environment and Build Tools 
+	Building a Full Build of the Office Suite
+	Building Individual Projects
+        Building a Project with Debug Information 
+	Building the Entire Office Suite with Debug Information
+    Instructions to Build an Installation Set 
+
+
+Overview of Performing a Full Build
+===================================
+
+All those who have done a build of OpenOffice.org before may use this section 
+as a reminder. You are well advised to check the release notes at 
+www.openoffice.org/dev_docs/source/download.html about changes since the 
+previous releases. 
+
+Detailed step-by-step build descriptions are given from the next section on. 
+
+To perform a full build, you need to follow these steps: 
+
+1. Get the source code OOo_1.0.0_source.tar.gz to /usr/tmp from the download
+   webpage at 
+   www.openoffice.org/dev_docs/source/1.0.0/source.html#downloads 
+2. Apply the Tru64 patch. Download the patch oo_1.0_src.patch.tar.gz and patch 
+   installation script init_oo1.0 to /usr/tmp from the Linux and Tru64 Unix 
+   Portability Tools CD.  Run init_oo1.0 to apply the patch.
+3. Run the configure script to check all requirements and to create the 
+   script Tru64AlphaEnv.Set. 
+4. Source in the Tru64AlphaEnv.Set script to set all environment variables. 
+5. Create the build tools using bootstrap. 
+6. Build by typing dmake in $SRC_ROOT, or build -all in the instsetoo 
+   module, or build followed by deliver in the individual modules. 
+
+For detailed build instructions, see the section Building a Full Build of the 
+Office Suite in this document.  The installation procedure is described at the
+end of this document.
+
+
+Build Requirements
+==================
+
+Before you start building, you must ensure that your system satisfies the 
+recommended software and hardware requirements for the type of system you are
+working on. For Tru64 UNIX, these are as follows: 
+
+Software Requirements 
+
+ * Tru64 UNIX V5.1A 
+ * tcsh -- Available in the Open Source Software Collection CD for Tru64 UNIX.
+		(To order CD, visit www.tru64unix.compaq.com/demos) 
+      	Or download at 
+        www.tru64unix.compaq.com/demos/ossc-v51a/rpmhtml/tcsh-6.09.00.htm 
+ * STLport Version 4.0 -- Available in The Linux and Tru64 Portability Tools CD.
+   	To install the built STLport library on Tru64 UNIX, copy files 
+	install_stlport.ksh, libstlport.tar and incstlport.tar to /usr/tmp, 
+	and run the installation script install_stlport.ksh: 
+     	# cd /usr/tmp 
+     	# ksh install_stlport.ksh
+ * JDK 1.3.1 -- Available to download at www.compaq.com/java/download 
+ * Compaq C++ V6.3-13. To get the cxx kit, visit 
+	www.tru64unix.compaq.com/cplus
+ * zip, bison and gmake. Available in The Linux and Tru64 UNIX Portability CD.
+	Or download at
+	www.tru64unix.compaq.com/demos/ossc-v51a/html/shwindex.htm#CommandShells
+
+Hardware Requirements 
+
+ * 128 MB RAM 
+ * 3 GB free disk space 
+
+
+External Components
+===================
+
+The code contains some further external components which are already provided. 
+If you are interested in details about these, look at the External Components
+webpage at http://tools.openoffice.org/ext_comp.html. 
+
+
+Build Instruction
+=================
+
+Get the source code
+===================
+
+Download the 1.0.0 source tarball OOo_1.0.0_source.tar.gz to /usr/tmp from 
+	www.openoffice.org/dev_docs/source/1.0.0/source.html#source  
+
+Apply the patch
+===============
+
+Get the tarball oo_1.0_src.patch.tar.gz and patch installation script 
+init_oo1.0 to /usr/tmp from the Linux and Tru64 Unix Portability Tools CD.  
+The patch oo_1.0_src.patch.tar.gz consists of several hundred files that are 
+modified in porting OpenOffice.org 1.0 to Tru64 UNIX.  To apply this patch, run
+init_oo1.0.  This script initializes the oo_1.0_src source pools for building.
+The environment variable SRC must be defined to point to a directory where the 
+developer's OpenOffice.org source tree will be. An example of SRC is 
+/usr/users/oo.  Also, you need to have 3GB free space on the disk that $SRC is 
+on to build the source.  The script basically does the following:
+1. Copy the original oo_1.0_src tar ball to $SRC
+2. Apply the Tru64 patch to oo_1.0_src
+
+
+Generating the Build Environment and Build Tools
+================================================
+
+You use the configure script to generate the build environment. The configure 
+script checks that all software, hardware, and system requirements for the 
+build are satisfied, and it creates a configuration file called 
+Tru64AlphaEnv.Set that you then run the source command on to set all necessary 
+build environment variables. This configuration file will be moved into the
+SRC_ROOT directory. A top-level makefile script makefile.mk and the script
+bootstrap in the config_office directory will be moved into SRC_ROOT as well. 
+This is due to technical reasons: The SRC_ROOT directory in the cvs tree can 
+only hold directories. On the other hand, the top-level makefile.mk should
+logically be placed in the top-level directory SRC_ROOT. The cvs tree holds 
+these files in config_office and configure copies them up.
+
+If you experiment with newest sources from the cvs-tree, mind that updates to 
+the configure process do not happen via updates of configure (the script file)
+but via the file configure.in. The configure script itself is created from
+configure.in using the autoconf command. In this case, you would run commands 
+like the following: 
+
+cd $SRC_ROOT/config_office
+$SRC_ROOT/config_office> cvs update configure.in
+$SRC_ROOT/config_office> autoconf
+
+to update the configure script. If you only use code from the snapshot releases
+on the web, you don't need to be concerned about this.
+
+To run the configure script, type the following commands: 
+
+> cd $SRC_ROOT/config_office
+$SRC_ROOT/config_office> ./configure --with-stlport4-home=(path)
+
+where path is the absolute path pointing to your STLPort installation. 
+
+There are a number of further options that you can use with the configure 
+script. To display these options, type the following command:
+
+> cd $SRC_ROOT/config_office
+$SRC_ROOT/config_office> ./configure --help
+
+The option --with-stlport4-home is a requirement. For more information on the 
+options that you can use with the configure script, see the Build Environment
+document at tools.openoffice.org/build_env.html. 
+
+After running configure, you have to source the configuration file with sets 
+all environment variables: 
+
+> cd $SRC_ROOT
+$SRC_ROOT> tcsh
+$SRC_ROOT> source Tru64AlphaEnv.Set
+
+Now you should make sure that the environment variable PATH is set to include
+the path to tools such as gmake, bison, and zip.  Note that each time you 
+source in Tru64AlphaEnv.Set, the PATH that was set for the tools may be gone.
+
+To create the build tools, type the following command: 
+
+> cd $SRC_ROOT
+$SRC_ROOT> ./bootstrap
+
+The bootstrap utility creates the tools required for building. This involves 
+already building some modules and will take a few minutes.
+  
+
+Building a Full Build of the Office Suite
+=========================================
+
+Now you are ready to build OpenOffice.org. To build the entire suite, all you 
+have to do (after having created the environment as described above) is to run
+dmake from the top-level directory. This will take several hours.  Note you may
+have to source in Tru64AlphaEnv.Set and set PATH to include paths to tools such
+as gmake again before typing in dmake.  Also, it is recommended that you
+unlimit the datasize before dmake to avoid memory problems.
+
+$SRC_ROOT> limit datasize unlimited
+$SRC_ROOT> dmake
+
+If you decide to rebuild a module or build each module individually (mind 
+dependencies!), you will have to use the build tool.  A subsequent deliver will
+copy all created binaries, libraries etc. into the solver tree:
+
+$SRC_ROOT/(module)> build
+$SRC_ROOT/(module)> deliver
+
+The following table shows the time required to build on a system with a 
+particular specification. You can use these details to estimate the time
+required to build on your system. 
+
+                  Architecture 		Alpha	
+                  Processor		EV6.7
+                  Processor speed	667 MHz
+                  RAM			512 MB
+                  Hard disk size	8 GB
+                  Time			8 hours
+
+
+Building Individual Projects
+============================
+
+OpenOffice.org is organized in several projects. For example, the Word 
+Processing Project. These in turn consist of several modules, organized in
+separate directories. The source contains approximately 90 modules. 
+
+You can build any project or module individually. Building modules individually
+should not be misunderstood as reducing OpenOffice.org to a special application,
+say, for instance, the spreadsheet application. The program will always consist
+in the entire office suite: text processor, spreadsheet, drawing application
+etc. Building individual modules comes in handy if you want to develop on a 
+certain module or port a module that has not yet been ported for this plaform. 
+Most modules will depend on other modules to be already built.  In other words,
+all modules must build in a particular order. Accordingly, you must build all of
+the modules in the Abstraction and Infrastructure Layers before you trying 
+building any projects or modules individually.
+
+For more information on modules and on the sequence that they build in, and on 
+the dependencies, see tools.openoffice.org/modules.html .
+
+To build a project, you build each of its modules individually in their 
+directory with the build tool, followed by deliver to copy the created
+libraries, binaries etc. into the solver tree: 
+
+$SRC_ROOT/(module-name)> build
+$SRC_ROOT/(module-name)> deliver
+
+Files called build.lst in the directories (module-name)/prj contain all 
+information about the subdirectories to be build (each of them containing 
+makefiles makefile.mk), about internal dependencies, and also about modules
+the current module depends on. The files (module-name)/prj/d.lst control the
+actions done by deliver. The last or second to last directory to be built is
+usually module-name/util which is responsible for linking one or more shared 
+libraries. 
+
+
+Building a Project with Debug Information
+=========================================
+
+To rebuild a complete project with debug information, remove all object files
+by removing the unxt64.pro directory. Then run build with the debug option
+set to true:
+  
+$SRC_ROOT/(module)> rm -rf unxt64.pro 
+$SRC_ROOT/(module)> build debug=true 
+
+Note that building a project with debug information requires approximately
+280 Mb of disk space.
+
+
+Building the Entire Office Suite with Debug Information
+=======================================================
+
+To rebuild the entire Office Suite with debug information, remove all object
+files by removing the unxt64.pro directory. Then modify the file
+$SRC_ROOT/solenv/inc/unxt64.mk by adding -g to the CFLAGS definition:
+
+1) Comment out the line at line 31:
+	#CFLAGS= -Wall -pthread -c -I/usr/local/include/stlport $(INCLUDE)
+2) Uncomment the line at line 30:
+	CFLAGS= -Wall -pthread -c -g -I/usr/local/include/stlport $(INCLUDE)
+
+Then run dmake again:
+
+$SRC_ROOT> dmake
+
+Note that building the entire Office Suite with debug information requires
+approximately 5 Gb of disk space.
+
+
+Instructions to Build an Installation Set
+=========================================
+
+The build process (started with a top-level dmake or build -all in 
+$SRC_ROOT/instsetoo) will create installation sets in all languages you have
+chosen. A simple build in $SRC_ROOT/instsetoo will also create the installation
+sets, provided all other modules are already built. 
+
+If you have build an installation set earlier and want to re-build it, please 
+delete the local outpath first: 
+
+$SRC_ROOT/instsetoo> rm -rf unxt64.pro 
+
+The English installation set will be located at 
+$SRC_ROOT/instsetoo/unxt64.pro/01/normal. Execute the setup binary to install:
+
+$SRC_ROOT> cd instsetoo/unxt64.pro/01/normal
+normal> ./setup
+
+The 01 in the path names indicates that the localisation is american english.
+This corresponds to the international phone code for the USA.  The German
+installation will be located in a subdirectory 49.
+
+For a network installation, use the -net option to setup. Details on the network
+installation process can be found at
+http://installation.openoffice.org/proposals/netinstall.html 
+in the installation project webpage.

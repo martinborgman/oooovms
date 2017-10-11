@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+# This script initializes the oo_1.0_src source pools for building.
+#
+# Inputs: The environment variable SRC must be defined
+#         to point to a direcotry where the developer's Open Office 
+#	  source tree will be. An example of SRC is /usr/users/oo
+#	   
+#	  The original source tarball and patch tarball should be 
+#	  downloaded to /usr/tmp: 	
+#	 		/usr/tmp/OOo_1.0.0_source.tar.gz 
+#			/usr/tmp/oo_1.0_src.patch.tar.gz
+#
+# Operation:
+#
+# 1. Copy the original oo_1.0_src tar ball to $SRC
+# 2. Apply the Tru64 patch to oo_1.0_src
+#
+# Usage: init_oo1.0 
+#
+
+zipsrctarball="/usr/tmp/OOo_1.0.0_source.tar.gz"
+zippatchtarball="/usr/tmp/oo_1.0_src.patch.tar.gz"
+srctarball="/usr/tmp/OOo_1.0.0_source.tar"
+patchtarball="/usr/tmp/oo_1.0_src.patch.tar"
+
+[ -n "$SRC" ] || { 
+    echo "****ERROR****"
+    echo "The environment variable SRC is not defined!"
+    echo "The environment variable SRC must be defined"
+    echo "to point to a directory where the developer's Open Office"
+    echo "source tree will be."
+    exit 1
+}
+
+if [ -f $srctarball ]; then
+  if [ -f $zipsrctarball ]; then 
+    echo "****ERROR****"
+    echo "Original source tarball /usr/tmp/OOo_1.0.0_source.tar.gz or /usr/tmp/OOo_1.0.0_source.tar not found!"
+    exit 1
+  fi
+fi
+
+if [ -f $patchtarball ]; then
+  if [ -f $zippatchtarball ]; then 
+    echo "****ERROR****"
+    echo "Patch tarball /usr/tmp/oo_1.0_src.patch.tar.gz or /usr/tmp/oo_1.0_src.patch.tar not found!"
+
+    exit 1
+  fi
+fi
+
+#
+# Get back the original source
+#
+echo "Copying the original source code ..."
+rm -rf $SRC/oo_1.0_src
+cd $SRC
+if [ -f $zipsrctarball ]; then 
+  gunzip -d $zipsrctarball
+fi
+tar xf $srctarball
+
+SRC_ROOT=$SRC/oo_1.0_src; export SRC_ROOT
+
+#
+# Apply the patch
+#
+echo "Applying the patches ..."
+cd $SRC_ROOT
+
+if [ -f $zippatchtarball ]; then
+  gunzip -d $zippatchtarball
+fi
+tar xf $patchtarball

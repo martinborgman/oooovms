@@ -1,0 +1,514 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>OpenVMS DMAKE installation instructions page</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>DMAKE installation instructions</FONT></I></U></B></P>
+<P>DMAKE is the make tool used in the Openoffice suite. It can however be used 
+wihout any other part of Openoffice. As such it can be tested and debugged.
+<BR>
+You are invited to test this part of software and give us any feedback
+we can use to improve the quality of the software.
+<BR>
+<BR>
+<B><U>Use it at your own risc, because we cannot 
+take responsebility for crashes, dumps or even worse: loosing data.</B></U></P>
+<P>If you want to help us, you can find a usermanual at this location: 
+<A href="http://tools.openoffice.org/tools/dmake.html">
+http://tools.openoffice.org/tools/dmake.html</A>
+<BR>
+<BR>
+After you downloaded the executable, you have to setup the
+DMAKE environment.
+<br>
+You have to define a logical dmakeroot pointing to
+the DMAKE startup configuration files.
+<br>
+Define a logical OS as "OpenVMS".
+<br>
+Also define a symbol dmake as follows:
+<BR>
+<PRE>
+$ DEFINE DMAKEROOT "/star/dmake/startup"
+$ DEFINE OS "OpenVMS"
+$ dmake :== $star:[DMAKE]dmake.exe;4
+</pre>
+You can follow everything DMAKE does if you invoke DMAKE with
+debugging flags. The following command lists all debugging flags,
+wich, as a result will generate a lot of output.
+<pre>
+$!Test with dbug
+$
+$ dmake -#d,%,cell,dfa,dir,exp,inf,io,mac,make,mem,mod,name,par,pool,rul,stat,str,tc,tok:t:result:o,logfile.log  -vcdfimtw
+$
+
+<b><u>original startup.mk from dmake/startup</u></b>
+
+# This is the root DMAKE startup file.
+#
+# Definitions common to all environments are given at the root.
+# Definitions parameterized at the root have their parameters specified
+# in sub-makefiles which are included based on the values of the three
+# make variables:
+#
+#	OS		- core operating system flavour
+#	OSRELEASE	- specific release of the operating system
+#	OSENVIRONMENT	- software construction environment in use
+# 
+# See the file 'summary', found in this directory for a list of
+# environments supported by this release.
+
+# Disable warnings for macros given on the command line but redefined here.
+__.silent !:= $(.SILENT)	# Preserve user's .SILENT flag
+.SILENT   !:= yes
+
+# startup.mk configuration parameters, for each, set it to non-null if you wish
+# to enable the named facility.
+__.HAVE_RCS  !:= yes 		# yes => RCS  is installed.
+__.HAVE_SCCS !:=    		# yes => SCCS is installed.
+__.DEFAULTS  !:= yes		# yes => define default construction rules.
+__.EXECS     !:= yes            # yes => define how to build executables.
+
+# Grab key definitions from the environment
+.IMPORT .IGNORE : OS OSRELEASE OSENVIRONMENT TMPDIR SHELL
+
+# Default DMAKE configuration, if not overriden by environment
+.INCLUDE .NOINFER $(!null,$(OS) .IGNORE) : $(INCFILENAME:d)config.mk
+
+# Look for a local defaults configuration
+.INCLUDE .NOINFER .IGNORE : $(INCFILENAME:d)local.mk
+
+# Define the directory separator string.
+/ *=  $(DIRSEPSTR)
+
+# Customize macro definitions based on setings of OS, OSRELEASE and
+# OSENVIRONMENT, this must come before the default macro definitions which
+# follow.
+.INCLUDE .NOINFER .IGNORE : $(INCFILENAME:d)$(OS)$/macros.mk
+
+# ----------------- Default Control Macro definitions -----------------------
+# Select appropriate defaults for basic macros
+   MAKE          *=  $(MAKECMD) -S $(MFLAGS)
+   TMPDIR        *:= $/tmp
+   DIVFILE       *=  $(TMPFILE)
+   AUGMAKE       *:= no
+
+# Recipe execution configuration
+   SHELL	 *:= $/bin$/sh
+   SHELLFLAGS	 *:= -ce
+   GROUPSHELL	 *:= $(SHELL)
+   GROUPFLAGS	 *:= 
+   SHELLMETAS	 *:= |();&<>?*][$$:\\#`'"
+   GROUPSUFFIX	 *:=
+
+# Intermediate target removal configuration
+   RM            *:= $/bin$/rm
+   RMFLAGS       *=  -f
+   RMTARGET      *=  $<
+
+# Default recipe that is used to remove intermediate targets.
+.REMOVE :; $(RM) $(RMFLAGS) $(RMTARGET)
+
+# Check and enable AUGMAKE extensions for SYSV compatibility
+.IF $(AUGMAKE)
+   "@B" != $(@:b)
+   "@D" != $(@:d)
+   "@F" != $(@:f)
+   "*B" != $(*:b)
+   "*D" != $(*:d)
+   "*F" != $(*:f)
+   "<B" != $(<:b)
+   "<D" != $(<:d)
+   "<F" != $(<:f)
+   "?B" != $(?:b)
+   "?F" != $(?:f)
+   "?D" != $(?:d)
+.ENDIF
+
+# Directory caching configuration.
+  .DIRCACHE         *:= yes
+  .DIRCACHERESPCASE *:= yes
+
+# Define the special NULL Prerequisite
+NULLPRQ *:= __.NULLPRQ
+
+# ---------- Default Construction Macro and Rule definitions --------------
+# The construction rules may be customized further in subsequent recipes.mk
+# files.
+.IF $(__.DEFAULTS)
+   # Primary suffixes in common use
+   A          *:= .a		# Libraries
+   E          *:= 		# Executables
+   F          *:= .f		# Fortran
+   O          *:= .o		# Objects
+   P          *:= .p		# Pascal
+   S          *:= .s		# Assembler sources
+   V          *:= ,v		# RCS suffix
+   YTAB	      *:= y.tab		# name-stem for yacc output files.
+   LEXYY      *:= lex.yy	# lex output file
+
+   # Standard C-language command names and flags
+   CPP	      *:= $/lib$/cpp	# C-preprocessor
+   CC         *:= cc		# C   compiler 
+   CFLAGS     *=		# C   compiler flags
+   "C++"      *:= CC		# C++ Compiler
+   "C++FLAGS" *=                # C++ Compiler flags
+
+   AS         *:= as		# Assembler and flags
+   ASFLAGS    *= 
+
+   LD         *= $(CC)		# Loader and flags
+   LDFLAGS    *=
+   LDLIBS     *=		# Default libraries
+
+   AR         *:= ar		# archiver
+   ARFLAGS    *= -rv
+
+   # Definition of Print command for this system.
+   PRINT      *= lp
+
+   # Language and Parser generation Tools and their flags
+   YACC	      *:= yacc		# standard yacc
+   YFLAGS     *=
+   LEX	      *:= lex		# standard lex
+   LFLAGS     *=
+
+   # Other Compilers, Tools and their flags
+   PC	      *:= pc		# pascal compiler
+   RC	      *:= f77		# ratfor compiler
+   FC	      *:= f77		# fortran compiler
+   MV	      *:= $/bin$/mv     # File rename command
+
+   # Implicit generation rules for making inferences.
+   # lex and yacc rules
+   %.c : %.y %.Y
+	$(YACC) $(YFLAGS) $<
+	$(MV) $(YTAB).c $@
+
+   %.c : %.l %.L
+	$(LEX) $(LFLAGS) $<
+	$(MV) $(LEXYY).c $@
+
+   # Rules for making *$O
+   %$O : %.c ; $(CC) $(CFLAGS) -c $<
+   %$O : %$P ; $(PC) $(PFLAGS) -c $<
+   %$O : %$S ; $(AS) $(ASFLAGS) -o $@ $<
+   %$O : %.cl ; class -c $<
+   %$O :| %.e %.r %.F %$F
+	$(FC) $(RFLAGS) $(EFLAGS) $(FFLAGS) -c $<
+
+   # Defibe how to build simple executables
+   .IF $(__.EXECS)
+      %$E : %$O ; $(CC) $(LDFLAGS) -o $@ $< $(LDLIBS)
+   .ENDIF
+
+   # Recipe to make archive files, defined only if we have
+   # an archiver defined.
+   .IF $(AR)
+      %$A .SWAP .GROUP :
+	$(AR) $(ARFLAGS) $@ $?
+	$(RM) $(RMFLAGS) $?
+   .ENDIF
+
+   # RCS support
+   .IF $(__.HAVE_RCS)
+      CO      *:= co		# check out for RCS
+      COFLAGS !+= -q
+
+      % : $$(@:d)RCS$$/$$(@:f)$V
+	-$(CO) $(COFLAGS) $(null,$(@:d) $@ $(<:d:s/RCS/)$@)
+      .NOINFER : $$(@:d)RCS$$/$$(@:f)$V
+
+      .IF $V
+         % : %$V
+	    -$(CO) $(COFLAGS) $(null,$(@:d) $@ $(<:d:s/RCS/)$@)
+         .NOINFER : %$V
+      .ENDIF
+   .END
+
+   # SCCS support
+   .IF $(__.HAVE_SCCS)
+      GET     *:= get
+      GFLAGS  !+=
+
+      % : "$$(null,$$(@:d) s.$$@ $$(@:d)s.$$(@:f))"
+	-$(GET) $(GFLAGS) $@
+      .NOINFER : "$$(null,$$(@:d) s.$$@ $$(@:d)s.$$(@:f))"
+   .END
+
+   # Customize default recipe definitions for OS, OSRELEASE, etc. settings.
+   .INCLUDE .NOINFER .IGNORE: $(INCFILENAME:d)$(OS)$/recipes.mk
+.ENDIF
+
+
+# Finally, define the default construction strategy
+.ROOT .PHONY .NOSTATE .SEQUENTIAL :- .INIT .TARGETS .DONE;
+.INIT .DONE .PHONY: $(NULLPRQ);
+
+# Define the NULL Prerequisite as having no recipe.
+$(NULLPRQ) .PHONY :;
+
+# Reset warnings back to previous setting.
+.SILENT !:= $(__.silent)
+
+# Check for a Local project file, gets parsed before user makefile.
+.INCLUDE .IGNORE .NOINFER: "project.mk"
+</pre>
+
+<pre>
+<b><u>
+We don't know what should be in the startup file. Our first
+version of this file is as follows. If you can help us find
+the correct settings in this file, please help us and mail
+us your suggestions. We certainly will appreciate it!</u></b>
+
+# This is the root DMAKE startup file.
+#
+# Definitions common to all environments are given at the root.
+# Definitions parameterized at the root have their parameters specified
+# in sub-makefiles which are included based on the values of the three
+# make variables:
+#
+#	OS		- core operating system flavour
+#	OSRELEASE	- specific release of the operating system
+#	OSENVIRONMENT	- software construction environment in use
+# 
+# See the file 'summary', found in this directory for a list of
+# environments supported by this release.
+
+# Disable warnings for macros given on the command line but redefined here.
+__.silent !:= $(.SILENT)	# Preserve user's .SILENT flag
+.SILENT   !:= yes
+
+# startup.mk configuration parameters, for each, set it to non-null if you wish
+# to enable the named facility.
+.IF $(OS) == OpenVMS
+__.HAVE_RCS  !:= 		# yes => RCS  is installed.
+.ELSE
+__.HAVE_RCS  !:= yes 		# yes => RCS  is installed.
+.ENDIF
+
+__.HAVE_SCCS !:=    		# yes => SCCS is installed.
+__.DEFAULTS  !:= yes		# yes => define default construction rules.
+__.EXECS     !:= yes            # yes => define how to build executables.
+
+# Grab key definitions from the environment
+.IMPORT .IGNORE : OS OSRELEASE OSENVIRONMENT TMPDIR SHELL
+
+# Default DMAKE configuration, if not overriden by environment
+.INCLUDE .NOINFER $(!null,$(OS) .IGNORE) : $(INCFILENAME:d)config.mk
+
+# Look for a local defaults configuration
+.INCLUDE .NOINFER .IGNORE : $(INCFILENAME:d)local.mk
+
+# Define the directory separator string.
+/ *=  $(DIRSEPSTR)
+
+# Customize macro definitions based on setings of OS, OSRELEASE and
+# OSENVIRONMENT, this must come before the default macro definitions which
+# follow.
+.INCLUDE .NOINFER .IGNORE : $(INCFILENAME:d)$(OS)$/macros.mk
+
+# ----------------- Default Control Macro definitions -----------------------
+# Select appropriate defaults for basic macros
+   MAKE          *=  $(MAKECMD) -S $(MFLAGS)
+   TMPDIR        *:= $/tmp
+   DIVFILE       *=  $(TMPFILE)
+   AUGMAKE       *:= no
+
+# Recipe execution configuration
+   SHELL	 *:= $/bin$/bash
+.IF $(OS) == vms
+   SHELLFLAGS	 *:= -c
+.ELSE
+   SHELLFLAGS	 *:= -ce
+.ENDIF
+   GROUPSHELL	 *:= $(SHELL)
+   GROUPFLAGS	 *:= 
+   SHELLMETAS	 *:= |();&<>?*][$$:\\#`'"
+   GROUPSUFFIX	 *:=
+
+# Intermediate target removal configuration
+   RM            *:= $/bin$/rm
+   RMFLAGS       *=  -f
+   RMTARGET      *=  $<
+
+# Default recipe that is used to remove intermediate targets.
+.REMOVE :; $(RM) $(RMFLAGS) $(RMTARGET)
+
+# Check and enable AUGMAKE extensions for SYSV compatibility
+.IF $(AUGMAKE)
+   "@B" != $(@:b)
+   "@D" != $(@:d)
+   "@F" != $(@:f)
+   "*B" != $(*:b)
+   "*D" != $(*:d)
+   "*F" != $(*:f)
+   "<B" != $(<:b)
+   "<D" != $(<:d)
+   "<F" != $(<:f)
+   "?B" != $(?:b)
+   "?F" != $(?:f)
+   "?D" != $(?:d)
+.ENDIF
+
+# Directory caching configuration.
+  .DIRCACHE         *:= yes
+  .DIRCACHERESPCASE *:= yes
+
+# Define the special NULL Prerequisite
+NULLPRQ *:= __.NULLPRQ
+
+# ---------- Default Construction Macro and Rule definitions --------------
+# The construction rules may be customized further in subsequent recipes.mk
+# files.
+.IF $(__.DEFAULTS)
+   # Primary suffixes in common use
+   A          *:= .a		# Libraries
+   E          *:= 		# Executables
+   F          *:= .f		# Fortran
+   O          *:= .o		# Objects
+   P          *:= .p		# Pascal
+   S          *:= .s		# Assembler sources
+   V          *:= ,v		# RCS suffix
+   YTAB	      *:= y.tab		# name-stem for yacc output files.
+   LEXYY      *:= lex.yy	# lex output file
+
+   # Standard C-language command names and flags
+   CPP	      *:= $/lib$/cpp	# C-preprocessor
+   CC         *:= cc		# C   compiler 
+   CFLAGS     *=		# C   compiler flags
+   "C++"      *:= CC		# C++ Compiler
+   "C++FLAGS" *=                # C++ Compiler flags
+
+   AS         *:= as		# Assembler and flags
+   ASFLAGS    *= 
+
+   LD         *= $(CC)		# Loader and flags
+   LDFLAGS    *=
+   LDLIBS     *=		# Default libraries
+
+   AR         *:= ar		# archiver
+   ARFLAGS    *= -rv
+
+   # Definition of Print command for this system.
+   PRINT      *= lp
+
+   # Language and Parser generation Tools and their flags
+   YACC	      *:= yacc		# standard yacc
+   YFLAGS     *=
+   LEX	      *:= lex		# standard lex
+   LFLAGS     *=
+
+   # Other Compilers, Tools and their flags
+   PC	      *:= pc		# pascal compiler
+   RC	      *:= f77		# ratfor compiler
+   FC	      *:= f77		# fortran compiler
+   MV	      *:= $/bin$/mv     # File rename command
+
+   # Implicit generation rules for making inferences.
+   # lex and yacc rules
+   %.c : %.y %.Y
+	$(YACC) $(YFLAGS) $<
+	$(MV) $(YTAB).c $@
+
+   %.c : %.l %.L
+	$(LEX) $(LFLAGS) $<
+	$(MV) $(LEXYY).c $@
+
+   # Rules for making *$O
+   %$O : %.c ; $(CC) $(CFLAGS) -c $<
+   %$O : %$P ; $(PC) $(PFLAGS) -c $<
+   %$O : %$S ; $(AS) $(ASFLAGS) -o $@ $<
+   %$O : %.cl ; class -c $<
+   %$O :| %.e %.r %.F %$F
+	$(FC) $(RFLAGS) $(EFLAGS) $(FFLAGS) -c $<
+
+   # Describe how to build simple executables
+#   .IF $(OS) == vms
+#       # already defined in [.startup.vms]macros.mk
+#   .ELSE
+   .IF $(__.EXECS)
+      %$E : %$O ; $(CC) $(LDFLAGS) -o $@ $< $(LDLIBS)
+   .ENDIF
+#   .ENDIF
+
+   # Recipe to make archive files, defined only if we have
+   # an archiver defined.
+#   .IF $(OS) == OpenVMS
+#       # already defined in [.startup.vms]macros.mk
+#   .ELSE
+   .IF $(AR)
+      %$A .SWAP .GROUP :
+	$(AR) $(ARFLAGS) $@ $?
+	$(RM) $(RMFLAGS) $?
+   .ENDIF
+#   .ENDIF
+
+   # RCS support
+   .IF $(__.HAVE_RCS)
+      CO      *:= co		# check out for RCS
+      COFLAGS !+= -q
+
+      % : $$(@:d)RCS$$/$$(@:f)$V
+	-$(CO) $(COFLAGS) $(null,$(@:d) $@ $(<:d:s/RCS/)$@)
+      .NOINFER : $$(@:d)RCS$$/$$(@:f)$V
+
+      .IF $V
+         % : %$V
+	    -$(CO) $(COFLAGS) $(null,$(@:d) $@ $(<:d:s/RCS/)$@)
+         .NOINFER : %$V
+      .ENDIF
+   .END
+
+   # SCCS support
+   .IF $(__.HAVE_SCCS)
+      GET     *:= get
+      GFLAGS  !+=
+
+      % : "$$(null,$$(@:d) s.$$@ $$(@:d)s.$$(@:f))"
+	-$(GET) $(GFLAGS) $@
+      .NOINFER : "$$(null,$$(@:d) s.$$@ $$(@:d)s.$$(@:f))"
+   .END
+
+   # Customize default recipe definitions for OS, OSRELEASE, etc. settings.
+   .INCLUDE .NOINFER .IGNORE: $(INCFILENAME:d)$(OS)$/recipes.mk
+.ENDIF
+
+
+# Finally, define the default construction strategy
+.ROOT .PHONY .NOSTATE .SEQUENTIAL :- .INIT .TARGETS .DONE;
+.INIT .DONE .PHONY: $(NULLPRQ);
+
+# Define the NULL Prerequisite as having no recipe.
+$(NULLPRQ) .PHONY :;
+
+# Reset warnings back to previous setting.
+.SILENT !:= $(__.silent)
+
+# Check for a Local project file, gets parsed before user makefile.
+.INCLUDE .IGNORE .NOINFER: "project.mk"
+
+
+</PRE>
+<b>
+After this you can use dmake. Please remember that due to the some limitations
+you can use only a single compile stream.
+</b>
+<BR>
+<BR>To get online help type:
+<PRE>
+
+$ dmake -h
+</PRE>
+Please report any problems with this executable to:
+<A href="mailto:dev@oooovms.dyndns.org">dev@oooovms.dyndns.org.</A>
+<BR>
+<BR>
+<BR>
+    <a href="../"><img src="../images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="../images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

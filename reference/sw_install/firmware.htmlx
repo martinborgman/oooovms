@@ -1,0 +1,652 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+
+<head>
+  <title>
+    porting:        OpenOffice.org for OpenVMS
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="version" content="2.6.2.4.8" />
+  <style type="text/css">
+    /*<![CDATA[*/
+    <!--
+    @import url("/branding/css/tigris.css");
+    @import url("/branding/css/inst.css");
+    -->
+    /*]]>*/
+  </style>
+  <link rel="stylesheet" type="text/css" href="/branding/css/print.css" media="print" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO" />
+  <meta name="description" content="OpenOffice.org: The Open Office Suite" />
+
+</head>
+
+<body>
+  <p class="nonscreen"><a href="#content">Skip to content</a></p>
+
+
+  <div id="banner">
+    <div>
+      <a href="http://www.openoffice.org">
+      <img src="/branding/images/ooo-logo.png"
+           alt="Openoffice.org" id="ooologo" />
+      </a>
+    </div>
+
+    <div id="login">
+      <form name="bannerloginform" id="bannerloginform" action="http://porting.openoffice.org/servlets/TLogin" method="post">
+        <div>
+          <label for="loginID">User:</label>
+          <input type="text" alt="username" name="loginID" id="loginID" class="inputtext" size="10" maxlength="32" />
+          <label for="password">Password:</label>
+          <input type="password" alt="password" name="password" id="password" class="inputtext" size="10" maxlength="32" />
+          <input type="submit" name="Login" id="Button" class="inputbutton" value="Login" /> 
+          <a href="http://www.openoffice.org/servlets/Join">Register</a>  | 
+          <a href="http://www.openoffice.org/servlets/TLogin">Login help</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toptabs">
+    <ul class="tabs">
+      <li>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </li>
+
+      <li> <a href="http://download.openoffice.org/index.html" title="Get OpenOffice.org or browse for additions">Download</a> </li>
+
+      <li> <a href="http://support.openoffice.org/index.html" title="The place for both free and commercial support on OpenOffice.org">Support</a> </li>
+
+      <li> <a href="http://contributing.openoffice.org/index.html" title="Become part of the largest OpenSource project!">Contributing</a> </li>
+
+      <li class="th">   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </li>
+
+      <li>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </li>
+
+      <li> <a href="http://about.openoffice.org/index.html" title="Background information on OpenOffice.org">About</a> </li>
+
+    </ul>
+  </div>
+
+  <div class="contentpart" id="contextualinformation">
+    <div id="breadcrumbs">
+      <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+      <strong>
+        <a href="http://porting.openoffice.org/">porting</a>
+      </strong>
+    </div>
+  </div>
+
+  <div id="body">
+    <table id="main" summary="body">
+      <tr>
+        <td id="leftcol">
+          <div id="navcolumn">
+            <div id="projecttools" class="toolgroup">
+              <div class="label">
+                <strong>Project tools</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a>
+                </div>  
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+                </div>
+              </div> 
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a>
+                </div>
+              </div>
+            </div>
+            <form action="http://porting.openoffice.org/servlets/Search" method="get">
+              <div id="searchbox" class="toolgroup">
+                <div class="label">
+                  <strong>Search</strong>
+                </div>
+                <div class="body">
+                  <div>
+                    <select name="scope">
+                      <option value="projectAndSubs" selected="selected">This project</option>
+                      <option value="domain" >All projects</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="hidden" name="resultsPerPage" value="40" /> 
+                    <input type="text" name="query" size="10" /> 
+                    <input type="submit" name="Button" value="Go" />
+                  </div>
+                  <div>
+                    <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>
+                  </div>
+                  <div>
+                    <a href="http://support.openoffice.org/search.html">Google search</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="helptext" class="toolgroup">
+              <div class="label">
+                <strong>How do I...</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://www.openoffice.org/sitemap.html" class="helplink">Sitemap</a>
+                </div>
+                <div><a href="http://www.openoffice.org/faq.html" class="helplink">FAQ</a></div>
+                <div>
+                  <a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+                    title="Note: link may open in new window" class="helplink">Get help?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strut">
+            &nbsp;
+          </div>
+        </td>
+
+        <td id="bodytd">
+          <div id="bodycol">
+            <p class="nonscreen"><a name="content">start:</a></p>
+
+            <!--#config timefmt="%Y-%m-%d" --> 
+ 
+	<h1>
+	        Reference section: Alpha firmware update procedure
+	</h1>
+            <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin  Borgman</a></i></p>
+<!-- edit this below -->
+
+  <h2>
+   Description of the update of Alpha firmware.</h2>
+  <hr />
+  <blockquote>
+	First you have to make certain that your Alpha-computer has the latest (supported) firmware loaded.
+<br />
+<br />
+	In order to do so connect a serial console, or in case you have a alphastation, a monitor, keyboard and a mouse.
+ <br />
+	After a power-up you should see (after a minute, depending on the speed of your alpha) a hexadecimal
+countdown.
+<br />
+If your system is starting to boot,
+	press Ctrl-C or a break-switch (see the hardware manual of your alpha).
+<br />
+	You should see:
+<pre>
+>>> 
+</pre>
+First set some environment variables. The most important are:
+<pre>
+- os_type	defines the os type. You will want to set it to OpenVMS
+- bootdef_dev	sets the default boot device. For now set it to "" (no default boot device)
+- boot_osflags	defines the default boot behaviour  For now set it to 0,0
+- auto_action	defines the default behaviour after a powerup or crash. For now set it to halt
+- ewa0_mode	defines the ethernet cable and speed settings. Use one of the following settings:
+        Twisted-Pair
+        Full Duplex, Twisted-Pair
+        AUI
+        BNC
+        Fast
+        FastFD (Full Duplex)
+        Auto-Negotiate 
+</pre>
+Link to <a href="http://h18002.www1.hp.com/alphaserver/docs/userguide/WebHelp/boot_osflags.htm">information on boot_osflags</a>.
+
+<br />
+<br />
+Make certain you have the right version firmware CD. As you will see in the following example, this doesn't always mean the latest
+version of the firmware cd ....;-)
+<br />
+<hr />
+<b><i><u>
+Example of a firmware upgrade on a AlphaStation 200 4/100. In this example you'll see the effect of a boot of OpenVMS 7.3-1 on a
+system running firmware rev. 6.7 wich is below the recommended minimum of 6.9. The recommended Firmware CD is not correct...
+</u></i></b>
+<pre>
+ff.fe.fd.fc.fb.fa.f9.f8.f7.f6.f5.
+ef.df.ee.ed.ec.f4.eb.....ea.e9.e8.e7.e6.e5.
+V6.7-2, built on Jan 20 1998 at 09:56:27
+
+CPU 0 booting
+
+(boot dka100.1.0.6.0 -flags A)
+>>><b>^C</b>
+>>><b>show boot*</b>
+boot_dev                dka100.1.0.6.0
+boot_file
+boot_osflags            A
+boot_reset              ON
+bootdef_dev             dka100.1.0.6.0
+booted_dev
+booted_file
+booted_osflags
+>>><b>set os_type OpenVMS</b>
+>>><b>set bootdef_dev ""</b>
+>>><b>set boot_osflags 0,0</b>
+>>><b>set auto_action halt</b>
+>>><b>set ewa0_mode Twisted-Pair</b>
+>>><b>show dev</b>
+dka400.4.0.6.0             DKA400     TOSHIBA CD-ROM XM-4101TA  1084
+dva0.0.0.0.1               DVA0
+ewa0.0.0.11.0              EWA0              08-00-2B-E5-0B-D6
+pka0.7.0.6.0               PKA0                  SCSI Bus ID 7
+
+<b><i><u>
+Firmware CD 6.2 is loaded in drive dka400:.
+</u></i></b>
+
+>>><b>boot dka400</b>
+(boot dka400.4.0.6.0)
+block 0 of dka400.4.0.6.0 is a valid boot block
+reading 1082 blocks from dka400.4.0.6.0
+bootstrap code read in
+base = 1f2000, image_start = 0, image_bytes = 87400
+initializing HWRPB at 2000
+initializing page table at 1e4000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+-------------------------------------------------------------------------------
+                   +++++++++++++++++++++++++++++++++++++++
+                   +         Archived Firmware           +
+                   +                                     +
+                   +++++++++++++++++++++++++++++++++++++++
+
+  The most recent firmware update for this platform was issued more than
+  three years before this CD-ROM was created. The firmware for this
+  platform is no longer being re-issued on CD. Please refer to Section 2
+  of the Release Notes Overview booklet that was included with this CD
+  for a list of systems in this category. Please also refer to Section 6
+  for a pointer to an internet site where the most recent firmware for
+  this platform can be obtained from an archive area.
+
+  The "bootfile" prompt that will follow this text will show the file
+  "NOFILE.EXE". The attempt to boot this file will fail since it does
+  not exist. After the failure, ensure that the system is reset, and
+  then return it to normal operation.
+
+-------------------------------------------------------------------------------
+
+Hit &lt;RETURN&gt; to scroll text, or &lt;CTRL/C&gt; to skip text.
+
+The default bootfile for this platform is
+
+        [ARCHIVE]NOFILE.EXE
+
+Hit &lt;RETURN&gt; at the prompt to use the default bootfile.
+
+Bootfile:<i><b>&lt;RETURN&gt;</b></i>
+%APB-I-FILENOTLOC, Unable to locate NOFILE.EXE
+%APB-I-LOADFAIL, Failed to load secondary bootstrap, status = 00000910
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = 20003d10
+warning -- HWRPB is invalid.
+>>>ff.fe.fd.fc.fb.fa.f9.f8.f7.f6.f5.
+ef.df.ee.ed.ec.f4.eb.....ea.e9.e8.e7.e6.e5.
+V6.7-2, built on Jan 20 1998 at 09:56:27
+>>><b>show dev</b>
+dka400.4.0.6.0             DKA400     TOSHIBA CD-ROM XM-4101TA  1084
+dva0.0.0.0.1               DVA0
+ewa0.0.0.11.0              EWA0              08-00-2B-E5-0B-D6
+pka0.7.0.6.0               PKA0                  SCSI Bus ID 7
+
+<b><i><u>
+OpenVMS Alpha Operating System version 7.3-1 is loaded in drive dka400:.
+</u></i></b>
+
+>>><b>boot dka400</b>
+(boot dka400.4.0.6.0)
+block 0 of dka400.4.0.6.0 is a valid boot block
+reading 969 blocks from dka400.4.0.6.0
+bootstrap code read in
+base = 1f2000, image_start = 0, image_bytes = 79200
+initializing HWRPB at 2000
+initializing page table at 1e4000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+%SYSBOOT-W-FIRMREV, Firmware rev. 6.7 is below the recommended minimum of 6.9.
+                   Please update your firmware to the recommended revision,
+                   which can be found on the firmware CD labeled:
+                   Alpha AXP Systems Firmware Update 6.2.
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-1
+
+
+Please enter date and time (DD-MMM-YYYY  HH:MM)
+Please enter date and time (DD-MMM-YYYY  HH:MM)
+<b><i><u>pressed the break switch.</u></i></b>
+halted CPU 0
+
+halt code = 1
+operator initiated halt
+PC = ffffffff83204060
+>>>
+>>>
+<b><i><u>
+On firmware CD 6.0 is a newer firmware version for this machine.
+</u></i></b>
+>>>
+>>>
+>>><b>boot dka400</b>
+(boot dka400.4.0.6.0)
+block 0 of dka400.4.0.6.0 is a valid boot block
+reading 1082 blocks from dka400.4.0.6.0
+bootstrap code read in
+base = 1f2000, image_start = 0, image_bytes = 87400
+initializing HWRPB at 2000
+initializing page table at 1e4000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+------------------------------------------------------------------------------
+                    +++++++++++++++++++++++++++++++++++++++
+                    +    AlphaStation 200/250 Firmware    +
+                    +           README-First !!!          +
+                    +++++++++++++++++++++++++++++++++++++++
+
+        1. Latest Firmware Update Revisions
+
+             The latest Firmware Update Bootfile "AS200_V7_0.EXE" on this
+             Alpha Systems Firmware CD contains the SRM Console V7.0, which
+             has the following components (* = CHANGED since last release) :
+
+                        APU  7.0
+                        SRM  7.0
+                        ARC  4.58
+         PCI Update Utility  V1.4
+                 BIOS (SRM)  1.15a
+                 BIOS (ARC)  2.02
+                VMS PALcode  5.56-2
+                OSF PALcode  1.46-2
+
+        2. Firmware Enhancements and New Features
+
+Hit &lt;RETURN&gt; to scroll text, or &lt;CTRL/C&gt; to skip text.
+
+
+              Console V7.0 contains the following enhancements :
+
+                    - Updated ARC firmware to 4.58
+                    - Added support for HSG forced failover
+                    - Fixed System banner truncation problem
+
+        3. Firmware Anomalies, Restrictions, and Workarounds
+
+                                        NOTE:
+
+                 If you are upgrading from pre-V3.4 CD firmware or
+                 from systems that are currently running 5.3 SRM
+                 console or earlier please see the release notes for
+                 special information regarding update procedures.
+
+        4. AlphaStation 200/250 Firmware Release Notes
+
+              If you wish to read the complete Firmware Release Notes
+              (no longer required for booting the firmware update program)
+              for the AlphaStation 200/250, they can be found on the
+              Alpha Systems Firmware Update CD in the following
+
+Hit &lt;RETURN&gt; to scroll text, or &lt;CTRL/C&gt; to skip text.<i><b>&lt;RETURN&gt;</b></i>
+
+              directories :
+
+              On an OpenVMS System:
+              [DOC]ALPHA200_V70_FW_RELNOTE.PS     (PostScript file)
+              [DOC]ALPHA200_V70_FW_RELNOTE.TXT    (Text file)
+
+              On a Digital UNIX System:
+
+              /DOC/ALPHA200_V70_FW_RELNOTE.PS     (PostScript file)
+              /DOC/ALPHA200_V70_FW_RELNOTE.TXT    (Text file)
+
+              On a Windows NT System:
+
+              \DOC\ALPHA200_V70_FW_RELNOTE.PS     (PostScript file)
+              \DOC\ALPHA200_V70_FW_RELNOTE.TXT    (Text file)
+------------------------------------------------------------------------------
+
+Hit &lt;RETURN&gt; to scroll text, or &lt;CTRL/C&gt; to skip text.<i><b>&lt;RETURN&gt;</b></i>
+
+The default bootfile for this platform is
+
+        [ALPHA200]AS200_V7_0.EXE
+
+Hit &lt;RETURN&gt; at the prompt to use the default bootfile.
+
+Bootfile:<i><b>&lt;RETURN&gt;</b></i>
+ff.fe.fd.fc.fb.fa.f9.f8.f7.f6.f5.
+ef.df.ee.ed.ec.f4.eb.ea.e9.e8.e7.....e5.
+V7.0-9, built on Mar 18 1999 at 13:41:11
+>>>(boot pmem:180000 -flags 0,0 unit=1)
+bootstrap code read in
+base = 180000, image_start = 0, image_bytes = 800000
+initializing HWRPB at 2000
+initializing page table at 7fc000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+APU-E Manufacturing Header Incorrect
+
+        ***  AlphaStation 200 4/100 -- Firmware Update   ***
+
+        Use HELP or ? for help
+
+Update
+Verify
+List
+Show
+DEbug
+NDebug
+?
+Apu-> <b>update</b>
+APU-I ARE YOU READY TO PROGRAM (SRM  ) ROM DEVICE ? (Y/N) <b>y</b>
+APU-I PRECHARGING (SRM  ) ROM DEVICE
+APU-I ERASING (SRM  ) ROM DEVICE
+APU-I PROGRAMMING (SRM  ) ROM DEVICE
+APU-I VERIFY LOADED (SRM  ) ROM IMAGE
+APU-I VERIFY LOADED (SRM  ) ROM IMAGE DONE
+APU-I PROGRAMMING (SRM  ) ROM COMPLETED
+Apu-> <b>verify</b>
+SRM   ROM verify successful
+Apu-> ?
+
+        For more information, type:  HELP &lt;Topic&gt; or ? &lt;Topic&gt;
+
+        Topic        Description
+        -----        -----------
+        Update       Update the ROM(s)
+        VERIFy       Verify the ROM(s)
+        List         List ROM device type
+        Show         Show ROM checksum
+        Quit         Quit update utility
+
+Update
+Verify
+List
+Show
+DEbug
+NDebug
+?
+Apu-> <b>quit</b>
+
+
+    ...Please Cycle System Power <b><i><u>pressed the power switch.</u></i></b>...ff.fe.fd.fc.fb.fa.f9.f8.f7.f6.f5.
+ef.df.ee.ed.ec.f4.eb.ea.e9.e8.e7.e6.....e5.
+V7.0-9, built on Mar 18 1999 at 13:41:11
+>>><b>show</b>
+auto_action             HALT
+boot_dev
+boot_file
+boot_osflags            0,0
+boot_reset              ON
+bootdef_dev
+booted_dev
+booted_file
+booted_osflags
+bus_probe_algorithm     old
+char_set                0
+console                 serial
+control_disfd           enable
+control_idema           enable
+control_irq11           scsi
+control_irq12           mouse
+control_scsi_term       internal
+controlp                on
+dump_dev
+enable_audit            ON
+ewa0_arp_tries          3
+ewa0_bootp_file
+ewa0_bootp_server
+ewa0_bootp_tries        3
+ewa0_def_ginetaddr      0.0.0.0
+ewa0_def_inetaddr       0.0.0.0
+ewa0_def_inetfile
+ewa0_def_sinetaddr      0.0.0.0
+ewa0_def_subnetmask     0.0.0.0
+ewa0_ginetaddr          0.0.0.0
+ewa0_inet_init          bootp
+ewa0_inetaddr           0.0.0.0
+ewa0_inetfile
+ewa0_loop_count         3e8
+ewa0_loop_inc           a
+ewa0_loop_patt          ffffffff
+ewa0_loop_size          2e
+ewa0_lp_msg_node        1
+ewa0_mode               Twisted-Pair
+ewa0_protocols          BOOTP
+ewa0_sinetaddr          0.0.0.0
+ewa0_tftp_tries         3
+ffauto                  OFF
+ffnext                  OFF
+kbd_hardware_type       PCXAL
+language                36
+language_name           English(American)
+license                 MU
+mopv3_boot              OFF
+os_type                 OpenVMS
+pal                     VMS PALcode V5.56-2, OSF PALcode X1.46-2
+pci_parity              off
+pka0_disconnect         1
+pka0_fast               1
+pka0_host_id            7
+quick_start             OFF
+scsi_poll               ON
+srm2ctrl
+srm2dev
+sys_serial_num
+tga_sync_green          0
+timer_tps               1
+tt_allow_login          1
+tty_dev                 0
+version                 V7.0-9 Mar 18 1999 13:41:11
+>>>
+>>><b>show config</b>
+
+Firmware
+SRM Console:    V7.0-9
+show_arc: Can't find Flash Rom containing ARC console.
+PALcode:        VMS PALcode V5.56-2, OSF PALcode X1.46-2
+Serial Rom:     V4.6
+Diag Rom:       V1.7
+
+Processor
+DECchip (tm) 21064-3    100Mhz 512KB Cache
+
+MEMORY
+     128 Meg of System Memory
+     Bank 0 = 64 Mbytes(32 MB Per Simm) Starting at 0x0
+     Bank 1 = 64 Mbytes(32 MB Per Simm) Starting at 0x4000000
+     Bank 2 = No Memory Detected
+
+PCI Bus
+     Bus 00  Slot 06: NCR     810 Scsi Controller
+                                   pka0.7.0.6.0          SCSI Bus ID 7
+                                   dka400.4.0.6.0         TOSHIBA CD-ROM XM-41
+
+     Bus 00  Slot 07: Intel SIO 82378
+
+
+     Bus 00  Slot 11: DECchip 21040 Network Controller
+                                   ewa0.0.0.11.0         08-00-2B-E5-0B-D6
+
+ISA
+Slot    Device  Name            Type         Enabled  BaseAddr  IRQ     DMA
+0
+        0       MOUSE           Embedded        Yes     60      12
+        1       KBD             Embedded        Yes     60      1
+        2       COM1            Embedded        Yes     3f8     4
+        3       COM2            Embedded        Yes     2f8     3
+        4       LPT1            Embedded        Yes     3bc     7
+        5       FLOPPY          Embedded        Yes     3f0     6       2
+>>>
+	</pre>
+  </blockquote>
+            <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <div class="footerpart" id="sponsorsun">
+      <p><a href="http://www.sun.com/software/star/openoffice/index.html">
+        <img title="Sponsored by Sun Microsystems, Inc." alt="Sun Microsystems Logo" src="/branding/images/sun_logo.gif" /></a><br />
+      </p>
+    </div>
+	
+    <div class="footerpart" id="sponsorhp">
+      <p><a href="http://www.hp.com/go/openvms">
+        <img title="Powered by OpenVMS" alt="Powered by OpenVMS logo" src="/branding/images/powered_1ovms.gif" id="poweredby" /></a>
+      </p>
+    </div>
+	
+    <div id="smallprint">
+      <ul class="horizontalmenu">
+        <li><a title="Give feedback, or ask for assistance" href="/project/www/contact.html">Contact us</a></li>
+        <li><a title="Sitemap" href="/project/www/sitemap.html">Sitemap</a></li>
+        <li><a title="What should happen on the matter listed on this page..." href="/project/development/todo.html">To-Dos</a></li>
+	<li><a href="http://www.openoffice.org/nonav/servlets/HelpTOC">Site Help</a></li>
+	<li><a href="/project/www/press/1.1/">Press room</a></li>			
+      </ul>
+
+      <p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+      <p>HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P., Sun, Sun Microsystems, the Sun logo, Java, Solaris, StarOffice are 
+trademarks or registered trademarks of Sun Microsystems, Inc., UNIX &reg; is a registered Trademark of The Open Group, POSIX &reg; is a registered Trademark of
+The IEEE.</p>
+    </div>
+  </div>
+
+</body>
+</html>

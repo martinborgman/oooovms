@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>OpenVMS define logicals for OpenOffice port</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>Logicals for OpenOffice port</FONT></I></U></B></P>
+<P>This procedure defines logicals so that a 'normal' compile will find the
+include files. This version is based upon OO_641c.
+We switched the OpenOffice code base to OO_stable_1, so this procedure will
+be revised in the near future.
+</P>
+<BR>
+<pre>
+$! setten van environment voor het bouwen van Openoffice
+$!
+$! v0.3 28-10-2002
+$!
+$ define SRC_ROOT "''f$trnlnm("OpenOffice")'[oo_stable_1"
+$!
+$ define basic 'f$trnlnm("SRC_ROOT")'.basic.inc]
+$ define comphelper 'f$trnlnm("SRC_ROOT")'.comphelper.inc.comphelper]
+$ define cppuhelper 'f$trnlnm("SRC_ROOT")'.cppuhelper.inc.cppuhelper]
+$ define goodies 'f$trnlnm("SRC_ROOT")'.goodies.inc]
+$ define ldapber 'f$trnlnm("SRC_ROOT")'.ldapber.inc.ldapber]
+$ define offmgr 'f$trnlnm("SRC_ROOT")'.offmgr.inc]
+$ define osl 'f$trnlnm("SRC_ROOT")'.sal.inc.osl]
+$ define rsc 'f$trnlnm("SRC_ROOT")'.rsc.inc]
+$ define rtl 'f$trnlnm("SRC_ROOT")'.sal.inc.rtl]
+$ define sal 'f$trnlnm("SRC_ROOT")'.sal.inc.sal]
+$ define sch 'f$trnlnm("SRC_ROOT")'.sch.inc]
+$ define sfx2 'f$trnlnm("SRC_ROOT")'.sfx2.inc]
+$ define so3 'f$trnlnm("SRC_ROOT")'.so3.inc]
+$ define sot 'f$trnlnm("SRC_ROOT")'.sot.inc]
+$ define starmath 'f$trnlnm("SRC_ROOT")'.starmath.inc]
+$ define svtools 'f$trnlnm("SRC_ROOT")'.svtools.inc]
+$ define svx 'f$trnlnm("SRC_ROOT")'.svx.inc]
+$ define systools 'f$trnlnm("SRC_ROOT")'.sal.inc.systools.]/trans=conc
+$ define toolkit 'f$trnlnm("SRC_ROOT")'.toolkit.inc.toolkit.]/trans=conc
+$ define tools 'f$trnlnm("SRC_ROOT")'.tools.inc]
+$ define ucbhelper 'f$trnlnm("SRC_ROOT")'.ucbhelper.inc.ucbhelper]
+$ define uno 'f$trnlnm("SRC_ROOT")'.cppu.inc.uno]
+$ define unotools 'f$trnlnm("SRC_ROOT")'.unotools.inc.unotools]
+$ define vcl 'f$trnlnm("SRC_ROOT")'.vcl.inc]
+$ define vos 'f$trnlnm("SRC_ROOT")'.vos.inc.vos]
+$ define xmloff 'f$trnlnm("SRC_ROOT")'.xmloff.inc]
+$exit
+</pre>
+<BR>
+    <a href="../"><img src="../images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="../images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

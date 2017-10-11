@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+
+<head>
+  <title>
+    porting:        OpenOffice.org for OpenVMS
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="version" content="2.6.2.4.8" />
+  <style type="text/css">
+    /*<![CDATA[*/
+    <!--
+    @import url("/branding/css/tigris.css");
+    @import url("/branding/css/inst.css");
+    -->
+    /*]]>*/
+  </style>
+  <link rel="stylesheet" type="text/css" href="/branding/css/print.css" media="print" />
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico" />
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO" />
+  <meta name="description" content="OpenOffice.org: The Open Office Suite" />
+
+</head>
+
+<body>
+  <p class="nonscreen"><a href="#content">Skip to content</a></p>
+
+
+  <div id="banner">
+    <div>
+      <a href="http://www.openoffice.org">
+      <img src="/branding/images/ooo_bcake_5th.gif"
+           alt="Openoffice.org" id="ooologo" />
+      </a>
+    </div>
+
+    <div id="login">
+      <form name="bannerloginform" id="bannerloginform" action="http://porting.openoffice.org/servlets/TLogin" method="post">
+        <div>
+          <label for="loginID">User:</label>
+          <input type="text" alt="username" name="loginID" id="loginID" class="inputtext" size="10" maxlength="32" />
+          <label for="password">Password:</label>
+          <input type="password" alt="password" name="password" id="password" class="inputtext" size="10" maxlength="32" />
+          <input type="submit" name="Login" id="Button" class="inputbutton" value="Login" /> 
+          <a href="http://www.openoffice.org/servlets/Join">Register</a>  | 
+          <a href="http://www.openoffice.org/servlets/TLogin">Login help</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toptabs">
+    <ul class="tabs">
+      <li>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </li>
+
+      <li> <a href="http://download.openoffice.org/index.html" title="Get OpenOffice.org or browse for additions">Download</a> </li>
+
+      <li> <a href="http://support.openoffice.org/index.html" title="The place for both free and commercial support on OpenOffice.org">Support</a> </li>
+
+      <li> <a href="http://contributing.openoffice.org/index.html" title="Become part of the largest OpenSource project!">Contributing</a> </li>
+
+      <li class="th">   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </li>
+
+      <li>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </li>
+
+      <li> <a href="http://about.openoffice.org/index.html" title="Background information on OpenOffice.org">About</a> </li>
+
+    </ul>
+  </div>
+
+  <div class="contentpart" id="contextualinformation">
+    <div id="breadcrumbs">
+      <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+      <strong>
+        <a href="http://porting.openoffice.org/">porting</a>
+      </strong>
+    </div>
+  </div>
+
+  <div id="body">
+    <table id="main" summary="body">
+      <tr>
+        <td id="leftcol">
+          <div id="navcolumn">
+            <div id="projecttools" class="toolgroup">
+              <div class="label">
+                <strong>Project tools</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a>
+                </div>  
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a>
+                </div>
+              </div>  
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a>
+                </div>
+                <div>
+                  <a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+                </div>
+              </div> 
+              <div class="body">
+                <div>
+                  <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a>
+                </div>
+              </div>
+            </div>
+            <form action="http://porting.openoffice.org/servlets/Search" method="get">
+              <div id="searchbox" class="toolgroup">
+                <div class="label">
+                  <strong>Search</strong>
+                </div>
+                <div class="body">
+                  <div>
+                    <select name="scope">
+                      <option value="projectAndSubs" selected="selected">This project</option>
+                      <option value="domain" >All projects</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input type="hidden" name="resultsPerPage" value="40" /> 
+                    <input type="text" name="query" size="10" /> 
+                    <input type="submit" name="Button" value="Go" />
+                  </div>
+                  <div>
+                    <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>
+                  </div>
+                  <div>
+                    <a href="http://support.openoffice.org/search.html">Google search</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="helptext" class="toolgroup">
+              <div class="label">
+                <strong>How do I...</strong>
+              </div>
+              <div class="body">
+                <div>
+                  <a href="http://www.openoffice.org/sitemap.html" class="helplink">Sitemap</a>
+                </div>
+                <div><a href="http://www.openoffice.org/faq.html" class="helplink">FAQ</a></div>
+                <div>
+                  <a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+                    title="Note: link may open in new window" class="helplink">Get help?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strut">
+            &nbsp;
+          </div>
+        </td>
+
+        <td id="bodytd">
+          <div id="bodycol">
+            <p class="nonscreen"><a name="content">start:</a></p>
+
+            <!--#config timefmt="%Y-%m-%d" --> 
+ 
+ <h1>
+        perl GNV section 
+</h1>
+<p>
+        <i>
+                Updated <!--#echo var="LAST_MODIFIED" -->, by 
+                <a href="mailto:martin.borgman@oooovms.dyndns.org">
+                        Martin Borgman
+                </a>
+        </i>
+</p>
+
+<!-- edit this below -->
+
+<pre>
+
+How to enable Perl in GNV
+
+This was tested on a zx6000 with:
+----------------------------------- ----------- ------------
+PRODUCT                             KIT TYPE    STATE
+----------------------------------- ----------- ------------
+HP I64VMS AVAIL_MAN_BASE V8.2-1     Full LP     Installed
+HP I64VMS C V7.1-11                 Full LP     Installed
+HP I64VMS CDSA V2.1-355             Full LP     Installed
+HP I64VMS CSWS V2.1                 Full LP     Installed
+HP I64VMS CSWS_JAVA V3.0            Full LP     Installed
+HP I64VMS CSWS_PERL V2.1            Full LP     Installed
+HP I64VMS CSWS_PHP V1.3             Full LP     Installed
+HP I64VMS CXX V7.1-11               Full LP     Installed
+HP I64VMS DWMOTIF V1.5              Full LP     Installed
+HP I64VMS GNV V1.6-4                Full LP     Installed
+HP I64VMS JAVA142 V1.4-22           Full LP     Installed
+HP I64VMS KERBEROS V2.1-75          Full LP     Installed
+HP I64VMS OPENVMS V8.2-1            Platform    Installed
+HP I64VMS PERL V5.8-6               Full LP     Installed
+HP I64VMS TCPIP V5.5-11             Full LP     Installed
+HP I64VMS TDC_RT V2.1-78            Full LP     Installed
+HP I64VMS VMS V8.2-1                Oper System Installed
+JFP I64VMS LIBBZ2 V1.0-2            Full LP     Installed
+JFP I64VMS MYSQL V4.1-14            Full LP     Installed
+JFP I64VMS PYTHON235 V1.46-0        Full LP     Installed
+JFP I64VMS ZLIB V1.2-3              Full LP     Installed
+----------------------------------- ----------- ------------
+
+Note1:
+I'm using a HP internal version of bash, but I don't think that matters in this
+case.
+
+Note2:
+I'm also using a similar hack to enable java on GNV. This hack enables the
+following CRTL feature switches:
+  "DECC$ARGV_PARSE_STYLE" = "TRUE"
+  "DECC$EFS_CASE_PRESERVE" = "TRUE"
+  "DECC$EFS_CASE_SPECIAL" = "TRUE"
+  "DECC$EFS_CHARSET" = "TRUE"
+  "DECC$ENABLE_GETENV_CACHE" = "TRUE"
+  "DECC$FILE_SHARING" = "TRUE"
+  "DECC$POSIX_SEEK_STREAM_FILE" = "TRUE"
+Some of these switches change the behavior of the Perl executables.
+
+
+Prerequisites are:
+GNV 1.6-2 or better
+PERL 5.6.1 or better
+Alpha or IA64 system
+ODS-5 disk with hard links enabled
+extended parse style enabled
+case blind
+
+What to do:
+
+   1. Check the PERLDOC symbol you defined in your LOGIN.COM or in the system
+      wide SYS$MANAGER:SYLOGIN.COM.
+      The lower case -t at the end should be quoted. Define the PERLDOC symbol
+      like this:
+      PERLDOC :== $PERL_ROOT:[000000]PERL.EXE PERL_ROOT:[LIB.POD]PERLDOC.COM "-t"
+      or like this:
+      PERLDOC == "$PERL_ROOT:[000000]PERL.EXE PERL_ROOT:[LIB.POD]PERLDOC.COM -t"
+   2. Create the directory GNU:[usr.local.bin]
+   3. Create a lowercase link for all the .COM files in PERL_ROOT:[UTILS]
+      SET FILE /ENTER='lc_name'. PERL_ROOT:[UTILS]'UC_NAME'.COM
+      Note1: don't forget the dot at the end of the lowercase link name
+      Note2: this is not just for GNV it also solves problems with Perl caused
+      by some CRTL switches.
+   4. Create lowercase links for the PERL executables in GNU:[usr.local.bin]
+      SET FILE /ENTER=GNU:[usr.local.bin]a2p. PERL_ROOT:[000000]A2P.EXE
+      SET FILE /ENTER=GNU:[usr.local.bin]perl. PERL_ROOT:[000000]PERL.EXE
+      Note: don't forget the dot at the end of the lowercase link name
+   5. Copy all the Perl scripts, unfortunately called .COM, from
+      PERL_ROOT:[UTILS] to GNU:[usr.local.bin], removing the .COM from the
+      destination name
+   6. Edit the copied perl scrips from the previous step and
+          * Remove the line starting with "$ exit++ +"
+          * Change the line starting with "$ perl" to "#!/usr/local/bin/perl"
+          * Change the text "perl_root:[000000]Perl.exe" to "/usr/local/bin/perl"
+      Note: you can combine steps 5 and 6 using grep and sed
+   7. Check your bash PATH environment. It should include /usr/local/bin. If it
+      doesn't edit your .bashrc
+      export PATH=${PATH}:/usr/local/bin
+   8. Edit your .bashrc to define GNV_DISABLE_DCL_FALLBACK=1:
+      export GNV_DISABLE_DCL_FALLBACK=1
+   9. Edit your .bashrc to define the alias for perldoc:
+      alias perldoc='perldoc -t'
+
+Because all these steps are a lot of work, I made a script. I made it as simple
+simple as possible although the bash stuff at the end may seem a little strange
+to some of us.
+
+$ ECHO := WRITE SYS$OUTPUT
+$!
+$ ECHO "Testing achitecture..."
+$!
+$ architecture = F$GETSYI("ARCH_NAME")
+$ ECHO "Architecture is: " + architecture
+$!
+$ IF (architecture .NES. "ALPHA") .AND. (architecture .NES. "IA64")
+$ THEN
+$    ECHO "This procedure only makes sense on Alpha or Itanium"
+$    EXIT
+$ ENDIF
+$!
+$ old_style = F$GETJPI("","PARSE_STYLE_PERM")
+$ ECHO "Setting parse style to extended"
+$ SET PROC /PARSE_STYLE=EXTENDED
+$!
+$! check if we can find GNV
+$ ECHO "Testing GNV installation and setup..."
+$ GNVDIR = F$TRNLNM("GNU")
+$ IF GNVDIR .EQS. ""
+$ THEN
+$    ECHO "GNV is not installed or setup properly."
+$    ECHO "Read read the GNV installation guide."
+$    ECHO "Logical GNU not defined."
+$    GOTO theend
+$ ENDIF
+$ IF  (F$TRNLNM("DCL$PATH") .NES. "GNU:[BIN]") -
+ .OR. (F$TRNLNM("VAXC$PATH") .NES. "GNU:[BIN]")
+$ THEN
+$    ECHO "GNV is not installed or setup properly."
+$    ECHO "Read read the GNV installation guide."
+$    ECHO "The logicals DCL$PATH and VAXC$PATH are not setup correctly."
+$    GOTO theend
+$ ENDIF
+$ IF  (F$SEARCH("SYS$POSIX_ROOT:[000000]bin.DIR") .EQS. "")
+$ THEN
+$    ECHO "GNV is not installed or setup properly."
+$    ECHO "Read read the GNV installation guide."
+$    ECHO "Tho logical SYS$POSIX_ROOT not set correctly."
+$    GOTO theend
+$ ENDIF
+$ IF  ("''bash'" .EQS. "")
+$ THEN
+$    ECHO "GNV is not installed or setup properly."
+$    ECHO "Read read the GNV installation guide."
+$    ECHO "The symbol bash is not defined."
+$    GOTO theend
+$ ENDIF
+$ ECHO "GNV looks OK"
+$!
+$! OK we found GNV
+$! How about PERL
+$!
+$ ECHO "Testing Perl installation and setup..."
+$ PERLDIR = F$TRNLNM("PERL_ROOT")
+$ IF PERLDIR .EQS. ""
+$ THEN
+$    ECHO "PERL is not installed or setup properly."
+$    ECHO "Read read the PERL installation guide."
+$    GOTO theend
+$ ENDIF
+$ length = F$LENGTH("''PERLDOC'")
+$ IF length .EQ. 0
+$ THEN
+$    ECHO "PERL is not installed or setup properly."
+$    ECHO "Read read the PERL installation guide."
+$    ECHO "Symbol PERLDOC is not defined."
+$    GOTO theend
+$ ENDIF
+$!
+$! When you enable DECC$ARGV_PARSE_STYLE perldoc fails because the -t was
+$! translated to -T by DCL
+$!
+$ IF F$EXTRACT(length -2,2,PERLDOC) .NES. "-t"
+$ THEN
+$    ECHO "For Perl to work properly it is necessary to define PERLDOC like this:"
+$    ECHO "PERLDOC :== $PERL_ROOT:[000000]PERL.EXE PERL_ROOT:[LIB.POD]PERLDOC.COM ""-t""
+$    ECHO "or like this:"
+$    ECHO "PERLDOC == ""$PERL_ROOT:[000000]PERL.EXE PERL_ROOT:[LIB.POD]PERLDOC.COM -t""
+$    ECHO "Please make the apropriate change in your SYS$LOGIN:LOGIN.COM or SYS$MANAGER:SYLOGIN.COM"
+$    ECHO "Continuing"
+$ ENDIF
+$!
+$ ECHO "Perl looks OK"
+$!
+$! ALL = WELL
+$!
+$ IF F$SEARCH("GNU:[usr.local]bin.DIR") .EQS. ""
+$ THEN
+$    ECHO "Create the direcory /usr/local/bin..."
+$    CREA/DIR/LOG GNU:[usr.local.bin]
+$ ENDIF
+$!
+$! Make the links in the UTILS directory
+$! This is mandatory when DECC$ARGV_PARSE_STYLE is anabled
+$!
+$ ECHO "Creating links in PERL_ROOT:[UTILS]..."
+$ loop1:
+$    file = F$SEARCH("PERL_ROOT:[UTILS]*.COM",1)
+$    IF file .NES. ""
+$    THEN
+$       name = F$EDIT(F$PARSE(file,,,"NAME"),"LOWERCASE")
+$       IF F$SEARCH("PERL_ROOT:[UTILS]''name'.",2) .NES. ""
+$       THEN
+$          SET FILE /REMOVE PERL_ROOT:[UTILS]'name'.;
+$       ENDIF
+$       ECHO "Creating link " + name + " for file " + file
+$       SET FILE /ENTER=PERL_ROOT:[UTILS]'name'. 'file'
+$       GOTO loop1
+$    ENDIF
+$ ECHO "Done."
+$!
+$! create the links in /usr/local/bin
+$!
+$ ECHO "Create links for Perl executables in /usr/local/bin"
+$ files = "A2P.EXE,PERL.EXE"
+$ index = 0
+$ loop2:
+$    file = F$ELEMENT(index,",",files)
+$    IF file .NES. ","
+$    THEN
+$       IF F$SEARCH("PERL_ROOT:[000000]''file'") .NES. ""
+$       THEN
+$          name = F$EDIT(F$PARSE("PERL_ROOT:[000000]''file'",,,"NAME"),"LOWERCASE")
+$          IF F$SEARCH("GNU:[usr.local.bin]''name'.") .NES. ""
+$          THEN
+$             SET FILE /REMOVE GNU:[usr.local.bin]'name'.;
+$          ENDIF
+$          ECHO "Creating link /usr/local/bin/" + name + " for file PERL_ROOT:[000000]" + file
+$          SET FILE /ENTER=GNU:[usr.local.bin]'name'. PERL_ROOT:[000000]'file'
+$       ELSE
+$          ECHO "How did I get here..."
+$          ECHO "Somethin's wrong with this perl installation."
+$          ECHO "I'm dead..."
+$          GOTO theend
+$       ENDIF
+$       index = index + 1
+$       GOTO loop2
+$    ENDIF
+$ ECHO "Done."
+$!
+$ ECHO "Recreating some perl scripts for bash..."
+$ loop3:
+$    file = F$SEARCH("PERL_ROOT:[UTILS]*.COM",1)
+$    IF file .NES. ""
+$    THEN
+$       UNAME = F$PARSE(file,,,"NAME")
+$       name = F$EDIT(UNAME,"LOWERCASE")
+$       ECHO "Creating /usr/local/bin/" + name + " from file " + file
+$       IF F$SEARCH("GNU:[usr.local.bin]''name'.") .NES. ""
+$       THEN
+$          DEL GNU:[usr.local.bin]'name'.;
+$       ENDIF
+$       PIPE grep -v "\$ exit++ + .*" /PERL_ROOT/UTILS/'UNAME'.COM | sed -e "s/^\$ perl.*/#!\/usr\/local\/bin\/perl/g" -e "s/perl_root.*exe/\/usr\/local\/bin\/perl/g" > GNU:[usr.local.bin]'name'.
+$       GOTO loop3
+$    ENDIF
+$ ECHO "Done."
+$!
+$ ECHO "Checking your bash environment..."
+$!
+$ bash
+echo Checking .bashrc...
+if [ -f ${HOME}/.bashrc ]
+then
+  . ${HOME}/.bashrc
+else
+  echo You do not have a .bashrc
+  echo I will create one for you
+  touch ${HOME}/.bashrc
+fi
+
+echo Checking export GNV_DISABLE_DCL_FALLBACK=1...
+if [ -z "${GNV_DISABLE_DCL_FALLBACK}" ] || [ ${GNV_DISABLE_DCL_FALLBACK} -ne 1 ]
+then
+  echo Adding export GNV_DISABLE_DCL_FALLBACK=1 to your .bashrc
+  echo "export GNV_DISABLE_DCL_FALLBACK=1" >> ${HOME}/.bashrc
+fi
+
+echo Checking PATH contains /usr/local/bin...
+if ! (echo "${PATH}" | grep -q /usr/local/bin)
+then
+   echo Adding export PATH=${PATH}:/usr/local/bin to your .bashrc
+   echo export PATH=${PATH}:/usr/local/bin >> ${HOME}/.bashrc
+fi
+
+echo Chekking perldoc alias...
+if ! grep -q -e '^[[:blank:]]*alias[[:blank:]]\{1,\}perldoc' ${HOME}/.bashrc
+then
+  echo Adding alias perldoc='perldoc -t' to your .bashrc
+  echo "alias perldoc='perldoc -t'" >> ${HOME}/.bashrc
+fi
+echo bash done
+$
+$ ECHO "All Done"
+$!
+$ theend:
+$   ECHO "Resetting parse style."
+$   SET PROC/PARSE_STYLE='old_style'
+$   EXIT
+
+A few comments:
+I was unable to use + and ? in regular expressions, I head to use \{1,\} and
+\{0,1\} instead.
+Why doesn't bash use the standard search mechanism for system wide .profile and
+user .profile?
+
+Regards,
+
+Martin Borgman,
+OpenOffice.org On OpenVMS porting group.
+
+</pre>
+
+
+            <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="footer">
+    <div class="footerpart" id="sponsorsun">
+      <p><a href="http://www.sun.com/software/star/openoffice/index.html">
+        <img title="Sponsored by Sun Microsystems, Inc." alt="Sun Microsystems Logo" src="/branding/images/sun_logo.gif" /></a><br />
+      </p>
+    </div>
+	
+    <div class="footerpart" id="sponsorhp">
+      <p><a href="http://www.hp.com/go/openvms">
+        <img title="Powered by OpenVMS" alt="Powered by OpenVMS logo" src="/branding/images/powered_1ovms.gif" id="poweredby" /></a>
+      </p>
+    </div>
+	
+    <div id="smallprint">
+      <ul class="horizontalmenu">
+        <li><a title="Give feedback, or ask for assistance" href="/project/www/contact.html">Contact us</a></li>
+        <li><a title="Sitemap" href="/project/www/sitemap.html">Sitemap</a></li>
+        <li><a title="What should happen on the matter listed on this page..." href="/project/development/todo.html">To-Dos</a></li>
+	<li><a href="http://www.openoffice.org/nonav/servlets/HelpTOC">Site Help</a></li>
+	<li><a href="/project/www/press/1.1/">Press room</a></li>			
+      </ul>
+
+      <p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+      <p>HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P., Sun, Sun Microsystems, the Sun logo, Java, Solaris, StarOffice are 
+trademarks or registered trademarks of Sun Microsystems, Inc., UNIX &reg; is a registered Trademark of The Open Group, POSIX &reg; is a registered Trademark of
+The IEEE.</p>
+    </div>
+  </div>
+
+</body>
+</html>

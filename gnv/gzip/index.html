@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>OpenVMS GZIP main page</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>GZIP</FONT></I></U></B></P>
+<P>GZIP is the GNU ZIP tool used in the GNV suite. It can however be used 
+wihout any other part of GNV. As such it can be tested and debugged. You 
+are invited to test this part of software and give us any feedback we can use to 
+improve the quality of the software.
+</P>
+<p>
+<br>
+<b><u>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.
+</u></b>
+<br>
+</P>
+<P>
+Martin Borgman writes:
+</p> 
+<p>
+"The gzip version that comes with
+gnv does not handle ODS-5 filenames the way it should.
+</p>
+<p>
+I made several changes to gzip-1.2.4 these past few days. I didn't like 
+the clumsy changes I made previously to makegzip.com to optionally add the 
+vms_crtl_init stuff. So after long deliberation I decided to go into a 
+different direction. I removed de clumsy bits from makegzip.com and  
+changed vms.c. The new version of vms.c conditionally includes either 
+vms_expand_args.h or vms_crtl_init.h depending on the crtl version.
+</p>
+<p>
+The files vms_expand_args.h and vms_crtl_init.h are new.
+</p>
+<p>
+The vms_expand_args.h file is the original version of vms.c and vms_crtl_init.h needs no introduction.
+</p>
+<p>
+I also did some cleaning up in tailor.h.
+</p>
+<p>
+The build script should be able to build gzip on any resent VMS version, without setting any of the X symbols.
+</p>
+<p>
+Regards,
+</p>
+<p>
+Martin Borgman."
+</p>
+<p>
+A gzip file
+<A href="gzip-1_2_4c.tar-gz"> (gzip-1_2_4c.tar-gz, 224 KB)</A>
+containing the whole gzip source can be downloaded.
+</p>
+<p>
+Please give your feedback to 
+<A href="mailto:gzipdev@oooovms.dyndns.org">gzipdev@oooovms.dyndns.org.</A>
+</p>
+<p>
+    <a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

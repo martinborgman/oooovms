@@ -1,0 +1,55 @@
+#!/usr/bin/ksh
+
+libtarball="/usr/tmp/libstlport.tar.gz"
+inctarball="/usr/tmp/incstlport.tar.gz"
+unziplibtarball="/usr/tmp/libstlport.tar"
+unzipinctarball="/usr/tmp/incstlport.tar"
+libdir=/usr/local/lib
+incdir=/usr/local/include
+
+[[ "$(whoami)" != "root" ]] && {
+	echo $0: You must be root to run $0.
+	exit 2
+}
+
+echo "Extracting files ..."
+if [ -s $libtarball ] 
+then
+	gunzip -d $libtarball
+	tar -xvf $unziplibtarball
+	chmod -R 755 libstlport
+
+#
+# move the files into the final place
+#
+	[[ ! -d $libdir ]] && { 
+		mkdir -p /usr/local/lib
+	}
+  	cp -rf libstlport/* /usr/local/lib/
+  	rm -rf libstlport
+else
+#
+# error message
+#
+  echo "Can't find the $libitarball file."
+fi
+
+if [ -s $inctarball ] 
+then
+	gunzip -d $inctarball
+        tar -xvf $unzipinctarball 
+
+#
+# move the files into the final place
+#
+	[[ ! -d $incdir ]] && { 
+		mkdir -p /usr/local/include
+	}
+        cp -rf stlport /usr/local/include/
+        rm -rf stlport
+else
+#
+# error message
+#
+  echo "Can't find the $incitarball file."
+fi

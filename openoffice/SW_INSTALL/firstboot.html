@@ -1,0 +1,631 @@
+<!DOCTYPE html PUBLIC "-//Tigris//DTD XHTML 1.0 Transitional//EN"
+"http://style.tigris.org/tigris_transitional.dtd">
+<html>
+           
+ 
+ <head>
+ <style type="text/css"> /* <![CDATA[ */
+ @import "http://porting.openoffice.org/branding/css/tigris.css";
+ @import "http://porting.openoffice.org/branding/css/inst.css";
+ /* ]]> */</style>
+ <link rel="stylesheet" type="text/css" href="http://porting.openoffice.org/branding/css/print.css" media="print" />
+ <script src="http://porting.openoffice.org/branding/scripts/tigris.js" type="text/javascript"></script>
+  
+                                                  <title>
+        Reference section: First boot of OpenVMS
+    </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta http-equiv="Content-Style-Type" content="text/css" />
+
+ <meta name="version" content="2.6.2.3" />
+ <meta name="keywords" content="OpenVMS, SourceCast, CollabNet, collaboration, companies, software, development, model, enterprise, open source, developer, network, San Francisco" />
+ <meta name="description" content="SourceCast, a collaborative software development platform from CollabNet" />
+
+ 
+
+
+</head>
+ 
+ 
+<body onload="loginfocus()" marginwidth="0" marginheight="0" class="composite">
+ 
+ 
+ <div id="banner"><table border="0" cellspacing="0" cellpadding="4" width="100%"><tr><td>
+<div><a href="http://www.openoffice.org"><img src="http://www.openoffice.org/branding/images/logonew.gif" alt="Openoffice.org" id="ooologo" width="200" height="58" border="0" /></a></div>
+</td>  
+
+ <td>
+  <div align="right" id="login">
+    <div><small>
+    <a href="http://www.openoffice.org/servlets/Join">Register</a>  |    <a href="http://www.openoffice.org/servlets/TLogin">Login</a>  |   
+   </small>
+  </div>
+   </div>
+ </td>
+
+</tr>
+</table>
+</div>
+ 
+ 
+ 
+ 
+ <div class="tabs" id="toptabs">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+
+  <td>   <a href="http://www.openoffice.org/servlets/DomainHome">Home</a> </td>
+
+<td><a href="http://download.openoffice.org/index.html">Download</a></td>
+
+<td><a href="http://support.openoffice.org/index.html">Support</a></td>
+
+<td><a href="http://development.openoffice.org/index.html">Development</a></td>
+
+<th>   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a> </th>
+
+<td>   <a href="http://www.openoffice.org/servlets/StartPage">My pages</a> </td>
+
+
+
+</tr></table></div>
+
+  
+ 
+ <div id="breadcrumbs">
+   <a href="http://www.openoffice.org/servlets/ProjectList">Projects</a>     &nbsp;&gt;&nbsp;
+     
+
+   <strong>   <a href="http://porting.openoffice.org/"
+     >porting</a>
+   </strong>  </div>
+ 
+ 
+ 
+ 
+<table border="0" cellspacing="0" cellpadding="4" width="100%" id="main">
+<tr valign="top">
+<td id="leftcol" width="20%">
+ 
+ 
+ <div id="navcolumn">
+
+
+  <div id="projecttools" class="toolgroup">
+  <div class="label"><strong>Project tools</strong></div>
+  <div class="body">
+   <div>
+       <a href="http://porting.openoffice.org/servlets/ProjectHome">Project home</a>    </div>
+    
+       
+ 
+ <div>   <a href="http://porting.openoffice.org/servlets/ProjectMemberList">Membership</a> </div>
+</div>  
+ 
+            
+ 
+ <div class="body">  <div>   <a href="http://porting.openoffice.org/servlets/ProjectNewsList">Announcements</a> </div>  
+ 
+ 
+         
+ 
+   
+ 
+         
+ 
+ <div>   <a href="http://porting.openoffice.org/servlets/ProjectMailingListList">Mailing lists</a> </div>
+</div>  
+ 
+            
+ 
+ <div class="body"><div>   <a href="http://porting.openoffice.org/servlets/ProjectDocumentList">Documents &amp; files</a> </div>
+ 
+ 
+            
+ 
+ <div><a href="http://porting.openoffice.org/source/browse/porting/">Version control</a>
+
+
+</div>
+</div> 
+ 
+               
+ 
+ <div class="body"><div>
+   <a href="http://porting.openoffice.org/servlets/ProjectIssues">Issue tracker</a> </div>
+ 
+ 
+                  <div><a href=http://porting.openoffice.org/issues/buglist.cgi?issue_status=UNCONFIRMED&issue_status=NEW&issue_status=STARTED&issue_status=REOPENED&email1=guest;@openoffice.org&emailtype1=exact&emailassigned_to1=1&emailreporter1=1">My issues</a></div>
+  </div>
+ </div>
+  
+
+
+
+
+<form action="http://porting.openoffice.org/servlets/Search" method="get">
+ <div id="searchbox" class="toolgroup">
+  
+      <div class="label"><strong>Search</strong></div>
+    <div class="body">
+<div>
+       <select name="scope">
+           <option value="projectAndSubs" selected="selected">This project</option>
+               <option value="domain" >All projects</option>
+    </select>
+     </div>
+   <div>
+    <input type="hidden" name="resultsPerPage" value="40" /> 
+    <input type="text" name="query" size="10" /> 
+    <input type="submit" name="Button" value="Go" />
+   </div>
+   <div>
+       <a href="http://porting.openoffice.org/servlets/Search?mode=advanced">Advanced search</a>    </div>
+   <div><a href="http://support.openoffice.org/search.html">Google search</a></div>
+  </div>
+
+ </div>
+
+</form>
+
+
+<div id="helptext" class="toolgroup">
+<div class="label"><strong>Help</strong></div>
+<div class="body">
+
+<div><a href="http://www.openoffice.org/sitemap.html"  onclick="return launch(this.href, 1)" 
+title="Note: link may open in new window" class="helplink">Sitemap</a></div>
+<div><a href="http://www.openoffice.org/faq.html"  onclick="return launch(this.href, 1)" 
+title="Note: link may open in new window" class="helplink">FAQ</a></div>
+<div><a href="http://porting.openoffice.org/nonav/servlets/HelpTOC" onclick="return launch(this.href, 1)" 
+title="Note: link may open in new window" class="helplink">Get help?</a></div>
+</div></div>
+
+
+</div>
+ 
+ 
+<div class="strut">&nbsp;</div>
+</td>
+<td>
+ 
+<div id="bodycol">
+ 
+	<h1>
+	        Reference section: First boot of OpenVMS 
+	</h1>
+	<p>
+	        <i>
+	                Updated 2004-02-15, by 
+	                <a href="mailto:martin.borgman@oooovms.dyndns.org">
+	                        Martin Borgman
+	                </a>
+	        </i>
+	</p>
+<!-- edit this below -->
+
+  <h2>
+   Description of the first boot of Alpha OpenVMS.</h2>
+  <p>
+  <hr>
+  <blockquote>
+	First you have to make certain that your Alpha-computer has the latest (supported) firmware loaded.
+<BR>
+See the <a href="firmware.html">description of a firmware update</a> on an Alpha computer.
+<br>
+<br>
+After that you installed OpenVMS. See the <a href="install_os.html">description of the OpenVMS installation</a>.
+<br>
+<br>
+As no more information is needed by the procedure, all you have to do is sit and wait for the final boot to complete.
+<br>
+This step will normally take less then 5 minutes to complete.
+<hr>
+<b><i><u>
+Example of the first boot after a succesfull installation on an AlphaStation 200 4/100.
+</u></i></b>
+<PRE>
+>>><b>show dev</b>
+dka0.0.0.6.0               DKA0                       RZ28L-AS  0654
+dka400.4.0.6.0             DKA400     TOSHIBA CD-ROM XM-4101TA  1084
+dva0.0.0.0.1               DVA0
+ewa0.0.0.11.0              EWA0              08-00-2B-E5-0B-D6
+pka0.7.0.6.0               PKA0                  SCSI Bus ID 7
+>>>
+>>>
+>>><b>boot dka0</b>
+(boot dka0.0.0.6.0 -flags 0,0)
+block 0 of dka0.0.0.6.0 is a valid boot block
+reading 969 blocks from dka0.0.0.6.0
+bootstrap code read in
+base = 1f2000, image_start = 0, image_bytes = 79200
+initializing HWRPB at 2000
+initializing page table at 1e4000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-1
+
+
+$!  Copyright 2002 Compaq Information Technologies Group, L.P.
+
+    Installing required known files...
+
+    Configuring devices...
+%RUN-S-PROC_ID, identification of created process is 00000024
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:36.28  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%SYSTEM-I-BOOTUPGRADE, security auditing disabled
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:36.39  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:36.58  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;1
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:36.58  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;1
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:36.58  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:39.39  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:39.40  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%LICENSE-F-EMTLDB, license database contains no license records
+%SYSTEM-I-BOOTUPGRADE, security server not started
+%SYSTEM-I-BOOTUPGRADE, ACME server not started
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:45.49  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:12:48.72  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+
+
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+Startup processing continuing...
+
+%SYSTEM-I-BOOTUPGRADE, Coordinated Startup not performed
+%EWA0, Twisted-Pair mode set by console
+
+
+
+    AUTOGEN will now be run to compute the new system parameters.  The system
+    will then shut down and reboot, and the installation or upgrade will be
+    complete.
+
+    After rebooting you can continue with such system management tasks as:
+
+            Decompressing System Libraries
+            Configuring networking software (TCP/IP Services, DECnet, other)
+            Using SYS$MANAGER:CLUSTER_CONFIG.COM to create an OpenVMS Cluster
+            Creating FIELD, SYSTEST and SYSTEST_CLIG accounts if needed
+
+%AUTOGEN-I-BEGIN, GETDATA phase is beginning.
+%AUTOGEN-I-NEWFILE,  Previous contents of SYS$SYSTEM:CLU$PARAMS.DAT have
+  been copied to SYS$SYSTEM:CLU$PARAMS.OLD.  You may wish to purge
+  SYS$SYSTEM:CLU$PARAMS.OLD.
+%AUTOGEN-I-NEWFILE,  Previous contents of SYS$SYSTEM:CLU$PARAMS.DAT have
+  been copied to SYS$SYSTEM:CLU$PARAMS.OLD.  You may wish to purge
+  SYS$SYSTEM:CLU$PARAMS.OLD.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:PARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GETDATA phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENPARAMS phase is beginning.
+%AUTOGEN-I-NEWFILE, A new version of SYS$MANAGER:VMSIMAGES.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-NEWFILE, A new version of SYS$SYSTEM:SETPARAMS.DAT has been created.
+        You may wish to purge this file.
+%AUTOGEN-I-END, GENPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, GENFILES phase is beginning.
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]PAGEFILE.SYS;1 extended
+%SYSGEN-I-CREATED, SYS$SYSROOT:[SYSEXE]SYSDUMP.DMP;1 created
+%SYSGEN-I-EXTENDED, SYS$SYSROOT:[SYSEXE]SWAPFILE.SYS;1 extended
+
+%AUTOGEN-I-REPORT, AUTOGEN has produced some informational messages which
+        have been stored in the file SYS$SYSTEM:AGEN$PARAMS.REPORT.  You may
+        wish to review the information in that file.
+
+%AUTOGEN-I-END, GENFILES phase has successfully completed.
+%AUTOGEN-I-BEGIN, SETPARAMS phase is beginning.
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:13:54.63  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SYSGEN-I-WRITECUR, CURRENT system parameters modified by process ID 00000023 in
+to file SYS$SYSROOT:[SYSEXE]ALPHAVMSSYS.PAR;2
+
+%AUTOGEN-I-SYSGEN, parameters modified
+%AUTOGEN-I-END, SETPARAMS phase has successfully completed.
+%AUTOGEN-I-BEGIN, REBOOT phase is beginning.
+
+The system is shutting down to allow the system to boot with the
+generated site-specific parameters and installed images.
+
+The system will automatically reboot after the shutdown and the
+upgrade will be complete.
+
+
+
+        SHUTDOWN -- Perform an Orderly System Shutdown
+                    on node STAR
+
+
+%SHUTDOWN-I-BOOTCHECK, performing reboot consistency check...
+%SHUTDOWN-I-CHECKOK, basic reboot consistency check completed
+
+%SHUTDOWN-I-OPERATOR, this terminal is now an operator's console
+%SHUTDOWN-I-DISLOGINS, interactive logins will now be disabled
+%SET-I-INTSET, login interactive limit = 0, current interactive value = 0
+%SHUTDOWN-I-STOPQUEUES, the queues on this node will now be stopped
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:13:59.68  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:13:59.68  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+
+SHUTDOWN message on STAR from user SYSTEM at STAR Batch   23:14:00
+STAR will shut down in 0 minutes; back up soon.  Please log off node STAR.
+Reboot system with AUTOGENerated parameters
+
+
+%SHUTDOWN-I-SITESHUT, the site-specific shutdown procedure will now be invoked
+%SHUTDOWN-I-STOPUSER, all user processes will now be stopped
+%SHUTDOWN-I-QUIESCING, quiescing remaining non-system processes
+%SHUTDOWN-I-REMOVE, all installed images will now be removed
+%SHUTDOWN-I-DISMOUNT, all volumes will now be dismounted
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:14:03.03  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+STARTUP, STAR shutdown was requested by the operator.
+
+halted CPU 0
+
+halt code = 5
+HALT instruction executed
+PC = ffffffff800c5844
+
+CPU 0 booting
+
+(boot dka0.0.0.6.0 -flags 0,0)
+block 0 of dka0.0.0.6.0 is a valid boot block
+reading 969 blocks from dka0.0.0.6.0
+bootstrap code read in
+base = 1f2000, image_start = 0, image_bytes = 79200
+initializing HWRPB at 2000
+initializing page table at 1e4000
+initializing machine state
+setting affinity to the primary CPU
+jumping to bootstrap code
+
+
+    OpenVMS (TM) Alpha Operating System, Version V7.3-1
+
+
+$!  Copyright © 2002 Compaq Information Technologies Group, L.P.
+%STDRV-I-STARTUP, OpenVMS startup begun at 17-MAY-2003 23:15:44.70
+%EWA0, Twisted-Pair mode set by console
+%RUN-S-PROC_ID, identification of created process is 00000084
+%RUN-S-PROC_ID, identification of created process is 00000085
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:08.43  %%%%%%%%%%%
+Operator _STAR$OPA0: has been enabled, username SYSTEM
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:08.46  %%%%%%%%%%%
+Operator status for operator _STAR$OPA0:
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%SET-I-NEWAUDSRV, identification of new audit server process is 0000008A
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:08.60  %%%%%%%%%%%
+Logfile has been initialized by operator _STAR$OPA0:
+Logfile is STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:08.60  %%%%%%%%%%%
+Operator status for operator STAR::SYS$SYSROOT:[SYSMGR]OPERATOR.LOG;2
+CENTRAL, PRINTER, TAPES, DISKS, DEVICES, CARDS, NETWORK, CLUSTER, SECURITY,
+LICENSE, OPER1, OPER2, OPER3, OPER4, OPER5, OPER6, OPER7, OPER8, OPER9, OPER10,
+OPER11, OPER12
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:08.60  %%%%%%%%%%%
+Message from user WBM$SERVER
+%WBM-I-WBMINFO Write Bitmap has successfully completed initialization.
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:09.03  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-NEWSERVERDB, new audit server database created
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:09.32  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-REMENABLED, resource monitoring enabled for journal SECURITY
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:09.89  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+%AUDSRV-I-NEWOBJECTDB, new object database created
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:09.94  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%JBC-E-OPENERR, error opening SYS$COMMON:[SYSEXE]QMAN$MASTER.DAT;
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:09.94  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+-RMS-E-FNF, file not found
+
+%LICENSE-F-EMTLDB, license database contains no license records
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:13.80  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%ACME-I-SERVERSTART, ACME_SERVER starting
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:14.33  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:14.42  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-E-NOPROXYDB, cannot find proxy database file NET$PROXY.DAT
+%RMS-E-FNF, file not found
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:14.42  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIACRECLUDB, security server created cluster intrusion database
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:14.42  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-SERVERSTARTINGU, security server starting up
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:14.50  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%SECSRV-I-CIASTARTINGUP, breakin detection and evasion processing now starting u
+p
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:23.25  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+TDF-I-SETTDF TDF set new timezone differential
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:25.90  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+Warning: DECdtm log file not found (SYS$JOURNAL:SYSTEM$STAR.LM$JOURNAL)
+        %RMS-E-FNF, file not found
+        TP server process waiting
+
+
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:25.96  %%%%%%%%%%%
+Message from user SYSTEM on STAR
+%LICENSE-E-NOAUTH, DEC OPENVMS-ALPHA use is not authorized on this node
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+
+
+-LICENSE-F-NOLICENSE, no license is active for this software product
+-LICENSE-I-SYSMGR, please see your system manager
+Startup processing continuing...
+
+%STARTUP-I-AUDITCONTINUE, audit server initialization complete
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:27.54  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6553
+4
+Auditable event:          Audit server starting up
+Event time:               17-MAY-2003 23:16:27.37
+PID:                      00000083
+Username:                 SYSTEM
+
+
+The OpenVMS Alpha system is now executing the site-specific startup commands.
+
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:29.26  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6553
+4
+Auditable event:          Identifier added
+Event time:               17-MAY-2003 23:16:29.25
+PID:                      00000083
+Process name:             STARTUP
+Username:                 SYSTEM
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA0:[SYS0.SYSCOMMON.][SYSEXE]AUTHORIZE.EXE
+Identifier name:          SYS$NODE_STAR
+Identifier value:         %X80010000
+Attributes:               none
+
+%UAF-I-RDBADDMSG, identifier SYS$NODE_STAR value %X80010000 added to rights data
+base
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:31.12  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6553
+4
+Auditable event:          Identifier added
+Event time:               17-MAY-2003 23:16:31.12
+PID:                      00000083
+Process name:             STARTUP
+Username:                 SYSTEM
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA0:[SYS0.SYSCOMMON.][SYSEXE]IMGDMP_RIGHTS.EXE;1
+Identifier name:          IMGDMP$READALL
+Identifier value:         %X90390001
+Attributes:               none
+
+%PROCDUMP-I-CREATED, rights identifier IMGDMP$READALL successfully created
+%%%%%%%%%%%  OPCOM  17-MAY-2003 23:16:32.09  %%%%%%%%%%%
+Message from user AUDIT$SERVER on STAR
+Security alarm (SECURITY) and security audit (SECURITY) on STAR, system id: 6553
+4
+Auditable event:          Identifier added
+Event time:               17-MAY-2003 23:16:32.09
+PID:                      00000083
+Process name:             STARTUP
+Username:                 SYSTEM
+Process owner:            [SYSTEM]
+Image name:               STAR$DKA0:[SYS0.SYSCOMMON.][SYSEXE]IMGDMP_RIGHTS.EXE;1
+Identifier name:          IMGDMP$PROTECT
+Identifier value:         %X90390002
+Attributes:               RESOURCE
+
+%PROCDUMP-I-CREATED, rights identifier IMGDMP$PROTECT successfully created
+%SET-I-INTSET, login interactive limit = 64, current interactive value = 0
+  SYSTEM       job terminated at 17-MAY-2003 23:16:47.91
+
+  Accounting information:
+  Buffered I/O count:               2587      Peak working set size:       7040
+  Direct I/O count:                 1359      Peak virtual size:         182432
+  Page faults:                      1994      Mounted volumes:                0
+  Charged CPU time:        0 00:00:15.85      Elapsed time:       0 00:01:04.03
+</PRE>
+  </blockquote>
+	<br>
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+	        <tr>
+	                <td>
+	                        <div align="left">
+	                                Maintained by the 
+	                                <a href="mailto:oooodoc@oooovms.dyndns.org">
+	                                        OpenOffice on OpenVMS porting Project</a>. 
+	                        </div>
+	                </td>
+	        </tr>
+	</table>
+
+</div>
+</td>
+
+</tr>
+</table>
+ 
+ 
+ <div id="footer"><table border="0" cellspacing="0" cellpadding="4"><tr><td>
+<p>We welcome your <a href="http://porting.openoffice.org/project/www/contact.html">feedback</a>.</p>
+<p>By any use of this Website, you agree to be bound by these <a href="http://www.sunsource.net/TUPPCP.html">Policies and Terms of Use</a></p>
+<p>CollabNet, Inc. CollabNet is a trademark of CollabNet, Inc.
+Sun, Sun Microsystems, the Sun Logo, Solaris, Java, StarOffice, StarOffice 7 and StarSuite 7 are trademarks or registered trademarks of Sun Microsystems, Inc., in the United States and other countries.</p>
+</td>
+<td nowrap="nowrap">
+<p class="center><a href="http://www.collab.net/special/clickpbc0502.html" target="collab"><img src="http://porting.openoffice.org/branding/images/poweredby_036.gif" alt="This site is Powered by CollabNet." id="poweredby" width="102" height="38" border="0" /></a></p>
+</td>
+</tr></table></div>
+ 
+ 
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>OpenVMS OpenOffice.org port</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p>
+    <h2>Recent News</h2>
+    <dl>
+      <dt>11-oct-2011</dt>
+      <dd>A new version of DIX (version 8.0) has been released.</dd>
+      <dd>The main new feature is a plotting option to either a DECWindows display or a .ps file. This options also allows you to process (plot) t4 files, like TLVIZ but now native on VMS.</dd>
+      <dd>DIX now also includes a FFT function (Fourier transform) with the fast and the discrete algorithm. And as usual some bug-fixing (and without a doubt creation).</dd>
+      <dd>As always I am very interested in suggestions/questions/error reports via dixdev@oooovms.dyndns.org</dd>
+      <dd>
+        See the release notes for this version on the <a href="dix/">dix</a> webpage.
+      </dd>
+      <dt>21-oct-2010:</dt>
+      <dd>A new version of DIX (7.3) has been released. It contains a lot of enhancements (see the release notes) and of course some bugfixing.</dd>
+      <dd>The sources have been moved to a [.source] subdirectory. See the freeware_readme.txt. As always there are 4 kits, one per platform, and one for all platforms combined. Comments and questions are welcome.</dd>
+      <dd>
+        See the release notes for this version on the <a href="dix/">dix</a> webpage.
+      </dd>
+      <dt>07-jun-2010:</dt>
+      <dd>
+        A new tool has been ditributed, DISKSTAT. It will generate a report for the consequences of changing the clustersize of a disk. The program can also generate a filesize distribution list. See the freeware_readme.txt on the <a href="/diskstat/">diskstat</a> webpage.
+      </dd>
+      <dt>19-dec-2009:</dt>
+      <dd>
+        A new version of DIX is available (7.2). You can download a kit depending on the platform you need it for (Vax, Alpha or IA64).<br>
+        The main new features of this version are:
+        <ul>
+          <li>A lot more DCL compatibility.</li>
+          <li>The option to compile scripts (and so most of the DCL command files).</li>
+          <li>Indexed symbols, symbols can now be indexed not only by number, but by any data type (f.e. date, uic...)</li>
+          <li>And as usual some bugs have been solved (and no doubt some new ones have been added).</li>
+        </ul>See the release notes for this version on the <a href="/dix/">dix</a> webpage.
+      </dd>
+      <dt>12-apr-2009:</dt>
+      <dd>
+        A new version of DIX (7.1) is now available. DIX has become more and more DCL-like. A lot of DCL lexical functions now work in DIX, so you can execute more and more dcl scripts. Since DIX now also has a builtin debugger, you can debug dcl-scripts (at least as long as DIX understands them). In total some 50 changes have been made. See the release notes for this version on the <a href="/dix/">dix</a> webpage.
+      </dd>
+      <dt>8 december 2008:</dt>
+      <dd>
+        The presentation "Overview Kerberos, ACME and LDAP in an OpenVMS-environment" Ton held 20 november 2008 at the HPdutchworld 2008/Interex 2008 conference is now online. This presentation is in Dutch. On request I will make an English translation available.
+        <p><a href="http://www.oooovms.dyndns.org/reference/openvms_kerberos_20-11.odp">The presentation in ODF format</a>, <a href="http://www.oooovms.dyndns.org/reference/openvms_kerberos_20-11.pdf">The presentation in PDF format</a>.</p>
+        <p><a href="http://www.oooovms.dyndns.org/reference/openvms_kerberos_20-11_tekst.odt">The text of the notes of the presentation in ODF format</a>, <a href="http://www.oooovms.dyndns.org/reference/openvms_kerberos_20-11_tekst.pdf">The text of the notes of the presentation in PDF format</a>.</p>
+        <p>The ODF format can be read using OpenOffice.org.</p>
+      </dd>
+      <dt>17-jun-2008:</dt>
+      <dd>
+        A new version of DIX (7.0) is now available. The main new feature is the concept of a view. This is the possibility to combine data from multiple records in multiple files as one record. You can then search / display / modify this (combined) record. Also the interactive mode now contains a very good interpretor with a lot of things you always wanted in DCL (reals, tables and much much more). See the release notes for this version on the <a href="/dix/">dix</a> webpage.
+      </dd>
+      <dd>
+        A new utility has been added: ACX. This is an enhanced accounting utility that supports wildcard selection, SMG interface, multiple lists and much more. See the info in <a href="/acx/">acx</a> webpage.
+      </dd>
+      <dd>
+        A new utility has been added: Analyze_rms. This is a decwindows variant of analyze/rms, with a lot of explaining how RMS indexed files are organized. See the info in the <a href="/analyze_rms/">analyze_rms</a> webpage.
+      </dd>
+      <dt>28 nov 2006:</dt>
+      <dd>
+        A new version of dix (6.0) is available. The main new feature of this version is a DecWindows interface. Dix now also has an option to analyze RMS Indexed files with a lot of detail. Very nice to learn to understand how RMS indexed files are organized. See the release notes for this version on the <a href="/dix/">dix</a> webpage.
+      </dd>
+      <dt>13 october 2006:</dt>
+      <dd>
+        The Presentation Ton held 11 october 2006 at the HPdutchworld 2006/Interex 2006 conference is now online.
+        <p><a href="http://www.oooovms.dyndns.org/reference/hpdutchworld2006.odp">The presentation in ODF format</a>, <a href="http://www.oooovms.dyndns.org/reference/hpdutchworld2006.pdf">The presentation in PDF format</a>.</p>
+        <p>The ODF format can be read using OpenOffice.org 2. Using Openoffice.org means that you can see the notes attached to some sheets.</p>
+      </dd>
+      <dt>30 august 2006:</dt>
+      <dd>
+        I made some changes to the perl enabler page <a href="http://www.oooovms.dyndns.org/gnv/perl/">using perl under bash</a>. It now works on OpenVMS 8.3 with GNV 2.1-0 and Perl 5.8-6.
+      </dd>
+      <dt>1 february 2006:</dt>
+      <dd>
+        After perl and java Martin also worked out a way to use python under bash. We need this features for the OpenOffice port to OpenVMS.<br>
+        <br>
+        A description how to use python can be found in the gnv section <a href="http://www.oooovms.dyndns.org/gnv/python/">using python under bash</a>.
+      </dd>
+      <dt>30 january 2006:</dt>
+      <dd>
+        Martin worked out a way to use perl and java under bash. We need this features for the OpenOffice port to OpenVMS.<br>
+        <br>
+        A description how to use perl can be found in the gnv section <a href="http://www.oooovms.dyndns.org/gnv/perl/">using perl under bash</a>.<br>
+        <br>
+        A description how to use java can be found in the gnv section <a href="http://www.oooovms.dyndns.org/gnv/java/">using java under bash</a>.
+      </dd>
+      <dt>22 january 2006:</dt>
+      <dd>A new version of dix (4.3) is available.</dd>
+      <dt>19 oktober 2005:</dt>
+      <dd>Fekko made new versions of his freeware tools dix and fshelp.</dd>
+      <dd>Fekko also made a new freeware tool called auto. A program to AUTOmatically expand DCL commands. Check it out.</dd>
+      <dt>14 oktober 2005:</dt>
+      <dd>
+        <p><b>OOoCon 2005</b></p>We attended the third Openoffice conference, held in Koper (Capodistria), Slovenia. It was a real thumbs up experience. Although we don't working port on OpenVMS (yet), next year we hope to be able to give a simular presentation as the novell team did on a 64 bit port. Below is a picture of some of the people who attended the conference. Other people were still very busy attending a session at one of locations.
+      </dd>
+      <dd>
+        <b>OpenVMS technical update days</b>
+        <p>10 and 11 october were the technical update days in Holland. The spirit of this conference reminded us a little bit of the OOocon 2005 in Koper and of the decus conferences of the begin 90's.</p>
+        <p>Many people asked us about the progress of the Openoffice port. Although we couldn't show much progress (a working port), with the support of a lot of friends (from Nashua..) next year will be different!</p>
+        <p>We have high hopes, especially because hardware support (integrity box) and software support (update of the gnv) are on the way!</p>
+      </dd>
+      <dt>9 september 2005:</dt>
+      <dd>
+        Fekko Stubbe updated his <a href="/dix/">dix</a> program. Version 4.1 is released today.
+      </dd>
+      <dd>
+        We support multiple websites on our server. This caused some problems for our strictly native vmsmail environment. To support multiple domains we looked at communigate pro. We are still exploring its possibilities. One problem we encountered is that all batch procedures needed to be adapted to a UNIX style sendmail or mail syntax. VMSmail syntax was not supported. Fekko Stubbe developed the <a href="/mymail/">mymail</a> program, which enabled us to use all (batch)procedures without modification!
+      </dd>
+    </dl>
+    <dl>
+      <dt>2 september 2005:</dt>
+      <dd>The system supporting our websites had some problems. We had to replace the failing combo-card (rom-errors on pka0).</dd>
+      <dd>We think the system will perform like a charm for a long time now!</dd>
+    </dl>
+    <dl>
+      <dt>18 august 2005:</dt>
+      <dd>The system supporting our websites is upgraded to OpenVMS 8.2. We switched the location of the server from Martin's place to Ton's.</dd>
+      <dd>During the following weeks we'll update the information on our websites. (holiday cleaning...)</dd>
+    </dl>
+    <dl>
+      <dt>22 June 2005:</dt>
+      <dd>There is a new version of the porting guide in the reference section</dd>
+      <dd>Fekko Stubbe brought some interesting news from the advanced technical bootcamp. HP will release a OpenVMS 8.2 Symbolic Links SDK in the near future. A field test version of this SDK currently is available on the OpenVMS 8.2 field test site for those with a field test account. I cannot release any information on this kit, but it contains much more than it's name implies. It will be a major step forward for Open Source porting.</dd>
+    </dl>
+    <dl>
+      <dt>12 June 2005:</dt>
+      <dd>Early this month we received the news that Terry Shannon passed away. Terry wasn't just a great OpenVMS evangelist, he made evangelizing OpenVMS his business. Terry, you will be missed.</dd>
+      <dd>We all had our share of small problems at home or in our families these past months and this almost brought our porting effort to a halt. Things are also a bit quiet on the GNV front. I was hoping for some help in porting bash 3.0 to OpenVMS. It looks like I'll have to do this on my own.</dd>
+      <dd>Ton and I are working on a new version of the porting guide. In the new version we will look at some common problems like the fork() issues.</dd>
+      <dd>Fekko Stubbe attended the advanced technical bootcamp last week.</dd>
+      <dt>19 January 2005:</dt>
+      <dd>This update is long overdue.</dd>
+      <dd>
+        Yesterday Mark Gorham mentioned our effort in an interview with Terry Shannon. Read the article here <a href="http://www.shannonknowshpc.com/stories.php?story=05/01/18/0435366">"An Interview With Mr. OpenVMS Himself"</a>.
+      </dd>
+      <dd>Mark's statement about our project is essentially correct. We are still looking for people who can help, but unfortunately not with OpenOffice.org yet. At the moment we are working closely with HP to get GNV to the next level. We just started a new project to port Bash 3 to OpenVMS. Bash 3 will hopefully be part of GNV 2.0.</dd>
+      <dt>30 September 2004:</dt>
+      <dd>Last week we went to OOCon 2004 in Berlin. Unfortunately we were unable to show them a working version of OpenOffice.org on OpenVMS, but we attended discussions on how to improve portability, GUI design and translating with special interest. There was much talk about European government agencies migrating to OpenOffice.org and linux. There were also a lot of interesting sessions about XML. XML is not only used for the OpenOffice.org file format, it is also used in many interfaces. Project like the OASIS project are working on a new, more standard compliant, XML file format. Xforms is another interesting XML development.</dd>
+      <dd>In about two weeks time (11 and 12 October) Ton, Fekko and I will attend HP Dutchworld. We hope that Gerrit Woertman can arrange a special session with Andy Goldstein and Brad McCusker from HP OpenVMS engineering. We would like to talk with them about the future of UNIX portability, GNV and what we can do to help.</dd>
+      <dd>Fekko Stubbe released a new version of fshelp. Fshelp, dix and regedit now come with IA64 binaries!</dd>
+      <dt>15 September 2004:</dt>
+      <dd>The holidays are all over by now and we are all back for business.</dd>
+      <dd>The OpenVMS 8.2 field tests are coming along fine. There are some welcome improvements to the CRTL like standard compliant stat functions.</dd>
+      <dd>Fekko Stubbe released new versions of regedit, fshelp and dix (see below). All programs now come with IA64 binaries.</dd>
+      <dt>31 July 2004:</dt>
+      <dd>The GNV project proudly announces the release of V1.6-2.</dd>
+      <dd>This release is specifically targetted for the Field Test release of OpenVMS 8.2, for both Alpha and Integrity.</dd>
+      <dd>This release also runs at least on OpenVMS Alpha, V7.3-2.</dd>
+      <dd>
+        New to this release:
+        <ul>
+          <li>du</li>
+          <li>printenv</li>
+          <li>env</li>
+          <li>which</li>
+          <li>gnutar</li>
+          <li>g++</li>
+        </ul>
+      </dd>
+      <dd>
+        Bug Fixes:
+        <ul>
+          <li>Numerous</li>
+        </ul>
+      </dd>
+      <dd>But most importantly, a fix was made to BASH which allows OpenSource scripts to generate correct CONFIG.H files.</dd>
+      <dd>Please download the new GNV kit from the SourceForge website:</dd>
+      <dd>
+        <a href="https://sourceforge.net/projects/gnv/">https://sourceforge.net/projects/gnv/</a>
+      </dd>
+      <dd>
+        Kits will also be available at the <a href="http://h71000.www7.hp.com/opensource/opensource.html">HP OpenVMS Open Source Tools</a> website shortly.
+      </dd>
+      <dt>28 July 2004:</dt>
+      <dd>There is so much news that I don't know where to start. This is my own fault. I should post news more often.</dd>
+      <dd>
+        Several weeks ago we moved the <a href="http://www.4ovms.dyndns.org/phpbb/">OpenVMS Porting Bulletin Board</a> to this server. This turned out to be a bit of a nightmare. The first problem I had, was that CSWS_PHP doesn't quite work the same as on a plain nix box. This is because on these plan nix boxes most of the PHP extensions are part of the PHP executable and don't have to be loaded with the PHP dl() function or pre-load them by adding them to the PHP.INI file. On OpenVMS the extensions are not part of the PHP executable so you'll have to edit PHP.INI to make PHP function as it is supposed to.
+      </dd>
+      <dd>
+        The second problem was that MySQL 4.1.3 beta (see <a href="http://www.pi-net.dyndns.org/anonymous/kits/">Jean-François Piéronnes web site</a>) no longer worked with CSWS_PHP. This isn't Jean-François fault nor is it an OpenVMS issue. CSWS_PHP simply uses a rather old MySQL client that does not support the authentication method introduced in MySQL 4.1.x. You can read more about this at <a href="http://dev.mysql.com/doc/mysql/en/Password_hashing.html">http://dev.mysql.com/doc/mysql/en/Password_hashing.html</a>. I would like to thank Jean-François Piéronne for helping me fix this. Jean-François made a new kit that disables the new authentication method by default. He also added some switches to work around the MyISAM corruption problem. This is much better then editing your PHP scripts to regularly flush data.
+      </dd>
+      <dd>However after fixing all these problems the site still didn't work right. This was because I was using Ton van der Zwets modified version of phpbb. This version still had the flush statements. And for some reason this did not work with Jean-François changes. I had to installed a fresh copy of phpbb to get the site to work again. The good thing about this that we now know what we need to do to get PHP and MySQL to work. Ton van der Zwet will reproduce my installation and write a how-to about it.</dd>
+      <dd>Because we are eagerly awaiting the arrival of the OpenVMS 8.2 field test. I was investigating the OpenVMS porting library. This library has functions like a standard version of stat(). OpenVMS 8.2 will also have a standard version of stat(), but if you would like your program to also work on older versions of OpenVMS you'll need the porting library to make it work right.</dd>
+      <dd>
+        Most of you, who are using OpenOffice.org already, know that the PDF output function is really great. But unfortunately PDF output is lacking some important features that are important for technical documentation. To fix this Martin W Brown created the extendedPDF macro. You can find it at <a href="http://www.jdisoftware.co.uk/">JDiSoftware</a>. I will be using extendedPDF for the next version of the porting guide.
+      </dd>
+      <dd>And a saved the big news for last. We now have a rx2600 machine on loan from HP. Today I installed OpenVMS 8.1 and everything I need to start porting stuff to Itanium. I couldn't wait for the OpenVMS 8.2 field test stuff, which will of-coarse be available tomorrow. anyway I can't wait to play with this thing.</dd>
+      <dt>2 June 2004:</dt>
+      <dd>Things were a bit silent for a while. This wasn't we stopped porting, but because we are quite buzzy porting. I am working on several utilities for the GNV kit. I'm a GNV project member now, so most of my updates go directly to the GNV cvs repository. I will also create PCSI packages and post them on this site in the near future.</dd>
+      <dd>
+        We are also in the process of staging our own little boot camp on June 17 in Utrecht (Holland). If you would like to come, send an e-mail to <a href="mailto:Gerrit.Woertman@hp.com">Gerrit Woertman (HP)</a>.
+      </dd>
+      <dd>We are also preparing for the OpenVMS 8.2 field test. Unfortunately, we only have an aplha machine. I would so much like to do some porting on an Itanium box. Who wouldn't?</dd>
+      <dd>
+        We now have a <a href="http://www.4ovms.dyndns.org/phpbb/">OpenVMS Porting Bulletin Board</a>. It runs on an OpenVMS 7.3-2 box using MySQL an phpbb.If you want to know how we did it, become a member and read the PHPBB/MYSQL problem discussions.
+      </dd>
+      <dd>Last but not least, Ton van der Zwet is updating some of the Software install Reference pages.</dd>
+      <dt>24 March 2004:</dt>
+      <dd>Last I had a power failure so we were down for a few minutes. Today I installed several patches to bring our system up-to-date. This also caused some unavailability of our web site. Sorry for the inconvenience. We are only hobbyists and cannot afford ourselves a fault tolerant cluster.</dd>
+      <dt>22 March 2004:</dt>
+      <dd>Some of you may have noticed that the bison PCSI kit whas broken. I posted a new kit on the GNV BISON page.</dd>
+      <dt>21 March 2004:</dt>
+      <dd>Bernard Giroud is very active at the moment. In the GNV section you'll find GNU patch and the source code patches for bison. I also recreated the zip files of bison and flex. I'm using the zip "-Vjo" options now. The zip files should now extract the contained PCSI file in the current directory.</dd>
+      <dt>17 March 2004:</dt>
+      <dd>In the GNV section you'll find ports flex and bison. Both ports are from Bernard Giroud. I also moved m4 and cvs from this page to the GNV section.</dd>
+      <dt>14 March 2004:</dt>
+      <dd>I finally posted our UNIX to OpenVMS Porting Guide. You can find it in the Reference section. We would love to get some feedback on this document.</dd>
+      <dd>I also added a column to the UNIX® System Interface Tables for the Linux Standard Base Specification version 1.3. You can find the UNIX® System Interface Tables in the Reference section.</dd>
+      <dt>7 March 2004:</dt>
+      <dd>Fekko Stubbe posted a new version of DIX, a freeware utility to view, search and modify OpenVMS indexed files.</dd>
+      <dt>26 February 2004:</dt>
+      <dd>Bernard Giroud came up with a brilliant fix for the problem I discovered with his first approach for making PCSI distributions for our ports. I posted a PCSI distribution of the BZIP2 1.0.2 port (follow the GNV link in the table at the bottom). Please try it and let us know what you think.</dd>
+      <dt>22 February 2004:</dt>
+      <dd>I finally posted the bzip2 kits on the bzip2 page in the gnv section. Unfortunately no PCSI kit (yet). Bernard Giroud's scrips don't work with the bzip2 Makefile. Maybe we shouldn't automate the creation of PCSI kits this much? I'll discuss this problems with Bernard on the gnv-developer list. No kits for cvs yet. I want to fix the cleanup file deletion problem first. Fekko Stubbe is working on a new version of DIX at the moment.</dd>
+      <dt>18 February 2004:</dt>
+      <dd>OK no source or binaries for either bzip2 1.0.2 or cvs 1.11.11, but I did update the bzip2 page (part of the gnv page) with build instructions. Bernard Giroud posted some scripts on the gnv developer list some time ago and I thought that bzip2 would be a nice test for these scripts. Unfortunately the stuff he posted wasn't complete, and at the moment I'm waiting for the source code for one of the required programs.</dd>
+      <dt>15 February 2004:</dt>
+      <dd>
+        I've moved some page from our <a href="/openoffice/index.html">original openoffice page</a> to the reference section. The moved pages are also in the new OpenOffice.org look. The content of these pages still needs updating. Ton van der Zwet is currently working on the OpenVMS install pages. Ton will also write a short essay on how to upgrade a website from Secure Web Server v1.3 to v2.0. I still did not post the promised kits for bzip2 1.0.2 and cvs 1.11.11. It is now on the top of my list for next wednesday.
+      </dd>
+      <dt>4 February 2004:</dt>
+      <dd>
+        I updated several pages. I think that several people were aware of the fact that there was some odd problem with GNV bash, especially when running configure scripts. In configure scripts this problem could caused some definition errors in config.h, i.e. the configure script would detect that some function wasn't available and the generated config.h defined the function being available. Steve Pitcher finally caught this little bug and we both tested the new version. For those who know how to get the bash sources from the GNV cvs site. Please fetch this new version, build and test it. Because of this work I didn't get around posting kits for bzip2 1.0.2 and cvs 1.11.11. I would also like to note that Jouk Jansen is working on a <a href="http://nchrem.tnw.tudelft.nl/openvms/software2.html#tcsh">tcsh</a> port.
+      </dd>
+      <dt>28 January 2004:</dt>
+      <dd>I updated the table at the bottem of the page. The GNV and cvs sections are new, the gzip section moved to the new GNV section.</dd>
+      <dt>7 January 2004:</dt>
+      <dd>Today we have new versions of DIX and FSHELP (See below). Because not having an ODS-5 compatible cvs client was becomming a real problem, I decided to work on this myself. I now have a version of cvs 1.11.9 that I can use to fetch the OpenOffice.org sources from the OpenOffice.org cvs server. More on this soon.</dd>
+      <dt>11 December 2003:</dt>
+      <dd>Our web server now runs OpenVMS 7.3-2. The site now looks like the OpenOffice.org site again. We were receiving some spam on our e-mail addresses so we started to use the OpenVMS SMTP Antispam feature.</dd>
+      <dt>16 November 2003:</dt>
+      <dd>Our site didn't change for a while. This was basically because we were too busy doing other things like Field testing OpenVMS 7.3-2 and some public relations stuff like our presentation on the OpenVMS UNIX portability boot camp. Right now we are upgrading our systems to the production version of OpenVMS 7.3-2. Bart van Pelt and Sjaak Bosman (new member) are redoing the dmake port. Ton van der Zwet is checking out some php based bulletin board systems for our site, and I am helping Martin Zinser with his port of gzip 1.3.5. I am also writing a Open Source to OpenVMS porting Guide with Brad McCusker (HP) an Steve Pitcher (HP). As most of you, who have seen this site before, will notice. The text on this page has changed completely. It is much shorter and more to the point.</dd>
+      <dt>24 September 2003:</dt>
+      <dd>Added GNU m4 1.4, the basis for many UNIX tools and updated the email address of the Tru64 project leader.</dd>
+      <dt>21 September 2003:</dt>
+      <dd>Added the POSIX.2 utility PAX. With PAX we can extract the files from the OpenOffice.org source distribution. Added a UNIX to OpenVMS porting hints and tips section to the reference section. Updated the Tru64 reference section.</dd>
+      <dt>10 September 2003:</dt>
+      <dd>Updated versions of DIX and FSHELP and I updated the tcp/ip version of our server to version T5.4-13L.</dd>
+      <dt>10 August 2003:</dt>
+      <dd>See the link to the reference section. It contains a number of tables with the UNIX System Interfaces with a column for OpenVMS 7.3-2. The information in the various UNIX standard colums was compiled using The System Interface Table, an extract from The Single UNIX Specification, Version 3. Published in the U.K. by The Open Group. In the reference section you also find the Tru64 port of OpenOffice.org 1.0. We use this port as reference material because they used the same compiler suite we are using.</dd>
+      <dt>27 July 2003:</dt>
+      <dd>I completely revised our porting web site. It now conforms to the OpenOffice.org style, but is not yet hosted on the OpenOffice.org site. We will move this site to the OpenOffice.org site when we have some actual results. There is also some other software hosted on this site, some of these programs are helpful or necessary to port OpenOffice.org to OpenVMS, some have no relation to the project at all. All these tools will be moved to the 4ovms.dyndns.org web site in the near future.</dd>
+    </dl>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

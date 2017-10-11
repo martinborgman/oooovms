@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>BISON</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>BISON 1.3.5</FONT></I></U></B></P>
+<p>
+GNU bison is a free parser generator computer program written for the GNU project, and available for virtually all common operating systems. It is mostly
+compatible with yacc, and offers several improvements over the earlier program.
+</p>
+<p>
+<b><u>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.</u></b>
+<br>
+</P>
+<P>
+This port of bison 1.3.5 was posted by:
+<pre>
+Bernard Giroud
+Credit Lyonnais (Suisse) SA
+</pre>
+</p>
+<P>
+Here is the <A href="GNV-AXPVMS-BISON-V0135--1_PCSI.ZIP">bison 1.3.5 zipped PCSI package (<!--#fsize virtual="GNV-AXPVMS-BISON-V0135--1_PCSI.ZIP" -->B)</A>. Unzip the
+file on OpenVMS using UNZIP to restore the original RMS file attributes.
+</P>
+<P>
+Here is the <A href="GNV-BISON-1-35.TGZ">bison 1.3.5 source patch package (<!--#fsize virtual="GNV-BISON-1-35.TGZ" -->B)</A>. You can download the original
+source package from <a href="http://www.gnu.org/software/bison/">http://www.gnu.org/software/bison/</a>.
+</P>
+<p>
+Please give your feedback to 
+<A href="mailto:bisondev@oooovms.dyndns.org">bisondev@oooovms.dyndns.org.</A>
+</p>
+<p>
+    <a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

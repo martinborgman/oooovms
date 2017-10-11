@@ -1,0 +1,63 @@
+010 1-jan-1992
+Initial release, long long long ago
+
+020 1-may-2003
+Initial distributed releasae
+
+021 1-jun-2003
+1. Allow the help page to be scrolled in horizontal direction also.
+2. Search actions can be in all selected libraries
+
+0211 23-jul-2003
+1. Bugfix. If you wanted to extract a module either to file or to printer
+           from a textlibrary, the first record containing a / in the first
+           columns would be seen as a terminator (as in a helplibrary). This
+           problem is solved.
+
+0212 19-aug-2003
+1. The display in show open libs/modules counted the bytes loaded twice.
+2. FSHELP now supports the /BINARY qualifier for the display of 
+   non-printable data as occurs in printer libraries.
+
+0213 24-dec-2003
+1. Better support for the /WHOLE qualifier when searching text in the
+   display. The cursor will go to the x,y pos of the found string. Before
+   this patch the cursor remained on col 1 of the line where the string was
+   found. This was confusing if the string occurred more than once on a line.
+2. Include option in display help text to display the data in VMS-dump
+   format via the KP6 key, and a /BINARY qualifier.
+3. Changed the layout of the select window. If a topic has subtopics starting
+   with a slash (as after the most Qualifiers topic), this topic will
+   be the only one on a new line. This makes the layout more like
+   VMS-help.
+4. Included the KP6 key to toggle display from text to dump format (/BINARY).
+
+0300 2-sep-2004
+1. Support for IA64, including the ana/obj for most of the sections.
+   Since the LBR$MAP_MODULE in only supported on IA64, the object data from
+   ELF(IA64) object libraries can only be viewed on IA64 platforms.
+2. The bytecount/linecount if the show open libs/mods was not updated for
+   the ana/obj modules. This has been fixed.
+
+0301 28-sep-2004
+1. Included index for help messages.
+2. Improved token parsing for help/message. Keywords like violation, are now
+   found (the , is skipped).
+3. Now supports searches in the help/message display (and its index)
+0302 8-dec-2004
+1. Allow see also's to jump to a specific line/col in the help page.
+   Upto now you could only jump to the beginning of the page
+2. Added the /CURRENT switch. This allows you to specify a library
+   in your current directory i.s.o the SYS$SHARE default
+   so HELP/CURRENT/LIBR=test  searches TEST.* in your current directory.
+0303 17-oct-2005
+1. If the first paramter start with an @, FSHELP will treat this parameter
+   as a library name. If the user gave an explicit library with the
+   /library, FSHELP will treat the @ first parameter as a help token now.
+  
+2. There were some modules missing for the alpha/ia64 build. They are
+   added now.
+
+  Since I no longer have access to an IA64 system, the objects/images for
+  IA64 are from the 0300 version. To the best of my knowledge the kit
+  will compile/build now, but I cannot test it.

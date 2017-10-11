@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.1.45">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>porting: OpenOffice.org for OpenVMS</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="http://www.openoffice.org/favicon.ico">
+  <meta name="keywords" content="OpenOffice.org, OpenVMS, openvms, VMS, vms, Open Office, OpenOffice, openoffice, StarOffice, Star Office, OOo, ooo, xml, open source, developer, UNO">
+  <meta name="description" content="OpenOffice.org: The Open Office Suite">
+</head>
+<body>
+  <div class="container">
+    <!--#config timefmt="%Y-%m-%d" -->
+    <h1>Reference section</h1>
+    <p><i>Updated <!--#echo var="LAST_MODIFIED" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p><!-- edit this below -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>References</th>
+          </tr>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="guide_19-jul-2005.pdf">Porting Guide</a> (<!--#fsize file="guide_19-jul-2005.pdf" -->)
+            </td>
+            <td>UNIX to OpenVMS porting guide 19-jul-2005</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="ht/">Hint and Tips</a>
+            </td>
+            <td>UNIX to OpenVMS porting hints and tips</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="issuelist/">Issuelist</a>
+            </td>
+            <td>UNIX to OpenVMS porting issuelist</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="sw_install/">Software Install</a>
+            </td>
+            <td>Software installation for Opensource porting on OpenVMS. How do I upgrade Alpha firmware. How do I install OpenVMS...</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="System_Interface_Table_A.htmlx">UNIX® System Interface Tables</a>
+            </td>
+            <td>Tables of system interfaces defined in the Single UNIX Specification Version 3, complete with an indication of their availability in other related standards, such as UNIX 98, UNIX 95, the ISO POSIX-1 standard, the ISO POSIX-2 standard, the ISO C standard, SVID3 and 4.3BSD, and on OpenVMS 7.3-2</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="tru64/">Tru64 port</a>
+            </td>
+            <td>OpenOffice 1.0 for Tru64 Unix. This version is build on the same hardware and with the same family of compilers as we are using</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Maintained by the <a href="mailto:oooodoc@oooovms.dyndns.org">OpenOffice on OpenVMS porting Project</a>.</p>
+    <footer>
+      <p class="small">HP, Compaq and OpenVMS are trademarks of Hewlett-Packard Development Company, L.P.<br>
+      Sun, the Sun logo, Sun Microsystems, Solaris, HotJava, and Java are trademarks or registered trademarks of Sun Microsystems, Inc.<br>
+      UNIX ® is a registered Trademark of The Open Group<br>
+      POSIX ® is a registered Trademark of The IEEE.</p>
+    </footer>
+  </div><!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script> <!-- Include all compiled plugins (below), or include individual files as needed -->
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+</body>
+</html>

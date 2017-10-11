@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>OpenVMS BZIP2 main page</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<BODY lang=nl-NL>
+<P align=center><B><U><I><FONT style="FONT-SIZE: 20pt" 
+size=5>BZIP2 1.0.2</FONT></I></U></B></P>
+<p>
+<br>
+<b><u>Use it at your own risk, because we cannot take responsibility for crashes, dumps or even worse: loosing data.
+</u></b>
+<br>
+</p>
+<p>
+Bernard Giroud's script now works with bzip2's Makefile, so you can now download the <a href="GNV-AXPVMS-BZIP2-V0100-2-1_PCSI.ZIP">PCSI kit with the Alpha
+binaries</a> (384KB). Don't forget to add /usr/bin to your PATH environment variable after installing the kit.
+</p>
+<p>
+You can still download the previous <a href="BZIP2.ZIP">Alpha binary distribution</a> (199KB) (for installation instruction, see below). You can
+also download the <a href="bzip2_source.tgz">source disribution</a> (801KB).
+</p>
+<p>
+Prerequisites:
+</p>
+<ul>
+<li>OpenVMS 7.3-1 (with most recent CRTL eco)
+<li>GNV 1.5-6
+</ul>
+<p>
+To install the binary distribution of bzip2 do the following:
+</p>
+<ul>
+<li>enable extended filename parsing
+<pre>
+$ <b>SET PROC/PARSE=EXT</b>
+</pre
+<li>unzip the .zip file on an ODS-5 disk
+<pre>
+$ <b>UNZIP "-V" BZIP2.ZIP</b>
+</pre>
+<li>download the following <a href="install.sh">Install.sh</a> script and put it in the bzip2 directory
+<li>enter bash
+<pre>
+$ <b>bash</b>
+</pre>
+<li>cd to the bzip2 directory
+<li>execute the install.sh script
+<pre>
+bash$ <b>. ./install.sh</b>
+if ( test ! -d /usr/bin ) ; then mkdir -p /usr/bin ; fi
+if ( test ! -d /usr/lib ) ; then mkdir -p /usr/lib ; fi
+if ( test ! -d /usr/share/man ) ; then mkdir -p /usr/share/man ; fi
+if ( test ! -d /usr/share/man/man1 ) ; then mkdir -p /usr/share/man/man1 ; fi
+if ( test ! -d /usr/include ) ; then mkdir -p /usr/include ; fi
+cp -f bzip2 /usr/bin/bzip2
+cp -f bzip2 /usr/bin/bunzip2
+cp -f bzip2 /usr/bin/bzcat
+cp -f bzip2recover /usr/bin/bzip2recover
+chmod a+x /usr/bin/bzip2
+chmod a+x /usr/bin/bunzip2
+chmod a+x /usr/bin/bzcat
+chmod a+x /usr/bin/bzip2recover
+cp -f bzip2.1 /usr/share/man/man1
+chmod a+r /usr/share/man/man1/bzip2.1
+cp -f bzlib.h /usr/include
+chmod a+r /usr/include/bzlib.h
+cp -f libbz2.a /usr/lib
+chmod a+r /usr/lib/libbz2.a
+cp -f bzgrep /usr/bin/bzgrep
+ln /usr/bin/bzgrep /usr/bin/bzegrep
+ln /usr/bin/bzgrep /usr/bin/bzfgrep
+chmod a+x /usr/bin/bzgrep
+cp -f bzmore /usr/bin/bzmore
+ln /usr/bin/bzmore /usr/bin/bzless
+chmod a+x /usr/bin/bzmore
+cp -f bzdiff /usr/bin/bzdiff
+ln /usr/bin/bzdiff /usr/bin/bzcmp
+chmod a+x /usr/bin/bzdiff
+cp -f bzgrep.1 bzmore.1 bzdiff.1 /usr/share/man/man1
+chmod a+r /usr/share/man/man1/bzgrep.1
+chmod a+r /usr/share/man/man1/bzmore.1
+chmod a+r /usr/share/man/man1/bzdiff.1
+echo ".so man1/bzgrep.1" > /usr/share/man/man1/bzegrep.1
+echo ".so man1/bzgrep.1" > /usr/share/man/man1/bzfgrep.1
+echo ".so man1/bzmore.1" > /usr/share/man/man1/bzless.1
+echo ".so man1/bzdiff.1" > /usr/share/man/man1/bzcmp.1
+</pre>
+<li>add /usr/bin to your $PATH environment variable
+<pre>
+bash$ <b>export PATH=/usr/bin:$PATH</b>
+</pre>
+you may want to add this to your .profile
+</ul>
+<p>
+Please give your feedback to 
+<A href="mailto:gnvdev@oooovms.dyndns.org">gnv@oooovms.dyndns.org.</A>
+</p>
+<p>
+    <a href="../"><img src="/openoffice/images/index.gif" alt="Index" /></a>
+  <div align="CENTER">
+   <img src="/openoffice/images/apache_pb.gif" alt="Klein 'Powered by Apache' Logotje">
+  </div>
+  </body>
+</html>

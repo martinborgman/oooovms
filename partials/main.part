@@ -1,0 +1,264 @@
+    <h1>OpenVMS OpenOffice.org port</h1>
+    <p><i>Updated <!--#flastmod file="partials/main.part" -->, by <a href="mailto:martin.borgman@oooovms.dyndns.org">Martin Borgman</a></i></p>
+    <p style="text-align:center"><img src="images/vms-shark-hp.png" alt="vms shark large" style="width:155px;height:155px;border:0"></p>
+    <h2>News</h2>
+    <dl>
+      <dt>25-feb-2016</dt>
+      <dd>A new version of DIX (8.5) has been released.<br>
+      The new features can be found in the release_notes file on the dix webpage.<br>
+      This version adds support for VSI VMS 8.4-1 and 8.4-2.</dd>
+      <dt>16-jun-2014</dt>
+      <dd>
+        A new version of DIX (8.4) has been released.<br>
+        The new features can be found in the release_notes file on the dix webpage.<br>
+        Some enhancements are:
+        <ol>
+          <li>Support for complex numbers</li>
+          <li>Added some scripts to the examples</li>
+          <li>Added a CONVERT command</li>
+          <li>Added a LIBRARY command</li>
+        </ol>
+      </dd>
+      <dt>22-sep-2013</dt>
+      <dd>
+        A new version of DIX (8.3) has been released.<br>
+        The new features can be found in the release notes file.<br>
+        Some enhancements are:
+        <ul>
+          <li>Directory has been enhanced
+            <table>
+              <tr>
+                <td>directory/fast</td>
+                <td>: Like dfu.</td>
+              </tr>
+              <tr>
+                <td>direct/select=ace=id=username[/fast]</td>
+                <td>: Select files that have specific aces</td>
+              </tr>
+              <tr>
+                <td>direct/sel=lbn=(lbn1,lbn2)</td>
+                <td>: Select files that are mapped on lbn1-lbn2</td>
+              </tr>
+            </table>
+          </li>
+          <li>Structured symbols</li>
+          <li>Allow modules in libraries to be typed/searched/directoried as in library(module)</li>
+          <li>Allow status codes to be searched in message files : f$message(code,,"filemask")</li>
+        </ul>Also the help file of DIX is now avalible from the web site, click on DIX_HELP for the information.<br>
+        <br>
+        See the release notes for this version on the <a href="dix/">dix</a> webpage.
+      </dd>
+      <dt>31-okt-2012</dt>
+      <dd>
+        A new version of DIX (8.2) has been released.<br>
+        Some enhancements are:
+        <ul>
+          <li>Plotting of pie charts DIX/PLOT/PIE value</li>
+          <li>Show process/continuous</li>
+        </ul>Also the help file of DIX is now avalible from the web site, click on DIX_HELP for the information.<br>
+        <br>
+        See the release notes for this version on the <a href="dix/">dix</a> webpage.
+      </dd>
+      <dt>22-mar-2012</dt>
+      <dd>A new version of DIX (version 8.1) has been released.</dd>
+      <dd>It contains a lot of enhancements (see the release notes) and of course some bugfixing.</dd>
+      <dd>As always I am very interested in suggestions/questions/error reports via dixdev@oooovms.dyndns.org</dd>
+      <dd>
+        See the release notes for this version on the <a href="dix/">dix</a> webpage.
+      </dd>
+    </dl>
+    <p><strong><a href="news/">Recent News...</a></strong></p>
+    <h2>Porting OpenOffice to OpenVMS</h2>
+    <h3>Project Goals</h3>
+    <p>The main goal of the project is to port a recent version of OpenOffice to OpenVMS Alpha and ia64. To achieve this goal we decided to use the features first introduced in the OpenVMS versions for the DII COE project. This means the new features introduced in the CRTL (improved "standards" compatibility and UNIX style file paths) and the unix commands and utilities provided by the GNV kit. As a result, OpenOffice will only become available on OpenVMS versions supporting these new features.</p>
+    <h3>Secondary Goals</h3>
+    <p>We participate in field tests and provide as much feedback as we can on the new features in the CRTL and the GNV kit.</p>
+    <p>We will improve, add new features to some GNV tools and add new tools when needed.</p>
+    <p>We help others to add ODS-5 and UNIX style file path support to their ported applications.</p>
+    <p>We write how-to documents on how to port open source software to OpenVMS.</p>
+    <h3>Status of the project</h3>
+    <p>Porting OpenOffice is really hard, and not only because of the sheer amount of source files (100,000+). Even getting OpenOffice compiled on Solaris 9 took some serious effort! The hardest part is that you see so little progress on the outside. When you finally see the OpenOffice.org logo, you're 99.9% done.</p>
+    <p>Our first problem was getting the sources on an OpenVMS ODS-5 disk with all the filenames intact. There is, as far as we know, no tool, supporting ODS-5 filenames, to get source files from a CVS server so we downloaded a tar.gz file.</p>
+    <p>GNV gzip did not handle ODS-5 names properly, but that was a minor problem (a file named xxx^.tar.gz;1 would become xxx^.tar.;1 after gunzipping). We fixed this and our version of gzip is now part of the latest GNV kit.</p>
+    <p>GNV tar could not untar the OpenOffice tar file. We are porting POSIX.2 PAX to OpenVMS. With PAX you can read and write tar and cpio files. We use PAX to untar the OpenOffice sources. We will submit our version of PAX for a future release of the GNV kit.</p>
+    <p>We have a port of m4, a UNIX macro language interpreter, used by many open source build tools like automake, autoconf and libtool.</p>
+    <p>We are writing a document on how to port open source software to OpenVMS. Hopefully more people will participate in the writing of this document.</p>
+    <h4>But this was just to get us started.</h4>
+    <p>What part of OpenOffice did we really port:</p>
+    <ul>
+      <li>We have a working version of dmake, the primary OpenOffice build tool, but we need to do some of this work again because of all the changes in OpenOffice 2.0 and OpenVMS 8.3.</li>
+    </ul>
+    <h3>What still needs to be done</h3>
+    <p>Although we only have two people doing some programming work in their spare time, we have achieved quite a lot, but we have unfortunately very little to show for it. Partially this is because of the strange OpenOffice build environment. It is somewhat strange for UNIX people but completely strange for us OpenVMS people.</p>
+    <p>And then there are the new CRTL features and the feature switches. This took a while to understand.</p>
+    <p>And don't forget that, in the beginning, many of the GNV tools didn't quite work the way they should.</p>
+    <h4>We still need:</h4>
+    <ul>
+      <li>An ODS-5 extended filename aware CVS client with UNIX style file path support, And preferably also a CVS server with these features.</li>
+      <li>Tools like automake, autoconf and libtool.</li>
+      <li>All the GNV tools still need to be tested for ODS-5 extended filename and UNIX style file path support. Tools like zip and bzip2 still need some work.</li>
+      <li>A tcsh shell. Hunter Goatley ported tcsh to OpenVMS using POSIX for OpenVMS a very long time ago, so, as far as we know, no ODS-5 extended filename support.</li>
+      <li>All the standard tools that are missing from the GNV kit and/or have an outdated version in the GNV kit.</li>
+      <li>Although the DEC compilers are most probably the best compilers on the market, a OpenVMS port of gcc 3.2.2 or better with ODS-5 extended filename and UNIX style file path support would really help our project.</li>
+      <li>More standard compliant functions in the CRTL, we desperately need fork and a proper working version of vfork and while we don't have those, we need good workarounds.</li>
+      <li>An Alpha? as Tinderbox-system <a href="http://www.mozilla.org/tinderbox.html">http://www.mozilla.org/tinderbox.html</a>
+      </li>
+      <li>But most of all PEOPLE. Primary contact-address:mailto:info@oooovms.dyndns.org</li>
+    </ul>
+    <h3>We need you!</h3>
+    <p>Our group currently consists of:</p>
+    <ul>
+      <li>two programmers</li>
+      <li>one system manager</li>
+      <li>one ambassador</li>
+      <li>about three others who sometimes help out</li>
+    </ul>
+    <p>We could do more with some helpful hands in basically any department.</p>
+    <p>And don't forget, this is what we do in our spare time.</p>
+    <h3>Links</h3>
+    <ul>
+      <li>The OpenOffice.org home page is at <a href="http://www.openoffice.org/">http://www.openoffice.org/</a>; you might want to start using OpenOffice today; but not yet on OpenVMS...
+      </li>
+      <li>On the OpenOffice.org porting page <a href="http://porting.openoffice.org/">http://porting.openoffice.org/</a> you'll find a link to our projects OpenOffice.org home page <a href="http://www.oooovms.dyndns.org/">http://www.oooovms.dyndns.org/</a> and the names of the project leaders. Our web server runs OpenVMS 8.3 and Secure Web Server 1.3-1.
+      </li>
+      <li>The official GNV page is at <a href="http://gnv.sourceforge.net/">http://gnv.sourceforge.net/</a>, but you can download an official PCSI kit from <a href="http://h71000.www7.hp.com/opensource/opensource.html">http://h71000.www7.hp.com/opensource/opensource.html</a>
+      </li>
+      <li>If you want to know more about DII COE, start at this page <a href="http://h71000.www7.hp.com/solutions/government/coe/kpc_program.html">http://h71000.www7.hp.com/solutions/government/coe/kpc_program.html</a>
+      </li>
+      <li>OpenVMS UNIX Portability web site <a href="http://h71000.www7.hp.com/portability/index.html">http://h71000.www7.hp.com/portability/index.html</a>
+      </li>
+      <li>Linux and Tru64 UNIX affinity portability tools <a href="http://h30097.www3.hp.com/affinity/affinity-tools.html">http://h30097.www3.hp.com/affinity/affinity-tools.html</a>
+      </li>
+    </ul>
+    <h3>Contacts</h3>
+    <ul>
+      <li>Primary contact-address: <a href="mailto:info@oooovms.dyndns.org">info@oooovms.dyndns.org</a>
+      </li>
+      <li>Ton van der Zwet, project leader and system manager, web site and documentation <a href="mailto:ton.vanderzwet@oooovms.dyndns.org">ton.vanderzwet@oooovms.dyndns.org</a>
+      </li>
+      <li>Martin Borgman, second project leader, programmer, web site and documentation <a href="mailto:martin.borgman@oooovms.dyndns.org">martin.borgman@oooovms.dyndns.org</a>
+      </li>
+      <li>Gerrit Woertman, Dutch OpenVMS ambassador <a href="mailto:gerrit.woertman@hp.com">gerrit.woertman@hp.com</a>
+      </li>
+    </ul>
+    <h2>Us at the third OpenOffice.org conference</h2>
+    <div style="text-align:center"><img src="images/epsn2509-r.jpg" alt="Us at the third OpenOffice.org conference" style="width:454px;height:342px;border:0"></div>
+    <h2>Our build environment (updated 24 june 2008)</h2>
+    <p>Our current build environment consists of the following:</p>
+    <ul>
+      <li>One Alpha 1000A 5/400 system with 1024 MB of memory and a KZPCM-DA Dual SCSI card</li>
+      <li>OpenVMS 8.3</li>
+      <li>TCP/IP 5.6-9 ECO 2</li>
+      <li>JAVA 1.5-3 from the <a href="http://h18012.www1.hp.com/java/download/index.html">Java™ technology on hp Alpha systems for the Java™ Platform page</a>
+      </li>
+      <li>GNV 2.1-1</li>
+      <li>GTK V1.2-10</li>
+      <li>OPL V1.0-0A9</li>
+      <li>MYSQL V4.1-14</li>
+      <li>OPENSSL097E V1.2-0</li>
+      <li>CGATEPRO V5.1-4</li>
+      <li>C 7.3-009</li>
+      <li>C++ 7.3-009</li>
+      <li>HP Fortran V8.0-1-104669-48GBT</li>
+      <li>DECset 12.4 (not a requirement, but some of our programmers love LSE. They also love vi, weird!)</li>
+      <li>Perl 5.8-6 from <a href="http://www.openvms.compaq.com/openvms/products/ips/apache/csws.html">OpenVMS secure web server (based on apache) page</a>
+      </li>
+      <li>Compaq Secure Web Server (Apache) V1.3-1</li>
+      <li>Compaq Secure Web Server PERL (mod_perl) V1.1</li>
+      <li>Compaq Secure Web Server PHP (mod_php) V1.2-1</li>
+      <li>An Itanium box running OpenVMS 8.3 for the ia64 port.</li>
+    </ul>
+    <p>I don't think that we need the OpenVMS porting tools because the CRTL makes them obsolete.</p>
+    <h2>Featured on this site:</h2>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>Link</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>
+            <a href="reference/">Reference</a>
+          </td>
+          <td>Reference section (<!--#flastmod virtual="reference/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="gnv/">GNV</a>
+          </td>
+          <td>GNV section (<!--#flastmod virtual="gnv/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="todo/tcsh/tcsh.html">TCSH</a>
+          </td>
+          <td>placed on to do list (<!--#flastmod virtual="todo/tcsh/tcsh.html" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="openoffice/current/dmake.html">dmake</a>
+          </td>
+          <td>Update dmake page (<!--#flastmod virtual="openoffice/current/dmake.html" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="pax/index.html">pax 2.1</a>
+          </td>
+          <td>PAX is the POSIX.2 Portable Archive eXchange utility. With PAX you can read and write tar and cpio formatted archives (<!--#flastmod virtual="pax/index.html" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="reference/issuelist/">issuelist</a>
+          </td>
+          <td>General OpenVMS porting issuelist (<!--#flastmod virtual="reference/issuelist/index.htmlx" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="fshelp/">fshelp</a>
+          </td>
+          <td>Freeware utility to view and search OpenVMS help files (<!--#flastmod virtual="fshelp/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="dix/">dix</a>
+          </td>
+          <td>Freeware utility to view, search and modify OpenVMS indexed files (<!--#flastmod virtual="dix/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="regedit/">regedit</a>
+          </td>
+          <td>Freeware utility to edit the OpenVMS registry (<!--#flastmod virtual="regedit/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="acx/">acx</a>
+          </td>
+          <td>Enhanced accounting utility(<!--#flastmod virtual="acx/FREEWARE_README.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="analyze_rms/">analyze_rms</a>
+          </td>
+          <td>Decwindows variant of analyze/rms (<!--#flastmod virtual="analyze_rms/FREEWARE_README.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="mymail/">mymail</a>
+          </td>
+          <td>A program to use vms mail syntax in a communigate-pro environment (<!--#flastmod virtual="mymail/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="auto/">auto</a>
+          </td>
+          <td>A program to AUTOmatically expand DCL commands (<!--#flastmod virtual="auto/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="diskstat/">diskstat</a>
+          </td>
+          <td>A program to display consequences of changing clustersize (<!--#flastmod virtual="diskstat/RELEASE_NOTES.TXT" -->)</td>
+        </tr>
+      </table>
+    </div>
